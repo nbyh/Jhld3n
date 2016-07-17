@@ -26,7 +26,7 @@ namespace AnonManagementSystem
 
         private void dGvEquip_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dGvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
+            if (e.ColumnIndex >= 0 && dGvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
             {
                 EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
                 {
@@ -95,12 +95,12 @@ namespace AnonManagementSystem
             }
             e.DrawBackground();
             e.DrawFocusRectangle();
-            e.Graphics.DrawString(((ComboBox) sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
+            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
         }
 
         private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AmsAboutBox amsAboutBox=new AmsAboutBox();
+            AmsAboutBox amsAboutBox = new AmsAboutBox();
             amsAboutBox.ShowDialog();
         }
 
@@ -119,7 +119,7 @@ namespace AnonManagementSystem
 
         private void 系统设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SystemSetting systemSetting=new SystemSetting();
+            SystemSetting systemSetting = new SystemSetting();
             systemSetting.ShowDialog();
         }
 
