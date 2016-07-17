@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("AnonManagementSystem")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Demo")]
+[assembly: AssemblyDescription("演示版本")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AnonManagementSystem")]
+[assembly: AssemblyProduct("XXX管理系统")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

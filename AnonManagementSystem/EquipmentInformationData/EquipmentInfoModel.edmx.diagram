@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="64a9115112db44b0aac666424c9c8b9d" Name="Diagram1">
+        <EntityTypeShape EntityType="EquipInfoModel.CombatEquipment" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipInfoModel.CombatVehicles" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipInfoModel.EquipImage" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipInfoModel.Events" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipInfoModel.VehiclesImage" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="EquipInfoModel.FK_CombatEquipment_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipInfoModel.FK_CombatVehicles_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipInfoModel.FK_Events_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipInfoModel.FK_CombatVehicles_0_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
