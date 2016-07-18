@@ -15,6 +15,7 @@ namespace AnonManagementSystem
         public LoginForm()
         {
             InitializeComponent();
+
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
@@ -48,8 +49,14 @@ namespace AnonManagementSystem
             {
                 Enableedit = loginuser.Edit
             };
+            form.ChangeCurrentuser += ShowForm;
             form.Show();
             this.Hide();
+        }
+
+        private void ShowForm()
+        {
+            this.Show();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

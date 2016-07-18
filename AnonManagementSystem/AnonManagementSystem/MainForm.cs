@@ -12,6 +12,8 @@ namespace AnonManagementSystem
 {
     public partial class MainForm : Form
     {
+        public delegate void ChangeUser();
+        public event ChangeUser ChangeCurrentuser;
         private bool _exitapp = true;
         private bool _enableedit = false;
         public MainForm()
@@ -127,6 +129,7 @@ namespace AnonManagementSystem
         {
             _exitapp = false;
             this.Close();
+            ChangeCurrentuser?.Invoke();
         }
     }
 }

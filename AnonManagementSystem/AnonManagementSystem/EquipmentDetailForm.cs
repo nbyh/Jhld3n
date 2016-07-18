@@ -38,7 +38,7 @@ namespace AnonManagementSystem
 
         private void cmsPicture_Opening(object sender, CancelEventArgs e)
         {
-            更新图片ToolStripMenuItem.Text = pbEquip.Image == null ? "添加图片" : "更新图片";
+            更新图片ToolStripMenuItem.Text = pbEquipFront.Image == null ? "添加图片" : "更新图片";
         }
 
         private void EquipmentDetailForm_Load(object sender, EventArgs e)

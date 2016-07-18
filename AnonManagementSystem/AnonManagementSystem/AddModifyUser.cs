@@ -1,21 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
     public partial class AddModifyUser : Form
     {
-        private bool _modify = false;
-        private int _id;
+        private List<string> _alluserList = new List<string>();
+
+        private bool _enableedit;
+
+        private int _id = -1;
+
+        private bool _modify;
+
+        private string _pwd;
+
+        private string _user;
+
         public AddModifyUser()
         {
             InitializeComponent();
+        }
+
+        public delegate void AddModifySysUser(bool modify, int id, string user, string pwd, bool enableedit);
+
+        public event AddModifySysUser Add_ModifyUser;
+
+        public List<string> AlluserList
+        {
+            set { _alluserList = value; }
+        }
+
+        public bool Enableedit
+        {
+            set { _enableedit = value; }
+        }
+
+        public int Id
+        {
+            set { _id = value; }
         }
 
         public bool Modify
@@ -23,9 +48,24 @@ namespace AnonManagementSystem
             set { _modify = value; }
         }
 
-        public int Id
+        public string Pwd
         {
-            set { _id = value; }
+            set { _pwd = value; }
+        }
+
+        public string User
+        {
+            set { _user = value; }
+        }
+
+        private void AddModifyUser_Load(object sender, EventArgs e)
+        {
+            if (_modify)
+            {
+                tbUser.Text = _user;
+                tbPwdSure.Text = tbPwd.Text = _pwd;
+                cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -35,6 +75,18 @@ namespace AnonManagementSystem
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
+            if (tbPwd.Text != tbPwdSure.Text)
+            {
+                MessageBox.Show(@"两次密码不一致!");
+                return;
+            }
+            if (!_modify && _alluserList.Contains(tbUser.Text))
+            {
+                MessageBox.Show(@"已经包含相同用户，请勿重复添加!");
+                return;
+            }
+            bool enableedit = cmbAuthority.SelectedItem.ToString().Equals("可写");
+            Add_ModifyUser?.Invoke(_modify, _id, tbUser.Text, tbPwdSure.Text, enableedit);
             this.Close();
         }
 
@@ -47,14 +99,6 @@ namespace AnonManagementSystem
             e.DrawBackground();
             e.DrawFocusRectangle();
             e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
-        }
-
-        private void AddModifyUser_Load(object sender, EventArgs e)
-        {
-            if (_modify)
-            {
-                
-            }
         }
     }
 }
