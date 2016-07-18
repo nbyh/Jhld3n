@@ -48,7 +48,7 @@ namespace AnonManagementSystem
             var equip = from eq in equipEntities.CombatEquipment
                         select eq;
             List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
-            cmbeqName.DataSource = equipnameList;
+            //cmbeqName.DataSource = equipnameList;
             List<string> equipsubdepartList = (from d in equip select d.SubDepartment).Distinct().ToList();
             cmbSubDepart.DataSource = equipsubdepartList;
             List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
@@ -57,7 +57,7 @@ namespace AnonManagementSystem
             cmbSpot.DataSource = equipSpotList;
             if (_add)
             {
-                cmbeqName.SelectedIndex = -1;
+                //cmbeqName.SelectedIndex = -1;
                 cmbSubDepart.SelectedIndex = -1;
                 cmbModel.SelectedIndex = -1;
                 cmbSpot.SelectedIndex = -1;
@@ -67,13 +67,13 @@ namespace AnonManagementSystem
                 var appointeq = from eq in equip
                                 where eq.SerialNo == _id
                                 select eq;
-                cmbeqName.SelectedItem = appointeq.First().Name;
+                //cmbeqName.SelectedItem = appointeq.First().Name;
                 cmbSubDepart.SelectedItem = appointeq.First().SubDepartment;
                 cmbModel.SelectedItem = appointeq.First().Model;
                 cmbSpot.SelectedItem = appointeq.First().InventorySpot;
-                tbSerialNo.Text = appointeq.First().SerialNo;
-                dtpEnableTime.Value = (DateTime)appointeq.First().EnableTime;
-                nudServiceLift.Value = (decimal)appointeq.First().ServiceLife;
+                //tbSerialNo.Text = appointeq.First().SerialNo;
+                //dtpEnableTime.Value = (DateTime)appointeq.First().EnableTime;
+                //nudServiceLift.Value = (decimal)appointeq.First().ServiceLife;
             }
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
         }
@@ -82,12 +82,12 @@ namespace AnonManagementSystem
         {
             CombatEquipment ce = new CombatEquipment()
             {
-                Name = cmbeqName.Text,
-                SerialNo = tbSerialNo.Text,
+                //Name = cmbeqName.Text,
+                //SerialNo = tbSerialNo.Text,
                 Model = cmbModel.Text,
-                EnableTime = dtpEnableTime.Value.Date,
+                //EnableTime = dtpEnableTime.Value.Date,
                 SubDepartment = cmbSubDepart.Text,
-                ServiceLife = (long)nudServiceLift.Value,
+                //ServiceLife = (long)nudServiceLift.Value,
                 InventorySpot = cmbSpot.Text
             };
             Entities eqEntities = new Entities();
