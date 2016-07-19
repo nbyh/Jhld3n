@@ -19,11 +19,11 @@
         <AssociationConnector Association="EquipInfoModel.FK_CombatVehicles_0_01" />
         <AssociationConnector Association="EquipInfoModel.FK_Material_0_0" />
         <AssociationConnector Association="EquipInfoModel.FK_Train_0_0" />
-        <EntityTypeShape EntityType="EquipInfoModel.Events" Width="1.5" PointX="7.5" PointY="11.875" />
-        <AssociationConnector Association="EquipInfoModel.FK_Events_1_0" />
-        <AssociationConnector Association="EquipInfoModel.FK_Events_0_0" />
         <EntityTypeShape EntityType="EquipInfoModel.VehiclesImage" Width="1.5" PointX="9.5" PointY="5.875" />
         <AssociationConnector Association="EquipInfoModel.FK_CombatVehicles_1_0" />
+        <EntityTypeShape EntityType="EquipInfoModel.Events" Width="1.5" PointX="7.5" PointY="11.125" />
+        <AssociationConnector Association="EquipInfoModel.FK_Events_1_0" />
+        <AssociationConnector Association="EquipInfoModel.FK_Events_0_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

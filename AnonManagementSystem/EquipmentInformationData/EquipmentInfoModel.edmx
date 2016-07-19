@@ -417,6 +417,11 @@
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="Train" EntitySet="Train" />
           </AssociationSet>
+          <EntitySet Name="VehiclesImage" EntityType="EquipInfoModel.VehiclesImage" />
+          <AssociationSet Name="FK_CombatVehicles_1_0" Association="EquipInfoModel.FK_CombatVehicles_1_0">
+            <End Role="VehiclesImage" EntitySet="VehiclesImage" />
+            <End Role="CombatVehicles" EntitySet="CombatVehicles" />
+          </AssociationSet>
           <EntitySet Name="Events" EntityType="EquipInfoModel.Events" />
           <AssociationSet Name="FK_Events_1_0" Association="EquipInfoModel.FK_Events_1_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
@@ -425,11 +430,6 @@
           <AssociationSet Name="FK_Events_0_0" Association="EquipInfoModel.FK_Events_0_0">
             <End Role="EventData" EntitySet="EventData" />
             <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <EntitySet Name="VehiclesImage" EntityType="EquipInfoModel.VehiclesImage" />
-          <AssociationSet Name="FK_CombatVehicles_1_0" Association="EquipInfoModel.FK_CombatVehicles_1_0">
-            <End Role="VehiclesImage" EntitySet="VehiclesImage" />
-            <End Role="CombatVehicles" EntitySet="CombatVehicles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="EventData">
@@ -615,6 +615,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VehiclesImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageFront" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize1" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize2" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <NavigationProperty Name="CombatVehicles" Relationship="EquipInfoModel.FK_CombatVehicles_1_0" FromRole="VehiclesImage" ToRole="CombatVehicles" />
+        </EntityType>
+        <Association Name="FK_CombatVehicles_1_0">
+          <End Type="EquipInfoModel.VehiclesImage" Role="VehiclesImage" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.CombatVehicles" Role="CombatVehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehiclesImage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CombatVehicles">
+              <PropertyRef Name="Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Events">
           <Key>
             <PropertyRef Name="ID" />
@@ -664,28 +686,6 @@
             </Principal>
             <Dependent Role="Events">
               <PropertyRef Name="Data" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="VehiclesImage">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImageFront" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <Property Name="ImageSize1" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <Property Name="ImageSize2" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <NavigationProperty Name="CombatVehicles" Relationship="EquipInfoModel.FK_CombatVehicles_1_0" FromRole="VehiclesImage" ToRole="CombatVehicles" />
-        </EntityType>
-        <Association Name="FK_CombatVehicles_1_0">
-          <End Type="EquipInfoModel.VehiclesImage" Role="VehiclesImage" Multiplicity="0..1" />
-          <End Type="EquipInfoModel.CombatVehicles" Role="CombatVehicles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VehiclesImage">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CombatVehicles">
-              <PropertyRef Name="Image" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -843,6 +843,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VehiclesImage">
+            <EntityTypeMapping TypeName="EquipInfoModel.VehiclesImage">
+              <MappingFragment StoreEntitySet="VehiclesImage">
+                <ScalarProperty Name="ImageSize2" ColumnName="ImageSize2" />
+                <ScalarProperty Name="ImageSize1" ColumnName="ImageSize1" />
+                <ScalarProperty Name="ImageFront" ColumnName="ImageFront" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="EquipInfoModel.Events">
               <MappingFragment StoreEntitySet="Events">
@@ -866,16 +876,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VehiclesImage">
-            <EntityTypeMapping TypeName="EquipInfoModel.VehiclesImage">
-              <MappingFragment StoreEntitySet="VehiclesImage">
-                <ScalarProperty Name="ImageSize2" ColumnName="ImageSize2" />
-                <ScalarProperty Name="ImageSize1" ColumnName="ImageSize1" />
-                <ScalarProperty Name="ImageFront" ColumnName="ImageFront" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
