@@ -16,10 +16,27 @@ namespace EquipmentInformationData
     {
         public long ID { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> EventTime { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
         public string Address { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public string No { get; set; }
+        public string PartUnit { get; set; }
+        public string PulishUnit { get; set; }
+        public Nullable<System.DateTime> PublishDate { get; set; }
+        public string EventType { get; set; }
+        public string SpecificType { get; set; }
+        public string Code { get; set; }
+        public string According { get; set; }
+        public string Document { get; set; }
+        public string PeopleDescri { get; set; }
+        public string ProcessDescri { get; set; }
+        public string HandleStep { get; set; }
+        public string Problem { get; set; }
+        public string Remarks { get; set; }
         public Nullable<long> Equipment { get; set; }
+        public Nullable<long> Data { get; set; }
     
         public virtual CombatEquipment CombatEquipment { get; set; }
+        public virtual EventData EventData { get; set; }
     }
 }

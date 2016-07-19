@@ -4,20 +4,34 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EquipInfoModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\AnonManagementSystem\bin\Debug\Database\Test.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EquipInfoModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\AnonManagementSystem\bin\Debug\Database\Test.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CombatEquipment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="integer" Nullable="false" />
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="SerialNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MajorCategory" Type="nvarchar" MaxLength="254" />
           <Property Name="Model" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="EnableTime" Type="datetime" />
           <Property Name="SubDepartment" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="UseType" Type="nvarchar" MaxLength="254" />
+          <Property Name="TechCondition" Type="nvarchar" MaxLength="254" />
+          <Property Name="UseCondition" Type="nvarchar" MaxLength="254" />
+          <Property Name="Factory" Type="nvarchar" MaxLength="254" />
+          <Property Name="FactoryTime" Type="datetime" />
           <Property Name="ServiceLife" Type="integer" />
           <Property Name="InventorySpot" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="MajorComp" Type="nvarchar" MaxLength="254" />
+          <Property Name="MainUsage" Type="nvarchar" MaxLength="254" />
+          <Property Name="PerformIndex" Type="nvarchar" MaxLength="254" />
+          <Property Name="UseMethod" Type="nvarchar" MaxLength="254" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="254" />
+          <Property Name="User" Type="nvarchar" MaxLength="254" />
+          <Property Name="Maintainer" Type="nvarchar" MaxLength="254" />
+          <Property Name="Technician" Type="nvarchar" MaxLength="254" />
           <Property Name="Image" Type="integer" />
+          <Property Name="OilEngine" Type="integer" />
         </EntityType>
         <EntityType Name="CombatVehicles">
           <Key>
@@ -26,15 +40,47 @@
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="SerialNo" Type="varchar" MaxLength="25" />
-          <Property Name="Equipment" Type="integer" />
+          <Property Name="Model" Type="nvarchar" MaxLength="254" />
+          <Property Name="VehiclesNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorModel" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="Factory" Type="nvarchar" MaxLength="254" />
+          <Property Name="ProductionDate" Type="nvarchar" MaxLength="254" />
+          <Property Name="OemNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="Mass" Type="nvarchar" MaxLength="254" />
+          <Property Name="Tankage" Type="nvarchar" MaxLength="254" />
+          <Property Name="OverallSize" Type="nvarchar" MaxLength="254" />
+          <Property Name="ExpandedSize" Type="nvarchar" MaxLength="254" />
+          <Property Name="WheelBase" Type="nvarchar" MaxLength="254" />
+          <Property Name="FuelType" Type="nvarchar" MaxLength="254" />
+          <Property Name="DrivingModel" Type="nvarchar" MaxLength="254" />
+          <Property Name="Mileage" Type="nvarchar" MaxLength="254" />
+          <Property Name="Output" Type="nvarchar" MaxLength="254" />
+          <Property Name="LicenseCarry" Type="nvarchar" MaxLength="254" />
+          <Property Name="SubDepartment" Type="nvarchar" MaxLength="254" />
+          <Property Name="VehicleChargers" Type="nvarchar" MaxLength="254" />
+          <Property Name="UseType" Type="nvarchar" MaxLength="254" />
+          <Property Name="VehicleSpotNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="FaultDescri" Type="nvarchar" MaxLength="254" />
           <Property Name="Image" Type="integer" />
+          <Property Name="Equipment" Type="integer" />
         </EntityType>
         <EntityType Name="EquipImage">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Image" Type="blob" />
+          <Property Name="ImageFront" Type="blob" />
+          <Property Name="ImageSize1" Type="blob" />
+          <Property Name="ImageSize2" Type="blob" />
+        </EntityType>
+        <EntityType Name="EventData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="Spot" Type="nvarchar" MaxLength="254" Nullable="false" />
         </EntityType>
         <EntityType Name="Events">
           <Key>
@@ -42,8 +88,87 @@
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="EventTime" Type="datetime" />
+          <Property Name="StartTime" Type="datetime" />
           <Property Name="Address" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="No" Type="nvarchar" MaxLength="254" />
+          <Property Name="PartUnit" Type="nvarchar" MaxLength="254" />
+          <Property Name="PulishUnit" Type="nvarchar" MaxLength="254" />
+          <Property Name="PublishDate" Type="datetime" />
+          <Property Name="EventType" Type="nvarchar" MaxLength="254" />
+          <Property Name="SpecificType" Type="nvarchar" MaxLength="254" />
+          <Property Name="Code" Type="nvarchar" MaxLength="254" />
+          <Property Name="According" Type="nvarchar" MaxLength="254" />
+          <Property Name="Document" Type="nvarchar" MaxLength="254" />
+          <Property Name="PeopleDescri" Type="nvarchar" MaxLength="254" />
+          <Property Name="ProcessDescri" Type="nvarchar" MaxLength="254" />
+          <Property Name="HandleStep" Type="nvarchar" MaxLength="254" />
+          <Property Name="Problem" Type="nvarchar" MaxLength="254" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="254" />
+          <Property Name="Equipment" Type="integer" />
+          <Property Name="Data" Type="integer" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="No" Type="nvarchar" MaxLength="254" />
+          <Property Name="Type" Type="nvarchar" MaxLength="254" />
+          <Property Name="PaperSize" Type="nvarchar" MaxLength="254" />
+          <Property Name="Pagination" Type="nvarchar" MaxLength="254" />
+          <Property Name="Edition" Type="nvarchar" MaxLength="254" />
+          <Property Name="Volume" Type="nvarchar" MaxLength="254" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="DocumentLink" Type="nvarchar" MaxLength="254" />
+          <Property Name="Content" Type="nvarchar" MaxLength="254" />
+          <Property Name="Equipment" Type="integer" />
+        </EntityType>
+        <EntityType Name="OilEngine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OeNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="OeModel" Type="nvarchar" MaxLength="254" />
+          <Property Name="OutPower" Type="nvarchar" MaxLength="254" />
+          <Property Name="OutSize" Type="nvarchar" MaxLength="254" />
+          <Property Name="WorkHour" Type="nvarchar" MaxLength="254" />
+          <Property Name="OeFactory" Type="nvarchar" MaxLength="254" />
+          <Property Name="OeDate" Type="nvarchar" MaxLength="254" />
+          <Property Name="OeOemNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorModel" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorPower" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorFuel" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorTankage" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorFactory" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorDate" Type="nvarchar" MaxLength="254" />
+          <Property Name="MotorOemNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="FaultDescri" Type="nvarchar" MaxLength="254" />
+          <Property Name="Image" Type="integer" />
+        </EntityType>
+        <EntityType Name="OilEngineImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageFront" Type="blob" />
+          <Property Name="ImageSize1" Type="blob" />
+          <Property Name="ImageSize2" Type="blob" />
+          <Property Name="ImageTop" Type="blob" />
+        </EntityType>
+        <EntityType Name="Train">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Trainee" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="Address" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Content" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Equipment" Type="integer" />
         </EntityType>
         <EntityType Name="VehiclesImage">
@@ -51,9 +176,23 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Image" Type="blob" />
+          <Property Name="ImageFront" Type="blob" />
+          <Property Name="ImageSize1" Type="blob" />
+          <Property Name="ImageSize2" Type="blob" />
         </EntityType>
         <Association Name="FK_CombatEquipment_0_0">
+          <End Role="OilEngine" Type="Self.OilEngine" Multiplicity="0..1" />
+          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OilEngine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CombatEquipment">
+              <PropertyRef Name="OilEngine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CombatEquipment_1_0">
           <End Role="EquipImage" Type="Self.EquipImage" Multiplicity="0..1" />
           <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -66,6 +205,18 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CombatVehicles_0_0">
+          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
+          <End Role="CombatVehicles" Type="Self.CombatVehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CombatVehicles">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CombatVehicles_1_0">
           <End Role="VehiclesImage" Type="Self.VehiclesImage" Multiplicity="0..1" />
           <End Role="CombatVehicles" Type="Self.CombatVehicles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -77,19 +228,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CombatVehicles_1_0">
-          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
-          <End Role="CombatVehicles" Type="Self.CombatVehicles" Multiplicity="*" />
+        <Association Name="FK_Events_0_0">
+          <End Role="EventData" Type="Self.EventData" Multiplicity="0..1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CombatEquipment">
+            <Principal Role="EventData">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="CombatVehicles">
-              <PropertyRef Name="Equipment" />
+            <Dependent Role="Events">
+              <PropertyRef Name="Data" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Events_0_0">
+        <Association Name="FK_Events_1_0">
           <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
           <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
@@ -101,51 +252,94 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Material_0_0">
+          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
+          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OilEngine_0_0">
+          <End Role="OilEngineImage" Type="Self.OilEngineImage" Multiplicity="0..1" />
+          <End Role="OilEngine" Type="Self.OilEngine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OilEngineImage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OilEngine">
+              <PropertyRef Name="Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Train_0_0">
+          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
+          <End Role="Train" Type="Self.Train" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Train">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EquipInfoModelStoreContainer">
           <EntitySet Name="CombatEquipment" EntityType="Self.CombatEquipment" store:Type="Tables" />
           <EntitySet Name="CombatVehicles" EntityType="Self.CombatVehicles" store:Type="Tables" />
           <EntitySet Name="EquipImage" EntityType="Self.EquipImage" store:Type="Tables" />
+          <EntitySet Name="EventData" EntityType="Self.EventData" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" store:Type="Tables" />
+          <EntitySet Name="OilEngine" EntityType="Self.OilEngine" store:Type="Tables" />
+          <EntitySet Name="OilEngineImage" EntityType="Self.OilEngineImage" store:Type="Tables" />
+          <EntitySet Name="Train" EntityType="Self.Train" store:Type="Tables" />
           <EntitySet Name="VehiclesImage" EntityType="Self.VehiclesImage" store:Type="Tables" />
           <AssociationSet Name="FK_CombatEquipment_0_0" Association="Self.FK_CombatEquipment_0_0">
+            <End Role="OilEngine" EntitySet="OilEngine" />
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CombatEquipment_1_0" Association="Self.FK_CombatEquipment_1_0">
             <End Role="EquipImage" EntitySet="EquipImage" />
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
           </AssociationSet>
           <AssociationSet Name="FK_CombatVehicles_0_0" Association="Self.FK_CombatVehicles_0_0">
-            <End Role="VehiclesImage" EntitySet="VehiclesImage" />
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
           </AssociationSet>
           <AssociationSet Name="FK_CombatVehicles_1_0" Association="Self.FK_CombatVehicles_1_0">
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="VehiclesImage" EntitySet="VehiclesImage" />
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
           </AssociationSet>
           <AssociationSet Name="FK_Events_0_0" Association="Self.FK_Events_0_0">
+            <End Role="EventData" EntitySet="EventData" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_1_0" Association="Self.FK_Events_1_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="Events" EntitySet="Events" />
           </AssociationSet>
+          <AssociationSet Name="FK_Material_0_0" Association="Self.FK_Material_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OilEngine_0_0" Association="Self.FK_OilEngine_0_0">
+            <End Role="OilEngineImage" EntitySet="OilEngineImage" />
+            <End Role="OilEngine" EntitySet="OilEngine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Train_0_0" Association="Self.FK_Train_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Train" EntitySet="Train" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EquipInfoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CombatEquipment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EnableTime" Type="DateTime" />
-          <Property Name="SubDepartment" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="ServiceLife" Type="Int64" />
-          <Property Name="InventorySpot" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="Int64" />
-          <NavigationProperty Name="EquipImage" Relationship="Self.FK_CombatEquipment_0_0" FromRole="CombatEquipment" ToRole="EquipImage" />
-          <NavigationProperty Name="CombatVehicles" Relationship="Self.FK_CombatVehicles_1_0" FromRole="CombatEquipment" ToRole="CombatVehicles" />
-          <NavigationProperty Name="Events" Relationship="Self.FK_Events_0_0" FromRole="CombatEquipment" ToRole="Events" />
-        </EntityType>
         <EntityType Name="CombatVehicles">
           <Key>
             <PropertyRef Name="ID" />
@@ -155,39 +349,227 @@
           <Property Name="SerialNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Equipment" Type="Int64" />
           <Property Name="Image" Type="Int64" />
-          <NavigationProperty Name="CombatEquipment" Relationship="Self.FK_CombatVehicles_1_0" FromRole="CombatVehicles" ToRole="CombatEquipment" />
-          <NavigationProperty Name="VehiclesImage" Relationship="Self.FK_CombatVehicles_0_0" FromRole="CombatVehicles" ToRole="VehiclesImage" />
+          <Property Name="Model" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="VehiclesNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorModel" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Factory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionDate" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OemNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Mass" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Tankage" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OverallSize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ExpandedSize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="WheelBase" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FuelType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="DrivingModel" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Mileage" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Output" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="LicenseCarry" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="SubDepartment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleChargers" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="UseType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleSpotNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FaultDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipInfoModel.FK_CombatVehicles_0_01" FromRole="CombatVehicles" ToRole="CombatEquipment" />
+          <NavigationProperty Name="VehiclesImage" Relationship="EquipInfoModel.FK_CombatVehicles_1_0" FromRole="CombatVehicles" ToRole="VehiclesImage" />
         </EntityType>
         <EntityType Name="EquipImage">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Image" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <NavigationProperty Name="CombatEquipment" Relationship="Self.FK_CombatEquipment_0_0" FromRole="EquipImage" ToRole="CombatEquipment" />
+          <Property Name="ImageFront" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize1" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize2" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipInfoModel.FK_CombatEquipment_1_0" FromRole="EquipImage" ToRole="CombatEquipment" />
         </EntityType>
-        <EntityType Name="Events">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CombatVehicles" EntityType="Self.CombatVehicles" />
+          <EntitySet Name="EquipImage" EntityType="Self.EquipImage" />
+          <EntitySet Name="EventData" EntityType="EquipInfoModel.EventData" />
+          <EntitySet Name="Material" EntityType="EquipInfoModel.Material" />
+          <EntitySet Name="OilEngine" EntityType="EquipInfoModel.OilEngine" />
+          <EntitySet Name="OilEngineImage" EntityType="EquipInfoModel.OilEngineImage" />
+          <EntitySet Name="Train" EntityType="EquipInfoModel.Train" />
+          <AssociationSet Name="FK_OilEngine_0_0" Association="EquipInfoModel.FK_OilEngine_0_0">
+            <End Role="OilEngineImage" EntitySet="OilEngineImage" />
+            <End Role="OilEngine" EntitySet="OilEngine" />
+          </AssociationSet>
+          <EntitySet Name="CombatEquipment" EntityType="EquipInfoModel.CombatEquipment" />
+          <AssociationSet Name="FK_CombatEquipment_0_0" Association="EquipInfoModel.FK_CombatEquipment_0_0">
+            <End Role="OilEngine" EntitySet="OilEngine" />
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CombatEquipment_1_0" Association="EquipInfoModel.FK_CombatEquipment_1_0">
+            <End Role="EquipImage" EntitySet="EquipImage" />
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CombatVehicles_0_01" Association="EquipInfoModel.FK_CombatVehicles_0_01">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="CombatVehicles" EntitySet="CombatVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_0_0" Association="EquipInfoModel.FK_Material_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Train_0_0" Association="EquipInfoModel.FK_Train_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Train" EntitySet="Train" />
+          </AssociationSet>
+          <EntitySet Name="Events" EntityType="EquipInfoModel.Events" />
+          <AssociationSet Name="FK_Events_1_0" Association="EquipInfoModel.FK_Events_1_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_0_0" Association="EquipInfoModel.FK_Events_0_0">
+            <End Role="EventData" EntitySet="EventData" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <EntitySet Name="VehiclesImage" EntityType="EquipInfoModel.VehiclesImage" />
+          <AssociationSet Name="FK_CombatVehicles_1_0" Association="EquipInfoModel.FK_CombatVehicles_1_0">
+            <End Role="VehiclesImage" EntitySet="VehiclesImage" />
+            <End Role="CombatVehicles" EntitySet="CombatVehicles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EventData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Spot" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="EquipInfoModel.FK_Events_0_0" FromRole="EventData" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="No" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PaperSize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Pagination" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Edition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Volume" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="DocumentLink" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="Int64" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipInfoModel.FK_Material_0_0" FromRole="Material" ToRole="CombatEquipment" />
+        </EntityType>
+        <EntityType Name="OilEngine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OeNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OeModel" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OutPower" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OutSize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="WorkHour" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OeFactory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OeDate" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="OeOemNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorModel" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorPower" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorFuel" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorTankage" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorFactory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorDate" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorOemNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FaultDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Int64" />
+          <NavigationProperty Name="OilEngineImage" Relationship="EquipInfoModel.FK_OilEngine_0_0" FromRole="OilEngine" ToRole="OilEngineImage" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipInfoModel.FK_CombatEquipment_0_0" FromRole="OilEngine" ToRole="CombatEquipment" />
+        </EntityType>
+        <EntityType Name="OilEngineImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageFront" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize1" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize2" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageTop" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <NavigationProperty Name="OilEngine" Relationship="EquipInfoModel.FK_OilEngine_0_0" FromRole="OilEngineImage" ToRole="OilEngine" />
+        </EntityType>
+        <EntityType Name="Train">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="EventTime" Type="DateTime" />
+          <Property Name="Trainee" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" />
           <Property Name="Address" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Equipment" Type="Int64" />
-          <NavigationProperty Name="CombatEquipment" Relationship="Self.FK_Events_0_0" FromRole="Events" ToRole="CombatEquipment" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipInfoModel.FK_Train_0_0" FromRole="Train" ToRole="CombatEquipment" />
         </EntityType>
-        <EntityType Name="VehiclesImage">
+        <Association Name="FK_OilEngine_0_0">
+          <End Type="EquipInfoModel.OilEngineImage" Role="OilEngineImage" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.OilEngine" Role="OilEngine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OilEngineImage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OilEngine">
+              <PropertyRef Name="Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CombatEquipment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Image" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <NavigationProperty Name="CombatVehicles" Relationship="Self.FK_CombatVehicles_0_0" FromRole="VehiclesImage" ToRole="CombatVehicles" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MajorCategory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SubDepartment" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="UseType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="TechCondition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="UseCondition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Factory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FactoryTime" Type="DateTime" />
+          <Property Name="ServiceLife" Type="Int64" />
+          <Property Name="InventorySpot" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="MajorComp" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MainUsage" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PerformIndex" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="UseMethod" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Maintainer" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Technician" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Int64" />
+          <Property Name="OilEngine" Type="Int64" />
+          <NavigationProperty Name="OilEngine1" Relationship="EquipInfoModel.FK_CombatEquipment_0_0" FromRole="CombatEquipment" ToRole="OilEngine" />
+          <NavigationProperty Name="EquipImage" Relationship="EquipInfoModel.FK_CombatEquipment_1_0" FromRole="CombatEquipment" ToRole="EquipImage" />
+          <NavigationProperty Name="CombatVehicles" Relationship="EquipInfoModel.FK_CombatVehicles_0_01" FromRole="CombatEquipment" ToRole="CombatVehicles" />
+          <NavigationProperty Name="Material" Relationship="EquipInfoModel.FK_Material_0_0" FromRole="CombatEquipment" ToRole="Material" />
+          <NavigationProperty Name="Train" Relationship="EquipInfoModel.FK_Train_0_0" FromRole="CombatEquipment" ToRole="Train" />
+          <NavigationProperty Name="Events" Relationship="EquipInfoModel.FK_Events_1_0" FromRole="CombatEquipment" ToRole="Events" />
         </EntityType>
         <Association Name="FK_CombatEquipment_0_0">
-          <End Role="EquipImage" Type="Self.EquipImage" Multiplicity="0..1" />
-          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="*" />
+          <End Type="EquipInfoModel.OilEngine" Role="OilEngine" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.CombatEquipment" Role="CombatEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OilEngine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CombatEquipment">
+              <PropertyRef Name="OilEngine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CombatEquipment_1_0">
+          <End Type="EquipInfoModel.EquipImage" Role="EquipImage" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.CombatEquipment" Role="CombatEquipment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EquipImage">
               <PropertyRef Name="ID" />
@@ -197,9 +579,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CombatVehicles_1_0">
-          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
-          <End Role="CombatVehicles" Type="Self.CombatVehicles" Multiplicity="*" />
+        <Association Name="FK_CombatVehicles_0_01">
+          <End Type="EquipInfoModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.CombatVehicles" Role="CombatVehicles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CombatEquipment">
               <PropertyRef Name="ID" />
@@ -209,9 +591,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Events_0_0">
-          <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
-          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+        <Association Name="FK_Material_0_0">
+          <End Type="EquipInfoModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.Material" Role="Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Train_0_0">
+          <End Type="EquipInfoModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.Train" Role="Train" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Train">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" />
+          <Property Name="Address" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="EndTime" Type="DateTime" />
+          <Property Name="No" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PartUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PulishUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" />
+          <Property Name="EventType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="SpecificType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="According" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Document" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PeopleDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="HandleStep" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Problem" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="Int64" />
+          <Property Name="Data" Type="Int64" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipInfoModel.FK_Events_1_0" FromRole="Events" ToRole="CombatEquipment" />
+          <NavigationProperty Name="EventData" Relationship="EquipInfoModel.FK_Events_0_0" FromRole="Events" ToRole="EventData" />
+        </EntityType>
+        <Association Name="FK_Events_1_0">
+          <End Type="EquipInfoModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.Events" Role="Events" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CombatEquipment">
               <PropertyRef Name="ID" />
@@ -221,9 +655,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CombatVehicles_0_0">
-          <End Role="VehiclesImage" Type="Self.VehiclesImage" Multiplicity="0..1" />
-          <End Role="CombatVehicles" Type="Self.CombatVehicles" Multiplicity="*" />
+        <Association Name="FK_Events_0_0">
+          <End Type="EquipInfoModel.EventData" Role="EventData" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.Events" Role="Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="Data" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VehiclesImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageFront" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize1" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <Property Name="ImageSize2" Type="Binary" MaxLength="2147483647" FixedLength="false" />
+          <NavigationProperty Name="CombatVehicles" Relationship="EquipInfoModel.FK_CombatVehicles_1_0" FromRole="VehiclesImage" ToRole="CombatVehicles" />
+        </EntityType>
+        <Association Name="FK_CombatVehicles_1_0">
+          <End Type="EquipInfoModel.VehiclesImage" Role="VehiclesImage" Multiplicity="0..1" />
+          <End Type="EquipInfoModel.CombatVehicles" Role="CombatVehicles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="VehiclesImage">
               <PropertyRef Name="ID" />
@@ -233,53 +689,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CombatEquipment" EntityType="Self.CombatEquipment" />
-          <EntitySet Name="CombatVehicles" EntityType="Self.CombatVehicles" />
-          <EntitySet Name="EquipImage" EntityType="Self.EquipImage" />
-          <EntitySet Name="Events" EntityType="Self.Events" />
-          <EntitySet Name="VehiclesImage" EntityType="Self.VehiclesImage" />
-          <AssociationSet Name="FK_CombatEquipment_0_0" Association="Self.FK_CombatEquipment_0_0">
-            <End Role="EquipImage" EntitySet="EquipImage" />
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CombatVehicles_1_0" Association="Self.FK_CombatVehicles_1_0">
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
-            <End Role="CombatVehicles" EntitySet="CombatVehicles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Events_0_0" Association="Self.FK_Events_0_0">
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CombatVehicles_0_0" Association="Self.FK_CombatVehicles_0_0">
-            <End Role="VehiclesImage" EntitySet="VehiclesImage" />
-            <End Role="CombatVehicles" EntitySet="CombatVehicles" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EquipInfoModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="CombatEquipment">
-            <EntityTypeMapping TypeName="EquipInfoModel.CombatEquipment">
-              <MappingFragment StoreEntitySet="CombatEquipment">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="EnableTime" ColumnName="EnableTime" />
-                <ScalarProperty Name="SubDepartment" ColumnName="SubDepartment" />
-                <ScalarProperty Name="ServiceLife" ColumnName="ServiceLife" />
-                <ScalarProperty Name="InventorySpot" ColumnName="InventorySpot" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CombatVehicles">
             <EntityTypeMapping TypeName="EquipInfoModel.CombatVehicles">
               <MappingFragment StoreEntitySet="CombatVehicles">
+                <ScalarProperty Name="FaultDescri" ColumnName="FaultDescri" />
+                <ScalarProperty Name="VehicleSpotNo" ColumnName="VehicleSpotNo" />
+                <ScalarProperty Name="UseType" ColumnName="UseType" />
+                <ScalarProperty Name="VehicleChargers" ColumnName="VehicleChargers" />
+                <ScalarProperty Name="SubDepartment" ColumnName="SubDepartment" />
+                <ScalarProperty Name="LicenseCarry" ColumnName="LicenseCarry" />
+                <ScalarProperty Name="Output" ColumnName="Output" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="DrivingModel" ColumnName="DrivingModel" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+                <ScalarProperty Name="WheelBase" ColumnName="WheelBase" />
+                <ScalarProperty Name="ExpandedSize" ColumnName="ExpandedSize" />
+                <ScalarProperty Name="OverallSize" ColumnName="OverallSize" />
+                <ScalarProperty Name="Tankage" ColumnName="Tankage" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="OemNo" ColumnName="OemNo" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="MotorNo" ColumnName="MotorNo" />
+                <ScalarProperty Name="MotorModel" ColumnName="MotorModel" />
+                <ScalarProperty Name="VehiclesNo" ColumnName="VehiclesNo" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
@@ -291,27 +731,152 @@
           <EntitySetMapping Name="EquipImage">
             <EntityTypeMapping TypeName="EquipInfoModel.EquipImage">
               <MappingFragment StoreEntitySet="EquipImage">
+                <ScalarProperty Name="ImageSize2" ColumnName="ImageSize2" />
+                <ScalarProperty Name="ImageSize1" ColumnName="ImageSize1" />
+                <ScalarProperty Name="ImageFront" ColumnName="ImageFront" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventData">
+            <EntityTypeMapping TypeName="EquipInfoModel.EventData">
+              <MappingFragment StoreEntitySet="EventData">
+                <ScalarProperty Name="Spot" ColumnName="Spot" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="EquipInfoModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="DocumentLink" ColumnName="DocumentLink" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Pagination" ColumnName="Pagination" />
+                <ScalarProperty Name="PaperSize" ColumnName="PaperSize" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OilEngine">
+            <EntityTypeMapping TypeName="EquipInfoModel.OilEngine">
+              <MappingFragment StoreEntitySet="OilEngine">
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="FaultDescri" ColumnName="FaultDescri" />
+                <ScalarProperty Name="MotorOemNo" ColumnName="MotorOemNo" />
+                <ScalarProperty Name="MotorDate" ColumnName="MotorDate" />
+                <ScalarProperty Name="MotorFactory" ColumnName="MotorFactory" />
+                <ScalarProperty Name="MotorTankage" ColumnName="MotorTankage" />
+                <ScalarProperty Name="MotorFuel" ColumnName="MotorFuel" />
+                <ScalarProperty Name="MotorPower" ColumnName="MotorPower" />
+                <ScalarProperty Name="MotorModel" ColumnName="MotorModel" />
+                <ScalarProperty Name="MotorNo" ColumnName="MotorNo" />
+                <ScalarProperty Name="OeOemNo" ColumnName="OeOemNo" />
+                <ScalarProperty Name="OeDate" ColumnName="OeDate" />
+                <ScalarProperty Name="OeFactory" ColumnName="OeFactory" />
+                <ScalarProperty Name="WorkHour" ColumnName="WorkHour" />
+                <ScalarProperty Name="OutSize" ColumnName="OutSize" />
+                <ScalarProperty Name="OutPower" ColumnName="OutPower" />
+                <ScalarProperty Name="OeModel" ColumnName="OeModel" />
+                <ScalarProperty Name="OeNo" ColumnName="OeNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OilEngineImage">
+            <EntityTypeMapping TypeName="EquipInfoModel.OilEngineImage">
+              <MappingFragment StoreEntitySet="OilEngineImage">
+                <ScalarProperty Name="ImageTop" ColumnName="ImageTop" />
+                <ScalarProperty Name="ImageSize2" ColumnName="ImageSize2" />
+                <ScalarProperty Name="ImageSize1" ColumnName="ImageSize1" />
+                <ScalarProperty Name="ImageFront" ColumnName="ImageFront" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Train">
+            <EntityTypeMapping TypeName="EquipInfoModel.Train">
+              <MappingFragment StoreEntitySet="Train">
+                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Trainee" ColumnName="Trainee" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CombatEquipment">
+            <EntityTypeMapping TypeName="EquipInfoModel.CombatEquipment">
+              <MappingFragment StoreEntitySet="CombatEquipment">
+                <ScalarProperty Name="OilEngine" ColumnName="OilEngine" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Technician" ColumnName="Technician" />
+                <ScalarProperty Name="Maintainer" ColumnName="Maintainer" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="UseMethod" ColumnName="UseMethod" />
+                <ScalarProperty Name="PerformIndex" ColumnName="PerformIndex" />
+                <ScalarProperty Name="MainUsage" ColumnName="MainUsage" />
+                <ScalarProperty Name="MajorComp" ColumnName="MajorComp" />
+                <ScalarProperty Name="InventorySpot" ColumnName="InventorySpot" />
+                <ScalarProperty Name="ServiceLife" ColumnName="ServiceLife" />
+                <ScalarProperty Name="FactoryTime" ColumnName="FactoryTime" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="UseCondition" ColumnName="UseCondition" />
+                <ScalarProperty Name="TechCondition" ColumnName="TechCondition" />
+                <ScalarProperty Name="UseType" ColumnName="UseType" />
+                <ScalarProperty Name="SubDepartment" ColumnName="SubDepartment" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="MajorCategory" ColumnName="MajorCategory" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="EquipInfoModel.Events">
               <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="HandleStep" ColumnName="HandleStep" />
+                <ScalarProperty Name="ProcessDescri" ColumnName="ProcessDescri" />
+                <ScalarProperty Name="PeopleDescri" ColumnName="PeopleDescri" />
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="According" ColumnName="According" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SpecificType" ColumnName="SpecificType" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="PulishUnit" ColumnName="PulishUnit" />
+                <ScalarProperty Name="PartUnit" ColumnName="PartUnit" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VehiclesImage">
             <EntityTypeMapping TypeName="EquipInfoModel.VehiclesImage">
               <MappingFragment StoreEntitySet="VehiclesImage">
+                <ScalarProperty Name="ImageSize2" ColumnName="ImageSize2" />
+                <ScalarProperty Name="ImageSize1" ColumnName="ImageSize1" />
+                <ScalarProperty Name="ImageFront" ColumnName="ImageFront" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

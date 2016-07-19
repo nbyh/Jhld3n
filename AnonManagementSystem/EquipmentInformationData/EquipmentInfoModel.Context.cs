@@ -25,9 +25,14 @@ namespace EquipmentInformationData
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CombatEquipment> CombatEquipment { get; set; }
         public virtual DbSet<CombatVehicles> CombatVehicles { get; set; }
         public virtual DbSet<EquipImage> EquipImage { get; set; }
+        public virtual DbSet<EventData> EventData { get; set; }
+        public virtual DbSet<Material> Material { get; set; }
+        public virtual DbSet<OilEngine> OilEngine { get; set; }
+        public virtual DbSet<OilEngineImage> OilEngineImage { get; set; }
+        public virtual DbSet<Train> Train { get; set; }
+        public virtual DbSet<CombatEquipment> CombatEquipment { get; set; }
         public virtual DbSet<Events> Events { get; set; }
         public virtual DbSet<VehiclesImage> VehiclesImage { get; set; }
     }

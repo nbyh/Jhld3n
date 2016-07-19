@@ -68,17 +68,30 @@ namespace AnonManagementSystem
 
         private void AddModify(bool modify, int id, string user, string pwd, bool enableedit)
         {
-            ;
+            int j = dgvUserManage.RowCount;
             if (modify)
             {
                 UserManage um = new UserManage() { ID = id, Edit = enableedit, Password = pwd, User = user };
                 modifyuser.Add(um);
+                for (int i = 0; i < j; i++)
+                {
+                    if (dgvUserManage.Rows[i].Cells["ID"].Value.ToString() == id.ToString())
+                    {
+                        dgvUserManage.Rows[i].Cells[0].Value = i + 1;
+                        dgvUserManage.Rows[i].Cells[1].Value = user;
+                        dgvUserManage.Rows[i].Cells[2].Value = enableedit ? "可写" : "只读";
+                    }
+                }
                 //修改
             }
             else
             {
                 UserManage um = new UserManage() { Edit = enableedit, Password = pwd, User = user };
                 adduser.Add(um);
+                dgvUserManage.RowCount = j + 1;
+                dgvUserManage.Rows[j].Cells[0].Value = j + 1;
+                dgvUserManage.Rows[j].Cells[1].Value = user;
+                dgvUserManage.Rows[j].Cells[2].Value = enableedit ? "可写" : "只读";
                 //增加
             }
         }
@@ -89,6 +102,7 @@ namespace AnonManagementSystem
             var sms = (from u in sysManagerEntities.UserManage
                        select u).Distinct().ToList();
             alluser = sms.Select(n => n.User).ToList();
+            dgvUserManage.RowCount = sms.Count;
             for (int i = 0; i < sms.Count; i++)
             {
                 dgvUserManage[0, i].Value = i + 1;
@@ -103,7 +117,7 @@ namespace AnonManagementSystem
         {
             if (dgvUserManage.CurrentRow != null)
             {
-                if (MessageBox.Show("确定是否删除", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show(@"确定是否删除", @"提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     int rowindex = dgvUserManage.CurrentRow.Index;
                     UserManage um = new UserManage()

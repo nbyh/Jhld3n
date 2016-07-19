@@ -51,15 +51,17 @@
             // 
             this.tbPwd.Location = new System.Drawing.Point(71, 39);
             this.tbPwd.Name = "tbPwd";
+            this.tbPwd.PasswordChar = '#';
             this.tbPwd.Size = new System.Drawing.Size(100, 21);
-            this.tbPwd.TabIndex = 0;
+            this.tbPwd.TabIndex = 1;
             // 
             // tbPwdSure
             // 
             this.tbPwdSure.Location = new System.Drawing.Point(71, 66);
             this.tbPwdSure.Name = "tbPwdSure";
+            this.tbPwdSure.PasswordChar = '#';
             this.tbPwdSure.Size = new System.Drawing.Size(100, 21);
-            this.tbPwdSure.TabIndex = 0;
+            this.tbPwdSure.TabIndex = 2;
             // 
             // cmbAuthority
             // 
@@ -72,7 +74,7 @@
             this.cmbAuthority.Location = new System.Drawing.Point(71, 93);
             this.cmbAuthority.Name = "cmbAuthority";
             this.cmbAuthority.Size = new System.Drawing.Size(100, 22);
-            this.cmbAuthority.TabIndex = 1;
+            this.cmbAuthority.TabIndex = 3;
             this.cmbAuthority.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbAuthority_DrawItem);
             // 
             // label1
@@ -81,7 +83,7 @@
             this.label1.Location = new System.Drawing.Point(24, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 6;
             this.label1.Text = "用户名";
             // 
             // label2
@@ -90,7 +92,7 @@
             this.label2.Location = new System.Drawing.Point(36, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 7;
             this.label2.Text = "密码";
             // 
             // label3
@@ -99,7 +101,7 @@
             this.label3.Location = new System.Drawing.Point(12, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 8;
             this.label3.Text = "确认密码";
             // 
             // label4
@@ -108,7 +110,7 @@
             this.label4.Location = new System.Drawing.Point(12, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 5;
+            this.label4.TabIndex = 9;
             this.label4.Text = "读写权限";
             // 
             // btnEnter
@@ -116,7 +118,7 @@
             this.btnEnter.Location = new System.Drawing.Point(14, 119);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(75, 23);
-            this.btnEnter.TabIndex = 6;
+            this.btnEnter.TabIndex = 4;
             this.btnEnter.Text = "确定";
             this.btnEnter.UseVisualStyleBackColor = true;
             this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
@@ -127,7 +129,7 @@
             this.btnCancel.Location = new System.Drawing.Point(96, 119);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 6;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
