@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
-    public partial class MachineMeterialFormcs : Form
+    public partial class EventsForm : Form
     {
-        public MachineMeterialFormcs()
+        public EventsForm()
         {
             InitializeComponent();
         }

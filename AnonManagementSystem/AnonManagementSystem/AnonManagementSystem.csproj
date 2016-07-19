@@ -88,17 +88,23 @@
     <Compile Include="EquipmentDetailForm.Designer.cs">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventsForm.Designer.cs">
+      <DependentUpon>EventsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MachineMeterialFormcs.cs">
+    <Compile Include="MachineMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MachineMeterialFormcs.Designer.cs">
-      <DependentUpon>MachineMeterialFormcs.cs</DependentUpon>
+    <Compile Include="MachineMaterialForm.Designer.cs">
+      <DependentUpon>MachineMaterialForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -129,11 +135,14 @@
     <EmbeddedResource Include="EquipmentDetailForm.resx">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EventsForm.resx">
+      <DependentUpon>EventsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MachineMeterialFormcs.resx">
-      <DependentUpon>MachineMeterialFormcs.cs</DependentUpon>
+    <EmbeddedResource Include="MachineMaterialForm.resx">
+      <DependentUpon>MachineMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

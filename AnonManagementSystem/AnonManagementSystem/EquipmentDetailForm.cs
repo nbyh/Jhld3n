@@ -94,5 +94,28 @@ namespace AnonManagementSystem
             eqEntities.CombatEquipment.Add(ce);
             eqEntities.SaveChanges();
         }
+
+        private void tsbAddVehicle_Click(object sender, EventArgs e)
+        {
+            VehicleDetailForm vdForm=new VehicleDetailForm();
+            vdForm.ShowDialog();
+        }
+
+        private void tsbAddTrain_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void 随机资料tsmAdd_Click(object sender, EventArgs e)
+        {
+            MachineMaterialForm mmForm = new MachineMaterialForm();
+            mmForm.ShowDialog();
+        }
+
+        private void tsbAddEvents_Click(object sender, EventArgs e)
+        {
+            EventsForm eFrom=new EventsForm();
+            eFrom.ShowDialog();
+        }
     }
 }
