@@ -7,7 +7,7 @@
       <Diagram DiagramId="64a9115112db44b0aac666424c9c8b9d" Name="Diagram1" ZoomLevel="100" DisplayType="false">
         <EntityTypeShape EntityType="EquipInfoModel.CombatVehicles" Width="1.5" PointX="9.5" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipInfoModel.EquipImage" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipInfoModel.EventData" Width="1.5" PointX="9.5" PointY="15.5" />
+        <EntityTypeShape EntityType="EquipInfoModel.EventData" Width="1.5" PointX="9.5" PointY="15.125" />
         <EntityTypeShape EntityType="EquipInfoModel.Material" Width="1.5" PointX="5.25" PointY="15.5" />
         <EntityTypeShape EntityType="EquipInfoModel.OilEngine" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="EquipInfoModel.OilEngineImage" Width="1.5" PointX="0.75" PointY="10.625" />

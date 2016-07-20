@@ -117,5 +117,10 @@ namespace AnonManagementSystem
             EventsForm eFrom=new EventsForm();
             eFrom.ShowDialog();
         }
+
+        private void dgvVideo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
