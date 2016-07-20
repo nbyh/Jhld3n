@@ -1,6 +1,6 @@
 ﻿namespace AnonManagementSystem
 {
-    partial class MainForm
+    partial class SubMainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.切换用户ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.系统设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
-            this.tsbAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label15 = new System.Windows.Forms.Label();
@@ -70,6 +61,9 @@
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.btnQueryInfo = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -91,7 +85,6 @@
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
             this.cmbEventName = new System.Windows.Forms.ComboBox();
             this.btnQueryEvent = new System.Windows.Forms.Button();
-            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -117,12 +110,8 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.menuStrip1.SuspendLayout();
+            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudService)).BeginInit();
@@ -131,109 +120,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.dGvEquip)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.切换用户ToolStripMenuItem,
-            this.系统设置ToolStripMenuItem,
-            this.关于ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(784, 25);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 切换用户ToolStripMenuItem
-            // 
-            this.切换用户ToolStripMenuItem.Name = "切换用户ToolStripMenuItem";
-            this.切换用户ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.切换用户ToolStripMenuItem.Text = "切换用户";
-            this.切换用户ToolStripMenuItem.Click += new System.EventHandler(this.切换用户ToolStripMenuItem_Click);
-            // 
-            // 系统设置ToolStripMenuItem
-            // 
-            this.系统设置ToolStripMenuItem.Name = "系统设置ToolStripMenuItem";
-            this.系统设置ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.系统设置ToolStripMenuItem.Text = "系统设置";
-            this.系统设置ToolStripMenuItem.Click += new System.EventHandler(this.系统设置ToolStripMenuItem_Click);
-            // 
-            // 关于ToolStripMenuItem
-            // 
-            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.关于ToolStripMenuItem.Text = "关于";
-            this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 158);
+            this.panel1.Size = new System.Drawing.Size(784, 128);
             this.panel1.TabIndex = 1;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbRefresh,
-            this.tsbAdd,
-            this.tsbDelete,
-            this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(784, 25);
-            this.toolStrip1.TabIndex = 12;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tsbRefresh
-            // 
-            this.tsbRefresh.Image = global::AnonManagementSystem.Properties.Resources.file_search;
-            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRefresh.Name = "tsbRefresh";
-            this.tsbRefresh.Size = new System.Drawing.Size(52, 22);
-            this.tsbRefresh.Text = "刷新";
-            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
-            // 
-            // tsbAdd
-            // 
-            this.tsbAdd.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.tsbAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAdd.Name = "tsbAdd";
-            this.tsbAdd.Size = new System.Drawing.Size(52, 22);
-            this.tsbAdd.Text = "添加";
-            this.tsbAdd.Click += new System.EventHandler(this.tsbAdd_Click);
-            // 
-            // tsbDelete
-            // 
-            this.tsbDelete.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDelete.Name = "tsbDelete";
-            this.tsbDelete.Size = new System.Drawing.Size(52, 22);
-            this.tsbDelete.Text = "删除";
-            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton3.Text = "保存";
-            this.toolStripButton3.Visible = false;
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(784, 130);
+            this.tabControl1.Size = new System.Drawing.Size(784, 128);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -267,7 +171,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(776, 104);
+            this.tabPage1.Size = new System.Drawing.Size(776, 102);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -275,7 +179,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(351, 47);
+            this.label15.Location = new System.Drawing.Point(351, 46);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 12);
             this.label15.TabIndex = 28;
@@ -286,7 +190,7 @@
             this.cmbTechCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbTechCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTechCondition.FormattingEnabled = true;
-            this.cmbTechCondition.Location = new System.Drawing.Point(410, 42);
+            this.cmbTechCondition.Location = new System.Drawing.Point(410, 41);
             this.cmbTechCondition.Name = "cmbTechCondition";
             this.cmbTechCondition.Size = new System.Drawing.Size(71, 22);
             this.cmbTechCondition.TabIndex = 27;
@@ -294,7 +198,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(490, 47);
+            this.label16.Location = new System.Drawing.Point(490, 46);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 12);
             this.label16.TabIndex = 26;
@@ -305,7 +209,7 @@
             this.cmbUseCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbUseCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUseCondition.FormattingEnabled = true;
-            this.cmbUseCondition.Location = new System.Drawing.Point(549, 42);
+            this.cmbUseCondition.Location = new System.Drawing.Point(549, 41);
             this.cmbUseCondition.Name = "cmbUseCondition";
             this.cmbUseCondition.Size = new System.Drawing.Size(71, 22);
             this.cmbUseCondition.TabIndex = 25;
@@ -313,7 +217,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(210, 19);
+            this.label13.Location = new System.Drawing.Point(210, 18);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 12);
             this.label13.TabIndex = 24;
@@ -324,7 +228,7 @@
             this.cmbMajorCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbMajorCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMajorCategory.FormattingEnabled = true;
-            this.cmbMajorCategory.Location = new System.Drawing.Point(269, 14);
+            this.cmbMajorCategory.Location = new System.Drawing.Point(269, 13);
             this.cmbMajorCategory.Name = "cmbMajorCategory";
             this.cmbMajorCategory.Size = new System.Drawing.Size(76, 22);
             this.cmbMajorCategory.TabIndex = 23;
@@ -332,7 +236,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(210, 47);
+            this.label11.Location = new System.Drawing.Point(210, 46);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 22;
@@ -341,7 +245,7 @@
             // cmbFactory
             // 
             this.cmbFactory.FormattingEnabled = true;
-            this.cmbFactory.Location = new System.Drawing.Point(83, 70);
+            this.cmbFactory.Location = new System.Drawing.Point(83, 69);
             this.cmbFactory.Name = "cmbFactory";
             this.cmbFactory.Size = new System.Drawing.Size(185, 20);
             this.cmbFactory.TabIndex = 19;
@@ -349,7 +253,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(24, 74);
+            this.label10.Location = new System.Drawing.Point(24, 73);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 12);
             this.label10.TabIndex = 18;
@@ -358,7 +262,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(462, 19);
+            this.label7.Location = new System.Drawing.Point(462, 18);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 16;
@@ -375,7 +279,7 @@
             "<",
             "≥",
             "≤"});
-            this.cmbUseType.Location = new System.Drawing.Point(269, 42);
+            this.cmbUseType.Location = new System.Drawing.Point(269, 41);
             this.cmbUseType.Name = "cmbUseType";
             this.cmbUseType.Size = new System.Drawing.Size(75, 22);
             this.cmbUseType.TabIndex = 21;
@@ -385,7 +289,7 @@
             this.cmbSpot.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbSpot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSpot.FormattingEnabled = true;
-            this.cmbSpot.Location = new System.Drawing.Point(521, 14);
+            this.cmbSpot.Location = new System.Drawing.Point(521, 13);
             this.cmbSpot.Name = "cmbSpot";
             this.cmbSpot.Size = new System.Drawing.Size(99, 22);
             this.cmbSpot.TabIndex = 14;
@@ -394,7 +298,7 @@
             // btnRestInfo
             // 
             this.btnRestInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestInfo.Location = new System.Drawing.Point(708, 37);
+            this.btnRestInfo.Location = new System.Drawing.Point(708, 34);
             this.btnRestInfo.Name = "btnRestInfo";
             this.btnRestInfo.Size = new System.Drawing.Size(44, 30);
             this.btnRestInfo.TabIndex = 17;
@@ -404,7 +308,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(24, 47);
+            this.label8.Location = new System.Drawing.Point(24, 46);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 16;
@@ -413,7 +317,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(490, 74);
+            this.label6.Location = new System.Drawing.Point(490, 73);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 16;
@@ -422,7 +326,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(274, 74);
+            this.label5.Location = new System.Drawing.Point(274, 73);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 16;
@@ -431,7 +335,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(351, 19);
+            this.label4.Location = new System.Drawing.Point(351, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 16;
@@ -440,7 +344,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 19);
+            this.label3.Location = new System.Drawing.Point(24, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 15;
@@ -448,7 +352,7 @@
             // 
             // nudService
             // 
-            this.nudService.Location = new System.Drawing.Point(582, 70);
+            this.nudService.Location = new System.Drawing.Point(582, 69);
             this.nudService.Name = "nudService";
             this.nudService.Size = new System.Drawing.Size(38, 21);
             this.nudService.TabIndex = 13;
@@ -464,7 +368,7 @@
             "<",
             "≥",
             "≤"});
-            this.cmbSerTerm.Location = new System.Drawing.Point(549, 69);
+            this.cmbSerTerm.Location = new System.Drawing.Point(549, 68);
             this.cmbSerTerm.Name = "cmbSerTerm";
             this.cmbSerTerm.Size = new System.Drawing.Size(33, 22);
             this.cmbSerTerm.TabIndex = 12;
@@ -481,7 +385,7 @@
             "<",
             "≥",
             "≤"});
-            this.cmbTimeTerm.Location = new System.Drawing.Point(333, 69);
+            this.cmbTimeTerm.Location = new System.Drawing.Point(333, 68);
             this.cmbTimeTerm.Name = "cmbTimeTerm";
             this.cmbTimeTerm.Size = new System.Drawing.Size(33, 22);
             this.cmbTimeTerm.TabIndex = 11;
@@ -489,7 +393,7 @@
             // 
             // dtpTime
             // 
-            this.dtpTime.Location = new System.Drawing.Point(366, 70);
+            this.dtpTime.Location = new System.Drawing.Point(366, 69);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.Size = new System.Drawing.Size(115, 21);
             this.dtpTime.TabIndex = 10;
@@ -499,7 +403,7 @@
             this.cmbModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(386, 14);
+            this.cmbModel.Location = new System.Drawing.Point(386, 13);
             this.cmbModel.Name = "cmbModel";
             this.cmbModel.Size = new System.Drawing.Size(71, 22);
             this.cmbModel.TabIndex = 9;
@@ -510,7 +414,7 @@
             this.cmbSubDepart.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbSubDepart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubDepart.FormattingEnabled = true;
-            this.cmbSubDepart.Location = new System.Drawing.Point(83, 42);
+            this.cmbSubDepart.Location = new System.Drawing.Point(83, 41);
             this.cmbSubDepart.Name = "cmbSubDepart";
             this.cmbSubDepart.Size = new System.Drawing.Size(121, 22);
             this.cmbSubDepart.TabIndex = 8;
@@ -521,7 +425,7 @@
             this.cmbName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbName.FormattingEnabled = true;
-            this.cmbName.Location = new System.Drawing.Point(83, 14);
+            this.cmbName.Location = new System.Drawing.Point(83, 13);
             this.cmbName.Name = "cmbName";
             this.cmbName.Size = new System.Drawing.Size(121, 22);
             this.cmbName.TabIndex = 8;
@@ -530,7 +434,7 @@
             // btnQueryInfo
             // 
             this.btnQueryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQueryInfo.Location = new System.Drawing.Point(658, 37);
+            this.btnQueryInfo.Location = new System.Drawing.Point(658, 34);
             this.btnQueryInfo.Name = "btnQueryInfo";
             this.btnQueryInfo.Size = new System.Drawing.Size(44, 30);
             this.btnQueryInfo.TabIndex = 7;
@@ -567,10 +471,33 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 104);
+            this.tabPage2.Size = new System.Drawing.Size(776, 102);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "活动情况";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(235, 43);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(103, 21);
+            this.dateTimePicker1.TabIndex = 51;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(391, 69);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(103, 21);
+            this.textBox3.TabIndex = 50;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(356, 73);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(29, 12);
+            this.label23.TabIndex = 49;
+            this.label23.Text = "代号";
             // 
             // label22
             // 
@@ -674,7 +601,7 @@
             // button6
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(701, 55);
+            this.button6.Location = new System.Drawing.Point(701, 40);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(44, 30);
             this.button6.TabIndex = 37;
@@ -763,25 +690,12 @@
             // btnQueryEvent
             // 
             this.btnQueryEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQueryEvent.Location = new System.Drawing.Point(701, 19);
+            this.btnQueryEvent.Location = new System.Drawing.Point(701, 4);
             this.btnQueryEvent.Name = "btnQueryEvent";
             this.btnQueryEvent.Size = new System.Drawing.Size(44, 30);
             this.btnQueryEvent.TabIndex = 17;
             this.btnQueryEvent.Text = "筛选";
             this.btnQueryEvent.UseVisualStyleBackColor = false;
-            // 
-            // ccmbDepartment
-            // 
-            this.ccmbDepartment.CheckOnClick = true;
-            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ccmbDepartment.DropDownHeight = 1;
-            this.ccmbDepartment.FormattingEnabled = true;
-            this.ccmbDepartment.IntegralHeight = false;
-            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
-            this.ccmbDepartment.Name = "ccmbDepartment";
-            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
-            this.ccmbDepartment.TabIndex = 35;
-            this.ccmbDepartment.ValueSeparator = ", ";
             // 
             // panel2
             // 
@@ -798,16 +712,16 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dGvEquip);
-            this.panel2.Location = new System.Drawing.Point(0, 186);
+            this.panel2.Location = new System.Drawing.Point(0, 130);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(784, 375);
+            this.panel2.Size = new System.Drawing.Size(784, 431);
             this.panel2.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(393, 347);
+            this.label2.Location = new System.Drawing.Point(393, 403);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 9;
@@ -817,7 +731,7 @@
             // 
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(434, 343);
+            this.comboBox1.Location = new System.Drawing.Point(434, 399);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(46, 20);
             this.comboBox1.TabIndex = 8;
@@ -825,7 +739,7 @@
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(686, 343);
+            this.textBox1.Location = new System.Drawing.Point(686, 399);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(44, 21);
             this.textBox1.TabIndex = 7;
@@ -833,7 +747,7 @@
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(736, 342);
+            this.button5.Location = new System.Drawing.Point(736, 398);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(44, 23);
             this.button5.TabIndex = 6;
@@ -843,7 +757,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(636, 342);
+            this.button4.Location = new System.Drawing.Point(636, 398);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(44, 23);
             this.button4.TabIndex = 5;
@@ -853,7 +767,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(586, 342);
+            this.button3.Location = new System.Drawing.Point(586, 398);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(44, 23);
             this.button3.TabIndex = 4;
@@ -863,7 +777,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(536, 342);
+            this.button2.Location = new System.Drawing.Point(536, 398);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(44, 23);
             this.button2.TabIndex = 3;
@@ -873,7 +787,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(486, 342);
+            this.button1.Location = new System.Drawing.Point(486, 398);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(44, 23);
             this.button1.TabIndex = 2;
@@ -884,7 +798,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 347);
+            this.label1.Location = new System.Drawing.Point(12, 403);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(257, 12);
             this.label1.TabIndex = 1;
@@ -896,22 +810,22 @@
             this.dGvEquip.AllowUserToDeleteRows = false;
             this.dGvEquip.AllowUserToResizeColumns = false;
             this.dGvEquip.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dGvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dGvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dGvEquip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dGvEquip.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dGvEquip.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGvEquip.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dGvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dGvEquip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGvEquip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -928,14 +842,14 @@
             this.Column11,
             this.Column7,
             this.MoreInfo});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGvEquip.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dGvEquip.DefaultCellStyle = dataGridViewCellStyle3;
             this.dGvEquip.Location = new System.Drawing.Point(4, 3);
             this.dGvEquip.MultiSelect = false;
             this.dGvEquip.Name = "dGvEquip";
@@ -943,7 +857,7 @@
             this.dGvEquip.RowHeadersVisible = false;
             this.dGvEquip.RowTemplate.Height = 23;
             this.dGvEquip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGvEquip.Size = new System.Drawing.Size(776, 331);
+            this.dGvEquip.Size = new System.Drawing.Size(776, 387);
             this.dGvEquip.TabIndex = 0;
             this.dGvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvEquip_CellContentClick);
             // 
@@ -1047,49 +961,34 @@
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
             // 
-            // label23
+            // ccmbDepartment
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(356, 73);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(29, 12);
-            this.label23.TabIndex = 49;
-            this.label23.Text = "代号";
+            this.ccmbDepartment.CheckOnClick = true;
+            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ccmbDepartment.DropDownHeight = 1;
+            this.ccmbDepartment.FormattingEnabled = true;
+            this.ccmbDepartment.IntegralHeight = false;
+            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
+            this.ccmbDepartment.Name = "ccmbDepartment";
+            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
+            this.ccmbDepartment.TabIndex = 35;
+            this.ccmbDepartment.ValueSeparator = ", ";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(391, 69);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(103, 21);
-            this.textBox3.TabIndex = 50;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(235, 43);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(103, 21);
-            this.dateTimePicker1.TabIndex = 51;
-            // 
-            // MainForm
+            // SubMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MainForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "SubMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Demo";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1100,15 +999,10 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGvEquip)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 系统设置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
@@ -1125,10 +1019,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnQueryInfo;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton tsbAdd;
-        private System.Windows.Forms.ToolStripButton tsbDelete;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -1152,8 +1042,6 @@
         private CheckComboBox.CheckedComboBox ccmbDepartment;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnRestInfo;
-        private System.Windows.Forms.ToolStripButton tsbRefresh;
-        private System.Windows.Forms.ToolStripMenuItem 切换用户ToolStripMenuItem;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbTechCondition;
         private System.Windows.Forms.Label label16;

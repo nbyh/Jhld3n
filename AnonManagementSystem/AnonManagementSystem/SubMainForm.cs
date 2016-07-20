@@ -10,13 +10,13 @@ using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
-    public partial class MainForm : Form
+    public partial class SubMainForm : Form, IMdiFunction
     {
         public delegate void ChangeUser();
         public event ChangeUser ChangeCurrentuser;
         private bool _exitapp = true;
         private bool _enableedit = false;
-        public MainForm()
+        public SubMainForm()
         {
             InitializeComponent();
         }
@@ -40,13 +40,6 @@ namespace AnonManagementSystem
             }
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (_exitapp)
-            {
-                Application.Exit();
-            }
-        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -71,17 +64,11 @@ namespace AnonManagementSystem
             cmbSubDepart.SelectedIndex = -1;
             cmbModel.SelectedIndex = -1;
             cmbSpot.SelectedIndex = -1;
-            tsbAdd.Enabled = tsbDelete.Enabled = _enableedit;
+            //tsbAdd.Enabled = tsbDelete.Enabled = _enableedit;
         }
 
         private void tsbAdd_Click(object sender, EventArgs e)
         {
-            EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
-            {
-                Enableedit = true,
-                Add = true
-            };
-            equipDetailForm.Show();
         }
 
         private void tsbDelete_Click(object sender, EventArgs e)
@@ -100,12 +87,6 @@ namespace AnonManagementSystem
             e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
         }
 
-        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AmsAboutBox amsAboutBox = new AmsAboutBox();
-            amsAboutBox.ShowDialog();
-        }
-
         private void tsbRefresh_Click(object sender, EventArgs e)
         {
             Entities equipEntities = new Entities();
@@ -119,17 +100,22 @@ namespace AnonManagementSystem
             }
         }
 
-        private void 系统设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        public void DataRefresh()
         {
-            SystemSetting systemSetting = new SystemSetting();
-            systemSetting.ShowDialog();
+        }
+        public void DataAdd()
+        {
+            EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
+            {
+                Enableedit = true,
+                Add = true
+            };
+            equipDetailForm.Show();
         }
 
-        private void 切换用户ToolStripMenuItem_Click(object sender, EventArgs e)
+        public void DataDelete()
         {
-            _exitapp = false;
-            this.Close();
-            ChangeCurrentuser?.Invoke();
+            throw new NotImplementedException();
         }
     }
 }

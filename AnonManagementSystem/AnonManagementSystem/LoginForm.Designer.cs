@@ -72,6 +72,7 @@
             // 
             // btnEnter
             // 
+            this.btnEnter.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnEnter.Location = new System.Drawing.Point(87, 86);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(75, 23);

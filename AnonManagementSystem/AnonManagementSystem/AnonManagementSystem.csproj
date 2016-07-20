@@ -106,11 +106,18 @@
     <Compile Include="MachineMaterialForm.Designer.cs">
       <DependentUpon>MachineMaterialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="MDIParent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="MDIParent.Designer.cs">
+      <DependentUpon>MDIParent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PublicInterface.cs" />
+    <Compile Include="SubMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubMainForm.Designer.cs">
+      <DependentUpon>SubMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,8 +151,11 @@
     <EmbeddedResource Include="MachineMaterialForm.resx">
       <DependentUpon>MachineMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="MDIParent.resx">
+      <DependentUpon>MDIParent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubMainForm.resx">
+      <DependentUpon>SubMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

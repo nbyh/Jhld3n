@@ -15,7 +15,6 @@ namespace AnonManagementSystem
         public LoginForm()
         {
             InitializeComponent();
-
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
@@ -45,23 +44,22 @@ namespace AnonManagementSystem
                 MessageBox.Show(@"密码不正确！");
                 return;
             }
-            MainForm form = new MainForm()
-            {
-                Enableedit = loginuser.Edit
-            };
-            form.ChangeCurrentuser += ShowForm;
-            form.Show();
-            this.Hide();
+            //SubMainForm form = new SubMainForm()
+            //{
+            //    Enableedit = loginuser.Edit
+            //};
+            //form.ChangeCurrentuser += ShowForm;
+            this.Close();
         }
 
-        private void ShowForm()
-        {
-            this.Show();
-        }
+        //private void ShowForm()
+        //{
+        //    this.Show();
+        //}
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
     }
 }
