@@ -38,7 +38,6 @@ namespace AnonManagementSystem
 
         private void cmsPicture_Opening(object sender, CancelEventArgs e)
         {
-            更新图片ToolStripMenuItem.Text = pbEquipFront.Image == null ? "添加图片" : "更新图片";
         }
 
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
@@ -108,7 +107,7 @@ namespace AnonManagementSystem
 
         private void 随机资料tsmAdd_Click(object sender, EventArgs e)
         {
-            MachineMaterialForm mmForm = new MachineMaterialForm();
+            AddMaterialForm mmForm = new AddMaterialForm();
             mmForm.ShowDialog();
         }
 
@@ -119,6 +118,11 @@ namespace AnonManagementSystem
         }
 
         private void dgvVideo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void toolStrip5_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

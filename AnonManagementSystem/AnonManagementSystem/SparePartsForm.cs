@@ -10,13 +10,13 @@ using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
-    public partial class SubMainForm : Form, IMdiFunction
+    public partial class SparePartsForm : Form, IMdiFunction
     {
         public delegate void ChangeUser();
         public event ChangeUser ChangeCurrentuser;
         private bool _exitapp = true;
         private bool _enableedit = false;
-        public SubMainForm()
+        public SparePartsForm()
         {
             InitializeComponent();
         }

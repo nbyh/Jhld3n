@@ -12,6 +12,8 @@ namespace AnonManagementSystem
 {
     public partial class LoginForm : Form
     {
+        public delegate void LoginOn();
+        public event LoginOn LoginSucess;
         public LoginForm()
         {
             InitializeComponent();
@@ -49,6 +51,8 @@ namespace AnonManagementSystem
             //    Enableedit = loginuser.Edit
             //};
             //form.ChangeCurrentuser += ShowForm;
+            //btnEnter.DialogResult = DialogResult.OK;
+            LoginSucess?.Invoke();
             this.Close();
         }
 

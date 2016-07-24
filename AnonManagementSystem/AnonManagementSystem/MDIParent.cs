@@ -16,6 +16,12 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
+        private void LoginOnSucess()
+        {
+            _islogin = true;
+            MessageBox.Show(@"登陆成功");
+        }
+
         private bool _islogin = false;
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,7 +64,7 @@ namespace AnonManagementSystem
                         return;
                     }
                 }
-                SubMainForm subMainForm = new SubMainForm { MdiParent = this, Tag = "Equipment" };
+                EquipMainForm subMainForm = new EquipMainForm { MdiParent = this, Tag = "Equipment" };
                 subMainForm.Show();
             }
             else
@@ -72,9 +78,8 @@ namespace AnonManagementSystem
         private void MDIParent_Shown(object sender, EventArgs e)
         {
             LoginForm loginForm = new LoginForm();
+            loginForm.LoginSucess += LoginOnSucess;
             loginForm.ShowDialog();
-            _islogin = loginForm.DialogResult == DialogResult.OK;
-
         }
 
         private void ChangeUserMenu_Click(object sender, EventArgs e)
@@ -85,8 +90,8 @@ namespace AnonManagementSystem
                 childForm.Close();
             }
             LoginForm loginForm = new LoginForm();
+            loginForm.LoginSucess += LoginOnSucess;
             loginForm.ShowDialog();
-            _islogin = loginForm.DialogResult == DialogResult.OK;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,8 +103,44 @@ namespace AnonManagementSystem
         private void tsbAdd_Click(object sender, EventArgs e)
         {
             Form form = this.ActiveMdiChild;
-            var mdiFunction = (IMdiFunction) form;
+            var mdiFunction = (IMdiFunction)form;
             mdiFunction?.DataAdd();
+        }
+
+        private void SparePartsMenu_Click(object sender, EventArgs e)
+        {
+            if (_islogin)
+            {
+                foreach (var childForm in MdiChildren)
+                {
+                    if (childForm.Tag.ToString() == "SpareParts")
+                    {
+                        childForm.Activate();
+                        return;
+                    }
+                }
+                SparePartsForm sparePartsForm = new SparePartsForm { MdiParent = this, Tag = "SpareParts" };
+                sparePartsForm.Show();
+            }
+            else
+            {
+                LoginForm loginForm = new LoginForm();
+                loginForm.ShowDialog();
+                _islogin = loginForm.DialogResult == DialogResult.OK;
+            }
+        }
+
+        private void SettingMenu_Click(object sender, EventArgs e)
+        {
+            SystemSetting sysSetForm = new SystemSetting();
+            sysSetForm.ShowDialog();
+        }
+
+        private void tsbRefresh_Click(object sender, EventArgs e)
+        {
+            Form form = this.ActiveMdiChild;
+            var mdiFunction = (IMdiFunction)form;
+            mdiFunction?.DataRefresh();
         }
     }
 }

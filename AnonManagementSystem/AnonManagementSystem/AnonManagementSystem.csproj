@@ -82,6 +82,12 @@
     <Compile Include="CheckedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SparePartsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SparePartsForm.Designer.cs">
+      <DependentUpon>SparePartsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EquipmentDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,11 +106,11 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MachineMaterialForm.cs">
+    <Compile Include="AddMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MachineMaterialForm.Designer.cs">
-      <DependentUpon>MachineMaterialForm.cs</DependentUpon>
+    <Compile Include="AddMaterialForm.Designer.cs">
+      <DependentUpon>AddMaterialForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MDIParent.cs">
       <SubType>Form</SubType>
@@ -113,11 +119,11 @@
       <DependentUpon>MDIParent.cs</DependentUpon>
     </Compile>
     <Compile Include="PublicInterface.cs" />
-    <Compile Include="SubMainForm.cs">
+    <Compile Include="EquipMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubMainForm.Designer.cs">
-      <DependentUpon>SubMainForm.cs</DependentUpon>
+    <Compile Include="EquipMainForm.Designer.cs">
+      <DependentUpon>EquipMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +145,9 @@
     <EmbeddedResource Include="AmsAboutBox.resx">
       <DependentUpon>AmsAboutBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SparePartsForm.resx">
+      <DependentUpon>SparePartsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EquipmentDetailForm.resx">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,14 +157,14 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MachineMaterialForm.resx">
-      <DependentUpon>MachineMaterialForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddMaterialForm.resx">
+      <DependentUpon>AddMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDIParent.resx">
       <DependentUpon>MDIParent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubMainForm.resx">
-      <DependentUpon>SubMainForm.cs</DependentUpon>
+    <EmbeddedResource Include="EquipMainForm.resx">
+      <DependentUpon>EquipMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

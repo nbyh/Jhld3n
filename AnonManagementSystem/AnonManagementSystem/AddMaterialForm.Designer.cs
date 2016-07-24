@@ -1,6 +1,6 @@
 ﻿namespace AnonManagementSystem
 {
-    partial class MachineMaterialForm
+    partial class AddMaterialForm
     {
         /// <summary>
         /// Required designer variable.

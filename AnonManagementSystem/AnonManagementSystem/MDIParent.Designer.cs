@@ -83,12 +83,14 @@
             this.SparePartsMenu.Name = "SparePartsMenu";
             this.SparePartsMenu.Size = new System.Drawing.Size(83, 21);
             this.SparePartsMenu.Text = "备件查询(&E)";
+            this.SparePartsMenu.Click += new System.EventHandler(this.SparePartsMenu_Click);
             // 
             // SettingMenu
             // 
             this.SettingMenu.Name = "SettingMenu";
             this.SettingMenu.Size = new System.Drawing.Size(83, 21);
             this.SettingMenu.Text = "系统设置(&T)";
+            this.SettingMenu.Click += new System.EventHandler(this.SettingMenu_Click);
             // 
             // ChangeUserMenu
             // 
@@ -187,6 +189,7 @@
             this.tsbRefresh.Name = "tsbRefresh";
             this.tsbRefresh.Size = new System.Drawing.Size(52, 22);
             this.tsbRefresh.Text = "刷新";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
             // tsbAdd
             // 
@@ -218,6 +221,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::AnonManagementSystem.Properties.Resources.user_manage;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);

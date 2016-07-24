@@ -85,6 +85,11 @@ namespace AnonManagementSystem
                 MessageBox.Show(@"已经包含相同用户，请勿重复添加!");
                 return;
             }
+            if (cmbAuthority.SelectedIndex < 0)
+            {
+                MessageBox.Show(@"请选择权限!");
+                return;
+            }
             bool enableedit = cmbAuthority.SelectedItem.ToString().Equals("可写");
             Add_ModifyUser?.Invoke(_modify, _id, tbUser.Text, tbPwdSure.Text, enableedit);
             this.Close();
