@@ -55,13 +55,13 @@ namespace AnonManagementSystem
             List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
             cmbName.DataSource = equipnameList;
             List<string> equipsubdepartList = (from d in equip select d.SubDepartment).Distinct().ToList();
-            cmbSubDepart.DataSource = equipsubdepartList;
+            //cmbSubDepart.DataSource = equipsubdepartList;
             List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
             List<string> equipSpotList = (from s in equip select s.InventorySpot).Distinct().ToList();
             cmbSpot.DataSource = equipSpotList;
             cmbName.SelectedIndex = -1;
-            cmbSubDepart.SelectedIndex = -1;
+            //cmbSubDepart.SelectedIndex = -1;
             cmbModel.SelectedIndex = -1;
             cmbSpot.SelectedIndex = -1;
             //tsbAdd.Enabled = tsbDelete.Enabled = _enableedit;
@@ -78,13 +78,11 @@ namespace AnonManagementSystem
 
         private void cmb_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0)
-            {
-                return;
-            }
+            if (e.Index < 0) return;
             e.DrawBackground();
             e.DrawFocusRectangle();
-            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
+            e.Graphics.DrawString(((ComboBox) sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor),
+                e.Bounds.X, e.Bounds.Y + 3);
         }
 
         private void tsbRefresh_Click(object sender, EventArgs e)

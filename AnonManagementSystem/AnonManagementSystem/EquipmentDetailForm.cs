@@ -53,13 +53,11 @@ namespace AnonManagementSystem
             List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
             List<string> equipSpotList = (from s in equip select s.InventorySpot).Distinct().ToList();
-            cmbSpot.DataSource = equipSpotList;
             if (_add)
             {
                 //cmbeqName.SelectedIndex = -1;
                 cmbSubDepart.SelectedIndex = -1;
                 cmbModel.SelectedIndex = -1;
-                cmbSpot.SelectedIndex = -1;
             }
             else
             {
@@ -69,7 +67,6 @@ namespace AnonManagementSystem
                 //cmbeqName.SelectedItem = appointeq.First().Name;
                 cmbSubDepart.SelectedItem = appointeq.First().SubDepartment;
                 cmbModel.SelectedItem = appointeq.First().Model;
-                cmbSpot.SelectedItem = appointeq.First().InventorySpot;
                 //tbSerialNo.Text = appointeq.First().SerialNo;
                 //dtpEnableTime.Value = (DateTime)appointeq.First().EnableTime;
                 //nudServiceLift.Value = (decimal)appointeq.First().ServiceLife;
@@ -87,7 +84,6 @@ namespace AnonManagementSystem
                 //EnableTime = dtpEnableTime.Value.Date,
                 SubDepartment = cmbSubDepart.Text,
                 //ServiceLife = (long)nudServiceLift.Value,
-                InventorySpot = cmbSpot.Text
             };
             Entities eqEntities = new Entities();
             eqEntities.CombatEquipment.Add(ce);

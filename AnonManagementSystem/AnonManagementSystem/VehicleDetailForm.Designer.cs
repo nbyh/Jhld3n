@@ -35,20 +35,14 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.gbBaseInfo = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.cmbSubDepart = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.textBox26 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox21 = new System.Windows.Forms.TextBox();
@@ -60,8 +54,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -86,13 +78,11 @@
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.tbOeFailDetail = new System.Windows.Forms.TextBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.tbMotorNo = new System.Windows.Forms.TextBox();
             this.tbMotorTankage = new System.Windows.Forms.TextBox();
             this.cmbMotorModel = new System.Windows.Forms.ComboBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.tbMotorPower = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.tbMotorFuelType = new System.Windows.Forms.ComboBox();
             this.tbMotorOemNo = new System.Windows.Forms.TextBox();
@@ -119,25 +109,13 @@
             this.nudWorkHour = new System.Windows.Forms.NumericUpDown();
             this.dtpOeTime = new System.Windows.Forms.DateTimePicker();
             this.cmbOeModel = new System.Windows.Forms.ComboBox();
-            this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.pbOeImageFront = new System.Windows.Forms.PictureBox();
             this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.pbOeImageSize1 = new System.Windows.Forms.PictureBox();
-            this.tabPage15 = new System.Windows.Forms.TabPage();
-            this.groupBox18 = new System.Windows.Forms.GroupBox();
-            this.pbOeImageSize2 = new System.Windows.Forms.PictureBox();
             this.tabPage16 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tsDetail = new System.Windows.Forms.ToolStrip();
-            this.tsbSave = new System.Windows.Forms.ToolStripButton();
-            this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
@@ -147,6 +125,19 @@
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsDetail = new System.Windows.Forms.ToolStrip();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
+            this.tsbRestore = new System.Windows.Forms.ToolStripButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -158,23 +149,15 @@
             this.groupBox14.SuspendLayout();
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWorkHour)).BeginInit();
-            this.tabPage13.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbOeImageFront)).BeginInit();
             this.cmsPicture.SuspendLayout();
-            this.tabPage14.SuspendLayout();
-            this.groupBox17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbOeImageSize1)).BeginInit();
-            this.tabPage15.SuspendLayout();
-            this.groupBox18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbOeImageSize2)).BeginInit();
             this.tabPage16.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabPage6.SuspendLayout();
-            this.tsDetail.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip5.SuspendLayout();
+            this.tsDetail.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -191,8 +174,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.groupBox8);
             this.tabPage1.Controls.Add(this.gbBaseInfo);
+            this.tabPage1.Controls.Add(this.groupBox8);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -209,7 +192,7 @@
             this.groupBox8.Size = new System.Drawing.Size(760, 299);
             this.groupBox8.TabIndex = 89;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "故障描述";
+            this.groupBox8.Text = "车辆描述";
             // 
             // textBox4
             // 
@@ -225,21 +208,16 @@
             // 
             this.gbBaseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBaseInfo.Controls.Add(this.checkBox1);
             this.gbBaseInfo.Controls.Add(this.textBox2);
-            this.gbBaseInfo.Controls.Add(this.comboBox5);
-            this.gbBaseInfo.Controls.Add(this.label2);
             this.gbBaseInfo.Controls.Add(this.label31);
             this.gbBaseInfo.Controls.Add(this.cmbSubDepart);
             this.gbBaseInfo.Controls.Add(this.comboBox4);
             this.gbBaseInfo.Controls.Add(this.label8);
             this.gbBaseInfo.Controls.Add(this.comboBox2);
             this.gbBaseInfo.Controls.Add(this.label11);
-            this.gbBaseInfo.Controls.Add(this.textBox18);
-            this.gbBaseInfo.Controls.Add(this.label13);
             this.gbBaseInfo.Controls.Add(this.textBox26);
             this.gbBaseInfo.Controls.Add(this.label1);
-            this.gbBaseInfo.Controls.Add(this.textBox24);
-            this.gbBaseInfo.Controls.Add(this.label23);
             this.gbBaseInfo.Controls.Add(this.textBox22);
             this.gbBaseInfo.Controls.Add(this.label19);
             this.gbBaseInfo.Controls.Add(this.textBox21);
@@ -251,8 +229,6 @@
             this.gbBaseInfo.Controls.Add(this.label25);
             this.gbBaseInfo.Controls.Add(this.textBox19);
             this.gbBaseInfo.Controls.Add(this.label14);
-            this.gbBaseInfo.Controls.Add(this.textBox6);
-            this.gbBaseInfo.Controls.Add(this.label6);
             this.gbBaseInfo.Controls.Add(this.textBox3);
             this.gbBaseInfo.Controls.Add(this.label12);
             this.gbBaseInfo.Controls.Add(this.textBox1);
@@ -279,34 +255,15 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(619, 128);
+            this.textBox2.Location = new System.Drawing.Point(646, 135);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(46, 21);
+            this.textBox2.Size = new System.Drawing.Size(36, 21);
             this.textBox2.TabIndex = 103;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(458, 155);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(71, 22);
-            this.comboBox5.TabIndex = 49;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(405, 160);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 50;
-            this.label2.Text = "使用性质";
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(269, 160);
+            this.label31.Location = new System.Drawing.Point(511, 83);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(65, 12);
             this.label31.TabIndex = 102;
@@ -317,9 +274,9 @@
             this.cmbSubDepart.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbSubDepart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubDepart.FormattingEnabled = true;
-            this.cmbSubDepart.Location = new System.Drawing.Point(148, 155);
+            this.cmbSubDepart.Location = new System.Drawing.Point(559, 49);
             this.cmbSubDepart.Name = "cmbSubDepart";
-            this.cmbSubDepart.Size = new System.Drawing.Size(121, 22);
+            this.cmbSubDepart.Size = new System.Drawing.Size(123, 22);
             this.cmbSubDepart.TabIndex = 30;
             // 
             // comboBox4
@@ -327,19 +284,19 @@
             this.comboBox4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(334, 155);
+            this.comboBox4.Location = new System.Drawing.Point(584, 78);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(71, 22);
+            this.comboBox4.Size = new System.Drawing.Size(98, 22);
             this.comboBox4.TabIndex = 101;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(95, 160);
+            this.label8.Location = new System.Drawing.Point(498, 54);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 39;
-            this.label8.Text = "隶属单位";
+            this.label8.Text = "技术状态";
             // 
             // comboBox2
             // 
@@ -352,7 +309,7 @@
             "<",
             "≥",
             "≤"});
-            this.comboBox2.Location = new System.Drawing.Point(247, 127);
+            this.comboBox2.Location = new System.Drawing.Point(139, 134);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(46, 22);
             this.comboBox2.TabIndex = 45;
@@ -360,63 +317,31 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(194, 132);
+            this.label11.Location = new System.Drawing.Point(78, 139);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 46;
             this.label11.Text = "燃料类型";
             // 
-            // textBox18
-            // 
-            this.textBox18.Location = new System.Drawing.Point(515, 48);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(149, 21);
-            this.textBox18.TabIndex = 63;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(450, 52);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 12);
-            this.label13.TabIndex = 62;
-            this.label13.Text = "发动机号码";
-            // 
             // textBox26
             // 
-            this.textBox26.Location = new System.Drawing.Point(515, 20);
+            this.textBox26.Location = new System.Drawing.Point(559, 20);
             this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(149, 21);
+            this.textBox26.Size = new System.Drawing.Size(123, 21);
             this.textBox26.TabIndex = 100;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(462, 24);
+            this.label1.Location = new System.Drawing.Point(498, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 99;
             this.label1.Text = "车牌号码";
             // 
-            // textBox24
-            // 
-            this.textBox24.Location = new System.Drawing.Point(544, 102);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(121, 21);
-            this.textBox24.TabIndex = 98;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(491, 105);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(53, 12);
-            this.label23.TabIndex = 97;
-            this.label23.Text = "展开尺寸";
-            // 
             // textBox22
             // 
-            this.textBox22.Location = new System.Drawing.Point(445, 128);
+            this.textBox22.Location = new System.Drawing.Point(369, 135);
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(46, 21);
             this.textBox22.TabIndex = 94;
@@ -424,7 +349,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(392, 132);
+            this.label19.Location = new System.Drawing.Point(308, 139);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(53, 12);
             this.label19.TabIndex = 93;
@@ -432,7 +357,7 @@
             // 
             // textBox21
             // 
-            this.textBox21.Location = new System.Drawing.Point(148, 101);
+            this.textBox21.Location = new System.Drawing.Point(139, 107);
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(46, 21);
             this.textBox21.TabIndex = 92;
@@ -440,7 +365,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(95, 105);
+            this.label17.Location = new System.Drawing.Point(78, 111);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(53, 12);
             this.label17.TabIndex = 91;
@@ -449,7 +374,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(566, 132);
+            this.label16.Location = new System.Drawing.Point(585, 139);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 12);
             this.label16.TabIndex = 90;
@@ -457,7 +382,7 @@
             // 
             // textBox20
             // 
-            this.textBox20.Location = new System.Drawing.Point(247, 101);
+            this.textBox20.Location = new System.Drawing.Point(254, 107);
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(46, 21);
             this.textBox20.TabIndex = 88;
@@ -465,7 +390,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(194, 105);
+            this.label15.Location = new System.Drawing.Point(193, 111);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 12);
             this.label15.TabIndex = 87;
@@ -473,15 +398,15 @@
             // 
             // textBox25
             // 
-            this.textBox25.Location = new System.Drawing.Point(148, 128);
+            this.textBox25.Location = new System.Drawing.Point(460, 135);
             this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(46, 21);
+            this.textBox25.Size = new System.Drawing.Size(36, 21);
             this.textBox25.TabIndex = 65;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(119, 132);
+            this.label25.Location = new System.Drawing.Point(423, 139);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(29, 12);
             this.label25.TabIndex = 64;
@@ -489,47 +414,31 @@
             // 
             // textBox19
             // 
-            this.textBox19.Location = new System.Drawing.Point(520, 128);
+            this.textBox19.Location = new System.Drawing.Point(541, 135);
             this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(46, 21);
+            this.textBox19.Size = new System.Drawing.Size(36, 21);
             this.textBox19.TabIndex = 65;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(491, 132);
+            this.label14.Location = new System.Drawing.Point(504, 139);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 64;
             this.label14.Text = "排量";
             // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(543, 75);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(122, 21);
-            this.textBox6.TabIndex = 61;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(490, 79);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 60;
-            this.label6.Text = "出厂编号";
-            // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(370, 101);
+            this.textBox3.Location = new System.Drawing.Point(393, 107);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(121, 21);
+            this.textBox3.Size = new System.Drawing.Size(137, 21);
             this.textBox3.TabIndex = 59;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(293, 105);
+            this.label12.Location = new System.Drawing.Point(308, 111);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 12);
             this.label12.TabIndex = 58;
@@ -537,7 +446,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(148, 20);
+            this.textBox1.Location = new System.Drawing.Point(139, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(166, 21);
             this.textBox1.TabIndex = 55;
@@ -545,7 +454,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(95, 24);
+            this.label9.Location = new System.Drawing.Point(78, 24);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 54;
@@ -554,7 +463,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(293, 132);
+            this.label24.Location = new System.Drawing.Point(193, 139);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(53, 12);
             this.label24.TabIndex = 50;
@@ -565,7 +474,7 @@
             this.comboBox6.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(346, 127);
+            this.comboBox6.Location = new System.Drawing.Point(254, 134);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(46, 22);
             this.comboBox6.TabIndex = 49;
@@ -573,7 +482,7 @@
             // cmbFactory
             // 
             this.cmbFactory.FormattingEnabled = true;
-            this.cmbFactory.Location = new System.Drawing.Point(148, 75);
+            this.cmbFactory.Location = new System.Drawing.Point(139, 79);
             this.cmbFactory.Name = "cmbFactory";
             this.cmbFactory.Size = new System.Drawing.Size(166, 20);
             this.cmbFactory.TabIndex = 44;
@@ -581,7 +490,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(95, 79);
+            this.label10.Location = new System.Drawing.Point(78, 83);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 12);
             this.label10.TabIndex = 43;
@@ -590,7 +499,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(529, 160);
+            this.label7.Location = new System.Drawing.Point(536, 111);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 38;
@@ -601,15 +510,15 @@
             this.cmbSpot.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbSpot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSpot.FormattingEnabled = true;
-            this.cmbSpot.Location = new System.Drawing.Point(570, 155);
+            this.cmbSpot.Location = new System.Drawing.Point(584, 106);
             this.cmbSpot.Name = "cmbSpot";
-            this.cmbSpot.Size = new System.Drawing.Size(95, 22);
+            this.cmbSpot.Size = new System.Drawing.Size(98, 22);
             this.cmbSpot.TabIndex = 36;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(315, 79);
+            this.label5.Location = new System.Drawing.Point(313, 83);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 41;
@@ -618,7 +527,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(314, 52);
+            this.label4.Location = new System.Drawing.Point(313, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 42;
@@ -627,7 +536,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(326, 24);
+            this.label28.Location = new System.Drawing.Point(325, 24);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(53, 12);
             this.label28.TabIndex = 37;
@@ -636,7 +545,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(95, 52);
+            this.label3.Location = new System.Drawing.Point(78, 54);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 37;
@@ -644,9 +553,9 @@
             // 
             // dtpTime
             // 
-            this.dtpTime.Location = new System.Drawing.Point(368, 75);
+            this.dtpTime.Location = new System.Drawing.Point(374, 79);
             this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(122, 21);
+            this.dtpTime.Size = new System.Drawing.Size(129, 21);
             this.dtpTime.TabIndex = 32;
             // 
             // cmbModel
@@ -654,9 +563,9 @@
             this.cmbModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(379, 47);
+            this.cmbModel.Location = new System.Drawing.Point(386, 49);
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(71, 22);
+            this.cmbModel.Size = new System.Drawing.Size(104, 22);
             this.cmbModel.TabIndex = 31;
             // 
             // comboBox7
@@ -664,9 +573,9 @@
             this.comboBox7.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(379, 19);
+            this.comboBox7.Location = new System.Drawing.Point(386, 19);
             this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(71, 22);
+            this.comboBox7.Size = new System.Drawing.Size(104, 22);
             this.comboBox7.TabIndex = 29;
             // 
             // cmbName
@@ -674,7 +583,7 @@
             this.cmbName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbName.FormattingEnabled = true;
-            this.cmbName.Location = new System.Drawing.Point(148, 47);
+            this.cmbName.Location = new System.Drawing.Point(139, 49);
             this.cmbName.Name = "cmbName";
             this.cmbName.Size = new System.Drawing.Size(166, 22);
             this.cmbName.TabIndex = 29;
@@ -693,9 +602,6 @@
             // pbOeImageTop
             // 
             this.pbOeImageTop.Controls.Add(this.tabPage12);
-            this.pbOeImageTop.Controls.Add(this.tabPage13);
-            this.pbOeImageTop.Controls.Add(this.tabPage14);
-            this.pbOeImageTop.Controls.Add(this.tabPage15);
             this.pbOeImageTop.Controls.Add(this.tabPage16);
             this.pbOeImageTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbOeImageTop.Location = new System.Drawing.Point(3, 3);
@@ -741,13 +647,11 @@
             // 
             this.groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox14.Controls.Add(this.tbMotorNo);
             this.groupBox14.Controls.Add(this.tbMotorTankage);
             this.groupBox14.Controls.Add(this.cmbMotorModel);
             this.groupBox14.Controls.Add(this.label45);
             this.groupBox14.Controls.Add(this.label38);
             this.groupBox14.Controls.Add(this.tbMotorPower);
-            this.groupBox14.Controls.Add(this.label30);
             this.groupBox14.Controls.Add(this.label44);
             this.groupBox14.Controls.Add(this.tbMotorFuelType);
             this.groupBox14.Controls.Add(this.tbMotorOemNo);
@@ -764,16 +668,9 @@
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "发动机信息";
             // 
-            // tbMotorNo
-            // 
-            this.tbMotorNo.Location = new System.Drawing.Point(75, 22);
-            this.tbMotorNo.Name = "tbMotorNo";
-            this.tbMotorNo.Size = new System.Drawing.Size(103, 21);
-            this.tbMotorNo.TabIndex = 76;
-            // 
             // tbMotorTankage
             // 
-            this.tbMotorTankage.Location = new System.Drawing.Point(619, 22);
+            this.tbMotorTankage.Location = new System.Drawing.Point(479, 22);
             this.tbMotorTankage.Name = "tbMotorTankage";
             this.tbMotorTankage.Size = new System.Drawing.Size(58, 21);
             this.tbMotorTankage.TabIndex = 86;
@@ -783,7 +680,7 @@
             this.cmbMotorModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbMotorModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMotorModel.FormattingEnabled = true;
-            this.cmbMotorModel.Location = new System.Drawing.Point(223, 21);
+            this.cmbMotorModel.Location = new System.Drawing.Point(75, 21);
             this.cmbMotorModel.Name = "cmbMotorModel";
             this.cmbMotorModel.Size = new System.Drawing.Size(75, 22);
             this.cmbMotorModel.TabIndex = 71;
@@ -791,7 +688,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(558, 26);
+            this.label45.Location = new System.Drawing.Point(418, 26);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(53, 12);
             this.label45.TabIndex = 85;
@@ -800,7 +697,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(186, 26);
+            this.label38.Location = new System.Drawing.Point(38, 26);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(29, 12);
             this.label38.TabIndex = 72;
@@ -808,24 +705,15 @@
             // 
             // tbMotorPower
             // 
-            this.tbMotorPower.Location = new System.Drawing.Point(367, 22);
+            this.tbMotorPower.Location = new System.Drawing.Point(219, 22);
             this.tbMotorPower.Name = "tbMotorPower";
-            this.tbMotorPower.Size = new System.Drawing.Size(43, 21);
+            this.tbMotorPower.Size = new System.Drawing.Size(53, 21);
             this.tbMotorPower.TabIndex = 84;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(38, 26);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(29, 12);
-            this.label30.TabIndex = 73;
-            this.label30.Text = "编号";
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(306, 26);
+            this.label44.Location = new System.Drawing.Point(158, 26);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(53, 12);
             this.label44.TabIndex = 83;
@@ -836,7 +724,7 @@
             this.tbMotorFuelType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.tbMotorFuelType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tbMotorFuelType.FormattingEnabled = true;
-            this.tbMotorFuelType.Location = new System.Drawing.Point(479, 21);
+            this.tbMotorFuelType.Location = new System.Drawing.Point(339, 21);
             this.tbMotorFuelType.Name = "tbMotorFuelType";
             this.tbMotorFuelType.Size = new System.Drawing.Size(71, 22);
             this.tbMotorFuelType.TabIndex = 74;
@@ -851,7 +739,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(418, 26);
+            this.label29.Location = new System.Drawing.Point(278, 26);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(53, 12);
             this.label29.TabIndex = 75;
@@ -903,6 +791,8 @@
             // 
             this.groupBox12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox12.Controls.Add(this.comboBox1);
+            this.groupBox12.Controls.Add(this.label2);
             this.groupBox12.Controls.Add(this.tbOeOemNo);
             this.groupBox12.Controls.Add(this.label33);
             this.groupBox12.Controls.Add(this.tbOeSize);
@@ -1063,38 +953,6 @@
             this.cmbOeModel.Size = new System.Drawing.Size(75, 22);
             this.cmbOeModel.TabIndex = 31;
             // 
-            // tabPage13
-            // 
-            this.tabPage13.Controls.Add(this.groupBox13);
-            this.tabPage13.Location = new System.Drawing.Point(4, 22);
-            this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(762, 478);
-            this.tabPage13.TabIndex = 1;
-            this.tabPage13.Text = "正面";
-            this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.pbOeImageFront);
-            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox13.Location = new System.Drawing.Point(3, 3);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(756, 472);
-            this.groupBox13.TabIndex = 4;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "图片";
-            // 
-            // pbOeImageFront
-            // 
-            this.pbOeImageFront.ContextMenuStrip = this.cmsPicture;
-            this.pbOeImageFront.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbOeImageFront.Location = new System.Drawing.Point(3, 17);
-            this.pbOeImageFront.Name = "pbOeImageFront";
-            this.pbOeImageFront.Size = new System.Drawing.Size(750, 452);
-            this.pbOeImageFront.TabIndex = 0;
-            this.pbOeImageFront.TabStop = false;
-            // 
             // cmsPicture
             // 
             this.cmsPicture.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1115,92 +973,26 @@
             this.图片另存为ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.图片另存为ToolStripMenuItem.Text = "图片另存为";
             // 
-            // tabPage14
-            // 
-            this.tabPage14.Controls.Add(this.groupBox17);
-            this.tabPage14.Location = new System.Drawing.Point(4, 22);
-            this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage14.Size = new System.Drawing.Size(762, 478);
-            this.tabPage14.TabIndex = 2;
-            this.tabPage14.Text = "侧面1";
-            this.tabPage14.UseVisualStyleBackColor = true;
-            // 
-            // groupBox17
-            // 
-            this.groupBox17.Controls.Add(this.pbOeImageSize1);
-            this.groupBox17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox17.Location = new System.Drawing.Point(3, 3);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(756, 472);
-            this.groupBox17.TabIndex = 5;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "图片";
-            // 
-            // pbOeImageSize1
-            // 
-            this.pbOeImageSize1.ContextMenuStrip = this.cmsPicture;
-            this.pbOeImageSize1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbOeImageSize1.Location = new System.Drawing.Point(3, 17);
-            this.pbOeImageSize1.Name = "pbOeImageSize1";
-            this.pbOeImageSize1.Size = new System.Drawing.Size(750, 452);
-            this.pbOeImageSize1.TabIndex = 0;
-            this.pbOeImageSize1.TabStop = false;
-            // 
-            // tabPage15
-            // 
-            this.tabPage15.Controls.Add(this.groupBox18);
-            this.tabPage15.Location = new System.Drawing.Point(4, 22);
-            this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage15.Size = new System.Drawing.Size(762, 478);
-            this.tabPage15.TabIndex = 3;
-            this.tabPage15.Text = "侧面2";
-            this.tabPage15.UseVisualStyleBackColor = true;
-            // 
-            // groupBox18
-            // 
-            this.groupBox18.Controls.Add(this.pbOeImageSize2);
-            this.groupBox18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox18.Location = new System.Drawing.Point(3, 3);
-            this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(756, 472);
-            this.groupBox18.TabIndex = 5;
-            this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "图片";
-            // 
-            // pbOeImageSize2
-            // 
-            this.pbOeImageSize2.ContextMenuStrip = this.cmsPicture;
-            this.pbOeImageSize2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbOeImageSize2.Location = new System.Drawing.Point(3, 17);
-            this.pbOeImageSize2.Name = "pbOeImageSize2";
-            this.pbOeImageSize2.Size = new System.Drawing.Size(750, 452);
-            this.pbOeImageSize2.TabIndex = 0;
-            this.pbOeImageSize2.TabStop = false;
-            // 
             // tabPage16
             // 
             this.tabPage16.Controls.Add(this.groupBox3);
+            this.tabPage16.Controls.Add(this.toolStrip1);
             this.tabPage16.Location = new System.Drawing.Point(4, 22);
             this.tabPage16.Name = "tabPage16";
             this.tabPage16.Size = new System.Drawing.Size(762, 478);
             this.tabPage16.TabIndex = 4;
-            this.tabPage16.Text = "顶部";
+            this.tabPage16.Text = "油机图片";
             this.tabPage16.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.pictureBox3);
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 25);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(756, 472);
+            this.groupBox3.Size = new System.Drawing.Size(762, 453);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "图片";
             // 
             // pictureBox3
             // 
@@ -1208,7 +1000,7 @@
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox3.Location = new System.Drawing.Point(3, 17);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(750, 452);
+            this.pictureBox3.Size = new System.Drawing.Size(756, 433);
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
             // 
@@ -1222,33 +1014,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "车辆图片";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tsDetail
-            // 
-            this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSave,
-            this.tsbRestore});
-            this.tsDetail.Location = new System.Drawing.Point(0, 0);
-            this.tsDetail.Name = "tsDetail";
-            this.tsDetail.Size = new System.Drawing.Size(784, 25);
-            this.tsDetail.TabIndex = 2;
-            this.tsDetail.Text = "toolStrip1";
-            // 
-            // tsbSave
-            // 
-            this.tsbSave.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(52, 22);
-            this.tsbSave.Text = "保存";
-            // 
-            // tsbRestore
-            // 
-            this.tsbRestore.Image = global::AnonManagementSystem.Properties.Resources.clock1;
-            this.tsbRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRestore.Name = "tsbRestore";
-            this.tsbRestore.Size = new System.Drawing.Size(52, 22);
-            this.tsbRestore.Text = "恢复";
             // 
             // groupBox1
             // 
@@ -1326,6 +1091,119 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem4.Text = "架设视频";
             // 
+            // tsDetail
+            // 
+            this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSave,
+            this.tsbRestore});
+            this.tsDetail.Location = new System.Drawing.Point(0, 0);
+            this.tsDetail.Name = "tsDetail";
+            this.tsDetail.Size = new System.Drawing.Size(784, 25);
+            this.tsDetail.TabIndex = 2;
+            this.tsDetail.Text = "toolStrip1";
+            // 
+            // tsbSave
+            // 
+            this.tsbSave.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(52, 22);
+            this.tsbSave.Text = "保存";
+            // 
+            // tsbRestore
+            // 
+            this.tsbRestore.Image = global::AnonManagementSystem.Properties.Resources.clock1;
+            this.tsbRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRestore.Name = "tsbRestore";
+            this.tsbRestore.Size = new System.Drawing.Size(52, 22);
+            this.tsbRestore.Text = "恢复";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(610, 162);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 104;
+            this.checkBox1.Text = "包含油机";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(605, 48);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(123, 22);
+            this.comboBox1.TabIndex = 61;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(544, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "技术状态";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton3,
+            this.toolStripDropDownButton4});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(762, 25);
+            this.toolStrip1.TabIndex = 9;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton3
+            // 
+            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6});
+            this.toolStripDropDownButton3.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(61, 22);
+            this.toolStripDropDownButton3.Text = "添加";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem5.Text = "随机资料";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem6.Text = "架设视频";
+            // 
+            // toolStripDropDownButton4
+            // 
+            this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem7,
+            this.toolStripMenuItem8});
+            this.toolStripDropDownButton4.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
+            this.toolStripDropDownButton4.Size = new System.Drawing.Size(61, 22);
+            this.toolStripDropDownButton4.Text = "删除";
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem7.Text = "随机资料";
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem8.Text = "架设视频";
+            // 
             // VehicleDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1351,26 +1229,20 @@
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWorkHour)).EndInit();
-            this.tabPage13.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbOeImageFront)).EndInit();
             this.cmsPicture.ResumeLayout(false);
-            this.tabPage14.ResumeLayout(false);
-            this.groupBox17.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbOeImageSize1)).EndInit();
-            this.tabPage15.ResumeLayout(false);
-            this.groupBox18.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbOeImageSize2)).EndInit();
             this.tabPage16.ResumeLayout(false);
+            this.tabPage16.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            this.tsDetail.ResumeLayout(false);
-            this.tsDetail.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
+            this.tsDetail.ResumeLayout(false);
+            this.tsDetail.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1387,8 +1259,6 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox21;
@@ -1400,18 +1270,12 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox textBox19;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmbFactory;
         private System.Windows.Forms.Label label10;
@@ -1442,13 +1306,11 @@
         private System.Windows.Forms.GroupBox groupBox21;
         private System.Windows.Forms.TextBox tbOeFailDetail;
         private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.TextBox tbMotorNo;
         private System.Windows.Forms.TextBox tbMotorTankage;
         private System.Windows.Forms.ComboBox cmbMotorModel;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox tbMotorPower;
-        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox tbMotorFuelType;
         private System.Windows.Forms.TextBox tbMotorOemNo;
@@ -1475,15 +1337,6 @@
         private System.Windows.Forms.NumericUpDown nudWorkHour;
         private System.Windows.Forms.DateTimePicker dtpOeTime;
         private System.Windows.Forms.ComboBox cmbOeModel;
-        private System.Windows.Forms.TabPage tabPage13;
-        private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.PictureBox pbOeImageFront;
-        private System.Windows.Forms.TabPage tabPage14;
-        private System.Windows.Forms.GroupBox groupBox17;
-        private System.Windows.Forms.PictureBox pbOeImageSize1;
-        private System.Windows.Forms.TabPage tabPage15;
-        private System.Windows.Forms.GroupBox groupBox18;
-        private System.Windows.Forms.PictureBox pbOeImageSize2;
         private System.Windows.Forms.TabPage tabPage16;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -1496,5 +1349,15 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
     }
 }
