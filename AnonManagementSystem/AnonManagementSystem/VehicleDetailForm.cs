@@ -26,7 +26,6 @@ namespace AnonManagementSystem
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-
             CombatVehicles cv = new CombatVehicles()
             {
                 Name = cmbName.Text,
