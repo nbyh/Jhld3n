@@ -34,6 +34,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbTechCondition = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -82,7 +84,6 @@
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
             this.cmbEventName = new System.Windows.Forms.ComboBox();
             this.btnQueryEvent = new System.Windows.Forms.Button();
-            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -94,8 +95,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dGvEquip = new System.Windows.Forms.DataGridView();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,10 +103,11 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -170,6 +170,29 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            ">",
+            "=",
+            "<",
+            "≥",
+            "≤"});
+            this.comboBox3.Location = new System.Drawing.Point(488, 68);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(33, 22);
+            this.comboBox3.TabIndex = 30;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(521, 69);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(115, 21);
+            this.dateTimePicker2.TabIndex = 29;
             // 
             // label15
             // 
@@ -659,19 +682,6 @@
             this.btnQueryEvent.Text = "筛选";
             this.btnQueryEvent.UseVisualStyleBackColor = false;
             // 
-            // ccmbDepartment
-            // 
-            this.ccmbDepartment.CheckOnClick = true;
-            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ccmbDepartment.DropDownHeight = 1;
-            this.ccmbDepartment.FormattingEnabled = true;
-            this.ccmbDepartment.IntegralHeight = false;
-            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
-            this.ccmbDepartment.Name = "ccmbDepartment";
-            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
-            this.ccmbDepartment.TabIndex = 35;
-            this.ccmbDepartment.ValueSeparator = ", ";
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -811,9 +821,9 @@
             this.Column9,
             this.Column4,
             this.Column5,
-            this.Column6,
             this.Column10,
             this.Column11,
+            this.Column6,
             this.MoreInfo});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -833,29 +843,6 @@
             this.dGvEquip.Size = new System.Drawing.Size(776, 387);
             this.dGvEquip.TabIndex = 0;
             this.dGvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvEquip_CellContentClick);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            ">",
-            "=",
-            "<",
-            "≥",
-            "≤"});
-            this.comboBox3.Location = new System.Drawing.Point(488, 68);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(33, 22);
-            this.comboBox3.TabIndex = 30;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(521, 69);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(115, 21);
-            this.dateTimePicker2.TabIndex = 29;
             // 
             // Column1
             // 
@@ -890,19 +877,21 @@
             // 
             // Column8
             // 
+            this.Column8.DataPropertyName = "MajorCategory";
             this.Column8.HeaderText = "专业分类";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             // 
             // Column9
             // 
+            this.Column9.DataPropertyName = "Factory";
             this.Column9.HeaderText = "生产厂家";
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
             // 
             // Column4
             // 
-            this.Column4.DataPropertyName = "EnableTime";
+            this.Column4.DataPropertyName = "FactoryTime";
             this.Column4.HeaderText = "出厂时间";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -910,31 +899,33 @@
             // 
             // Column5
             // 
-            this.Column5.DataPropertyName = "ServiceLife";
-            this.Column5.HeaderText = "使用年限";
+            this.Column5.DataPropertyName = "SubDepartment";
+            this.Column5.HeaderText = "隶属单位";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "SubDepartment";
-            this.Column6.HeaderText = "负责人";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // Column10
             // 
+            this.Column10.DataPropertyName = "TechCondition";
             this.Column10.HeaderText = "技术状态";
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
             // 
             // Column11
             // 
+            this.Column11.DataPropertyName = "UseCondition";
             this.Column11.HeaderText = "使用状态";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "Manager";
+            this.Column6.HeaderText = "负责人";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // MoreInfo
             // 
@@ -942,6 +933,19 @@
             this.MoreInfo.Name = "MoreInfo";
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
+            // 
+            // ccmbDepartment
+            // 
+            this.ccmbDepartment.CheckOnClick = true;
+            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ccmbDepartment.DropDownHeight = 1;
+            this.ccmbDepartment.FormattingEnabled = true;
+            this.ccmbDepartment.IntegralHeight = false;
+            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
+            this.ccmbDepartment.Name = "ccmbDepartment";
+            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
+            this.ccmbDepartment.TabIndex = 35;
+            this.ccmbDepartment.ValueSeparator = ", ";
             // 
             // EquipMainForm
             // 
@@ -954,7 +958,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "装备管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += new System.EventHandler(this.EquipMainForm_Load);
+            this.Shown += new System.EventHandler(this.EquipMainForm_Shown);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1042,9 +1047,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewLinkColumn MoreInfo;
     }
 }

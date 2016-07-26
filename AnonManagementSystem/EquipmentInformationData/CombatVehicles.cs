@@ -17,32 +17,24 @@ namespace EquipmentInformationData
         public long ID { get; set; }
         public string Name { get; set; }
         public string SerialNo { get; set; }
-        public Nullable<long> Equipment { get; set; }
-        public Nullable<long> Image { get; set; }
         public string Model { get; set; }
         public string VehiclesNo { get; set; }
         public string MotorModel { get; set; }
-        public string MotorNo { get; set; }
+        public string TechCondition { get; set; }
         public string Factory { get; set; }
-        public string ProductionDate { get; set; }
-        public string OemNo { get; set; }
+        public Nullable<System.DateTime> ProductionDate { get; set; }
         public string Mass { get; set; }
         public string Tankage { get; set; }
         public string OverallSize { get; set; }
-        public string ExpandedSize { get; set; }
-        public string WheelBase { get; set; }
         public string FuelType { get; set; }
         public string DrivingModel { get; set; }
         public string Mileage { get; set; }
         public string Output { get; set; }
         public string LicenseCarry { get; set; }
-        public string SubDepartment { get; set; }
         public string VehicleChargers { get; set; }
-        public string UseType { get; set; }
         public string VehicleSpotNo { get; set; }
-        public string FaultDescri { get; set; }
-    
-        public virtual CombatEquipment CombatEquipment { get; set; }
-        public virtual VehiclesImage VehiclesImage { get; set; }
+        public string VehicleDescri { get; set; }
+        public Nullable<bool> CombineOe { get; set; }
+        public string Equipment { get; set; }
     }
 }

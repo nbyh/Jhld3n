@@ -43,7 +43,7 @@ namespace AnonManagementSystem
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
             tsbRestore.Visible = !_add;
-            Entities equipEntities = new Entities();
+            EquipmentManagementEntities equipEntities = new EquipmentManagementEntities();
             var equip = from eq in equipEntities.CombatEquipment
                         select eq;
             List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
@@ -78,27 +78,42 @@ namespace AnonManagementSystem
         {
             CombatEquipment ce = new CombatEquipment()
             {
-                //Name = cmbeqName.Text,
-                //SerialNo = tbSerialNo.Text,
+                Name = cmbName.Text,
+                SerialNo = tbSerialNo.Text,
+                MajorCategory = cmbMajorCategory.Text,
                 Model = cmbModel.Text,
-                //EnableTime = dtpEnableTime.Value.Date,
                 SubDepartment = cmbSubDepart.Text,
-                //ServiceLife = (long)nudServiceLift.Value,
+                TechCondition = cmbTechCondition.Text,
+                UseCondition = cmbUseCondition.Text,
+                Factory = cmbFactory.Text,
+                FactoryTime = dtpTime.Value.Date,
+
+                MajorComp = tbMajorComp.Text,
+                MainUsage = tbMainUsage.Text,
+                PerformIndex = tbPerformIndex.Text,
+                UseMethod = tbUseMethod.Text,
+                Manager = cmbCharger.Text,
+                Technician = cmbTechnician.Text,
+                TechRemould = tbTechRemould.Text,
+                SetupVideo = tbSetupVideo.Text
             };
-            Entities eqEntities = new Entities();
+            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
             eqEntities.CombatEquipment.Add(ce);
             eqEntities.SaveChanges();
         }
 
         private void tsbAddVehicle_Click(object sender, EventArgs e)
         {
-            VehicleDetailForm vdForm=new VehicleDetailForm();
+            VehicleDetailForm vdForm = new VehicleDetailForm()
+            {
+                Eqserialno = tbSerialNo.Text
+            };
             vdForm.ShowDialog();
         }
 
         private void tsbAddTrain_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void 随机资料tsmAdd_Click(object sender, EventArgs e)
@@ -109,7 +124,7 @@ namespace AnonManagementSystem
 
         private void tsbAddEvents_Click(object sender, EventArgs e)
         {
-            EventsForm eFrom=new EventsForm();
+            EventsForm eFrom = new EventsForm();
             eFrom.ShowDialog();
         }
 

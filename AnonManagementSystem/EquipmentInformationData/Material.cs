@@ -24,9 +24,8 @@ namespace EquipmentInformationData
         public string Volume { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string DocumentLink { get; set; }
+        public string StoreSpot { get; set; }
         public string Content { get; set; }
-        public Nullable<long> Equipment { get; set; }
-    
-        public virtual CombatEquipment CombatEquipment { get; set; }
+        public string Equipment { get; set; }
     }
 }

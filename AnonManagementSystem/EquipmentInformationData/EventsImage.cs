@@ -12,16 +12,10 @@ namespace EquipmentInformationData
     using System;
     using System.Collections.Generic;
     
-    public partial class Train
+    public partial class EventsImage
     {
         public long ID { get; set; }
-        public string Name { get; set; }
-        public string Trainee { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public string Address { get; set; }
-        public string Content { get; set; }
-        public Nullable<long> Equipment { get; set; }
-    
-        public virtual CombatEquipment CombatEquipment { get; set; }
+        public byte[] Images { get; set; }
+        public string SerialNo { get; set; }
     }
 }

@@ -14,23 +14,16 @@ namespace EquipmentInformationData
     
     public partial class OilEngine
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OilEngine()
-        {
-            this.CombatEquipment = new HashSet<CombatEquipment>();
-        }
-    
         public long ID { get; set; }
         public string OeNo { get; set; }
         public string OeModel { get; set; }
         public string OutPower { get; set; }
-        public string OutSize { get; set; }
+        public string TechCondition { get; set; }
         public string WorkHour { get; set; }
         public string OeFactory { get; set; }
         public string OeDate { get; set; }
         public string OeOemNo { get; set; }
         public string MotorNo { get; set; }
-        public string MotorModel { get; set; }
         public string MotorPower { get; set; }
         public string MotorFuel { get; set; }
         public string MotorTankage { get; set; }
@@ -38,10 +31,6 @@ namespace EquipmentInformationData
         public string MotorDate { get; set; }
         public string MotorOemNo { get; set; }
         public string FaultDescri { get; set; }
-        public Nullable<long> Image { get; set; }
-    
-        public virtual OilEngineImage OilEngineImage { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CombatEquipment> CombatEquipment { get; set; }
+        public string Vehicle { get; set; }
     }
 }

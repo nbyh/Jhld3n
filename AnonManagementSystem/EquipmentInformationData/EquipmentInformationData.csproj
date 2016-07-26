@@ -65,48 +65,93 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CombatEquipment.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
     </Compile>
     <Compile Include="CombatVehicles.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipImage.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+    <Compile Include="EquipmentImage.cs">
+      <DependentUpon>EquipmentImages.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentInfoModel.Context.cs">
+    <Compile Include="EquipmentImages.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentInfoModel.Context.tt</DependentUpon>
+      <DependentUpon>EquipmentImages.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentInfoModel.cs">
+    <Compile Include="EquipmentImages.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentImages.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentInfoModel.Designer.cs">
+    <Compile Include="EquipmentImages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentInfoModel.edmx</DependentUpon>
+      <DependentUpon>EquipmentImages.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentInformation.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EquipmentInformation.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentInformation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentInformation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
     </Compile>
     <Compile Include="EventData.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
     </Compile>
     <Compile Include="Events.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventsImage.cs">
+      <DependentUpon>EventsImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventsImages.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsImages.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventsImages.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventsImages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsImages.edmx</DependentUpon>
     </Compile>
     <Compile Include="Material.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
     </Compile>
     <Compile Include="OilEngine.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>EquipmentInformation.tt</DependentUpon>
     </Compile>
     <Compile Include="OilEngineImage.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>OilEngineImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OilEngineImages.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OilEngineImages.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OilEngineImages.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OilEngineImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OilEngineImages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OilEngineImages.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Train.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="UserManage.cs">
       <DependentUpon>UserManagerModel.tt</DependentUpon>
     </Compile>
@@ -126,17 +171,53 @@
       <DependentUpon>UserManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="VehiclesImage.cs">
-      <DependentUpon>EquipmentInfoModel.tt</DependentUpon>
+      <DependentUpon>VehiclesImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VehiclesImages.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehiclesImages.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VehiclesImages.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehiclesImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VehiclesImages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehiclesImages.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="EquipmentInfoModel.edmx">
+    <EntityDeploy Include="EquipmentInformation.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EquipmentInfoModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>EquipmentInformation.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EquipmentInfoModel.edmx.diagram">
-      <DependentUpon>EquipmentInfoModel.edmx</DependentUpon>
+    <EntityDeploy Include="EquipmentImages.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EquipmentImages.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EquipmentImages.edmx.diagram">
+      <DependentUpon>EquipmentImages.edmx</DependentUpon>
+    </None>
+    <None Include="EquipmentInformation.edmx.diagram">
+      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="OilEngineImages.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OilEngineImages.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="EventsImages.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventsImages.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EventsImages.edmx.diagram">
+      <DependentUpon>EventsImages.edmx</DependentUpon>
+    </None>
+    <None Include="OilEngineImages.edmx.diagram">
+      <DependentUpon>OilEngineImages.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <EntityDeploy Include="UserManagerModel.edmx">
@@ -146,17 +227,54 @@
     <None Include="UserManagerModel.edmx.diagram">
       <DependentUpon>UserManagerModel.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="VehiclesImages.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VehiclesImages.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="VehiclesImages.edmx.diagram">
+      <DependentUpon>VehiclesImages.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EquipmentInfoModel.Context.tt">
+    <Content Include="EquipmentImages.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipmentInfoModel.edmx</DependentUpon>
-      <LastGenOutput>EquipmentInfoModel.Context.cs</LastGenOutput>
+      <DependentUpon>EquipmentImages.edmx</DependentUpon>
+      <LastGenOutput>EquipmentImages.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EquipmentInfoModel.tt">
+    <Content Include="EquipmentImages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipmentInfoModel.edmx</DependentUpon>
-      <LastGenOutput>EquipmentInfoModel.cs</LastGenOutput>
+      <DependentUpon>EquipmentImages.edmx</DependentUpon>
+      <LastGenOutput>EquipmentImages.cs</LastGenOutput>
+    </Content>
+    <Content Include="EquipmentInformation.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
+      <LastGenOutput>EquipmentInformation.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EquipmentInformation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
+      <LastGenOutput>EquipmentInformation.cs</LastGenOutput>
+    </Content>
+    <Content Include="EventsImages.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventsImages.edmx</DependentUpon>
+      <LastGenOutput>EventsImages.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EventsImages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventsImages.edmx</DependentUpon>
+      <LastGenOutput>EventsImages.cs</LastGenOutput>
+    </Content>
+    <Content Include="OilEngineImages.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OilEngineImages.edmx</DependentUpon>
+      <LastGenOutput>OilEngineImages.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="OilEngineImages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OilEngineImages.edmx</DependentUpon>
+      <LastGenOutput>OilEngineImages.cs</LastGenOutput>
     </Content>
     <Content Include="UserManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -167,6 +285,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserManagerModel.edmx</DependentUpon>
       <LastGenOutput>UserManagerModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="VehiclesImages.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VehiclesImages.edmx</DependentUpon>
+      <LastGenOutput>VehiclesImages.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="VehiclesImages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VehiclesImages.edmx</DependentUpon>
+      <LastGenOutput>VehiclesImages.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

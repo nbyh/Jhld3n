@@ -12,7 +12,7 @@ namespace EquipmentInformationData
     using System;
     using System.Collections.Generic;
     
-    public partial class VehiclesImage
+    public partial class EquipmentImage
     {
         public long ID { get; set; }
         public byte[] Images { get; set; }

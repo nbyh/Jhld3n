@@ -14,19 +14,8 @@ namespace EquipmentInformationData
     
     public partial class OilEngineImage
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OilEngineImage()
-        {
-            this.OilEngine = new HashSet<OilEngine>();
-        }
-    
         public long ID { get; set; }
-        public byte[] ImageFront { get; set; }
-        public byte[] ImageSize1 { get; set; }
-        public byte[] ImageSize2 { get; set; }
-        public byte[] ImageTop { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OilEngine> OilEngine { get; set; }
+        public byte[] Images { get; set; }
+        public string SerialNo { get; set; }
     }
 }

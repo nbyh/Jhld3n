@@ -12,7 +12,7 @@ namespace AnonManagementSystem
 {
     public partial class LoginForm : Form
     {
-        public delegate void LoginOn();
+        public delegate void LoginOn(bool enableedit);
         public event LoginOn LoginSucess;
         public LoginForm()
         {
@@ -52,7 +52,7 @@ namespace AnonManagementSystem
             //};
             //form.ChangeCurrentuser += ShowForm;
             //btnEnter.DialogResult = DialogResult.OK;
-            LoginSucess?.Invoke();
+            LoginSucess?.Invoke(loginuser.Edit);
             this.Close();
         }
 

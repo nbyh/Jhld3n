@@ -16,12 +16,14 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
-        private void LoginOnSucess()
+        private void LoginOnSucess(bool enableedit)
         {
+            _enableedit = enableedit;
             _islogin = true;
             MessageBox.Show(@"登陆成功");
         }
 
+        private bool _enableedit = false;
         private bool _islogin = false;
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,7 +66,7 @@ namespace AnonManagementSystem
                         return;
                     }
                 }
-                EquipMainForm subMainForm = new EquipMainForm { MdiParent = this, Tag = "Equipment" };
+                EquipMainForm subMainForm = new EquipMainForm { MdiParent = this, Enableedit = _enableedit, Tag = "Equipment" };
                 subMainForm.Show();
             }
             else

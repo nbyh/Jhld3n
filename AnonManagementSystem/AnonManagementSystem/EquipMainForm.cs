@@ -41,9 +41,24 @@ namespace AnonManagementSystem
         }
 
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void EquipMainForm_Load(object sender, EventArgs e)
         {
-            Entities equipEntities = new Entities();
+        }
+
+        private void cmb_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+            {
+                return;
+            }
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
+        }
+
+        public void DataRefresh()
+        {
+            EquipmentManagementEntities equipEntities = new EquipmentManagementEntities();
             var equip = from eq in equipEntities.CombatEquipment
                         select eq;
             dGvEquip.DataSource = equip.ToList();
@@ -64,31 +79,6 @@ namespace AnonManagementSystem
             cmbSubDepart.SelectedIndex = -1;
             cmbModel.SelectedIndex = -1;
             cmbSpot.SelectedIndex = -1;
-            //tsbAdd.Enabled = tsbDelete.Enabled = _enableedit;
-        }
-        
-        private void cmb_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0)
-            {
-                return;
-            }
-            e.DrawBackground();
-            e.DrawFocusRectangle();
-            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
-        }
-        
-        public void DataRefresh()
-        {
-            Entities equipEntities = new Entities();
-            var equip = from eq in equipEntities.CombatEquipment
-                        select eq;
-            dGvEquip.DataSource = equip.ToList();
-            for (int i = 0; i < dGvEquip.RowCount; i++)
-            {
-                dGvEquip[0, i].Value = i + 1;
-                dGvEquip.Rows[i].Cells["MoreInfo"].Value = "详细信息";
-            }
         }
 
         public void DataAdd()
@@ -104,6 +94,11 @@ namespace AnonManagementSystem
         public void DataDelete()
         {
             throw new NotImplementedException();
+        }
+
+        private void EquipMainForm_Shown(object sender, EventArgs e)
+        {
+            DataRefresh();
         }
     }
 }

@@ -43,23 +43,23 @@ namespace AnonManagementSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Entities equipEntities = new Entities();
-            var equip = from eq in equipEntities.CombatEquipment
-                        select eq;
-            dGvEquip.DataSource = equip.ToList();
+            //Entities equipEntities = new Entities();
+            //var equip = from eq in equipEntities.CombatEquipment
+            //            select eq;
+            //dGvEquip.DataSource = equip.ToList();
             for (int i = 0; i < dGvEquip.RowCount; i++)
             {
                 dGvEquip[0, i].Value = i + 1;
                 dGvEquip.Rows[i].Cells["MoreInfo"].Value = "详细信息";
             }
-            List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
-            cmbName.DataSource = equipnameList;
-            List<string> equipsubdepartList = (from d in equip select d.SubDepartment).Distinct().ToList();
-            //cmbSubDepart.DataSource = equipsubdepartList;
-            List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
-            cmbModel.DataSource = equipModelList;
-            List<string> equipSpotList = (from s in equip select s.InventorySpot).Distinct().ToList();
-            cmbSpot.DataSource = equipSpotList;
+            //List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
+            //cmbName.DataSource = equipnameList;
+            //List<string> equipsubdepartList = (from d in equip select d.SubDepartment).Distinct().ToList();
+            ////cmbSubDepart.DataSource = equipsubdepartList;
+            //List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
+            //cmbModel.DataSource = equipModelList;
+            //List<string> equipSpotList = (from s in equip select s.InventorySpot).Distinct().ToList();
+            //cmbSpot.DataSource = equipSpotList;
             cmbName.SelectedIndex = -1;
             //cmbSubDepart.SelectedIndex = -1;
             cmbModel.SelectedIndex = -1;
@@ -87,15 +87,15 @@ namespace AnonManagementSystem
 
         private void tsbRefresh_Click(object sender, EventArgs e)
         {
-            Entities equipEntities = new Entities();
-            var equip = from eq in equipEntities.CombatEquipment
-                        select eq;
-            dGvEquip.DataSource = equip.ToList();
-            for (int i = 0; i < dGvEquip.RowCount; i++)
-            {
-                dGvEquip[0, i].Value = i + 1;
-                dGvEquip.Rows[i].Cells["MoreInfo"].Value = "详细信息";
-            }
+            //Entities equipEntities = new Entities();
+            //var equip = from eq in equipEntities.CombatEquipment
+            //            select eq;
+            //dGvEquip.DataSource = equip.ToList();
+            ////for (int i = 0; i < dGvEquip.RowCount; i++)
+            //{
+            //    dGvEquip[0, i].Value = i + 1;
+            //    dGvEquip.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+            //}
         }
 
         public void DataRefresh()
