@@ -79,9 +79,17 @@ namespace AnonManagementSystem
 
         private void MDIParent_Shown(object sender, EventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
-            loginForm.LoginSucess += LoginOnSucess;
-            loginForm.ShowDialog();
+            #if DEBUG
+            {
+                LoginOnSucess(true);
+            }
+            #else
+            {
+                LoginForm loginForm = new LoginForm();
+                loginForm.LoginSucess += LoginOnSucess;
+                loginForm.ShowDialog();
+            }
+            #endif
         }
 
         private void ChangeUserMenu_Click(object sender, EventArgs e)

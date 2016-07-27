@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabCtrlVehicle = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gbBaseInfo = new System.Windows.Forms.GroupBox();
             this.chkCombineOe = new System.Windows.Forms.CheckBox();
@@ -71,7 +71,7 @@
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tbVehiclesDescri = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabOilEngine = new System.Windows.Forms.TabPage();
             this.pbOeImageTop = new System.Windows.Forms.TabControl();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
@@ -117,30 +117,22 @@
             this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
-            this.tabControl1.SuspendLayout();
+            this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
+            this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabOilEngine.SuspendLayout();
             this.pbOeImageTop.SuspendLayout();
             this.tabPage12.SuspendLayout();
             this.groupBox21.SuspendLayout();
@@ -158,17 +150,17 @@
             this.tsDetail.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabCtrlVehicle
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(784, 536);
-            this.tabControl1.TabIndex = 1;
+            this.tabCtrlVehicle.Controls.Add(this.tabPage1);
+            this.tabCtrlVehicle.Controls.Add(this.tabOilEngine);
+            this.tabCtrlVehicle.Controls.Add(this.tabPage6);
+            this.tabCtrlVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCtrlVehicle.Location = new System.Drawing.Point(0, 25);
+            this.tabCtrlVehicle.Name = "tabCtrlVehicle";
+            this.tabCtrlVehicle.SelectedIndex = 0;
+            this.tabCtrlVehicle.Size = new System.Drawing.Size(784, 536);
+            this.tabCtrlVehicle.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -238,6 +230,7 @@
             this.chkCombineOe.TabIndex = 104;
             this.chkCombineOe.Text = "包含油机";
             this.chkCombineOe.UseVisualStyleBackColor = true;
+            this.chkCombineOe.CheckedChanged += new System.EventHandler(this.chkCombineOe_CheckedChanged);
             // 
             // tbLicenseCarry
             // 
@@ -562,16 +555,16 @@
             this.tbVehiclesDescri.Size = new System.Drawing.Size(754, 279);
             this.tbVehiclesDescri.TabIndex = 0;
             // 
-            // tabPage2
+            // tabOilEngine
             // 
-            this.tabPage2.Controls.Add(this.pbOeImageTop);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 510);
-            this.tabPage2.TabIndex = 6;
-            this.tabPage2.Text = "油机信息";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabOilEngine.Controls.Add(this.pbOeImageTop);
+            this.tabOilEngine.Location = new System.Drawing.Point(4, 22);
+            this.tabOilEngine.Name = "tabOilEngine";
+            this.tabOilEngine.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOilEngine.Size = new System.Drawing.Size(776, 510);
+            this.tabOilEngine.TabIndex = 6;
+            this.tabOilEngine.Text = "油机信息";
+            this.tabOilEngine.UseVisualStyleBackColor = true;
             // 
             // pbOeImageTop
             // 
@@ -994,59 +987,13 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton3,
-            this.toolStripDropDownButton4});
+            this.tsbAddOeImages,
+            this.tsbDeleteOeImages});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(762, 25);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripDropDownButton3
-            // 
-            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem5,
-            this.toolStripMenuItem6});
-            this.toolStripDropDownButton3.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
-            this.toolStripDropDownButton3.Size = new System.Drawing.Size(61, 22);
-            this.toolStripDropDownButton3.Text = "添加";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem5.Text = "随机资料";
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem6.Text = "架设视频";
-            // 
-            // toolStripDropDownButton4
-            // 
-            this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8});
-            this.toolStripDropDownButton4.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            this.toolStripDropDownButton4.Size = new System.Drawing.Size(61, 22);
-            this.toolStripDropDownButton4.Text = "删除";
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem7.Text = "随机资料";
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem8.Text = "架设视频";
             // 
             // tabPage6
             // 
@@ -1081,59 +1028,13 @@
             // toolStrip5
             // 
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
-            this.toolStripDropDownButton2});
+            this.tsbAddImages,
+            this.tsbDeleteImages});
             this.toolStrip5.Location = new System.Drawing.Point(0, 0);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.Size = new System.Drawing.Size(776, 25);
             this.toolStrip5.TabIndex = 8;
             this.toolStrip5.Text = "toolStrip5";
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2});
-            this.toolStripDropDownButton1.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(61, 22);
-            this.toolStripDropDownButton1.Text = "添加";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem1.Text = "随机资料";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem2.Text = "架设视频";
-            // 
-            // toolStripDropDownButton2
-            // 
-            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4});
-            this.toolStripDropDownButton2.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(61, 22);
-            this.toolStripDropDownButton2.Text = "删除";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem3.Text = "随机资料";
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem4.Text = "架设视频";
             // 
             // tsDetail
             // 
@@ -1163,23 +1064,55 @@
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
             // 
+            // tsbAddImages
+            // 
+            this.tsbAddImages.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddImages.Name = "tsbAddImages";
+            this.tsbAddImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddImages.Text = "添加";
+            // 
+            // tsbDeleteImages
+            // 
+            this.tsbDeleteImages.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteImages.Name = "tsbDeleteImages";
+            this.tsbDeleteImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteImages.Text = "删除";
+            // 
+            // tsbAddOeImages
+            // 
+            this.tsbAddOeImages.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddOeImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddOeImages.Name = "tsbAddOeImages";
+            this.tsbAddOeImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddOeImages.Text = "添加";
+            // 
+            // tsbDeleteOeImages
+            // 
+            this.tsbDeleteOeImages.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteOeImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteOeImages.Name = "tsbDeleteOeImages";
+            this.tsbDeleteOeImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteOeImages.Text = "删除";
+            // 
             // VehicleDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabCtrlVehicle);
             this.Controls.Add(this.tsDetail);
             this.Name = "VehicleDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "车辆详细信息";
-            this.tabControl1.ResumeLayout(false);
+            this.tabCtrlVehicle.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.gbBaseInfo.ResumeLayout(false);
             this.gbBaseInfo.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabOilEngine.ResumeLayout(false);
             this.pbOeImageTop.ResumeLayout(false);
             this.tabPage12.ResumeLayout(false);
             this.groupBox21.ResumeLayout(false);
@@ -1210,7 +1143,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabCtrlVehicle;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.TextBox tbVehiclesDescri;
@@ -1258,7 +1191,7 @@
         private System.Windows.Forms.ContextMenuStrip cmsPicture;
         private System.Windows.Forms.ToolStripMenuItem 更新图片ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 图片另存为ToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabOilEngine;
         private System.Windows.Forms.TabControl pbOeImageTop;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.GroupBox groupBox21;
@@ -1301,21 +1234,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStrip toolStrip5;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.CheckBox chkCombineOe;
         private System.Windows.Forms.ComboBox cmbMotorTechCon;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private System.Windows.Forms.ToolStripButton tsbAddOeImages;
+        private System.Windows.Forms.ToolStripButton tsbDeleteOeImages;
+        private System.Windows.Forms.ToolStripButton tsbAddImages;
+        private System.Windows.Forms.ToolStripButton tsbDeleteImages;
     }
 }

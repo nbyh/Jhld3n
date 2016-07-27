@@ -12,6 +12,9 @@ namespace AnonManagementSystem
 {
     public partial class VehicleDetailForm : Form
     {
+        public delegate void SaveVehicle(CombatVehicles combatVehicle);
+        public event SaveVehicle SaveVehicleSucess;
+
         private string _eqserialno;
         public VehicleDetailForm()
         {
@@ -37,7 +40,7 @@ namespace AnonManagementSystem
                 Factory = cmbFactory.Text,
                 ProductionDate = dtpTime.Value.Date,
                 Mass = tbMass.Text,
-                Tankage =   tbTankAge.Text,
+                Tankage = tbTankAge.Text,
                 OverallSize = tbSize.Text,
                 FuelType = cmbFuelType.Text,
                 DrivingModel = cmbDriveModel.Text,
@@ -53,6 +56,11 @@ namespace AnonManagementSystem
             EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
             eqEntities.CombatVehicles.Add(cv);
             eqEntities.SaveChanges();
+        }
+
+        private void chkCombineOe_CheckedChanged(object sender, EventArgs e)
+        {
+            tabOilEngine.Parent = chkCombineOe.Checked ? tabCtrlVehicle : null;
         }
     }
 }

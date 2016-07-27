@@ -137,5 +137,30 @@ namespace AnonManagementSystem
         {
 
         }
+
+        private void tsbAddMaterial_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteMaterial_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteEvents_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbAddImages_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteImage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
