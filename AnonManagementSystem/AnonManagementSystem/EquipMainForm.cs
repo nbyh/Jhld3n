@@ -177,7 +177,11 @@ namespace AnonManagementSystem
 
         private IList<CombatEquipment> QueryByPage(int pageSize, int curPage, IQueryable<CombatEquipment> query)
         {
-            return query.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+            //return query.OrderBy(s => s.SerialNo).Take(pageSize).Skip(pageSize * (curPage - 1)).ToList();
+            int offset = pageSize * (curPage - 1);
+            string cmds = $"select * from  CombatEquipment Limit {pageSize} Offset {offset}";
+            var cs = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
+            return cs.ToList();
         }
     }
 }

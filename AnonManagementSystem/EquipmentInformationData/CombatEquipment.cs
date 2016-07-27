@@ -14,9 +14,16 @@ namespace EquipmentInformationData
     
     public partial class CombatEquipment
     {
-        public long ID { get; set; }
-        public string Name { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CombatEquipment()
+        {
+            this.CombatVehicles = new HashSet<CombatVehicles>();
+            this.Events = new HashSet<Events>();
+            this.Material = new HashSet<Material>();
+        }
+    
         public string SerialNo { get; set; }
+        public string Name { get; set; }
         public string MajorCategory { get; set; }
         public string Model { get; set; }
         public string SubDepartment { get; set; }
@@ -33,5 +40,12 @@ namespace EquipmentInformationData
         public string Technician { get; set; }
         public string TechRemould { get; set; }
         public string SetupVideo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CombatVehicles> CombatVehicles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Events> Events { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Material> Material { get; set; }
     }
 }

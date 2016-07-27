@@ -14,7 +14,6 @@ namespace EquipmentInformationData
     
     public partial class OilEngine
     {
-        public long ID { get; set; }
         public string OeNo { get; set; }
         public string OeModel { get; set; }
         public string OutPower { get; set; }
@@ -32,5 +31,7 @@ namespace EquipmentInformationData
         public string MotorOemNo { get; set; }
         public string FaultDescri { get; set; }
         public string Vehicle { get; set; }
+    
+        public virtual CombatVehicles CombatVehicles { get; set; }
     }
 }

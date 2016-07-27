@@ -14,9 +14,8 @@ namespace EquipmentInformationData
     
     public partial class Material
     {
-        public long ID { get; set; }
+        public long No { get; set; }
         public string Name { get; set; }
-        public string No { get; set; }
         public string Type { get; set; }
         public string PaperSize { get; set; }
         public string Pagination { get; set; }
@@ -27,5 +26,7 @@ namespace EquipmentInformationData
         public string StoreSpot { get; set; }
         public string Content { get; set; }
         public string Equipment { get; set; }
+    
+        public virtual CombatEquipment CombatEquipment { get; set; }
     }
 }

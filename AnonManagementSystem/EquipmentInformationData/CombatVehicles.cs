@@ -14,9 +14,14 @@ namespace EquipmentInformationData
     
     public partial class CombatVehicles
     {
-        public long ID { get; set; }
-        public string Name { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CombatVehicles()
+        {
+            this.OilEngine = new HashSet<OilEngine>();
+        }
+    
         public string SerialNo { get; set; }
+        public string Name { get; set; }
         public string Model { get; set; }
         public string VehiclesNo { get; set; }
         public string MotorModel { get; set; }
@@ -36,5 +41,9 @@ namespace EquipmentInformationData
         public string VehicleDescri { get; set; }
         public Nullable<bool> CombineOe { get; set; }
         public string Equipment { get; set; }
+    
+        public virtual CombatEquipment CombatEquipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OilEngine> OilEngine { get; set; }
     }
 }

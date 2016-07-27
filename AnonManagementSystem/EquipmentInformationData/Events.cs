@@ -14,7 +14,6 @@ namespace EquipmentInformationData
     
     public partial class Events
     {
-        public long ID { get; set; }
         public string No { get; set; }
         public string Name { get; set; }
         public Nullable<System.DateTime> StartTime { get; set; }
@@ -35,6 +34,7 @@ namespace EquipmentInformationData
         public string Equipment { get; set; }
         public Nullable<long> Data { get; set; }
     
+        public virtual CombatEquipment CombatEquipment { get; set; }
         public virtual EventData EventData { get; set; }
     }
 }
