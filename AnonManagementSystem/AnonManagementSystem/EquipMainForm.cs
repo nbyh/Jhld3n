@@ -74,7 +74,7 @@ namespace AnonManagementSystem
             cmbModel.SelectedIndex = -1;
             cmbSpot.SelectedIndex = -1;
 
-            _pageSize = 10;
+            _pageSize = 20;
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, equip);
         }
@@ -199,7 +199,7 @@ namespace AnonManagementSystem
         {
 
         }
-
+        
         private void EquipMainForm_Shown(object sender, EventArgs e)
         {
             LoadData();

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -84,7 +84,6 @@
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
             this.cmbEventName = new System.Windows.Forms.ComboBox();
             this.btnQueryEvent = new System.Windows.Forms.Button();
-            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
@@ -108,6 +107,7 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -686,19 +686,6 @@
             this.btnQueryEvent.UseVisualStyleBackColor = false;
             this.btnQueryEvent.Click += new System.EventHandler(this.btnQueryEvent_Click);
             // 
-            // ccmbDepartment
-            // 
-            this.ccmbDepartment.CheckOnClick = true;
-            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ccmbDepartment.DropDownHeight = 1;
-            this.ccmbDepartment.FormattingEnabled = true;
-            this.ccmbDepartment.IntegralHeight = false;
-            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
-            this.ccmbDepartment.Name = "ccmbDepartment";
-            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
-            this.ccmbDepartment.TabIndex = 35;
-            this.ccmbDepartment.ValueSeparator = ", ";
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -826,22 +813,22 @@
             this.dGvEquip.AllowUserToDeleteRows = false;
             this.dGvEquip.AllowUserToResizeColumns = false;
             this.dGvEquip.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dGvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dGvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dGvEquip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dGvEquip.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dGvEquip.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGvEquip.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dGvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dGvEquip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGvEquip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -856,14 +843,14 @@
             this.Column11,
             this.Column6,
             this.MoreInfo});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGvEquip.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dGvEquip.DefaultCellStyle = dataGridViewCellStyle6;
             this.dGvEquip.Location = new System.Drawing.Point(4, 3);
             this.dGvEquip.MultiSelect = false;
             this.dGvEquip.Name = "dGvEquip";
@@ -964,6 +951,19 @@
             this.MoreInfo.Name = "MoreInfo";
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
+            // 
+            // ccmbDepartment
+            // 
+            this.ccmbDepartment.CheckOnClick = true;
+            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ccmbDepartment.DropDownHeight = 1;
+            this.ccmbDepartment.FormattingEnabled = true;
+            this.ccmbDepartment.IntegralHeight = false;
+            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
+            this.ccmbDepartment.Name = "ccmbDepartment";
+            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
+            this.ccmbDepartment.TabIndex = 35;
+            this.ccmbDepartment.ValueSeparator = ", ";
             // 
             // EquipMainForm
             // 

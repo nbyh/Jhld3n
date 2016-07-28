@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,10 @@ namespace AnonManagementSystem
         private bool _add = false;
         private bool _enableedit = false;
         private string _id;
+        private List<CombatVehicles> comVehList = new List<CombatVehicles>();
+        private List<Events> eventsList = new List<Events>();
+        private List<EquipmentImage> equipImageList = new List<EquipmentImage>();
+        private List<Material> materList = new List<Material>();
 
         public EquipmentDetailForm()
         {
@@ -43,62 +48,63 @@ namespace AnonManagementSystem
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
             tsbRestore.Visible = !_add;
-            EquipmentManagementEntities equipEntities = new EquipmentManagementEntities();
-            var equip = from eq in equipEntities.CombatEquipment
-                        select eq;
-            List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
-            //cmbeqName.DataSource = equipnameList;
-            List<string> equipsubdepartList = (from d in equip select d.SubDepartment).Distinct().ToList();
-            cmbSubDepart.DataSource = equipsubdepartList;
-            List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
-            cmbModel.DataSource = equipModelList;
-            List<string> equipSpotList = (from s in equip select s.InventorySpot).Distinct().ToList();
-            if (_add)
-            {
-                //cmbeqName.SelectedIndex = -1;
-                cmbSubDepart.SelectedIndex = -1;
-                cmbModel.SelectedIndex = -1;
-            }
-            else
-            {
-                var appointeq = from eq in equip
-                                where eq.SerialNo == _id
-                                select eq;
-                //cmbeqName.SelectedItem = appointeq.First().Name;
-                cmbSubDepart.SelectedItem = appointeq.First().SubDepartment;
-                cmbModel.SelectedItem = appointeq.First().Model;
-                //tbSerialNo.Text = appointeq.First().SerialNo;
-                //dtpEnableTime.Value = (DateTime)appointeq.First().EnableTime;
-                //nudServiceLift.Value = (decimal)appointeq.First().ServiceLife;
-            }
-            tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            CombatEquipment ce = new CombatEquipment()
-            {
-                Name = cmbName.Text,
-                SerialNo = tbSerialNo.Text,
-                MajorCategory = cmbMajorCategory.Text,
-                Model = cmbModel.Text,
-                SubDepartment = cmbSubDepart.Text,
-                TechCondition = cmbTechCondition.Text,
-                UseCondition = cmbUseCondition.Text,
-                Factory = cmbFactory.Text,
-                FactoryTime = dtpTime.Value.Date,
-
-                MajorComp = tbMajorComp.Text,
-                MainUsage = tbMainUsage.Text,
-                PerformIndex = tbPerformIndex.Text,
-                UseMethod = tbUseMethod.Text,
-                Manager = cmbCharger.Text,
-                Technician = cmbTechnician.Text,
-                TechRemould = tbTechRemould.Text,
-                SetupVideo = tbSetupVideo.Text
-            };
             EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
-            eqEntities.CombatEquipment.Add(ce);
+            if (_add)
+            {
+                CombatEquipment ce = new CombatEquipment()
+                {
+                    Name = cmbName.Text,
+                    SerialNo = tbSerialNo.Text,
+                    MajorCategory = cmbMajorCategory.Text,
+                    Model = cmbModel.Text,
+                    SubDepartment = cmbSubDepart.Text,
+                    TechCondition = cmbTechCondition.Text,
+                    UseCondition = cmbUseCondition.Text,
+                    Factory = cmbFactory.Text,
+                    FactoryTime = dtpTime.Value.Date,
+
+                    MajorComp = tbMajorComp.Text,
+                    MainUsage = tbMainUsage.Text,
+                    PerformIndex = tbPerformIndex.Text,
+                    UseMethod = tbUseMethod.Text,
+                    Manager = cmbCharger.Text,
+                    Technician = cmbTechnician.Text,
+                    TechRemould = tbTechRemould.Text,
+                    SetupVideo = tbSetupVideo.Text
+                };
+                eqEntities.CombatEquipment.Add(ce);
+            }
+            else
+            {
+                var equipfirst = (from eq in eqEntities.CombatEquipment
+                                  where eq.SerialNo == _id
+                                  select eq).First();
+
+                equipfirst.InventorySpot = tbOemNo.Text;
+                equipfirst.Technician = cmbTechnician.Text;
+                equipfirst.SubDepartment = cmbSubDepart.Text;
+                equipfirst.Manager = cmbCharger.Text;
+                equipfirst.TechCondition = cmbTechCondition.Text;
+                equipfirst.UseCondition = cmbUseCondition.Text;
+                equipfirst.MajorCategory = cmbMajorCategory.Text;
+                equipfirst.Factory = cmbFactory.Text;
+                equipfirst.FactoryTime = dtpTime.Value.Date;
+                equipfirst.Model = cmbModel.Text;
+                equipfirst.Name = cmbName.Text;
+                equipfirst.SubDepartment = cmbSubDepart.Text;
+                equipfirst.Model = cmbModel.Text;
+                equipfirst.SerialNo = tbSerialNo.Text;
+                equipfirst.TechRemould = tbTechRemould.Text;
+                ;
+                equipfirst.MajorComp = tbMajorComp.Text;
+                equipfirst.MainUsage = tbMainUsage.Text;
+                equipfirst.UseMethod = tbUseMethod.Text;
+                equipfirst.PerformIndex = tbPerformIndex.Text;
+            }
             eqEntities.SaveChanges();
         }
 
@@ -161,6 +167,99 @@ namespace AnonManagementSystem
         private void tsbDeleteImage_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void EquipmentDetailForm_Shown(object sender, EventArgs e)
+        {
+            EquipmentManagementEntities equipEntities = new EquipmentManagementEntities();
+            var equip = from eq in equipEntities.CombatEquipment
+                        select eq;
+            List<string> equipNameList = (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            cmbName.DataSource = equipNameList;
+            List<string> equipSubdepartList = (from s in equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
+            cmbSubDepart.DataSource = equipSubdepartList;
+            List<string> equipModelList = (from s in equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+            cmbModel.DataSource = equipModelList;
+            List<string> equipTechcanList = (from s in equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
+            cmbTechnician.DataSource = equipTechcanList;
+            List<string> equipManagerList = (from s in equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
+            cmbCharger.DataSource = equipManagerList;
+            List<string> equipTechconList = (from s in equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
+            cmbTechCondition.DataSource = equipTechconList;
+            List<string> equipUseconList = (from s in equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
+            cmbUseCondition.DataSource = equipUseconList;
+            List<string> equipMajcatList = (from s in equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
+            cmbMajorCategory.DataSource = equipMajcatList;
+            List<string> equipFactList = (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            cmbFactory.DataSource = equipFactList;
+
+
+            if (_add)
+            {
+                cmbName.SelectedIndex = -1;
+                cmbSubDepart.SelectedIndex = -1;
+                cmbModel.SelectedIndex = -1;
+                cmbTechnician.SelectedIndex = -1;
+                cmbCharger.SelectedIndex = -1;
+                cmbTechCondition.SelectedIndex = -1;
+                cmbUseCondition.SelectedIndex = -1;
+                cmbMajorCategory.SelectedIndex = -1;
+                cmbFactory.SelectedIndex = -1;
+            }
+            else
+            {
+                var appointeq = from eq in equip
+                                where eq.SerialNo == _id
+                                select eq;
+                var equipfirst = appointeq.First();
+                cmbName.SelectedItem = equipfirst.Name;
+                cmbModel.SelectedItem = equipfirst.Model;
+                cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
+                tbSerialNo.Text = equipfirst.SerialNo;
+                tbTechRemould.Text = equipfirst.TechRemould;
+                tbOemNo.Text = equipfirst.InventorySpot;
+                cmbTechnician.SelectedItem = equipfirst.Technician;
+                cmbCharger.SelectedItem = equipfirst.Manager;
+                cmbTechCondition.SelectedItem = equipfirst.TechCondition;
+                cmbUseCondition.SelectedItem = equipfirst.UseCondition;
+                cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
+                cmbFactory.SelectedItem = equipfirst.Factory;
+                dtpTime.Value = equipfirst.FactoryTime.Value;
+
+                tbMajorComp.Text = equipfirst.MajorComp;
+                tbMainUsage.Text = equipfirst.MainUsage;
+                tbUseMethod.Text = equipfirst.UseMethod;
+                tbPerformIndex.Text = equipfirst.PerformIndex;
+
+
+            }
+            tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
+
+            string cmds = $"select *from CombatVehicles where Equipment='{_id}' ";
+            _vehicleses = equipEntities.Database.SqlQuery<CombatVehicles>(cmds);
+
+            _pageSize = 20;
+            _curPage = 1;
+            DataRefresh(_pageSize, _curPage, _vehicleses);
+        }
+
+        private int _pageSize = 20, _curPage = 1, _lastPage = 1;
+        private DbRawSqlQuery<CombatVehicles> _vehicleses;
+        private void DataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
+        {
+            int all = iquery.Count();
+            _lastPage = (int)Math.Ceiling((double)all / _pageSize);
+            var vehcilepage = QueryByPage(pagesize, curpage, iquery);
+            dGvCombatVehicles.DataSource = vehcilepage.ToList();
+            for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
+            {
+                dGvCombatVehicles[0, i].Value = i + 1;
+                dGvCombatVehicles.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+            }
+        }
+        private IList<CombatVehicles> QueryByPage(int pageSize, int curPage, DbRawSqlQuery<CombatVehicles> dbRaw)
+        {
+            return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
         }
     }
 }

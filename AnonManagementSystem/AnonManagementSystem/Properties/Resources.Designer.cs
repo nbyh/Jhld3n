@@ -81,6 +81,26 @@ namespace AnonManagementSystem.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap direction_left {
+            get {
+                object obj = ResourceManager.GetObject("direction_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap direction_right {
+            get {
+                object obj = ResourceManager.GetObject("direction_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon diskette {
@@ -146,6 +166,36 @@ namespace AnonManagementSystem.Properties {
         internal static System.Drawing.Bitmap file_search {
             get {
                 object obj = ResourceManager.GetObject("file_search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap player_fastforward {
+            get {
+                object obj = ResourceManager.GetObject("player_fastforward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap player_play {
+            get {
+                object obj = ResourceManager.GetObject("player_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap player_rewind {
+            get {
+                object obj = ResourceManager.GetObject("player_rewind", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

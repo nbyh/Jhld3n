@@ -79,17 +79,17 @@ namespace AnonManagementSystem
 
         private void MDIParent_Shown(object sender, EventArgs e)
         {
-            #if DEBUG
+#if DEBUG
             {
                 LoginOnSucess(true);
             }
-            #else
+#else
             {
                 LoginForm loginForm = new LoginForm();
                 loginForm.LoginSucess += LoginOnSucess;
                 loginForm.ShowDialog();
             }
-            #endif
+#endif
         }
 
         private void ChangeUserMenu_Click(object sender, EventArgs e)
@@ -151,6 +151,17 @@ namespace AnonManagementSystem
             Form form = this.ActiveMdiChild;
             var mdiFunction = (IMdiFunction)form;
             mdiFunction?.DataRefresh();
+        }
+
+        private void MDIParent_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                foreach (var childForm in MdiChildren)
+                {
+                    childForm.WindowState = FormWindowState.Maximized;
+                }
+            }
         }
     }
 }
