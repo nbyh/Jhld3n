@@ -53,7 +53,7 @@
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmb = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dtpEventDt2 = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
@@ -81,9 +81,6 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.tsDetail = new System.Windows.Forms.ToolStrip();
-            this.tsbSave = new System.Windows.Forms.ToolStripButton();
-            this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -94,6 +91,9 @@
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsDetail = new System.Windows.Forms.ToolStrip();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
+            this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -108,10 +108,10 @@
             this.toolStrip2.SuspendLayout();
             this.groupBox20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrial)).BeginInit();
-            this.tsDetail.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.toolStrip5.SuspendLayout();
+            this.tsDetail.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -206,7 +206,7 @@
             this.gbBaseInfo.Controls.Add(this.comboBox4);
             this.gbBaseInfo.Controls.Add(this.label5);
             this.gbBaseInfo.Controls.Add(this.label17);
-            this.gbBaseInfo.Controls.Add(this.comboBox2);
+            this.gbBaseInfo.Controls.Add(this.cmb);
             this.gbBaseInfo.Controls.Add(this.label6);
             this.gbBaseInfo.Controls.Add(this.dtpEventDt2);
             this.gbBaseInfo.Controls.Add(this.label14);
@@ -347,13 +347,13 @@
             this.label17.TabIndex = 66;
             this.label17.Text = "发文单位";
             // 
-            // comboBox2
+            // cmb
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(162, 69);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(110, 20);
-            this.comboBox2.TabIndex = 65;
+            this.cmb.FormattingEnabled = true;
+            this.cmb.Location = new System.Drawing.Point(162, 69);
+            this.cmb.Name = "cmb";
+            this.cmb.Size = new System.Drawing.Size(110, 20);
+            this.cmb.TabIndex = 65;
             // 
             // label6
             // 
@@ -636,33 +636,6 @@
             this.dataGridViewLinkColumn1.ReadOnly = true;
             this.dataGridViewLinkColumn1.Text = "";
             // 
-            // tsDetail
-            // 
-            this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSave,
-            this.tsbRestore});
-            this.tsDetail.Location = new System.Drawing.Point(0, 0);
-            this.tsDetail.Name = "tsDetail";
-            this.tsDetail.Size = new System.Drawing.Size(784, 25);
-            this.tsDetail.TabIndex = 2;
-            this.tsDetail.Text = "toolStrip1";
-            // 
-            // tsbSave
-            // 
-            this.tsbSave.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(52, 22);
-            this.tsbSave.Text = "保存";
-            // 
-            // tsbRestore
-            // 
-            this.tsbRestore.Image = global::AnonManagementSystem.Properties.Resources.clock1;
-            this.tsbRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRestore.Name = "tsbRestore";
-            this.tsbRestore.Size = new System.Drawing.Size(52, 22);
-            this.tsbRestore.Text = "恢复";
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBox2);
@@ -751,6 +724,33 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem4.Text = "架设视频";
             // 
+            // tsDetail
+            // 
+            this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSave,
+            this.tsbRestore});
+            this.tsDetail.Location = new System.Drawing.Point(0, 0);
+            this.tsDetail.Name = "tsDetail";
+            this.tsDetail.Size = new System.Drawing.Size(784, 25);
+            this.tsDetail.TabIndex = 2;
+            this.tsDetail.Text = "toolStrip1";
+            // 
+            // tsbSave
+            // 
+            this.tsbSave.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(52, 22);
+            this.tsbSave.Text = "保存";
+            // 
+            // tsbRestore
+            // 
+            this.tsbRestore.Image = global::AnonManagementSystem.Properties.Resources.clock1;
+            this.tsbRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRestore.Name = "tsbRestore";
+            this.tsbRestore.Size = new System.Drawing.Size(52, 22);
+            this.tsbRestore.Text = "恢复";
+            // 
             // EventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -783,13 +783,13 @@
             this.toolStrip2.PerformLayout();
             this.groupBox20.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrial)).EndInit();
-            this.tsDetail.ResumeLayout(false);
-            this.tsDetail.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
+            this.tsDetail.ResumeLayout(false);
+            this.tsDetail.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -829,7 +829,7 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmb;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpEventDt2;
         private System.Windows.Forms.Label label14;

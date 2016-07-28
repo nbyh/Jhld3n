@@ -83,7 +83,7 @@
             this.label38 = new System.Windows.Forms.Label();
             this.tbMotorPower = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
-            this.tbMotorFuelType = new System.Windows.Forms.ComboBox();
+            this.cmbMotorFuelType = new System.Windows.Forms.ComboBox();
             this.tbMotorOemNo = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
@@ -117,17 +117,17 @@
             this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
-            this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
-            this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -620,7 +620,7 @@
             this.groupBox14.Controls.Add(this.label38);
             this.groupBox14.Controls.Add(this.tbMotorPower);
             this.groupBox14.Controls.Add(this.label44);
-            this.groupBox14.Controls.Add(this.tbMotorFuelType);
+            this.groupBox14.Controls.Add(this.cmbMotorFuelType);
             this.groupBox14.Controls.Add(this.tbMotorOemNo);
             this.groupBox14.Controls.Add(this.label29);
             this.groupBox14.Controls.Add(this.label41);
@@ -684,13 +684,13 @@
             this.label44.TabIndex = 83;
             this.label44.Text = "额定功率";
             // 
-            // tbMotorFuelType
+            // cmbMotorFuelType
             // 
-            this.tbMotorFuelType.FormattingEnabled = true;
-            this.tbMotorFuelType.Location = new System.Drawing.Point(339, 21);
-            this.tbMotorFuelType.Name = "tbMotorFuelType";
-            this.tbMotorFuelType.Size = new System.Drawing.Size(71, 20);
-            this.tbMotorFuelType.TabIndex = 74;
+            this.cmbMotorFuelType.FormattingEnabled = true;
+            this.cmbMotorFuelType.Location = new System.Drawing.Point(339, 21);
+            this.cmbMotorFuelType.Name = "cmbMotorFuelType";
+            this.cmbMotorFuelType.Size = new System.Drawing.Size(71, 20);
+            this.cmbMotorFuelType.TabIndex = 74;
             // 
             // tbMotorOemNo
             // 
@@ -995,6 +995,22 @@
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // tsbAddOeImages
+            // 
+            this.tsbAddOeImages.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddOeImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddOeImages.Name = "tsbAddOeImages";
+            this.tsbAddOeImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddOeImages.Text = "添加";
+            // 
+            // tsbDeleteOeImages
+            // 
+            this.tsbDeleteOeImages.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteOeImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteOeImages.Name = "tsbDeleteOeImages";
+            this.tsbDeleteOeImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteOeImages.Text = "删除";
+            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.groupBox1);
@@ -1036,6 +1052,22 @@
             this.toolStrip5.TabIndex = 8;
             this.toolStrip5.Text = "toolStrip5";
             // 
+            // tsbAddImages
+            // 
+            this.tsbAddImages.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddImages.Name = "tsbAddImages";
+            this.tsbAddImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddImages.Text = "添加";
+            // 
+            // tsbDeleteImages
+            // 
+            this.tsbDeleteImages.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteImages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteImages.Name = "tsbDeleteImages";
+            this.tsbDeleteImages.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteImages.Text = "删除";
+            // 
             // tsDetail
             // 
             this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1064,38 +1096,6 @@
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
             // 
-            // tsbAddImages
-            // 
-            this.tsbAddImages.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.tsbAddImages.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddImages.Name = "tsbAddImages";
-            this.tsbAddImages.Size = new System.Drawing.Size(52, 22);
-            this.tsbAddImages.Text = "添加";
-            // 
-            // tsbDeleteImages
-            // 
-            this.tsbDeleteImages.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.tsbDeleteImages.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDeleteImages.Name = "tsbDeleteImages";
-            this.tsbDeleteImages.Size = new System.Drawing.Size(52, 22);
-            this.tsbDeleteImages.Text = "删除";
-            // 
-            // tsbAddOeImages
-            // 
-            this.tsbAddOeImages.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.tsbAddOeImages.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddOeImages.Name = "tsbAddOeImages";
-            this.tsbAddOeImages.Size = new System.Drawing.Size(52, 22);
-            this.tsbAddOeImages.Text = "添加";
-            // 
-            // tsbDeleteOeImages
-            // 
-            this.tsbDeleteOeImages.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.tsbDeleteOeImages.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDeleteOeImages.Name = "tsbDeleteOeImages";
-            this.tsbDeleteOeImages.Size = new System.Drawing.Size(52, 22);
-            this.tsbDeleteOeImages.Text = "删除";
-            // 
             // VehicleDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1106,6 +1106,7 @@
             this.Name = "VehicleDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "车辆详细信息";
+            this.Load += new System.EventHandler(this.VehicleDetailForm_Load);
             this.tabCtrlVehicle.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.gbBaseInfo.ResumeLayout(false);
@@ -1203,7 +1204,7 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox tbMotorPower;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.ComboBox tbMotorFuelType;
+        private System.Windows.Forms.ComboBox cmbMotorFuelType;
         private System.Windows.Forms.TextBox tbMotorOemNo;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label41;

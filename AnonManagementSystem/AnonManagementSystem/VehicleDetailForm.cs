@@ -29,6 +29,31 @@ namespace AnonManagementSystem
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
+            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
+            if (chkCombineOe.Checked)
+            {
+                OilEngine oe=new OilEngine()
+                {
+                    OeNo = tbOilEngineNo.Text,
+                    OeModel = cmbOeModel.Text,
+                    OutPower = tbOePower.Text,
+                    TechCondition = cmbTechCondition.Text,
+                    WorkHour = nudWorkHour.Value.ToString(),
+                    OeFactory = cmbOeFactory.Text,
+                    OeDate = dtpOeTime.Value.Date.ToString(),
+                    OeOemNo = tbOeOemNo.Text,
+                    MotorNo = cmbMotorModel.Text,
+                    MotorPower = tbMotorPower.Text,
+                    MotorFuel = cmbMotorFuelType.Text,
+                    MotorTankage = tbMotorTankage.Text,
+                    MotorFactory = cmbMotorFactory.Text,
+                    MotorDate = dtpMotorTime.Value.Date.ToString(),
+                    MotorOemNo = tbMotorOemNo.Text,
+                    FaultDescri = tbOeFailDetail.Text,
+                    Vehicle = tbVehiclesNo.Text
+                };
+                eqEntities.OilEngine.Add(oe);
+            }
             CombatVehicles cv = new CombatVehicles()
             {
                 Name = cmbName.Text,
@@ -53,14 +78,19 @@ namespace AnonManagementSystem
                 CombineOe = chkCombineOe.Checked,
                 Equipment = _eqserialno
             };
-            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
             eqEntities.CombatVehicles.Add(cv);
             eqEntities.SaveChanges();
+            SaveVehicleSucess(cv);
         }
 
         private void chkCombineOe_CheckedChanged(object sender, EventArgs e)
         {
             tabOilEngine.Parent = chkCombineOe.Checked ? tabCtrlVehicle : null;
+        }
+
+        private void VehicleDetailForm_Load(object sender, EventArgs e)
+        {
+            tabOilEngine.Parent = null;
         }
     }
 }

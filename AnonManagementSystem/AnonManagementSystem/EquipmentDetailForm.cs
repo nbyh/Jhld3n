@@ -146,7 +146,8 @@ namespace AnonManagementSystem
 
         private void tsbAddMaterial_Click(object sender, EventArgs e)
         {
-
+            AddMaterialForm addMaterialForm = new AddMaterialForm();
+            addMaterialForm.ShowDialog();
         }
 
         private void tsbDeleteMaterial_Click(object sender, EventArgs e)
