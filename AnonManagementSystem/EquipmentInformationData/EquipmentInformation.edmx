@@ -60,7 +60,8 @@
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="254" />
-          <Property Name="Spot" Type="nvarchar" MaxLength="254" Nullable="false" />
+          <Property Name="Spot" Type="nvarchar" MaxLength="254" />
+          <Property Name="EventsNo" Type="nvarchar" MaxLength="254" />
         </EntityType>
         <EntityType Name="Events">
           <Key>
@@ -71,12 +72,12 @@
           <Property Name="StartTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
           <Property Name="Address" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="PartUnit" Type="nvarchar" MaxLength="254" />
-          <Property Name="PulishUnit" Type="nvarchar" MaxLength="254" />
-          <Property Name="PublishDate" Type="datetime" />
           <Property Name="EventType" Type="nvarchar" MaxLength="254" />
           <Property Name="SpecificType" Type="nvarchar" MaxLength="254" />
           <Property Name="Code" Type="nvarchar" MaxLength="254" />
+          <Property Name="PublishUnit" Type="nvarchar" MaxLength="254" />
+          <Property Name="PublishDate" Type="datetime" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="254" />
           <Property Name="According" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="PeopleDescri" Type="nvarchar" MaxLength="254" />
           <Property Name="ProcessDescri" Type="nvarchar" MaxLength="2147483647" />
@@ -84,7 +85,6 @@
           <Property Name="Problem" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Equipment" Type="nvarchar" MaxLength="254" />
-          <Property Name="Data" Type="integer" />
         </EntityType>
         <EntityType Name="Material">
           <Key>
@@ -137,19 +137,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Events_0_0">
-          <End Role="EventData" Type="Self.EventData" Multiplicity="0..1" />
-          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+        <Association Name="FK_EventData_0_0">
+          <End Role="Events" Type="Self.Events" Multiplicity="0..1" />
+          <End Role="EventData" Type="Self.EventData" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="EventData">
-              <PropertyRef Name="ID" />
+            <Principal Role="Events">
+              <PropertyRef Name="No" />
             </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="Data" />
+            <Dependent Role="EventData">
+              <PropertyRef Name="EventsNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Events_1_0">
+        <Association Name="FK_Events_0_0">
           <End Role="CombatEquipment" Type="Self.CombatEquipment" Multiplicity="0..1" />
           <End Role="Events" Type="Self.Events" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,11 +196,11 @@
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Events_0_0" Association="Self.FK_Events_0_0">
-            <End Role="EventData" EntitySet="EventData" />
+          <AssociationSet Name="FK_EventData_0_0" Association="Self.FK_EventData_0_0">
             <End Role="Events" EntitySet="Events" />
+            <End Role="EventData" EntitySet="EventData" />
           </AssociationSet>
-          <AssociationSet Name="FK_Events_1_0" Association="Self.FK_Events_1_0">
+          <AssociationSet Name="FK_Events_0_0" Association="Self.FK_Events_0_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="Events" EntitySet="Events" />
           </AssociationSet>
@@ -220,29 +220,29 @@
         <EntityContainer Name="EquipmentManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CombatEquipment" EntityType="EquipmentManagementModel.CombatEquipment" />
           <EntitySet Name="CombatVehicles" EntityType="EquipmentManagementModel.CombatVehicles" />
-          <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
-          <EntitySet Name="Events" EntityType="EquipmentManagementModel.Events" />
           <EntitySet Name="OilEngine" EntityType="EquipmentManagementModel.OilEngine" />
           <AssociationSet Name="FK_CombatVehicles_0_0" Association="EquipmentManagementModel.FK_CombatVehicles_0_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Events_1_0" Association="EquipmentManagementModel.FK_Events_1_0">
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
-            <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
           <AssociationSet Name="FK_OilEngine_0_0" Association="EquipmentManagementModel.FK_OilEngine_0_0">
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
             <End Role="OilEngine" EntitySet="OilEngine" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Events_0_0" Association="EquipmentManagementModel.FK_Events_0_0">
-            <End Role="EventData" EntitySet="EventData" />
-            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
           <EntitySet Name="Material" EntityType="EquipmentManagementModel.Material" />
           <AssociationSet Name="FK_Material_0_0" Association="EquipmentManagementModel.FK_Material_0_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
+          <EntitySet Name="Events" EntityType="EquipmentManagementModel.Events" />
+          <AssociationSet Name="FK_Events_0_0" Association="EquipmentManagementModel.FK_Events_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventData_0_0" Association="EquipmentManagementModel.FK_EventData_0_0">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventData" EntitySet="EventData" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CombatEquipment">
@@ -268,8 +268,8 @@
           <Property Name="TechRemould" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="SetupVideo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CombatVehicles" Relationship="EquipmentManagementModel.FK_CombatVehicles_0_0" FromRole="CombatEquipment" ToRole="CombatVehicles" />
-          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_Events_1_0" FromRole="CombatEquipment" ToRole="Events" />
           <NavigationProperty Name="Material" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="CombatEquipment" ToRole="Material" />
+          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="CombatEquipment" ToRole="Events" />
         </EntityType>
         <EntityType Name="CombatVehicles">
           <Key>
@@ -298,41 +298,6 @@
           <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_CombatVehicles_0_0" FromRole="CombatVehicles" ToRole="CombatEquipment" />
           <NavigationProperty Name="OilEngine" Relationship="EquipmentManagementModel.FK_OilEngine_0_0" FromRole="CombatVehicles" ToRole="OilEngine" />
-        </EntityType>
-        <EntityType Name="EventData">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Spot" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="EventData" ToRole="Events" />
-        </EntityType>
-        <EntityType Name="Events">
-          <Key>
-            <PropertyRef Name="No" />
-          </Key>
-          <Property Name="No" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="DateTime" />
-          <Property Name="EndTime" Type="DateTime" />
-          <Property Name="Address" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="PartUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="PulishUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="PublishDate" Type="DateTime" />
-          <Property Name="EventType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="SpecificType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="According" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="PeopleDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="ProcessDescri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="HandleStep" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Problem" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Data" Type="Int64" />
-          <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_Events_1_0" FromRole="Events" ToRole="CombatEquipment" />
-          <NavigationProperty Name="EventData" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="Events" ToRole="EventData" />
         </EntityType>
         <EntityType Name="OilEngine">
           <Key>
@@ -369,18 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Events_1_0">
-          <End Type="EquipmentManagementModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
-          <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CombatEquipment">
-              <PropertyRef Name="SerialNo" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="Equipment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OilEngine_0_0">
           <End Type="EquipmentManagementModel.CombatVehicles" Role="CombatVehicles" Multiplicity="0..1" />
           <End Type="EquipmentManagementModel.OilEngine" Role="OilEngine" Multiplicity="*" />
@@ -390,18 +343,6 @@
             </Principal>
             <Dependent Role="OilEngine">
               <PropertyRef Name="Vehicle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Events_0_0">
-          <End Type="EquipmentManagementModel.EventData" Role="EventData" Multiplicity="0..1" />
-          <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EventData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="Data" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -432,6 +373,65 @@
             </Principal>
             <Dependent Role="Material">
               <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EventData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Spot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="EventsNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="EventData" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" />
+          <Property Name="EndTime" Type="DateTime" />
+          <Property Name="Address" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="EventType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="SpecificType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PublishUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" />
+          <Property Name="Publisher" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="According" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PeopleDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessDescri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="HandleStep" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Problem" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="Events" ToRole="CombatEquipment" />
+          <NavigationProperty Name="EventData" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="Events" ToRole="EventData" />
+        </EntityType>
+        <Association Name="FK_Events_0_0">
+          <End Type="EquipmentManagementModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="SerialNo" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventData_0_0">
+          <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="0..1" />
+          <End Type="EquipmentManagementModel.EventData" Role="EventData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="EventData">
+              <PropertyRef Name="EventsNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -492,40 +492,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EventData">
-            <EntityTypeMapping TypeName="EquipmentManagementModel.EventData">
-              <MappingFragment StoreEntitySet="EventData">
-                <ScalarProperty Name="Spot" ColumnName="Spot" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="EquipmentManagementModel.Events">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Problem" ColumnName="Problem" />
-                <ScalarProperty Name="HandleStep" ColumnName="HandleStep" />
-                <ScalarProperty Name="ProcessDescri" ColumnName="ProcessDescri" />
-                <ScalarProperty Name="PeopleDescri" ColumnName="PeopleDescri" />
-                <ScalarProperty Name="According" ColumnName="According" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="SpecificType" ColumnName="SpecificType" />
-                <ScalarProperty Name="EventType" ColumnName="EventType" />
-                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-                <ScalarProperty Name="PulishUnit" ColumnName="PulishUnit" />
-                <ScalarProperty Name="PartUnit" ColumnName="PartUnit" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="No" ColumnName="No" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OilEngine">
             <EntityTypeMapping TypeName="EquipmentManagementModel.OilEngine">
               <MappingFragment StoreEntitySet="OilEngine">
@@ -562,6 +528,40 @@
                 <ScalarProperty Name="Pagination" ColumnName="Pagination" />
                 <ScalarProperty Name="PaperSize" ColumnName="PaperSize" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventData">
+            <EntityTypeMapping TypeName="EquipmentManagementModel.EventData">
+              <MappingFragment StoreEntitySet="EventData">
+                <ScalarProperty Name="EventsNo" ColumnName="EventsNo" />
+                <ScalarProperty Name="Spot" ColumnName="Spot" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="EquipmentManagementModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="HandleStep" ColumnName="HandleStep" />
+                <ScalarProperty Name="ProcessDescri" ColumnName="ProcessDescri" />
+                <ScalarProperty Name="PeopleDescri" ColumnName="PeopleDescri" />
+                <ScalarProperty Name="According" ColumnName="According" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="PublishUnit" ColumnName="PublishUnit" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SpecificType" ColumnName="SpecificType" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="No" ColumnName="No" />
               </MappingFragment>

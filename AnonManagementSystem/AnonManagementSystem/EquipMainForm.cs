@@ -61,19 +61,37 @@ namespace AnonManagementSystem
             string cmds = "select * from CombatEquipment";
             equip = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
 
-            List<string> equipnameList = (from n in equip select n.Name).Distinct().ToList();
-            cmbName.DataSource = equipnameList;
-            List<string> equipsubdepartList = (from d in equip select d.SubDepartment).Distinct().ToList();
-            cmbSubDepart.DataSource = equipsubdepartList;
-            List<string> equipModelList = (from s in equip select s.Model).Distinct().ToList();
+            List<string> equipNameList = (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            cmbName.DataSource = equipNameList;
+            List<string> equipSubdepartList = (from s in equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
+            cmbSubDepart.DataSource = equipSubdepartList;
+            List<string> equipMajcatList = (from s in equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
+            cmbMajorCategory.DataSource = equipMajcatList;
+            List<string> equipModelList = (from s in equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
-            List<string> equipSpotList = (from s in equip select s.InventorySpot).Distinct().ToList();
-            cmbSpot.DataSource = equipSpotList;
+            List<string> equipTechcanList = (from s in equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
+            cmbTechnician.DataSource = equipTechcanList;
+            List<string> equipManagerList = (from s in equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
+            cmbManager.DataSource = equipManagerList;
+            List<string> equipTechconList = (from s in equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
+            cmbTechCondition.DataSource = equipTechconList;
+            List<string> equipUseconList = (from s in equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
+            cmbUseCondition.DataSource = equipUseconList;
+            List<string> equipFactList = (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            cmbFactory.DataSource = equipFactList;
+            
             cmbName.SelectedIndex = -1;
             cmbSubDepart.SelectedIndex = -1;
             cmbModel.SelectedIndex = -1;
-            cmbSpot.SelectedIndex = -1;
-
+            cmbMajorCategory.SelectedIndex = -1;
+            cmbTechnician.SelectedIndex = -1;
+            cmbManager.SelectedIndex = -1;
+            cmbTechCondition.SelectedIndex = -1;
+            cmbUseCondition.SelectedIndex = -1;
+            cmbFactory.SelectedIndex = -1;
+            cmbTimeTerm1.SelectedIndex = -1;
+            cmbTimeTerm2.SelectedIndex = -1;
+            
             _pageSize = 20;
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, equip);
@@ -187,7 +205,17 @@ namespace AnonManagementSystem
 
         private void btnRestInfo_Click(object sender, EventArgs e)
         {
-
+            cmbName.SelectedIndex = -1;
+            cmbSubDepart.SelectedIndex = -1;
+            cmbModel.SelectedIndex = -1;
+            cmbMajorCategory.SelectedIndex = -1;
+            cmbTechnician.SelectedIndex = -1;
+            cmbManager.SelectedIndex = -1;
+            cmbTechCondition.SelectedIndex = -1;
+            cmbUseCondition.SelectedIndex = -1;
+            cmbFactory.SelectedIndex = -1;
+            cmbTimeTerm1.SelectedIndex = -1;
+            cmbTimeTerm2.SelectedIndex = -1;
         }
 
         private void btnQueryEvent_Click(object sender, EventArgs e)
@@ -195,7 +223,7 @@ namespace AnonManagementSystem
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void btnRestEvent_Click(object sender, EventArgs e)
         {
 
         }

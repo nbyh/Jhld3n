@@ -14,17 +14,11 @@ namespace EquipmentInformationData
     
     public partial class EventData
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EventData()
-        {
-            this.Events = new HashSet<Events>();
-        }
-    
         public long ID { get; set; }
         public string Name { get; set; }
         public string Spot { get; set; }
+        public string EventsNo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Events> Events { get; set; }
+        public virtual Events Events { get; set; }
     }
 }

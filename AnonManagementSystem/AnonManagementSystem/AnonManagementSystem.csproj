@@ -94,11 +94,11 @@
     <Compile Include="EquipmentDetailForm.Designer.cs">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EventsForm.cs">
+    <Compile Include="AddEventsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EventsForm.Designer.cs">
-      <DependentUpon>EventsForm.cs</DependentUpon>
+    <Compile Include="AddEventsForm.Designer.cs">
+      <DependentUpon>AddEventsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -151,8 +151,8 @@
     <EmbeddedResource Include="EquipmentDetailForm.resx">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EventsForm.resx">
-      <DependentUpon>EventsForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddEventsForm.resx">
+      <DependentUpon>AddEventsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

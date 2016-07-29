@@ -11,6 +11,7 @@ namespace AnonManagementSystem
 
         private bool _enableedit;
 
+        private int _rowindex=-1;
         private int _id = -1;
 
         private bool _modify;
@@ -24,7 +25,7 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
-        public delegate void AddModifySysUser(bool modify, int id, string user, string pwd, bool enableedit);
+        public delegate void AddModifySysUser(bool modify,int rowindex, int id, string user, string pwd, bool enableedit);
 
         public event AddModifySysUser Add_ModifyUser;
 
@@ -38,6 +39,10 @@ namespace AnonManagementSystem
             set { _enableedit = value; }
         }
 
+        public int RowIndex
+        {
+            set { _rowindex = value; }
+        }
         public int Id
         {
             set { _id = value; }
@@ -66,6 +71,15 @@ namespace AnonManagementSystem
                 tbPwdSure.Text = tbPwd.Text = _pwd;
                 cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
             }
+            else
+            {
+                if (!string.IsNullOrEmpty(_user))
+                {
+                    tbUser.Text = _user;
+                    tbPwdSure.Text = tbPwd.Text = _pwd;
+                    cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -91,7 +105,7 @@ namespace AnonManagementSystem
                 return;
             }
             bool enableedit = cmbAuthority.SelectedItem.ToString().Equals("可写");
-            Add_ModifyUser?.Invoke(_modify, _id, tbUser.Text, tbPwdSure.Text, enableedit);
+            Add_ModifyUser?.Invoke(_modify,_rowindex, _id, tbUser.Text, tbPwdSure.Text, enableedit);
             this.Close();
         }
 

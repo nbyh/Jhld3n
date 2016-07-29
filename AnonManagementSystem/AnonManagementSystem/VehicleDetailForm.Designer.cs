@@ -128,6 +128,7 @@
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
+            this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -1002,6 +1003,7 @@
             this.tsbAddOeImages.Name = "tsbAddOeImages";
             this.tsbAddOeImages.Size = new System.Drawing.Size(52, 22);
             this.tsbAddOeImages.Text = "添加";
+            this.tsbAddOeImages.Click += new System.EventHandler(this.tsbAddOeImages_Click);
             // 
             // tsbDeleteOeImages
             // 
@@ -1010,6 +1012,7 @@
             this.tsbDeleteOeImages.Name = "tsbDeleteOeImages";
             this.tsbDeleteOeImages.Size = new System.Drawing.Size(52, 22);
             this.tsbDeleteOeImages.Text = "删除";
+            this.tsbDeleteOeImages.Click += new System.EventHandler(this.tsbDeleteOeImages_Click);
             // 
             // tabPage6
             // 
@@ -1059,6 +1062,7 @@
             this.tsbAddImages.Name = "tsbAddImages";
             this.tsbAddImages.Size = new System.Drawing.Size(52, 22);
             this.tsbAddImages.Text = "添加";
+            this.tsbAddImages.Click += new System.EventHandler(this.tsbAddImages_Click);
             // 
             // tsbDeleteImages
             // 
@@ -1067,6 +1071,7 @@
             this.tsbDeleteImages.Name = "tsbDeleteImages";
             this.tsbDeleteImages.Size = new System.Drawing.Size(52, 22);
             this.tsbDeleteImages.Text = "删除";
+            this.tsbDeleteImages.Click += new System.EventHandler(this.tsbDeleteImages_Click);
             // 
             // tsDetail
             // 
@@ -1095,6 +1100,11 @@
             this.tsbRestore.Name = "tsbRestore";
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
+            // 
+            // ofdImage
+            // 
+            this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
+            this.ofdImage.Title = "请选择图片";
             // 
             // VehicleDetailForm
             // 
@@ -1243,5 +1253,6 @@
         private System.Windows.Forms.ToolStripButton tsbDeleteOeImages;
         private System.Windows.Forms.ToolStripButton tsbAddImages;
         private System.Windows.Forms.ToolStripButton tsbDeleteImages;
+        private System.Windows.Forms.OpenFileDialog ofdImage;
     }
 }

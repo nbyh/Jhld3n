@@ -34,10 +34,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cmbTimeTerm2 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
-            this.cmbTechCondition = new System.Windows.Forms.ComboBox();
+            this.cmbManager = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbUseCondition = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -46,14 +46,14 @@
             this.cmbFactory = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbUseType = new System.Windows.Forms.ComboBox();
-            this.cmbSpot = new System.Windows.Forms.ComboBox();
+            this.cmbTechnician = new System.Windows.Forms.ComboBox();
+            this.cmbTechCondition = new System.Windows.Forms.ComboBox();
             this.btnRestInfo = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmbTimeTerm = new System.Windows.Forms.ComboBox();
+            this.cmbTimeTerm1 = new System.Windows.Forms.ComboBox();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.cmbSubDepart = new System.Windows.Forms.ComboBox();
@@ -74,7 +74,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnRestEvent = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbEventDtTerm2 = new System.Windows.Forms.ComboBox();
             this.dtpEventDt2 = new System.Windows.Forms.DateTimePicker();
@@ -84,6 +84,7 @@
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
             this.cmbEventName = new System.Windows.Forms.ComboBox();
             this.btnQueryEvent = new System.Windows.Forms.Button();
+            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
@@ -107,7 +108,6 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -138,10 +138,10 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.comboBox3);
+            this.tabPage1.Controls.Add(this.cmbTimeTerm2);
             this.tabPage1.Controls.Add(this.dateTimePicker2);
             this.tabPage1.Controls.Add(this.label15);
-            this.tabPage1.Controls.Add(this.cmbTechCondition);
+            this.tabPage1.Controls.Add(this.cmbManager);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.cmbUseCondition);
             this.tabPage1.Controls.Add(this.label13);
@@ -150,14 +150,14 @@
             this.tabPage1.Controls.Add(this.cmbFactory);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.cmbUseType);
-            this.tabPage1.Controls.Add(this.cmbSpot);
+            this.tabPage1.Controls.Add(this.cmbTechnician);
+            this.tabPage1.Controls.Add(this.cmbTechCondition);
             this.tabPage1.Controls.Add(this.btnRestInfo);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.cmbTimeTerm);
+            this.tabPage1.Controls.Add(this.cmbTimeTerm1);
             this.tabPage1.Controls.Add(this.dtpTime);
             this.tabPage1.Controls.Add(this.cmbModel);
             this.tabPage1.Controls.Add(this.cmbSubDepart);
@@ -171,21 +171,21 @@
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // comboBox3
+            // cmbTimeTerm2
             // 
-            this.comboBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.cmbTimeTerm2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbTimeTerm2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTimeTerm2.FormattingEnabled = true;
+            this.cmbTimeTerm2.Items.AddRange(new object[] {
             ">",
             "=",
             "<",
             "≥",
             "≤"});
-            this.comboBox3.Location = new System.Drawing.Point(488, 68);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(33, 22);
-            this.comboBox3.TabIndex = 30;
+            this.cmbTimeTerm2.Location = new System.Drawing.Point(488, 68);
+            this.cmbTimeTerm2.Name = "cmbTimeTerm2";
+            this.cmbTimeTerm2.Size = new System.Drawing.Size(33, 22);
+            this.cmbTimeTerm2.TabIndex = 30;
             // 
             // dateTimePicker2
             // 
@@ -203,15 +203,15 @@
             this.label15.TabIndex = 28;
             this.label15.Text = "技术状态";
             // 
-            // cmbTechCondition
+            // cmbManager
             // 
-            this.cmbTechCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbTechCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTechCondition.FormattingEnabled = true;
-            this.cmbTechCondition.Location = new System.Drawing.Point(549, 13);
-            this.cmbTechCondition.Name = "cmbTechCondition";
-            this.cmbTechCondition.Size = new System.Drawing.Size(87, 22);
-            this.cmbTechCondition.TabIndex = 27;
+            this.cmbManager.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbManager.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbManager.FormattingEnabled = true;
+            this.cmbManager.Location = new System.Drawing.Point(549, 13);
+            this.cmbManager.Name = "cmbManager";
+            this.cmbManager.Size = new System.Drawing.Size(87, 22);
+            this.cmbManager.TabIndex = 27;
             // 
             // label16
             // 
@@ -286,32 +286,32 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "负责人";
             // 
-            // cmbUseType
+            // cmbTechnician
             // 
-            this.cmbUseType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbUseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUseType.FormattingEnabled = true;
-            this.cmbUseType.Items.AddRange(new object[] {
+            this.cmbTechnician.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbTechnician.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTechnician.FormattingEnabled = true;
+            this.cmbTechnician.Items.AddRange(new object[] {
             ">",
             "=",
             "<",
             "≥",
             "≤"});
-            this.cmbUseType.Location = new System.Drawing.Point(549, 41);
-            this.cmbUseType.Name = "cmbUseType";
-            this.cmbUseType.Size = new System.Drawing.Size(87, 22);
-            this.cmbUseType.TabIndex = 21;
+            this.cmbTechnician.Location = new System.Drawing.Point(549, 41);
+            this.cmbTechnician.Name = "cmbTechnician";
+            this.cmbTechnician.Size = new System.Drawing.Size(87, 22);
+            this.cmbTechnician.TabIndex = 21;
             // 
-            // cmbSpot
+            // cmbTechCondition
             // 
-            this.cmbSpot.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbSpot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSpot.FormattingEnabled = true;
-            this.cmbSpot.Location = new System.Drawing.Point(410, 41);
-            this.cmbSpot.Name = "cmbSpot";
-            this.cmbSpot.Size = new System.Drawing.Size(74, 22);
-            this.cmbSpot.TabIndex = 14;
-            this.cmbSpot.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbTechCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbTechCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTechCondition.FormattingEnabled = true;
+            this.cmbTechCondition.Location = new System.Drawing.Point(410, 41);
+            this.cmbTechCondition.Name = "cmbTechCondition";
+            this.cmbTechCondition.Size = new System.Drawing.Size(74, 22);
+            this.cmbTechCondition.TabIndex = 14;
+            this.cmbTechCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnRestInfo
             // 
@@ -360,22 +360,22 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "设备名称";
             // 
-            // cmbTimeTerm
+            // cmbTimeTerm1
             // 
-            this.cmbTimeTerm.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbTimeTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTimeTerm.FormattingEnabled = true;
-            this.cmbTimeTerm.Items.AddRange(new object[] {
+            this.cmbTimeTerm1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbTimeTerm1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTimeTerm1.FormattingEnabled = true;
+            this.cmbTimeTerm1.Items.AddRange(new object[] {
             ">",
             "=",
             "<",
             "≥",
             "≤"});
-            this.cmbTimeTerm.Location = new System.Drawing.Point(333, 68);
-            this.cmbTimeTerm.Name = "cmbTimeTerm";
-            this.cmbTimeTerm.Size = new System.Drawing.Size(33, 22);
-            this.cmbTimeTerm.TabIndex = 11;
-            this.cmbTimeTerm.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmbTimeTerm1.Location = new System.Drawing.Point(333, 68);
+            this.cmbTimeTerm1.Name = "cmbTimeTerm1";
+            this.cmbTimeTerm1.Size = new System.Drawing.Size(33, 22);
+            this.cmbTimeTerm1.TabIndex = 11;
+            this.cmbTimeTerm1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpTime
             // 
@@ -444,7 +444,7 @@
             this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.comboBox2);
-            this.tabPage2.Controls.Add(this.button6);
+            this.tabPage2.Controls.Add(this.btnRestEvent);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.cmbEventDtTerm2);
             this.tabPage2.Controls.Add(this.dtpEventDt2);
@@ -585,16 +585,16 @@
             this.comboBox2.Size = new System.Drawing.Size(103, 20);
             this.comboBox2.TabIndex = 38;
             // 
-            // button6
+            // btnRestEvent
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(704, 56);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(44, 30);
-            this.button6.TabIndex = 37;
-            this.button6.Text = "重置";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btnRestEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestEvent.Location = new System.Drawing.Point(704, 56);
+            this.btnRestEvent.Name = "btnRestEvent";
+            this.btnRestEvent.Size = new System.Drawing.Size(44, 30);
+            this.btnRestEvent.TabIndex = 37;
+            this.btnRestEvent.Text = "重置";
+            this.btnRestEvent.UseVisualStyleBackColor = false;
+            this.btnRestEvent.Click += new System.EventHandler(this.btnRestEvent_Click);
             // 
             // label9
             // 
@@ -685,6 +685,19 @@
             this.btnQueryEvent.Text = "筛选";
             this.btnQueryEvent.UseVisualStyleBackColor = false;
             this.btnQueryEvent.Click += new System.EventHandler(this.btnQueryEvent_Click);
+            // 
+            // ccmbDepartment
+            // 
+            this.ccmbDepartment.CheckOnClick = true;
+            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ccmbDepartment.DropDownHeight = 1;
+            this.ccmbDepartment.FormattingEnabled = true;
+            this.ccmbDepartment.IntegralHeight = false;
+            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
+            this.ccmbDepartment.Name = "ccmbDepartment";
+            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
+            this.ccmbDepartment.TabIndex = 35;
+            this.ccmbDepartment.ValueSeparator = ", ";
             // 
             // panel2
             // 
@@ -952,19 +965,6 @@
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
             // 
-            // ccmbDepartment
-            // 
-            this.ccmbDepartment.CheckOnClick = true;
-            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ccmbDepartment.DropDownHeight = 1;
-            this.ccmbDepartment.FormattingEnabled = true;
-            this.ccmbDepartment.IntegralHeight = false;
-            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
-            this.ccmbDepartment.Name = "ccmbDepartment";
-            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
-            this.ccmbDepartment.TabIndex = 35;
-            this.ccmbDepartment.ValueSeparator = ", ";
-            // 
             // EquipMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1014,7 +1014,7 @@
         private System.Windows.Forms.DateTimePicker dtpEventDt1;
         private CheckComboBox.CheckedComboBox ccmbDepartment;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnRestEvent;
         private System.Windows.Forms.Button btnQueryEvent;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
@@ -1043,10 +1043,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewLinkColumn MoreInfo;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cmbTimeTerm2;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox cmbTechCondition;
+        private System.Windows.Forms.ComboBox cmbManager;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox cmbUseCondition;
         private System.Windows.Forms.Label label13;
@@ -1055,14 +1055,14 @@
         private System.Windows.Forms.ComboBox cmbFactory;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbUseType;
-        private System.Windows.Forms.ComboBox cmbSpot;
+        private System.Windows.Forms.ComboBox cmbTechnician;
+        private System.Windows.Forms.ComboBox cmbTechCondition;
         private System.Windows.Forms.Button btnRestInfo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbTimeTerm;
+        private System.Windows.Forms.ComboBox cmbTimeTerm1;
         private System.Windows.Forms.DateTimePicker dtpTime;
         private System.Windows.Forms.ComboBox cmbModel;
         private System.Windows.Forms.ComboBox cmbSubDepart;

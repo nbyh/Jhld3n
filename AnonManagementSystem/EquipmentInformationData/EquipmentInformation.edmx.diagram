@@ -7,15 +7,15 @@
       <Diagram DiagramId="3af4b8c537cd4677929c9cc34fa32973" Name="Diagram1">
         <EntityTypeShape EntityType="EquipmentManagementModel.CombatEquipment" Width="1.5" PointX="4.875" PointY="3.375" />
         <EntityTypeShape EntityType="EquipmentManagementModel.CombatVehicles" Width="1.5" PointX="7" PointY="3.375" />
-        <EntityTypeShape EntityType="EquipmentManagementModel.EventData" Width="1.5" PointX="0.75" PointY="3.375" />
-        <EntityTypeShape EntityType="EquipmentManagementModel.Events" Width="1.5" PointX="2.75" PointY="3.375" />
         <EntityTypeShape EntityType="EquipmentManagementModel.OilEngine" Width="1.5" PointX="9.125" PointY="3.375" />
         <AssociationConnector Association="EquipmentManagementModel.FK_CombatVehicles_0_0" />
-        <AssociationConnector Association="EquipmentManagementModel.FK_Events_1_0" />
         <AssociationConnector Association="EquipmentManagementModel.FK_OilEngine_0_0" />
-        <AssociationConnector Association="EquipmentManagementModel.FK_Events_0_0" />
         <EntityTypeShape EntityType="EquipmentManagementModel.Material" Width="1.5" PointX="4.875" PointY="8.875" />
         <AssociationConnector Association="EquipmentManagementModel.FK_Material_0_0" />
+        <EntityTypeShape EntityType="EquipmentManagementModel.EventData" Width="1.5" PointX="1" PointY="3.375" />
+        <EntityTypeShape EntityType="EquipmentManagementModel.Events" Width="1.5" PointX="2.875" PointY="3.375" />
+        <AssociationConnector Association="EquipmentManagementModel.FK_Events_0_0" />
+        <AssociationConnector Association="EquipmentManagementModel.FK_EventData_0_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

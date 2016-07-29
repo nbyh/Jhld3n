@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -16,9 +17,11 @@ namespace AnonManagementSystem
         private bool _add = false;
         private bool _enableedit = false;
         private string _id;
+        private int _pageSize = 20, _curPage = 1, _lastPage = 1;
+        private DbRawSqlQuery<CombatVehicles> _vehicleses;
         private List<CombatVehicles> comVehList = new List<CombatVehicles>();
-        private List<Events> eventsList = new List<Events>();
         private List<EquipmentImage> equipImageList = new List<EquipmentImage>();
+        private List<Events> eventsList = new List<Events>();
         private List<Material> materList = new List<Material>();
 
         public EquipmentDetailForm()
@@ -45,129 +48,22 @@ namespace AnonManagementSystem
         {
         }
 
+        private void DataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
+        {
+            int all = iquery.Count();
+            _lastPage = (int)Math.Ceiling((double)all / _pageSize);
+            var vehcilepage = QueryByPage(pagesize, curpage, iquery);
+            dGvCombatVehicles.DataSource = vehcilepage.ToList();
+            for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
+            {
+                dGvCombatVehicles[0, i].Value = i + 1;
+                dGvCombatVehicles.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+            }
+        }
+
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
             tsbRestore.Visible = !_add;
-        }
-
-        private void tsbSave_Click(object sender, EventArgs e)
-        {
-            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
-            if (_add)
-            {
-                CombatEquipment ce = new CombatEquipment()
-                {
-                    Name = cmbName.Text,
-                    SerialNo = tbSerialNo.Text,
-                    MajorCategory = cmbMajorCategory.Text,
-                    Model = cmbModel.Text,
-                    SubDepartment = cmbSubDepart.Text,
-                    TechCondition = cmbTechCondition.Text,
-                    UseCondition = cmbUseCondition.Text,
-                    Factory = cmbFactory.Text,
-                    FactoryTime = dtpTime.Value.Date,
-
-                    MajorComp = tbMajorComp.Text,
-                    MainUsage = tbMainUsage.Text,
-                    PerformIndex = tbPerformIndex.Text,
-                    UseMethod = tbUseMethod.Text,
-                    Manager = cmbCharger.Text,
-                    Technician = cmbTechnician.Text,
-                    TechRemould = tbTechRemould.Text,
-                    SetupVideo = tbSetupVideo.Text
-                };
-                eqEntities.CombatEquipment.Add(ce);
-            }
-            else
-            {
-                var equipfirst = (from eq in eqEntities.CombatEquipment
-                                  where eq.SerialNo == _id
-                                  select eq).First();
-
-                equipfirst.InventorySpot = tbOemNo.Text;
-                equipfirst.Technician = cmbTechnician.Text;
-                equipfirst.SubDepartment = cmbSubDepart.Text;
-                equipfirst.Manager = cmbCharger.Text;
-                equipfirst.TechCondition = cmbTechCondition.Text;
-                equipfirst.UseCondition = cmbUseCondition.Text;
-                equipfirst.MajorCategory = cmbMajorCategory.Text;
-                equipfirst.Factory = cmbFactory.Text;
-                equipfirst.FactoryTime = dtpTime.Value.Date;
-                equipfirst.Model = cmbModel.Text;
-                equipfirst.Name = cmbName.Text;
-                equipfirst.SubDepartment = cmbSubDepart.Text;
-                equipfirst.Model = cmbModel.Text;
-                equipfirst.SerialNo = tbSerialNo.Text;
-                equipfirst.TechRemould = tbTechRemould.Text;
-                ;
-                equipfirst.MajorComp = tbMajorComp.Text;
-                equipfirst.MainUsage = tbMainUsage.Text;
-                equipfirst.UseMethod = tbUseMethod.Text;
-                equipfirst.PerformIndex = tbPerformIndex.Text;
-            }
-            eqEntities.SaveChanges();
-        }
-
-        private void tsbAddVehicle_Click(object sender, EventArgs e)
-        {
-            VehicleDetailForm vdForm = new VehicleDetailForm()
-            {
-                Eqserialno = tbSerialNo.Text
-            };
-            vdForm.ShowDialog();
-        }
-
-        private void tsbAddTrain_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 随机资料tsmAdd_Click(object sender, EventArgs e)
-        {
-            AddMaterialForm mmForm = new AddMaterialForm();
-            mmForm.ShowDialog();
-        }
-
-        private void tsbAddEvents_Click(object sender, EventArgs e)
-        {
-            EventsForm eFrom = new EventsForm();
-            eFrom.ShowDialog();
-        }
-
-        private void dgvVideo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void toolStrip5_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void tsbAddMaterial_Click(object sender, EventArgs e)
-        {
-            AddMaterialForm addMaterialForm = new AddMaterialForm();
-            addMaterialForm.ShowDialog();
-        }
-
-        private void tsbDeleteMaterial_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbDeleteEvents_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbAddImages_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbDeleteImage_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void EquipmentDetailForm_Shown(object sender, EventArgs e)
@@ -232,7 +128,6 @@ namespace AnonManagementSystem
                 tbUseMethod.Text = equipfirst.UseMethod;
                 tbPerformIndex.Text = equipfirst.PerformIndex;
 
-
             }
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
 
@@ -244,23 +139,135 @@ namespace AnonManagementSystem
             DataRefresh(_pageSize, _curPage, _vehicleses);
         }
 
-        private int _pageSize = 20, _curPage = 1, _lastPage = 1;
-        private DbRawSqlQuery<CombatVehicles> _vehicleses;
-        private void DataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
-        {
-            int all = iquery.Count();
-            _lastPage = (int)Math.Ceiling((double)all / _pageSize);
-            var vehcilepage = QueryByPage(pagesize, curpage, iquery);
-            dGvCombatVehicles.DataSource = vehcilepage.ToList();
-            for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
-            {
-                dGvCombatVehicles[0, i].Value = i + 1;
-                dGvCombatVehicles.Rows[i].Cells["MoreInfo"].Value = "详细信息";
-            }
-        }
         private IList<CombatVehicles> QueryByPage(int pageSize, int curPage, DbRawSqlQuery<CombatVehicles> dbRaw)
         {
             return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+        }
+
+        private void AddVehicleSucess(CombatVehicles combatVehicles)
+        {
+            comVehList.Add(combatVehicles);
+            //界面增加
+        }
+
+        private void tsbAddEvents_Click(object sender, EventArgs e)
+        {
+            AddEventsForm eFrom = new AddEventsForm()
+            {
+                Id = tbSerialNo.Text
+            };
+            eFrom.ShowDialog();
+        }
+
+        private void tsbAddImages_Click(object sender, EventArgs e)
+        {
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                string imgpath = ofdImage.FileName;
+                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read); 
+                BinaryReader br = new BinaryReader(fs); 
+                byte[] imgBytes = br.ReadBytes((int)fs.Length); 
+                fs.Close();
+                EquipmentImage eqImg = new EquipmentImage
+                {
+                    Images = imgBytes,
+                    SerialNo = tbSerialNo.Text
+                };
+                equipImageList.Add(eqImg);
+                //界面增加
+            }
+        }
+
+        private void tsbAddMaterial_Click(object sender, EventArgs e)
+        {
+            AddMaterialForm addMaterialForm = new AddMaterialForm()
+            {
+                Id = tbSerialNo.Text
+            };
+            addMaterialForm.ShowDialog();
+        }
+
+        private void tsbAddVehicle_Click(object sender, EventArgs e)
+        {
+            VehicleDetailForm vdForm = new VehicleDetailForm()
+            {
+                Id = tbSerialNo.Text
+            };
+            vdForm.SaveVehicleSucess += AddVehicleSucess;
+            vdForm.ShowDialog();
+        }
+
+        private void tsbDeleteEvents_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteMaterial_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
+            if (_add)
+            {
+                CombatEquipment ce = new CombatEquipment()
+                {
+                    Name = cmbName.Text,
+                    SerialNo = tbSerialNo.Text,
+                    MajorCategory = cmbMajorCategory.Text,
+                    Model = cmbModel.Text,
+                    SubDepartment = cmbSubDepart.Text,
+                    TechCondition = cmbTechCondition.Text,
+                    UseCondition = cmbUseCondition.Text,
+                    Factory = cmbFactory.Text,
+                    FactoryTime = dtpTime.Value.Date,
+
+                    MajorComp = tbMajorComp.Text,
+                    MainUsage = tbMainUsage.Text,
+                    PerformIndex = tbPerformIndex.Text,
+                    UseMethod = tbUseMethod.Text,
+                    Manager = cmbCharger.Text,
+                    Technician = cmbTechnician.Text,
+                    TechRemould = tbTechRemould.Text,
+                    SetupVideo = tbSetupVideo.Text
+                };
+                eqEntities.CombatEquipment.Add(ce);
+            }
+            else
+            {
+                var equipfirst = (from eq in eqEntities.CombatEquipment
+                                  where eq.SerialNo == _id
+                                  select eq).First();
+
+                equipfirst.InventorySpot = tbOemNo.Text;
+                equipfirst.Technician = cmbTechnician.Text;
+                equipfirst.SubDepartment = cmbSubDepart.Text;
+                equipfirst.Manager = cmbCharger.Text;
+                equipfirst.TechCondition = cmbTechCondition.Text;
+                equipfirst.UseCondition = cmbUseCondition.Text;
+                equipfirst.MajorCategory = cmbMajorCategory.Text;
+                equipfirst.Factory = cmbFactory.Text;
+                equipfirst.FactoryTime = dtpTime.Value.Date;
+                equipfirst.Model = cmbModel.Text;
+                equipfirst.Name = cmbName.Text;
+                equipfirst.SubDepartment = cmbSubDepart.Text;
+                equipfirst.Model = cmbModel.Text;
+                equipfirst.SerialNo = tbSerialNo.Text;
+                equipfirst.TechRemould = tbTechRemould.Text;
+                ;
+                equipfirst.MajorComp = tbMajorComp.Text;
+                equipfirst.MainUsage = tbMainUsage.Text;
+                equipfirst.UseMethod = tbUseMethod.Text;
+                equipfirst.PerformIndex = tbPerformIndex.Text;
+            }
+            eqEntities.SaveChanges();
         }
     }
 }

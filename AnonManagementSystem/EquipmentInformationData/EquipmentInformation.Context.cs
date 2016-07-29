@@ -27,9 +27,9 @@ namespace EquipmentInformationData
     
         public virtual DbSet<CombatEquipment> CombatEquipment { get; set; }
         public virtual DbSet<CombatVehicles> CombatVehicles { get; set; }
-        public virtual DbSet<EventData> EventData { get; set; }
-        public virtual DbSet<Events> Events { get; set; }
         public virtual DbSet<OilEngine> OilEngine { get; set; }
         public virtual DbSet<Material> Material { get; set; }
+        public virtual DbSet<EventData> EventData { get; set; }
+        public virtual DbSet<Events> Events { get; set; }
     }
 }

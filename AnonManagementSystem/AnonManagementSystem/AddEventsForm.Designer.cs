@@ -1,6 +1,6 @@
 ﻿namespace AnonManagementSystem
 {
-    partial class EventsForm
+    partial class AddEventsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -34,53 +34,48 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox23 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbDesci = new System.Windows.Forms.TextBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbAccording = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.gbBaseInfo = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpPulishDt = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbCode = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.cmbSpecificType = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cmbEventType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.cmbAddress = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cmbPulisher = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.cmb = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.cmbPulishUnit = new System.Windows.Forms.ComboBox();
             this.dtpEventDt2 = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
             this.cmbEventName = new System.Windows.Forms.ComboBox();
-            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.tbSerialNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbRemark = new System.Windows.Forms.TextBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.tbUseMethod = new System.Windows.Forms.TextBox();
+            this.tbProblems = new System.Windows.Forms.TextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.tbPerformIndex = new System.Windows.Forms.TextBox();
+            this.tbHandleStep = new System.Windows.Forms.TextBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.tbMainUsage = new System.Windows.Forms.TextBox();
+            this.tbProcessDescri = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddEventsData = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteEventsData = new System.Windows.Forms.ToolStripButton();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.dgvMatrial = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -94,6 +89,10 @@
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -142,7 +141,7 @@
             // 
             // groupBox23
             // 
-            this.groupBox23.Controls.Add(this.textBox2);
+            this.groupBox23.Controls.Add(this.tbDesci);
             this.groupBox23.Location = new System.Drawing.Point(8, 205);
             this.groupBox23.Name = "groupBox23";
             this.groupBox23.Size = new System.Drawing.Size(760, 299);
@@ -150,39 +149,45 @@
             this.groupBox23.TabStop = false;
             this.groupBox23.Text = "参加单位及人员描述";
             // 
-            // textBox2
+            // tbDesci
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 17);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(754, 279);
-            this.textBox2.TabIndex = 0;
+            this.tbDesci.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDesci.Location = new System.Drawing.Point(3, 17);
+            this.tbDesci.Multiline = true;
+            this.tbDesci.Name = "tbDesci";
+            this.tbDesci.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbDesci.Size = new System.Drawing.Size(754, 279);
+            this.tbDesci.TabIndex = 0;
             // 
             // groupBox22
             // 
             this.groupBox22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox22.Controls.Add(this.textBox1);
+            this.groupBox22.Controls.Add(this.dtpPulishDt);
+            this.groupBox22.Controls.Add(this.tbAccording);
+            this.groupBox22.Controls.Add(this.cmbPulishUnit);
+            this.groupBox22.Controls.Add(this.label17);
             this.groupBox22.Controls.Add(this.label31);
-            this.groupBox22.Location = new System.Drawing.Point(8, 140);
+            this.groupBox22.Controls.Add(this.label5);
+            this.groupBox22.Controls.Add(this.label19);
+            this.groupBox22.Controls.Add(this.cmbPulisher);
+            this.groupBox22.Location = new System.Drawing.Point(8, 111);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(760, 59);
+            this.groupBox22.Size = new System.Drawing.Size(760, 88);
             this.groupBox22.TabIndex = 1;
             this.groupBox22.TabStop = false;
             // 
-            // textBox1
+            // tbAccording
             // 
-            this.textBox1.Location = new System.Drawing.Point(162, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(471, 21);
-            this.textBox1.TabIndex = 57;
+            this.tbAccording.Location = new System.Drawing.Point(174, 50);
+            this.tbAccording.Name = "tbAccording";
+            this.tbAccording.Size = new System.Drawing.Size(436, 21);
+            this.tbAccording.TabIndex = 57;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(127, 24);
+            this.label31.Location = new System.Drawing.Point(139, 54);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(29, 12);
             this.label31.TabIndex = 54;
@@ -192,64 +197,56 @@
             // 
             this.gbBaseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbBaseInfo.Controls.Add(this.dateTimePicker1);
+            this.gbBaseInfo.Controls.Add(this.label2);
             this.gbBaseInfo.Controls.Add(this.label3);
-            this.gbBaseInfo.Controls.Add(this.textBox3);
+            this.gbBaseInfo.Controls.Add(this.cmbEventName);
+            this.gbBaseInfo.Controls.Add(this.cmbAddress);
+            this.gbBaseInfo.Controls.Add(this.tbCode);
+            this.gbBaseInfo.Controls.Add(this.label14);
             this.gbBaseInfo.Controls.Add(this.label23);
             this.gbBaseInfo.Controls.Add(this.label1);
-            this.gbBaseInfo.Controls.Add(this.comboBox7);
+            this.gbBaseInfo.Controls.Add(this.cmbSpecificType);
             this.gbBaseInfo.Controls.Add(this.label21);
-            this.gbBaseInfo.Controls.Add(this.comboBox6);
-            this.gbBaseInfo.Controls.Add(this.label2);
-            this.gbBaseInfo.Controls.Add(this.label19);
-            this.gbBaseInfo.Controls.Add(this.cmbAddress);
-            this.gbBaseInfo.Controls.Add(this.comboBox4);
-            this.gbBaseInfo.Controls.Add(this.label5);
-            this.gbBaseInfo.Controls.Add(this.label17);
-            this.gbBaseInfo.Controls.Add(this.cmb);
-            this.gbBaseInfo.Controls.Add(this.label6);
+            this.gbBaseInfo.Controls.Add(this.cmbEventType);
             this.gbBaseInfo.Controls.Add(this.dtpEventDt2);
-            this.gbBaseInfo.Controls.Add(this.label14);
             this.gbBaseInfo.Controls.Add(this.label12);
             this.gbBaseInfo.Controls.Add(this.dtpEventDt1);
-            this.gbBaseInfo.Controls.Add(this.cmbEventName);
-            this.gbBaseInfo.Controls.Add(this.ccmbDepartment);
             this.gbBaseInfo.Controls.Add(this.tbSerialNo);
             this.gbBaseInfo.Controls.Add(this.label9);
             this.gbBaseInfo.Location = new System.Drawing.Point(8, 3);
             this.gbBaseInfo.Name = "gbBaseInfo";
-            this.gbBaseInfo.Size = new System.Drawing.Size(760, 131);
+            this.gbBaseInfo.Size = new System.Drawing.Size(760, 102);
             this.gbBaseInfo.TabIndex = 0;
             this.gbBaseInfo.TabStop = false;
             // 
-            // dateTimePicker1
+            // dtpPulishDt
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(337, 69);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(110, 21);
-            this.dateTimePicker1.TabIndex = 80;
+            this.dtpPulishDt.Location = new System.Drawing.Point(349, 24);
+            this.dtpPulishDt.Name = "dtpPulishDt";
+            this.dtpPulishDt.Size = new System.Drawing.Size(110, 21);
+            this.dtpPulishDt.TabIndex = 80;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(278, 45);
+            this.label3.Location = new System.Drawing.Point(465, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 79;
             this.label3.Text = "——";
             // 
-            // textBox3
+            // tbCode
             // 
-            this.textBox3.Location = new System.Drawing.Point(500, 95);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(133, 21);
-            this.textBox3.TabIndex = 78;
-            this.textBox3.Visible = false;
+            this.tbCode.Location = new System.Drawing.Point(500, 69);
+            this.tbCode.Name = "tbCode";
+            this.tbCode.Size = new System.Drawing.Size(110, 21);
+            this.tbCode.TabIndex = 78;
+            this.tbCode.Visible = false;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(465, 98);
+            this.label23.Location = new System.Drawing.Point(465, 73);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(29, 12);
             this.label23.TabIndex = 77;
@@ -259,46 +256,46 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(278, 99);
+            this.label1.Location = new System.Drawing.Point(290, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 76;
             this.label1.Text = "具体类型";
             // 
-            // comboBox7
+            // cmbSpecificType
             // 
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(337, 95);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(110, 20);
-            this.comboBox7.TabIndex = 75;
+            this.cmbSpecificType.FormattingEnabled = true;
+            this.cmbSpecificType.Location = new System.Drawing.Point(349, 69);
+            this.cmbSpecificType.Name = "cmbSpecificType";
+            this.cmbSpecificType.Size = new System.Drawing.Size(110, 20);
+            this.cmbSpecificType.TabIndex = 75;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(103, 99);
+            this.label21.Location = new System.Drawing.Point(115, 73);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 74;
             this.label21.Text = "活动类型";
             // 
-            // comboBox6
+            // cmbEventType
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Items.AddRange(new object[] {
+            this.cmbEventType.FormattingEnabled = true;
+            this.cmbEventType.Items.AddRange(new object[] {
             "调整类",
             "动用类",
             "使用维护",
             "测试检修"});
-            this.comboBox6.Location = new System.Drawing.Point(162, 95);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(110, 20);
-            this.comboBox6.TabIndex = 73;
+            this.cmbEventType.Location = new System.Drawing.Point(174, 69);
+            this.cmbEventType.Name = "cmbEventType";
+            this.cmbEventType.Size = new System.Drawing.Size(110, 20);
+            this.cmbEventType.TabIndex = 73;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(451, 19);
+            this.label2.Location = new System.Drawing.Point(314, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 72;
@@ -307,7 +304,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(453, 73);
+            this.label19.Location = new System.Drawing.Point(465, 28);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 12);
             this.label19.TabIndex = 71;
@@ -316,23 +313,23 @@
             // cmbAddress
             // 
             this.cmbAddress.FormattingEnabled = true;
-            this.cmbAddress.Location = new System.Drawing.Point(488, 15);
+            this.cmbAddress.Location = new System.Drawing.Point(349, 43);
             this.cmbAddress.Name = "cmbAddress";
-            this.cmbAddress.Size = new System.Drawing.Size(145, 20);
+            this.cmbAddress.Size = new System.Drawing.Size(261, 20);
             this.cmbAddress.TabIndex = 70;
             // 
-            // comboBox4
+            // cmbPulisher
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(500, 69);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(133, 20);
-            this.comboBox4.TabIndex = 69;
+            this.cmbPulisher.FormattingEnabled = true;
+            this.cmbPulisher.Location = new System.Drawing.Point(512, 24);
+            this.cmbPulisher.Name = "cmbPulisher";
+            this.cmbPulisher.Size = new System.Drawing.Size(98, 20);
+            this.cmbPulisher.TabIndex = 69;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(278, 73);
+            this.label5.Location = new System.Drawing.Point(290, 28);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 68;
@@ -341,32 +338,23 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(103, 73);
+            this.label17.Location = new System.Drawing.Point(115, 28);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(53, 12);
             this.label17.TabIndex = 66;
             this.label17.Text = "发文单位";
             // 
-            // cmb
+            // cmbPulishUnit
             // 
-            this.cmb.FormattingEnabled = true;
-            this.cmb.Location = new System.Drawing.Point(162, 69);
-            this.cmb.Name = "cmb";
-            this.cmb.Size = new System.Drawing.Size(110, 20);
-            this.cmb.TabIndex = 65;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(429, 45);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 64;
-            this.label6.Text = "参加单位";
+            this.cmbPulishUnit.FormattingEnabled = true;
+            this.cmbPulishUnit.Location = new System.Drawing.Point(174, 24);
+            this.cmbPulishUnit.Name = "cmbPulishUnit";
+            this.cmbPulishUnit.Size = new System.Drawing.Size(110, 20);
+            this.cmbPulishUnit.TabIndex = 65;
             // 
             // dtpEventDt2
             // 
-            this.dtpEventDt2.Location = new System.Drawing.Point(313, 41);
+            this.dtpEventDt2.Location = new System.Drawing.Point(500, 16);
             this.dtpEventDt2.Name = "dtpEventDt2";
             this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt2.TabIndex = 61;
@@ -374,7 +362,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(278, 19);
+            this.label14.Location = new System.Drawing.Point(139, 44);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 60;
@@ -383,7 +371,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(127, 45);
+            this.label12.Location = new System.Drawing.Point(314, 20);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 59;
@@ -391,7 +379,7 @@
             // 
             // dtpEventDt1
             // 
-            this.dtpEventDt1.Location = new System.Drawing.Point(162, 41);
+            this.dtpEventDt1.Location = new System.Drawing.Point(349, 16);
             this.dtpEventDt1.Name = "dtpEventDt1";
             this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt1.TabIndex = 57;
@@ -399,27 +387,14 @@
             // cmbEventName
             // 
             this.cmbEventName.FormattingEnabled = true;
-            this.cmbEventName.Location = new System.Drawing.Point(313, 15);
+            this.cmbEventName.Location = new System.Drawing.Point(174, 43);
             this.cmbEventName.Name = "cmbEventName";
-            this.cmbEventName.Size = new System.Drawing.Size(131, 20);
+            this.cmbEventName.Size = new System.Drawing.Size(110, 20);
             this.cmbEventName.TabIndex = 56;
-            // 
-            // ccmbDepartment
-            // 
-            this.ccmbDepartment.CheckOnClick = true;
-            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ccmbDepartment.DropDownHeight = 1;
-            this.ccmbDepartment.FormattingEnabled = true;
-            this.ccmbDepartment.IntegralHeight = false;
-            this.ccmbDepartment.Location = new System.Drawing.Point(488, 40);
-            this.ccmbDepartment.Name = "ccmbDepartment";
-            this.ccmbDepartment.Size = new System.Drawing.Size(145, 22);
-            this.ccmbDepartment.TabIndex = 63;
-            this.ccmbDepartment.ValueSeparator = ", ";
             // 
             // tbSerialNo
             // 
-            this.tbSerialNo.Location = new System.Drawing.Point(162, 15);
+            this.tbSerialNo.Location = new System.Drawing.Point(174, 16);
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(110, 21);
             this.tbSerialNo.TabIndex = 55;
@@ -427,7 +402,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(127, 19);
+            this.label9.Location = new System.Drawing.Point(139, 20);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 54;
@@ -448,7 +423,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.tbRemark);
             this.groupBox1.Location = new System.Drawing.Point(8, 381);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(760, 121);
@@ -456,19 +431,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "备注";
             // 
-            // textBox4
+            // tbRemark
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(3, 17);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox4.Size = new System.Drawing.Size(754, 101);
-            this.textBox4.TabIndex = 0;
+            this.tbRemark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbRemark.Location = new System.Drawing.Point(3, 17);
+            this.tbRemark.Multiline = true;
+            this.tbRemark.Name = "tbRemark";
+            this.tbRemark.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbRemark.Size = new System.Drawing.Size(754, 101);
+            this.tbRemark.TabIndex = 0;
             // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.tbUseMethod);
+            this.groupBox11.Controls.Add(this.tbProblems);
             this.groupBox11.Location = new System.Drawing.Point(8, 255);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(760, 120);
@@ -476,19 +451,19 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "遗留问题";
             // 
-            // tbUseMethod
+            // tbProblems
             // 
-            this.tbUseMethod.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbUseMethod.Location = new System.Drawing.Point(3, 17);
-            this.tbUseMethod.Multiline = true;
-            this.tbUseMethod.Name = "tbUseMethod";
-            this.tbUseMethod.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbUseMethod.Size = new System.Drawing.Size(754, 100);
-            this.tbUseMethod.TabIndex = 0;
+            this.tbProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbProblems.Location = new System.Drawing.Point(3, 17);
+            this.tbProblems.Multiline = true;
+            this.tbProblems.Name = "tbProblems";
+            this.tbProblems.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbProblems.Size = new System.Drawing.Size(754, 100);
+            this.tbProblems.TabIndex = 0;
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.tbPerformIndex);
+            this.groupBox10.Controls.Add(this.tbHandleStep);
             this.groupBox10.Location = new System.Drawing.Point(8, 129);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(760, 120);
@@ -496,19 +471,19 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "处理措施";
             // 
-            // tbPerformIndex
+            // tbHandleStep
             // 
-            this.tbPerformIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbPerformIndex.Location = new System.Drawing.Point(3, 17);
-            this.tbPerformIndex.Multiline = true;
-            this.tbPerformIndex.Name = "tbPerformIndex";
-            this.tbPerformIndex.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbPerformIndex.Size = new System.Drawing.Size(754, 100);
-            this.tbPerformIndex.TabIndex = 0;
+            this.tbHandleStep.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbHandleStep.Location = new System.Drawing.Point(3, 17);
+            this.tbHandleStep.Multiline = true;
+            this.tbHandleStep.Name = "tbHandleStep";
+            this.tbHandleStep.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbHandleStep.Size = new System.Drawing.Size(754, 100);
+            this.tbHandleStep.TabIndex = 0;
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.tbMainUsage);
+            this.groupBox9.Controls.Add(this.tbProcessDescri);
             this.groupBox9.Location = new System.Drawing.Point(8, 3);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(760, 120);
@@ -516,15 +491,15 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "过程描述";
             // 
-            // tbMainUsage
+            // tbProcessDescri
             // 
-            this.tbMainUsage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMainUsage.Location = new System.Drawing.Point(3, 17);
-            this.tbMainUsage.Multiline = true;
-            this.tbMainUsage.Name = "tbMainUsage";
-            this.tbMainUsage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbMainUsage.Size = new System.Drawing.Size(754, 100);
-            this.tbMainUsage.TabIndex = 0;
+            this.tbProcessDescri.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbProcessDescri.Location = new System.Drawing.Point(3, 17);
+            this.tbProcessDescri.Multiline = true;
+            this.tbProcessDescri.Name = "tbProcessDescri";
+            this.tbProcessDescri.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbProcessDescri.Size = new System.Drawing.Size(754, 100);
+            this.tbProcessDescri.TabIndex = 0;
             // 
             // tabPage5
             // 
@@ -540,29 +515,29 @@
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton2,
-            this.toolStripButton4});
+            this.tsbAddEventsData,
+            this.tsbDeleteEventsData});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(776, 25);
             this.toolStrip2.TabIndex = 5;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButton2
+            // tsbAddEventsData
             // 
-            this.toolStripButton2.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton2.Text = "添加";
+            this.tsbAddEventsData.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddEventsData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddEventsData.Name = "tsbAddEventsData";
+            this.tsbAddEventsData.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddEventsData.Text = "添加";
             // 
-            // toolStripButton4
+            // tsbDeleteEventsData
             // 
-            this.toolStripButton4.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton4.Text = "删除";
+            this.tsbDeleteEventsData.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteEventsData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteEventsData.Name = "tsbDeleteEventsData";
+            this.tsbDeleteEventsData.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteEventsData.Text = "删除";
             // 
             // groupBox20
             // 
@@ -594,6 +569,7 @@
             this.dgvMatrial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
+            this.Column1,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewLinkColumn1});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -613,28 +589,6 @@
             this.dgvMatrial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMatrial.Size = new System.Drawing.Size(754, 454);
             this.dgvMatrial.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn6.HeaderText = "名称";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewLinkColumn1
-            // 
-            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
-            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
-            this.dataGridViewLinkColumn1.ReadOnly = true;
-            this.dataGridViewLinkColumn1.Text = "";
             // 
             // tabPage2
             // 
@@ -742,6 +696,7 @@
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(52, 22);
             this.tsbSave.Text = "保存";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tsbRestore
             // 
@@ -751,14 +706,41 @@
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
             // 
-            // EventsForm
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "资料编号";
+            this.Column1.Name = "Column1";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn6.HeaderText = "资料名称";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewLinkColumn1
+            // 
+            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
+            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
+            this.dataGridViewLinkColumn1.ReadOnly = true;
+            this.dataGridViewLinkColumn1.Text = "";
+            // 
+            // AddEventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tsDetail);
-            this.Name = "EventsForm";
+            this.Name = "AddEventsForm";
             this.Text = "活动事件";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -804,11 +786,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.TextBox tbUseMethod;
+        private System.Windows.Forms.TextBox tbProblems;
         private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.TextBox tbPerformIndex;
+        private System.Windows.Forms.TextBox tbHandleStep;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.TextBox tbMainUsage;
+        private System.Windows.Forms.TextBox tbProcessDescri;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.GroupBox groupBox20;
@@ -817,39 +799,34 @@
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton tsbRestore;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbCode;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox cmbSpecificType;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox cmbEventType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox cmbAddress;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cmbPulisher;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cmb;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbPulishUnit;
         private System.Windows.Forms.DateTimePicker dtpEventDt2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DateTimePicker dtpEventDt1;
         private System.Windows.Forms.ComboBox cmbEventName;
-        private CheckComboBox.CheckedComboBox ccmbDepartment;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpPulishDt;
         private System.Windows.Forms.GroupBox groupBox23;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbDesci;
         private System.Windows.Forms.GroupBox groupBox22;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbAccording;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton tsbAddEventsData;
+        private System.Windows.Forms.ToolStripButton tsbDeleteEventsData;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
+        private System.Windows.Forms.TextBox tbRemark;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;
@@ -860,5 +837,9 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
     }
 }
