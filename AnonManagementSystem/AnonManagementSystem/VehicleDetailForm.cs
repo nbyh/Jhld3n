@@ -15,11 +15,13 @@ namespace AnonManagementSystem
     {
         public delegate void SaveVehicle(
             CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
+        public event SaveVehicle SaveVehicleSucess;
         private readonly List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
         private readonly List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
-        public event SaveVehicle SaveVehicleSucess;
 
         private string _id;
+        private bool _add = false;
+        private bool _enableedit = false;
 
         public VehicleDetailForm()
         {
@@ -31,6 +33,16 @@ namespace AnonManagementSystem
             set { _id = value; }
         }
 
+        public bool Add
+        {
+            set { _add = value; }
+        }
+
+        public bool Enableedit
+        {
+            set { _enableedit = value; }
+        }
+        
         private void tsbSave_Click(object sender, EventArgs e)
         {
             EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();

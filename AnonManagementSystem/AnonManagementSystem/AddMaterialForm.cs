@@ -16,16 +16,21 @@ namespace AnonManagementSystem
         public delegate void SaveMaterial(Material material);
         public event SaveMaterial SaveMaterialSucess;
 
+        private bool _enableedit = false;
         private string _id;
         public string Id
         {
             set { _id = value; }
         }
-        
+
         private bool _add = false;
         public bool Add
         {
             set { _add = value; }
+        }
+        public bool Enableedit
+        {
+            set { _enableedit = value; }
         }
 
         EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
@@ -36,7 +41,21 @@ namespace AnonManagementSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            Material ma = new Material()
+            {
+                No = int.Parse(tbDocNo.Text),//todo：id要修改我string型
+                Name = tbDocName.Text,
+                PaperSize = cmbShape.Text,
+                Pagination = nUdPages.Value.ToString(),
+                Edition = tbEdition.Text,
+                Volume = nUdCopybook.Value.ToString(),
+                Date = dtpDate.Value.Date,
+                DocumentLink = tbDocumentLink.Text,
+                StoreSpot = tbStoreSpot.Text,
+                Content = tbBrief.Text,
+                Equipment = _id
+            };
+            SaveMaterialSucess(ma);
         }
 
         private void AddMaterialForm_Load(object sender, EventArgs e)
@@ -46,37 +65,38 @@ namespace AnonManagementSystem
 
         private void AddMaterialForm_Shown(object sender, EventArgs e)
         {
-            var equip = from eq in eqEntities.Material
-                        select eq;
+            var material = from eq in eqEntities.Material
+                           select eq;
+            List<string> sharpList = (from s in material where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
+            cmbShape.DataSource = sharpList;
             if (_add)
             {
                 cmbShape.SelectedIndex = -1;
             }
             else
             {
-                //var appointeq = from eq in equip
-                //                where eq.No == _id
-                //                select eq;
-                //var equipfirst = appointeq.First();
-                //cmbName.SelectedItem = equipfirst.Name;
-                //cmbModel.SelectedItem = equipfirst.Model;
-                //cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
-                //tbSerialNo.Text = equipfirst.SerialNo;
-                //tbTechRemould.Text = equipfirst.TechRemould;
-                //tbOemNo.Text = equipfirst.InventorySpot;
-                //cmbTechnician.SelectedItem = equipfirst.Technician;
-                //cmbCharger.SelectedItem = equipfirst.Manager;
-                //cmbTechCondition.SelectedItem = equipfirst.TechCondition;
-                //cmbUseCondition.SelectedItem = equipfirst.UseCondition;
-                //cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
-                //cmbFactory.SelectedItem = equipfirst.Factory;
-                //dtpTime.Value = equipfirst.FactoryTime.Value;
+                var appointma = from ma in material
+                                where ma.No.ToString() == _id
+                                select ma;
+                var mafirst = appointma.First();
+                tbDocNo.Text = mafirst.No.ToString();
+                tbDocName.Text = mafirst.Name;
+                cmbShape.Text = mafirst.PaperSize;
+                nUdPages.Value = decimal.Parse(mafirst.Pagination);
+                tbEdition.Text = mafirst.Edition;
+                nUdCopybook.Value = decimal.Parse(mafirst.Volume);
+                dtpDate.Value = DateTime.Now;//todo:null属性要去掉
+                tbDocumentLink.Text = mafirst.DocumentLink;
+                tbStoreSpot.Text = mafirst.StoreSpot;
+                tbBrief.Text = mafirst.Content;
+            }
+        }
 
-                //tbMajorComp.Text = equipfirst.MajorComp;
-                //tbMainUsage.Text = equipfirst.MainUsage;
-                //tbUseMethod.Text = equipfirst.UseMethod;
-                //tbPerformIndex.Text = equipfirst.PerformIndex;
-
+        private void btnBrowser_Click(object sender, EventArgs e)
+        {
+            if (ofdMaterial.ShowDialog() == DialogResult.OK)
+            {
+                tbDocumentLink.Text = ofdMaterial.FileName;
             }
         }
     }

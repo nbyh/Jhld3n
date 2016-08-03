@@ -36,7 +36,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbBrief = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.btnDocNo = new System.Windows.Forms.TextBox();
+            this.tbDocNo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbShape = new System.Windows.Forms.ComboBox();
             this.tbEdition = new System.Windows.Forms.TextBox();
@@ -68,7 +68,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.btnDocNo);
+            this.groupBox1.Controls.Add(this.tbDocNo);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cmbShape);
             this.groupBox1.Controls.Add(this.tbEdition);
@@ -149,12 +149,12 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "资料编号";
             // 
-            // btnDocNo
+            // tbDocNo
             // 
-            this.btnDocNo.Location = new System.Drawing.Point(79, 76);
-            this.btnDocNo.Name = "btnDocNo";
-            this.btnDocNo.Size = new System.Drawing.Size(141, 21);
-            this.btnDocNo.TabIndex = 18;
+            this.tbDocNo.Location = new System.Drawing.Point(79, 76);
+            this.tbDocNo.Name = "tbDocNo";
+            this.tbDocNo.Size = new System.Drawing.Size(141, 21);
+            this.tbDocNo.TabIndex = 18;
             // 
             // label8
             // 
@@ -269,6 +269,7 @@
             this.btnBrowser.TabIndex = 0;
             this.btnBrowser.Text = "浏览";
             this.btnBrowser.UseVisualStyleBackColor = false;
+            this.btnBrowser.Click += new System.EventHandler(this.btnBrowser_Click);
             // 
             // btnSave
             // 
@@ -327,7 +328,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tbBrief;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox btnDocNo;
+        private System.Windows.Forms.TextBox tbDocNo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbShape;
         private System.Windows.Forms.TextBox tbEdition;

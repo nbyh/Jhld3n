@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,14 +17,20 @@ namespace AnonManagementSystem
     {
         private bool _add = false;
         private bool _enableedit = false;
+        private DbRawSqlQuery<Events> _events;
         private string _id;
-        private int _pageSize = 20, _curPage = 1, _lastPage = 1;
+        private DbRawSqlQuery<Material> _materials;
+        private int _vehiclePageSize = 20, _eventsPageSize = 20, _materialPageSize = 20, _vehicleCurPage = 1, _eventsCurPage = 1, _materialCurPage = 1, _vehicleLastPage = 1, _eventsLastPage = 1, _materialLastPage = 1;
         private DbRawSqlQuery<CombatVehicles> _vehicleses;
-        private List<CombatVehicles> comVehList = new List<CombatVehicles>();
+        private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
         private List<EquipmentImage> equipImageList = new List<EquipmentImage>();
+        private Dictionary<string, List<EventData>> eventDataDictionary = new Dictionary<string, List<EventData>>();
+        private Dictionary<string, List<EventsImage>> eventsImgDictionary = new Dictionary<string, List<EventsImage>>();
         private List<Events> eventsList = new List<Events>();
         private List<Material> materList = new List<Material>();
-
+        private Dictionary<string, OilEngine> oilEnginesDictionary = new Dictionary<string, OilEngine>();
+        private Dictionary<string, List<OilEngineImage>> oilImgDictionary = new Dictionary<string, List<OilEngineImage>>();
+        private Dictionary<string, List<VehiclesImage>> vehImgDictionary = new Dictionary<string, List<VehiclesImage>>();
         public EquipmentDetailForm()
         {
             InitializeComponent();
@@ -44,20 +51,84 @@ namespace AnonManagementSystem
             set { _id = value; }
         }
 
+        private static IEnumerable<CombatVehicles> QueryByPage(int pageSize, int curPage, IEnumerable<CombatVehicles> dbRaw)
+        {
+            return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+        }
+
+        private static IEnumerable<Events> QueryByPage(int pageSize, int curPage, IEnumerable<Events> dbRaw)
+        {
+            return dbRaw.OrderBy(s => s.No).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+        }
+
+        private static IEnumerable<Material> QueryByPage(int pageSize, int curPage, IEnumerable<Material> dbRaw)
+        {
+            return dbRaw.OrderBy(s => s.No).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+        }
+
+        private void AddEventsSucess(Events events, List<EventData> eventdatalist, List<EventsImage> eventimglist)
+        {
+            eventsList.Add(events);
+            //todo:界面更新
+            eventDataDictionary.Add(events.No, eventdatalist);
+            eventsImgDictionary.Add(events.No, eventimglist);
+        }
+
+        private void AddMaterialSucess(Material material)
+        {
+            materList.Add(material);
+            //todo:界面增加
+        }
+
+        private void AddVehicleSucess(CombatVehicles combatVehicles, List<VehiclesImage> vehiclesImgList, OilEngine oilEngine, List<OilEngineImage> oilImgList)
+        {
+            _comVehList.Add(combatVehicles);
+            vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
+            //todo:界面增加
+            oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
+            oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
+        }
+
         private void cmsPicture_Opening(object sender, CancelEventArgs e)
         {
         }
 
-        private void DataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
+        private void dGvCombatVehicles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int all = iquery.Count();
-            _lastPage = (int)Math.Ceiling((double)all / _pageSize);
-            var vehcilepage = QueryByPage(pagesize, curpage, iquery);
-            dGvCombatVehicles.DataSource = vehcilepage.ToList();
-            for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
+            if (e.ColumnIndex >= 0 && dGvCombatVehicles.Columns[e.ColumnIndex].Name.Equals("VehcileMoreInfo"))
             {
-                dGvCombatVehicles[0, i].Value = i + 1;
-                dGvCombatVehicles.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+                VehicleDetailForm equipDetailForm = new VehicleDetailForm()
+                {
+                    Enableedit = _enableedit,
+                    Add = false,
+                    Id = dGvCombatVehicles.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
+                };
+                equipDetailForm.Show();
+            }
+        }
+
+        private void dgvMaterial_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("MaterialMoreInfo"))
+            {
+                AddMaterialForm equipDetailForm = new AddMaterialForm()
+                {
+                    Enableedit = _enableedit,
+                    Add = false,
+                    Id = dgvMaterial.Rows[e.RowIndex].Cells["No"].Value.ToString()
+                };
+                equipDetailForm.Show();
+            }
+            if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("DocumentLink"))
+            {
+                string path = dgvMaterial[e.ColumnIndex, e.RowIndex].Value.ToString();
+                FileInfo fInfo = new FileInfo(path);
+                string dir = fInfo.DirectoryName;
+                ProcessStartInfo psi = new ProcessStartInfo("Explorer.exe")
+                {
+                    Arguments = dir
+                };
+                Process.Start(psi);
             }
         }
 
@@ -89,7 +160,6 @@ namespace AnonManagementSystem
             cmbMajorCategory.DataSource = equipMajcatList;
             List<string> equipFactList = (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
-
 
             if (_add)
             {
@@ -128,26 +198,53 @@ namespace AnonManagementSystem
                 tbUseMethod.Text = equipfirst.UseMethod;
                 tbPerformIndex.Text = equipfirst.PerformIndex;
 
+                string vehcilecmds = $"select * from CombatVehicles where Equipment='{_id}' ";
+                _vehicleses = equipEntities.Database.SqlQuery<CombatVehicles>(vehcilecmds);
+                _vehiclePageSize = 20;
+                _vehicleCurPage = 1;
+                VehicleDataRefresh(_vehiclePageSize, _vehicleCurPage, _vehicleses);
+
+
+                string eventscmds = $"select * from Events where Equipment='{_id}' ";
+                _events = equipEntities.Database.SqlQuery<Events>(eventscmds);
+                _eventsPageSize = 20;
+                _eventsCurPage = 1;
+                EventsDataRefresh(_eventsPageSize, _eventsCurPage, _events);
+
+                string materialcmds = $"select * from Material where Equipment='{_id}' ";
+                _materials = equipEntities.Database.SqlQuery<Material>(materialcmds);
+                _materialPageSize = 20;
+                _materialCurPage = 1;
+                MaterialDataRefresh(_materialPageSize, _materialCurPage, _materials);
             }
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
 
-            string cmds = $"select *from CombatVehicles where Equipment='{_id}' ";
-            _vehicleses = equipEntities.Database.SqlQuery<CombatVehicles>(cmds);
-
-            _pageSize = 20;
-            _curPage = 1;
-            DataRefresh(_pageSize, _curPage, _vehicleses);
         }
 
-        private IList<CombatVehicles> QueryByPage(int pageSize, int curPage, DbRawSqlQuery<CombatVehicles> dbRaw)
+        private void EventsDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Events> iquery)
         {
-            return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+            int all = iquery.Count();
+            _eventsLastPage = (int)Math.Ceiling((double)all / _eventsPageSize);
+            var eventsParts = QueryByPage(pagesize, curpage, iquery);
+            dgvEvents.DataSource = eventsParts.ToList();
+            for (int i = 0; i < dgvEvents.RowCount; i++)
+            {
+                dgvEvents[0, i].Value = i + 1;
+                dgvEvents.Rows[i].Cells["EventMoreInfo"].Value = "详细信息";
+            }
         }
 
-        private void AddVehicleSucess(CombatVehicles combatVehicles)
+        private void MaterialDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Material> iquery)
         {
-            comVehList.Add(combatVehicles);
-            //界面增加
+            int all = iquery.Count();
+            _materialLastPage = (int)Math.Ceiling((double)all / _materialPageSize);
+            var materialParts = QueryByPage(pagesize, curpage, iquery);
+            dgvMaterial.DataSource = materialParts.ToList();
+            for (int i = 0; i < dgvMaterial.RowCount; i++)
+            {
+                dgvMaterial[0, i].Value = i + 1;
+                dgvMaterial.Rows[i].Cells["MaterialMoreInfo"].Value = "详细信息";
+            }
         }
 
         private void tsbAddEvents_Click(object sender, EventArgs e)
@@ -156,6 +253,7 @@ namespace AnonManagementSystem
             {
                 Id = tbSerialNo.Text
             };
+            eFrom.SaveEventsSucess += AddEventsSucess;
             eFrom.ShowDialog();
         }
 
@@ -164,9 +262,9 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read); 
-                BinaryReader br = new BinaryReader(fs); 
-                byte[] imgBytes = br.ReadBytes((int)fs.Length); 
+                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                byte[] imgBytes = br.ReadBytes((int)fs.Length);
                 fs.Close();
                 EquipmentImage eqImg = new EquipmentImage
                 {
@@ -184,6 +282,7 @@ namespace AnonManagementSystem
             {
                 Id = tbSerialNo.Text
             };
+            addMaterialForm.SaveMaterialSucess += AddMaterialSucess;
             addMaterialForm.ShowDialog();
         }
 
@@ -199,17 +298,26 @@ namespace AnonManagementSystem
 
         private void tsbDeleteEvents_Click(object sender, EventArgs e)
         {
+            //todo:界面修改
 
         }
 
         private void tsbDeleteImage_Click(object sender, EventArgs e)
         {
+            //todo:界面修改
 
         }
 
         private void tsbDeleteMaterial_Click(object sender, EventArgs e)
         {
+            //todo:界面修改
 
+        }
+
+        private void tsbDeleteVehicle_Click(object sender, EventArgs e)
+        {
+            //todo:界面修改
+            
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
@@ -261,13 +369,25 @@ namespace AnonManagementSystem
                 equipfirst.Model = cmbModel.Text;
                 equipfirst.SerialNo = tbSerialNo.Text;
                 equipfirst.TechRemould = tbTechRemould.Text;
-                ;
                 equipfirst.MajorComp = tbMajorComp.Text;
                 equipfirst.MainUsage = tbMainUsage.Text;
                 equipfirst.UseMethod = tbUseMethod.Text;
                 equipfirst.PerformIndex = tbPerformIndex.Text;
             }
             eqEntities.SaveChanges();
+        }
+
+        private void VehicleDataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
+        {
+            int all = iquery.Count();
+            _vehicleLastPage = (int)Math.Ceiling((double)all / _vehiclePageSize);
+            var vehcileParts = QueryByPage(pagesize, curpage, iquery);
+            dGvCombatVehicles.DataSource = vehcileParts.ToList();
+            for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
+            {
+                dGvCombatVehicles[0, i].Value = i + 1;
+                dGvCombatVehicles.Rows[i].Cells["EventMoreInfo"].Value = "详细信息";
+            }
         }
     }
 }

@@ -114,7 +114,7 @@
             this.tbSetupVideo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.dgvMatrial = new System.Windows.Forms.DataGridView();
+            this.dgvMaterial = new System.Windows.Forms.DataGridView();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.tsbAddMaterial = new System.Windows.Forms.ToolStripButton();
@@ -145,6 +145,14 @@
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EventMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -153,15 +161,8 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewLinkColumn2 = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.VehcileMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -170,7 +171,7 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.MaterialMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -191,7 +192,7 @@
             this.tabPage5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox20.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMatrial)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMaterial)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -641,7 +642,8 @@
             this.Column4,
             this.Column5,
             this.Column7,
-            this.MoreInfo});
+            this.VehcileMoreInfo,
+            this.SerialNo});
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -660,6 +662,7 @@
             this.dGvCombatVehicles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dGvCombatVehicles.Size = new System.Drawing.Size(764, 459);
             this.dGvCombatVehicles.TabIndex = 0;
+            this.dGvCombatVehicles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvCombatVehicles_CellContentClick);
             // 
             // toolStrip1
             // 
@@ -706,6 +709,7 @@
             this.tsbDeleteVehicle.Name = "tsbDeleteVehicle";
             this.tsbDeleteVehicle.Size = new System.Drawing.Size(52, 22);
             this.tsbDeleteVehicle.Text = "删除";
+            this.tsbDeleteVehicle.Click += new System.EventHandler(this.tsbDeleteVehicle_Click);
             // 
             // toolStripButton1
             // 
@@ -826,7 +830,7 @@
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16,
             this.dataGridViewTextBoxColumn17,
-            this.dataGridViewLinkColumn2});
+            this.EventMoreInfo});
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1020,24 +1024,24 @@
             this.groupBox20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox20.Controls.Add(this.dgvMatrial);
+            this.groupBox20.Controls.Add(this.dgvMaterial);
             this.groupBox20.Location = new System.Drawing.Point(8, 93);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(760, 409);
             this.groupBox20.TabIndex = 4;
             this.groupBox20.TabStop = false;
             // 
-            // dgvMatrial
+            // dgvMaterial
             // 
-            this.dgvMatrial.AllowUserToAddRows = false;
-            this.dgvMatrial.AllowUserToDeleteRows = false;
-            this.dgvMatrial.AllowUserToResizeColumns = false;
-            this.dgvMatrial.AllowUserToResizeRows = false;
+            this.dgvMaterial.AllowUserToAddRows = false;
+            this.dgvMaterial.AllowUserToDeleteRows = false;
+            this.dgvMaterial.AllowUserToResizeColumns = false;
+            this.dgvMaterial.AllowUserToResizeRows = false;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvMatrial.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvMatrial.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
-            this.dgvMatrial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMatrial.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvMaterial.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            this.dgvMaterial.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
+            this.dgvMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMaterial.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1045,9 +1049,9 @@
             dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMatrial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            this.dgvMatrial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMatrial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvMaterial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.dgvMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn6,
@@ -1056,7 +1060,7 @@
             this.dataGridViewTextBoxColumn10,
             this.Column8,
             this.dataGridViewLinkColumn1,
-            this.Column10});
+            this.MaterialMoreInfo});
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1064,17 +1068,18 @@
             dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMatrial.DefaultCellStyle = dataGridViewCellStyle18;
-            this.dgvMatrial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMatrial.Location = new System.Drawing.Point(3, 17);
-            this.dgvMatrial.MultiSelect = false;
-            this.dgvMatrial.Name = "dgvMatrial";
-            this.dgvMatrial.ReadOnly = true;
-            this.dgvMatrial.RowHeadersVisible = false;
-            this.dgvMatrial.RowTemplate.Height = 23;
-            this.dgvMatrial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMatrial.Size = new System.Drawing.Size(754, 389);
-            this.dgvMatrial.TabIndex = 1;
+            this.dgvMaterial.DefaultCellStyle = dataGridViewCellStyle18;
+            this.dgvMaterial.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMaterial.Location = new System.Drawing.Point(3, 17);
+            this.dgvMaterial.MultiSelect = false;
+            this.dgvMaterial.Name = "dgvMaterial";
+            this.dgvMaterial.ReadOnly = true;
+            this.dgvMaterial.RowHeadersVisible = false;
+            this.dgvMaterial.RowTemplate.Height = 23;
+            this.dgvMaterial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMaterial.Size = new System.Drawing.Size(754, 389);
+            this.dgvMaterial.TabIndex = 1;
+            this.dgvMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterial_CellContentClick);
             // 
             // toolStrip2
             // 
@@ -1330,6 +1335,68 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn13.HeaderText = "名称";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "No";
+            this.dataGridViewTextBoxColumn18.HeaderText = "活动编号";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "SpecificType";
+            this.dataGridViewTextBoxColumn14.HeaderText = "活动类型";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn15.HeaderText = "活动地点";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "StartTime";
+            this.dataGridViewTextBoxColumn16.HeaderText = "开始时间";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "EndTime";
+            this.dataGridViewTextBoxColumn17.HeaderText = "结束时间";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // EventMoreInfo
+            // 
+            this.EventMoreInfo.HeaderText = "详细信息";
+            this.EventMoreInfo.Name = "EventMoreInfo";
+            this.EventMoreInfo.ReadOnly = true;
+            this.EventMoreInfo.Text = "详细信息";
+            // 
             // Column1
             // 
             this.Column1.HeaderText = "序号";
@@ -1392,74 +1459,21 @@
             this.Column7.ReadOnly = true;
             this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // MoreInfo
+            // VehcileMoreInfo
             // 
-            this.MoreInfo.HeaderText = "详细信息";
-            this.MoreInfo.Name = "MoreInfo";
-            this.MoreInfo.ReadOnly = true;
-            this.MoreInfo.Text = "详细信息";
+            this.VehcileMoreInfo.HeaderText = "详细信息";
+            this.VehcileMoreInfo.Name = "VehcileMoreInfo";
+            this.VehcileMoreInfo.ReadOnly = true;
+            this.VehcileMoreInfo.Text = "详细信息";
             // 
-            // dataGridViewTextBoxColumn12
+            // SerialNo
             // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "序号";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn13.HeaderText = "名称";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "No";
-            this.dataGridViewTextBoxColumn18.HeaderText = "活动编号";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "SpecificType";
-            this.dataGridViewTextBoxColumn14.HeaderText = "活动类型";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Address";
-            this.dataGridViewTextBoxColumn15.HeaderText = "活动地点";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "StartTime";
-            this.dataGridViewTextBoxColumn16.HeaderText = "开始时间";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "EndTime";
-            this.dataGridViewTextBoxColumn17.HeaderText = "结束时间";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewLinkColumn2
-            // 
-            this.dataGridViewLinkColumn2.HeaderText = "详细信息";
-            this.dataGridViewLinkColumn2.Name = "dataGridViewLinkColumn2";
-            this.dataGridViewLinkColumn2.ReadOnly = true;
-            this.dataGridViewLinkColumn2.Text = "详细信息";
+            this.SerialNo.DataPropertyName = "SerialNo";
+            this.SerialNo.HeaderText = "序列号";
+            this.SerialNo.Name = "SerialNo";
+            this.SerialNo.ReadOnly = true;
+            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SerialNo.Visible = false;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -1524,11 +1538,11 @@
             this.dataGridViewLinkColumn1.ReadOnly = true;
             this.dataGridViewLinkColumn1.Text = "";
             // 
-            // Column10
+            // MaterialMoreInfo
             // 
-            this.Column10.HeaderText = "详细信息";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
+            this.MaterialMoreInfo.HeaderText = "详细信息";
+            this.MaterialMoreInfo.Name = "MaterialMoreInfo";
+            this.MaterialMoreInfo.ReadOnly = true;
             // 
             // EquipmentDetailForm
             // 
@@ -1574,7 +1588,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox20.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMatrial)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMaterial)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
@@ -1646,7 +1660,7 @@
         private System.Windows.Forms.DataGridView dgvEvents;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.GroupBox groupBox20;
-        private System.Windows.Forms.DataGridView dgvMatrial;
+        private System.Windows.Forms.DataGridView dgvMaterial;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListView lsvImages;
@@ -1709,7 +1723,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewLinkColumn MoreInfo;
+        private System.Windows.Forms.DataGridViewLinkColumn VehcileMoreInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
@@ -1717,7 +1732,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn2;
+        private System.Windows.Forms.DataGridViewLinkColumn EventMoreInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
@@ -1726,6 +1741,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
-        private System.Windows.Forms.DataGridViewLinkColumn Column10;
+        private System.Windows.Forms.DataGridViewLinkColumn MaterialMoreInfo;
     }
 }

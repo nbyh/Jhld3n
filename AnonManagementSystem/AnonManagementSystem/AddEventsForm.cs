@@ -15,7 +15,7 @@ namespace AnonManagementSystem
         private bool _add = false;
         private bool _enableedit = false;
         private string _id;
-        public delegate void SaveEvents(Events events);
+        public delegate void SaveEvents(Events events,List<EventData> eventDataList,List<EventsImage> eventImgList);
         public event SaveEvents SaveEventsSucess;
 
         public string Id
@@ -82,6 +82,26 @@ namespace AnonManagementSystem
                 eventfirst.Remarks = tbRemark.Text;
             }
             eqEntities.SaveChanges();
+        }
+
+        private void tsbAddEventsData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteEventsData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbAddImg_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteImg_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
