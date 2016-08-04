@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EquipmentManagementModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Work\Documents\GitHub\Jhld3n\AnonManagementSystem\Reference\EquipmentManagement.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EquipmentManagementModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\Reference\EquipmentManagement.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CombatEquipment">
           <Key>
             <PropertyRef Name="SerialNo" />
@@ -58,7 +58,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="254" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="254" />
           <Property Name="Spot" Type="nvarchar" MaxLength="254" />
           <Property Name="EventsNo" Type="nvarchar" MaxLength="254" />
@@ -90,7 +90,7 @@
           <Key>
             <PropertyRef Name="No" />
           </Key>
-          <Property Name="No" Type="integer" Nullable="false" />
+          <Property Name="No" Type="varchar" MaxLength="254" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="254" />
           <Property Name="Type" Type="nvarchar" MaxLength="254" />
           <Property Name="PaperSize" Type="nvarchar" MaxLength="254" />
@@ -229,16 +229,16 @@
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
             <End Role="OilEngine" EntitySet="OilEngine" />
           </AssociationSet>
-          <EntitySet Name="Material" EntityType="EquipmentManagementModel.Material" />
-          <AssociationSet Name="FK_Material_0_0" Association="EquipmentManagementModel.FK_Material_0_0">
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
-            <End Role="Material" EntitySet="Material" />
-          </AssociationSet>
-          <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
           <EntitySet Name="Events" EntityType="EquipmentManagementModel.Events" />
           <AssociationSet Name="FK_Events_0_0" Association="EquipmentManagementModel.FK_Events_0_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
+          <EntitySet Name="Material" EntityType="EquipmentManagementModel.Material" />
+          <AssociationSet Name="FK_Material_0_0" Association="EquipmentManagementModel.FK_Material_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Material" EntitySet="Material" />
           </AssociationSet>
           <AssociationSet Name="FK_EventData_0_0" Association="EquipmentManagementModel.FK_EventData_0_0">
             <End Role="Events" EntitySet="Events" />
@@ -268,8 +268,8 @@
           <Property Name="TechRemould" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="SetupVideo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CombatVehicles" Relationship="EquipmentManagementModel.FK_CombatVehicles_0_0" FromRole="CombatEquipment" ToRole="CombatVehicles" />
-          <NavigationProperty Name="Material" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="CombatEquipment" ToRole="Material" />
           <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="CombatEquipment" ToRole="Events" />
+          <NavigationProperty Name="Material" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="CombatEquipment" ToRole="Material" />
         </EntityType>
         <EntityType Name="CombatVehicles">
           <Key>
@@ -346,46 +346,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Material">
-          <Key>
-            <PropertyRef Name="No" />
-          </Key>
-          <Property Name="No" Type="Int64" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="PaperSize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Pagination" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Edition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Volume" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" />
-          <Property Name="DocumentLink" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="StoreSpot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="Material" ToRole="CombatEquipment" />
-        </EntityType>
-        <Association Name="FK_Material_0_0">
-          <End Type="EquipmentManagementModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
-          <End Type="EquipmentManagementModel.Material" Role="Material" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CombatEquipment">
-              <PropertyRef Name="SerialNo" />
-            </Principal>
-            <Dependent Role="Material">
-              <PropertyRef Name="Equipment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="EventData">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Spot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="EventsNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="EventData" ToRole="Events" />
-        </EntityType>
         <EntityType Name="Events">
           <Key>
             <PropertyRef Name="No" />
@@ -419,6 +379,46 @@
               <PropertyRef Name="SerialNo" />
             </Principal>
             <Dependent Role="Events">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EventData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Spot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="EventsNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="EventData" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PaperSize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Pagination" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Edition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Volume" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="DocumentLink" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="StoreSpot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="Material" ToRole="CombatEquipment" />
+        </EntityType>
+        <Association Name="FK_Material_0_0">
+          <End Type="EquipmentManagementModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipmentManagementModel.Material" Role="Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="SerialNo" />
+            </Principal>
+            <Dependent Role="Material">
               <PropertyRef Name="Equipment" />
             </Dependent>
           </ReferentialConstraint>
@@ -515,34 +515,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Material">
-            <EntityTypeMapping TypeName="EquipmentManagementModel.Material">
-              <MappingFragment StoreEntitySet="Material">
-                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="StoreSpot" ColumnName="StoreSpot" />
-                <ScalarProperty Name="DocumentLink" ColumnName="DocumentLink" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Volume" ColumnName="Volume" />
-                <ScalarProperty Name="Edition" ColumnName="Edition" />
-                <ScalarProperty Name="Pagination" ColumnName="Pagination" />
-                <ScalarProperty Name="PaperSize" ColumnName="PaperSize" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="No" ColumnName="No" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EventData">
-            <EntityTypeMapping TypeName="EquipmentManagementModel.EventData">
-              <MappingFragment StoreEntitySet="EventData">
-                <ScalarProperty Name="EventsNo" ColumnName="EventsNo" />
-                <ScalarProperty Name="Spot" ColumnName="Spot" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="EquipmentManagementModel.Events">
               <MappingFragment StoreEntitySet="Events">
@@ -562,6 +534,34 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventData">
+            <EntityTypeMapping TypeName="EquipmentManagementModel.EventData">
+              <MappingFragment StoreEntitySet="EventData">
+                <ScalarProperty Name="EventsNo" ColumnName="EventsNo" />
+                <ScalarProperty Name="Spot" ColumnName="Spot" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="EquipmentManagementModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="StoreSpot" ColumnName="StoreSpot" />
+                <ScalarProperty Name="DocumentLink" ColumnName="DocumentLink" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Pagination" ColumnName="Pagination" />
+                <ScalarProperty Name="PaperSize" ColumnName="PaperSize" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="No" ColumnName="No" />
               </MappingFragment>

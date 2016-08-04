@@ -43,7 +43,7 @@ namespace AnonManagementSystem
         {
             Material ma = new Material()
             {
-                No = int.Parse(tbDocNo.Text),//todo：id要修改我string型
+                No = tbDocNo.Text,//todo：id要修改我string型
                 Name = tbDocName.Text,
                 PaperSize = cmbShape.Text,
                 Pagination = nUdPages.Value.ToString(),

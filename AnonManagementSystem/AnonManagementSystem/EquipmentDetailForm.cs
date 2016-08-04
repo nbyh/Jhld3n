@@ -70,6 +70,7 @@ namespace AnonManagementSystem
         {
             eventsList.Add(events);
             //todo:界面更新
+            dgvEvents.DataSource = eventsList;
             eventDataDictionary.Add(events.No, eventdatalist);
             eventsImgDictionary.Add(events.No, eventimglist);
         }
@@ -198,54 +199,46 @@ namespace AnonManagementSystem
                 tbUseMethod.Text = equipfirst.UseMethod;
                 tbPerformIndex.Text = equipfirst.PerformIndex;
 
-                string vehcilecmds = $"select * from CombatVehicles where Equipment='{_id}' ";
-                _vehicleses = equipEntities.Database.SqlQuery<CombatVehicles>(vehcilecmds);
-                _vehiclePageSize = 20;
-                _vehicleCurPage = 1;
-                VehicleDataRefresh(_vehiclePageSize, _vehicleCurPage, _vehicleses);
+                var vechiledata = (from v in equipEntities.CombatVehicles
+                    select v).ToList();
+                dGvCombatVehicles.DataSource = vechiledata;
+                
+                var events=(from ev in equipEntities.Events select ev).ToList();
+                dgvEvents.DataSource = events;
 
+                var material = (from m in equipEntities.Material select m).ToList();
+                dgvMaterial.DataSource = material;
 
-                string eventscmds = $"select * from Events where Equipment='{_id}' ";
-                _events = equipEntities.Database.SqlQuery<Events>(eventscmds);
-                _eventsPageSize = 20;
-                _eventsCurPage = 1;
-                EventsDataRefresh(_eventsPageSize, _eventsCurPage, _events);
-
-                string materialcmds = $"select * from Material where Equipment='{_id}' ";
-                _materials = equipEntities.Database.SqlQuery<Material>(materialcmds);
-                _materialPageSize = 20;
-                _materialCurPage = 1;
-                MaterialDataRefresh(_materialPageSize, _materialCurPage, _materials);
             }
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
 
         }
 
-        private void EventsDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Events> iquery)
-        {
-            int all = iquery.Count();
-            _eventsLastPage = (int)Math.Ceiling((double)all / _eventsPageSize);
-            var eventsParts = QueryByPage(pagesize, curpage, iquery);
-            dgvEvents.DataSource = eventsParts.ToList();
-            for (int i = 0; i < dgvEvents.RowCount; i++)
-            {
-                dgvEvents[0, i].Value = i + 1;
-                dgvEvents.Rows[i].Cells["EventMoreInfo"].Value = "详细信息";
-            }
-        }
+        //private void EventsDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Events> iquery)
+        //{
+        //    int all = iquery.Count();
+        //    _eventsLastPage = (int)Math.Ceiling((double)all / _eventsPageSize);
+        //    var eventsParts = QueryByPage(pagesize, curpage, iquery);
+        //    dgvEvents.DataSource = eventsParts.ToList();
+        //    for (int i = 0; i < dgvEvents.RowCount; i++)
+        //    {
+        //        dgvEvents[0, i].Value = i + 1;
+        //        dgvEvents.Rows[i].Cells["EventMoreInfo"].Value = "详细信息";
+        //    }
+        //}
 
-        private void MaterialDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Material> iquery)
-        {
-            int all = iquery.Count();
-            _materialLastPage = (int)Math.Ceiling((double)all / _materialPageSize);
-            var materialParts = QueryByPage(pagesize, curpage, iquery);
-            dgvMaterial.DataSource = materialParts.ToList();
-            for (int i = 0; i < dgvMaterial.RowCount; i++)
-            {
-                dgvMaterial[0, i].Value = i + 1;
-                dgvMaterial.Rows[i].Cells["MaterialMoreInfo"].Value = "详细信息";
-            }
-        }
+        //private void MaterialDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Material> iquery)
+        //{
+        //    int all = iquery.Count();
+        //    _materialLastPage = (int)Math.Ceiling((double)all / _materialPageSize);
+        //    var materialParts = QueryByPage(pagesize, curpage, iquery);
+        //    dgvMaterial.DataSource = materialParts.ToList();
+        //    for (int i = 0; i < dgvMaterial.RowCount; i++)
+        //    {
+        //        dgvMaterial[0, i].Value = i + 1;
+        //        dgvMaterial.Rows[i].Cells["MaterialMoreInfo"].Value = "详细信息";
+        //    }
+        //}
 
         private void tsbAddEvents_Click(object sender, EventArgs e)
         {

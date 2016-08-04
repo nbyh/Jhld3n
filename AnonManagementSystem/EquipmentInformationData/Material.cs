@@ -14,7 +14,7 @@ namespace EquipmentInformationData
     
     public partial class Material
     {
-        public long No { get; set; }
+        public string No { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string PaperSize { get; set; }
