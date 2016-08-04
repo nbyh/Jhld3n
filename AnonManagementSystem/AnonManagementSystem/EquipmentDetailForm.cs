@@ -48,53 +48,51 @@ namespace AnonManagementSystem
         }
 
         public int Index { get; set; }
-        
+
         private void AddEventsSucess(bool add, int index, Events events, List<EventData> eventdatalist, List<EventsImage> eventimglist)
         {
-            eventsList.Add(events);
             //todo:界面更新
             if (add)
             {
-                
+                eventsList.Add(events);
+                dgvEvents.DataSource = eventsList;
+                eventDataDictionary.Add(events.No, eventdatalist);
+                eventsImgDictionary.Add(events.No, eventimglist);
+
             }
             else
             {
 
             }
-            dgvEvents.DataSource = eventsList;
-            eventDataDictionary.Add(events.No, eventdatalist);
-            eventsImgDictionary.Add(events.No, eventimglist);
         }
 
         private void AddMaterialSucess(bool add, int index, Material material)
         {
-            materList.Add(material);
             if (add)
             {
-                
+                materList.Add(material);
             }
             else
             {
-                
+
             }
             //todo:界面增加
         }
 
         private void AddVehicleSucess(bool add, int index, CombatVehicles combatVehicles, List<VehiclesImage> vehiclesImgList, OilEngine oilEngine, List<OilEngineImage> oilImgList)
         {
-            _comVehList.Add(combatVehicles);
-            vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
             if (add)
             {
-                
+                _comVehList.Add(combatVehicles);
+                vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
+                oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
+                oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
             }
             else
             {
-                
+
             }
             //todo:界面增加
-            oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
-            oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
         }
 
         private void cmsPicture_Opening(object sender, CancelEventArgs e)
@@ -150,24 +148,42 @@ namespace AnonManagementSystem
             EquipmentManagementEntities equipEntities = new EquipmentManagementEntities();
             var equip = from eq in equipEntities.CombatEquipment
                         select eq;
-            List<string> equipNameList = (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+
+            #region 下拉列表内容
+
+            List<string> equipNameList =
+                (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             cmbName.DataSource = equipNameList;
-            List<string> equipSubdepartList = (from s in equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
+            List<string> equipSubdepartList =
+                (from s in equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct()
+                    .ToList();
             cmbSubDepart.DataSource = equipSubdepartList;
-            List<string> equipModelList = (from s in equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+            List<string> equipModelList =
+                (from s in equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
-            List<string> equipTechcanList = (from s in equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
+            List<string> equipTechcanList =
+                (from s in equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
             cmbTechnician.DataSource = equipTechcanList;
-            List<string> equipManagerList = (from s in equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
+            List<string> equipManagerList =
+                (from s in equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
             cmbCharger.DataSource = equipManagerList;
-            List<string> equipTechconList = (from s in equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
+            List<string> equipTechconList =
+                (from s in equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct()
+                    .ToList();
             cmbTechCondition.DataSource = equipTechconList;
-            List<string> equipUseconList = (from s in equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
+            List<string> equipUseconList =
+                (from s in equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
             cmbUseCondition.DataSource = equipUseconList;
-            List<string> equipMajcatList = (from s in equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
+            List<string> equipMajcatList =
+                (from s in equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct()
+                    .ToList();
             cmbMajorCategory.DataSource = equipMajcatList;
-            List<string> equipFactList = (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            List<string> equipFactList =
+                (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
+
+            #endregion
+
 
             if (_add)
             {
@@ -207,10 +223,10 @@ namespace AnonManagementSystem
                 tbPerformIndex.Text = equipfirst.PerformIndex;
 
                 var vechiledata = (from v in equipEntities.CombatVehicles
-                    select v).ToList();
+                                   select v).ToList();
                 dGvCombatVehicles.DataSource = vechiledata;
-                
-                var events=(from ev in equipEntities.Events select ev).ToList();
+
+                var events = (from ev in equipEntities.Events select ev).ToList();
                 dgvEvents.DataSource = events;
 
                 var material = (from m in equipEntities.Material select m).ToList();
@@ -275,7 +291,7 @@ namespace AnonManagementSystem
                     SerialNo = tbSerialNo.Text
                 };
                 equipImageList.Add(eqImg);
-                //界面增加
+                //todo：界面增加
             }
         }
 
@@ -326,7 +342,7 @@ namespace AnonManagementSystem
         private void tsbDeleteVehicle_Click(object sender, EventArgs e)
         {
             //todo:界面修改
-            
+
         }
 
         private void tsbSave_Click(object sender, EventArgs e)

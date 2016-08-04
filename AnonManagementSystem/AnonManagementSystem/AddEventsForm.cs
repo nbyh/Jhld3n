@@ -33,15 +33,15 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
+        EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
-            List<EventData> eventdataList=new List<EventData>();
+            List<EventData> eventdataList = new List<EventData>();
             for (int i = 0; i < dgvEvents.RowCount; i++)
             {
-                EventData ed=new EventData()
+                EventData ed = new EventData()
                 {
-                    ID = dgvEvents[1,i].Value.ToString(),
+                    ID = dgvEvents[1, i].Value.ToString(),
                     Name = dgvEvents[2, i].Value.ToString(),
                     Spot = dgvEvents[3, i].Value.ToString(),
                     EventsNo = tbSerialNo.Text
@@ -127,12 +127,32 @@ namespace AnonManagementSystem
 
         private void tsbAddEventsData_Click(object sender, EventArgs e)
         {
-
+            int x = dgvEvents.RowCount;
+            dgvEvents.Rows.Add(1);
+            dgvEvents[0, x].Value = x + 1;
         }
 
         private void tsbDeleteEventsData_Click(object sender, EventArgs e)
         {
-
+            if (dgvEvents.CurrentRow != null)
+            {
+                int rowindex = dgvEvents.CurrentRow.Index;
+                if (MessageBox.Show(@"确定是否删除", @"提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    if (dgvEvents[1, rowindex].Value != null)
+                    {
+                        string id = dgvEvents[1, rowindex].Value.ToString();
+                        var ed = from ev in eqEntities.EventData
+                                 where ev.EventsNo == id
+                                 select ev;
+                        if (ed.Any())
+                        {
+                            eqEntities.EventData.Remove(ed.First());
+                        }
+                    }
+                    dgvEvents.Rows.RemoveAt(rowindex);
+                }
+            }
         }
 
         private void tsbAddImg_Click(object sender, EventArgs e)
