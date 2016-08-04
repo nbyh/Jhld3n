@@ -67,6 +67,7 @@ namespace AnonManagementSystem
         {
             if (_modify)
             {
+                tbUser.ReadOnly = true;
                 tbUser.Text = _user;
                 tbPwdSure.Text = tbPwd.Text = _pwd;
                 cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";

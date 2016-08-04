@@ -11,16 +11,14 @@ using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
-    public partial class VehicleDetailForm : Form
+    public partial class VehicleDetailForm : Form, IAddModify
     {
-        public delegate void SaveVehicle(
-            CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
+        public delegate void SaveVehicle(bool add, int index, CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
         public event SaveVehicle SaveVehicleSucess;
         private readonly List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
         private readonly List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
 
         private string _id;
-        private bool _add = false;
         private bool _enableedit = false;
 
         public VehicleDetailForm()
@@ -28,24 +26,22 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
+        public int Index { get; set; }
+
         public string Id
         {
             set { _id = value; }
         }
 
-        public bool Add
-        {
-            set { _add = value; }
-        }
+        public bool Add { get; set; }
 
         public bool Enableedit
         {
             set { _enableedit = value; }
         }
-        
+
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
             CombatVehicles cv = new CombatVehicles()
             {
                 Name = cmbName.Text,
@@ -93,12 +89,12 @@ namespace AnonManagementSystem
                     Vehicle = tbVehiclesNo.Text
                 };
                 //eqEntities.OilEngine.Add(oe);
-                SaveVehicleSucess(cv, _vehiclesImagesList, oe, _oilImagesList);
+                SaveVehicleSucess(Add, Index, cv, _vehiclesImagesList, oe, _oilImagesList);
 
             }
             else
             {
-                SaveVehicleSucess(cv, _vehiclesImagesList, null, null);
+                SaveVehicleSucess(Add, Index, cv, _vehiclesImagesList, null, null);
             }
         }
 

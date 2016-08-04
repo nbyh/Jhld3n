@@ -13,14 +13,13 @@ using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
-    public partial class EquipmentDetailForm : Form
+    public partial class EquipmentDetailForm : Form, IAddModify
     {
         private bool _add = false;
         private bool _enableedit = false;
-        private DbRawSqlQuery<Events> _events;
         private string _id;
+        private DbRawSqlQuery<Events> _events;
         private DbRawSqlQuery<Material> _materials;
-        private int _vehiclePageSize = 20, _eventsPageSize = 20, _materialPageSize = 20, _vehicleCurPage = 1, _eventsCurPage = 1, _materialCurPage = 1, _vehicleLastPage = 1, _eventsLastPage = 1, _materialLastPage = 1;
         private DbRawSqlQuery<CombatVehicles> _vehicleses;
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
         private List<EquipmentImage> equipImageList = new List<EquipmentImage>();
@@ -36,10 +35,7 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
-        public bool Add
-        {
-            set { _add = value; }
-        }
+        public bool Add { get; set; }
 
         public bool Enableedit
         {
@@ -51,40 +47,51 @@ namespace AnonManagementSystem
             set { _id = value; }
         }
 
-        private static IEnumerable<CombatVehicles> QueryByPage(int pageSize, int curPage, IEnumerable<CombatVehicles> dbRaw)
-        {
-            return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
-        }
-
-        private static IEnumerable<Events> QueryByPage(int pageSize, int curPage, IEnumerable<Events> dbRaw)
-        {
-            return dbRaw.OrderBy(s => s.No).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
-        }
-
-        private static IEnumerable<Material> QueryByPage(int pageSize, int curPage, IEnumerable<Material> dbRaw)
-        {
-            return dbRaw.OrderBy(s => s.No).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
-        }
-
-        private void AddEventsSucess(Events events, List<EventData> eventdatalist, List<EventsImage> eventimglist)
+        public int Index { get; set; }
+        
+        private void AddEventsSucess(bool add, int index, Events events, List<EventData> eventdatalist, List<EventsImage> eventimglist)
         {
             eventsList.Add(events);
             //todo:界面更新
+            if (add)
+            {
+                
+            }
+            else
+            {
+
+            }
             dgvEvents.DataSource = eventsList;
             eventDataDictionary.Add(events.No, eventdatalist);
             eventsImgDictionary.Add(events.No, eventimglist);
         }
 
-        private void AddMaterialSucess(Material material)
+        private void AddMaterialSucess(bool add, int index, Material material)
         {
             materList.Add(material);
+            if (add)
+            {
+                
+            }
+            else
+            {
+                
+            }
             //todo:界面增加
         }
 
-        private void AddVehicleSucess(CombatVehicles combatVehicles, List<VehiclesImage> vehiclesImgList, OilEngine oilEngine, List<OilEngineImage> oilImgList)
+        private void AddVehicleSucess(bool add, int index, CombatVehicles combatVehicles, List<VehiclesImage> vehiclesImgList, OilEngine oilEngine, List<OilEngineImage> oilImgList)
         {
             _comVehList.Add(combatVehicles);
             vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
+            if (add)
+            {
+                
+            }
+            else
+            {
+                
+            }
             //todo:界面增加
             oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
             oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
@@ -244,6 +251,9 @@ namespace AnonManagementSystem
         {
             AddEventsForm eFrom = new AddEventsForm()
             {
+                Add = true,
+                Index = -1,
+                Enabled = _enableedit,
                 Id = tbSerialNo.Text
             };
             eFrom.SaveEventsSucess += AddEventsSucess;
@@ -273,6 +283,9 @@ namespace AnonManagementSystem
         {
             AddMaterialForm addMaterialForm = new AddMaterialForm()
             {
+                Add = true,
+                Index = -1,
+                Enabled = _enableedit,
                 Id = tbSerialNo.Text
             };
             addMaterialForm.SaveMaterialSucess += AddMaterialSucess;
@@ -283,6 +296,9 @@ namespace AnonManagementSystem
         {
             VehicleDetailForm vdForm = new VehicleDetailForm()
             {
+                Add = true,
+                Index = -1,
+                Enabled = _enableedit,
                 Id = tbSerialNo.Text
             };
             vdForm.SaveVehicleSucess += AddVehicleSucess;
@@ -370,17 +386,17 @@ namespace AnonManagementSystem
             eqEntities.SaveChanges();
         }
 
-        private void VehicleDataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
-        {
-            int all = iquery.Count();
-            _vehicleLastPage = (int)Math.Ceiling((double)all / _vehiclePageSize);
-            var vehcileParts = QueryByPage(pagesize, curpage, iquery);
-            dGvCombatVehicles.DataSource = vehcileParts.ToList();
-            for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
-            {
-                dGvCombatVehicles[0, i].Value = i + 1;
-                dGvCombatVehicles.Rows[i].Cells["EventMoreInfo"].Value = "详细信息";
-            }
-        }
+        //private void VehicleDataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
+        //{
+        //    int all = iquery.Count();
+        //    _vehicleLastPage = (int)Math.Ceiling((double)all / _vehiclePageSize);
+        //    var vehcileParts = QueryByPage(pagesize, curpage, iquery);
+        //    dGvCombatVehicles.DataSource = vehcileParts.ToList();
+        //    for (int i = 0; i < dGvCombatVehicles.RowCount; i++)
+        //    {
+        //        dGvCombatVehicles[0, i].Value = i + 1;
+        //        dGvCombatVehicles.Rows[i].Cells["EventMoreInfo"].Value = "详细信息";
+        //    }
+        //}
     }
 }

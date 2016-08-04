@@ -11,23 +11,22 @@ using EquipmentInformationData;
 namespace AnonManagementSystem
 {
 
-    public partial class AddMaterialForm : Form
+    public partial class AddMaterialForm : Form, IAddModify
     {
-        public delegate void SaveMaterial(Material material);
+        public delegate void SaveMaterial(bool add, int index, Material material);
         public event SaveMaterial SaveMaterialSucess;
 
         private bool _enableedit = false;
         private string _id;
+        public int Index { get; set; }
+
         public string Id
         {
             set { _id = value; }
         }
 
         private bool _add = false;
-        public bool Add
-        {
-            set { _add = value; }
-        }
+        public bool Add { get; set; }
         public bool Enableedit
         {
             set { _enableedit = value; }
@@ -43,7 +42,7 @@ namespace AnonManagementSystem
         {
             Material ma = new Material()
             {
-                No = tbDocNo.Text,//todo：id要修改我string型
+                No = tbDocNo.Text,
                 Name = tbDocName.Text,
                 PaperSize = cmbShape.Text,
                 Pagination = nUdPages.Value.ToString(),
@@ -55,7 +54,7 @@ namespace AnonManagementSystem
                 Content = tbBrief.Text,
                 Equipment = _id
             };
-            SaveMaterialSucess(ma);
+            SaveMaterialSucess?.Invoke(Add, Index, ma);
         }
 
         private void AddMaterialForm_Load(object sender, EventArgs e)

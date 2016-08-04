@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox23 = new System.Windows.Forms.GroupBox();
             this.tbDesci = new System.Windows.Forms.TextBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
-            this.tbAccording = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.gbBaseInfo = new System.Windows.Forms.GroupBox();
             this.dtpPulishDt = new System.Windows.Forms.DateTimePicker();
+            this.tbAccording = new System.Windows.Forms.TextBox();
+            this.cmbPulishUnit = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cmbPulisher = new System.Windows.Forms.ComboBox();
+            this.gbBaseInfo = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.cmbEventName = new System.Windows.Forms.ComboBox();
+            this.cmbAddress = new System.Windows.Forms.ComboBox();
             this.tbCode = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbSpecificType = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.cmbEventType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.cmbAddress = new System.Windows.Forms.ComboBox();
-            this.cmbPulisher = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cmbPulishUnit = new System.Windows.Forms.ComboBox();
             this.dtpEventDt2 = new System.Windows.Forms.DateTimePicker();
-            this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
-            this.cmbEventName = new System.Windows.Forms.ComboBox();
             this.tbSerialNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -75,20 +75,20 @@
             this.tsbAddEventsData = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteEventsData = new System.Windows.Forms.ToolStripButton();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.dgvMatrial = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.tsDetail = new System.Windows.Forms.ToolStrip();
-            this.tsbSave = new System.Windows.Forms.ToolStripButton();
-            this.tsbRestore = new System.Windows.Forms.ToolStripButton();
+            this.dgvEvents = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.tsbDeleteImg = new System.Windows.Forms.ToolStripButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImg = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteImg = new System.Windows.Forms.ToolStripButton();
+            this.tsDetail = new System.Windows.Forms.ToolStrip();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
+            this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -102,7 +102,7 @@
             this.tabPage5.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.groupBox20.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMatrial)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.toolStrip5.SuspendLayout();
@@ -173,12 +173,36 @@
             this.groupBox22.TabIndex = 1;
             this.groupBox22.TabStop = false;
             // 
+            // dtpPulishDt
+            // 
+            this.dtpPulishDt.Location = new System.Drawing.Point(349, 24);
+            this.dtpPulishDt.Name = "dtpPulishDt";
+            this.dtpPulishDt.Size = new System.Drawing.Size(110, 21);
+            this.dtpPulishDt.TabIndex = 80;
+            // 
             // tbAccording
             // 
             this.tbAccording.Location = new System.Drawing.Point(174, 50);
             this.tbAccording.Name = "tbAccording";
             this.tbAccording.Size = new System.Drawing.Size(436, 21);
             this.tbAccording.TabIndex = 57;
+            // 
+            // cmbPulishUnit
+            // 
+            this.cmbPulishUnit.FormattingEnabled = true;
+            this.cmbPulishUnit.Location = new System.Drawing.Point(174, 24);
+            this.cmbPulishUnit.Name = "cmbPulishUnit";
+            this.cmbPulishUnit.Size = new System.Drawing.Size(110, 20);
+            this.cmbPulishUnit.TabIndex = 65;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(115, 28);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(53, 12);
+            this.label17.TabIndex = 66;
+            this.label17.Text = "发文单位";
             // 
             // label31
             // 
@@ -188,6 +212,32 @@
             this.label31.Size = new System.Drawing.Size(29, 12);
             this.label31.TabIndex = 54;
             this.label31.Text = "依据";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(290, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 68;
+            this.label5.Text = "发文时间";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(465, 28);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 12);
+            this.label19.TabIndex = 71;
+            this.label19.Text = "发文人";
+            // 
+            // cmbPulisher
+            // 
+            this.cmbPulisher.FormattingEnabled = true;
+            this.cmbPulisher.Location = new System.Drawing.Point(512, 24);
+            this.cmbPulisher.Name = "cmbPulisher";
+            this.cmbPulisher.Size = new System.Drawing.Size(98, 20);
+            this.cmbPulisher.TabIndex = 69;
             // 
             // gbBaseInfo
             // 
@@ -215,12 +265,14 @@
             this.gbBaseInfo.TabIndex = 0;
             this.gbBaseInfo.TabStop = false;
             // 
-            // dtpPulishDt
+            // label2
             // 
-            this.dtpPulishDt.Location = new System.Drawing.Point(349, 24);
-            this.dtpPulishDt.Name = "dtpPulishDt";
-            this.dtpPulishDt.Size = new System.Drawing.Size(110, 21);
-            this.dtpPulishDt.TabIndex = 80;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(314, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 72;
+            this.label2.Text = "地点";
             // 
             // label3
             // 
@@ -231,6 +283,22 @@
             this.label3.TabIndex = 79;
             this.label3.Text = "——";
             // 
+            // cmbEventName
+            // 
+            this.cmbEventName.FormattingEnabled = true;
+            this.cmbEventName.Location = new System.Drawing.Point(174, 43);
+            this.cmbEventName.Name = "cmbEventName";
+            this.cmbEventName.Size = new System.Drawing.Size(110, 20);
+            this.cmbEventName.TabIndex = 56;
+            // 
+            // cmbAddress
+            // 
+            this.cmbAddress.FormattingEnabled = true;
+            this.cmbAddress.Location = new System.Drawing.Point(349, 43);
+            this.cmbAddress.Name = "cmbAddress";
+            this.cmbAddress.Size = new System.Drawing.Size(261, 20);
+            this.cmbAddress.TabIndex = 70;
+            // 
             // tbCode
             // 
             this.tbCode.Location = new System.Drawing.Point(500, 69);
@@ -238,6 +306,15 @@
             this.tbCode.Size = new System.Drawing.Size(110, 21);
             this.tbCode.TabIndex = 78;
             this.tbCode.Visible = false;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(139, 44);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 12);
+            this.label14.TabIndex = 60;
+            this.label14.Text = "名称";
             // 
             // label23
             // 
@@ -288,81 +365,12 @@
             this.cmbEventType.Size = new System.Drawing.Size(110, 20);
             this.cmbEventType.TabIndex = 73;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(314, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 72;
-            this.label2.Text = "地点";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(465, 28);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 12);
-            this.label19.TabIndex = 71;
-            this.label19.Text = "发文人";
-            // 
-            // cmbAddress
-            // 
-            this.cmbAddress.FormattingEnabled = true;
-            this.cmbAddress.Location = new System.Drawing.Point(349, 43);
-            this.cmbAddress.Name = "cmbAddress";
-            this.cmbAddress.Size = new System.Drawing.Size(261, 20);
-            this.cmbAddress.TabIndex = 70;
-            // 
-            // cmbPulisher
-            // 
-            this.cmbPulisher.FormattingEnabled = true;
-            this.cmbPulisher.Location = new System.Drawing.Point(512, 24);
-            this.cmbPulisher.Name = "cmbPulisher";
-            this.cmbPulisher.Size = new System.Drawing.Size(98, 20);
-            this.cmbPulisher.TabIndex = 69;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(290, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 68;
-            this.label5.Text = "发文时间";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(115, 28);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(53, 12);
-            this.label17.TabIndex = 66;
-            this.label17.Text = "发文单位";
-            // 
-            // cmbPulishUnit
-            // 
-            this.cmbPulishUnit.FormattingEnabled = true;
-            this.cmbPulishUnit.Location = new System.Drawing.Point(174, 24);
-            this.cmbPulishUnit.Name = "cmbPulishUnit";
-            this.cmbPulishUnit.Size = new System.Drawing.Size(110, 20);
-            this.cmbPulishUnit.TabIndex = 65;
-            // 
             // dtpEventDt2
             // 
             this.dtpEventDt2.Location = new System.Drawing.Point(500, 16);
             this.dtpEventDt2.Name = "dtpEventDt2";
             this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt2.TabIndex = 61;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(139, 44);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(29, 12);
-            this.label14.TabIndex = 60;
-            this.label14.Text = "名称";
             // 
             // label12
             // 
@@ -379,14 +387,6 @@
             this.dtpEventDt1.Name = "dtpEventDt1";
             this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt1.TabIndex = 57;
-            // 
-            // cmbEventName
-            // 
-            this.cmbEventName.FormattingEnabled = true;
-            this.cmbEventName.Location = new System.Drawing.Point(174, 43);
-            this.cmbEventName.Name = "cmbEventName";
-            this.cmbEventName.Size = new System.Drawing.Size(110, 20);
-            this.cmbEventName.TabIndex = 56;
             // 
             // tbSerialNo
             // 
@@ -539,54 +539,80 @@
             // 
             // groupBox20
             // 
-            this.groupBox20.Controls.Add(this.dgvMatrial);
+            this.groupBox20.Controls.Add(this.dgvEvents);
             this.groupBox20.Location = new System.Drawing.Point(8, 28);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(760, 474);
             this.groupBox20.TabIndex = 4;
             this.groupBox20.TabStop = false;
             // 
-            // dgvMatrial
+            // dgvEvents
             // 
-            this.dgvMatrial.AllowUserToAddRows = false;
-            this.dgvMatrial.AllowUserToDeleteRows = false;
-            this.dgvMatrial.AllowUserToResizeColumns = false;
-            this.dgvMatrial.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvMatrial.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvMatrial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMatrial.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMatrial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvMatrial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMatrial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvEvents.AllowUserToDeleteRows = false;
+            this.dgvEvents.AllowUserToResizeColumns = false;
+            this.dgvEvents.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEvents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
             this.Column1,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewLinkColumn1});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMatrial.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvMatrial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMatrial.Location = new System.Drawing.Point(3, 17);
-            this.dgvMatrial.MultiSelect = false;
-            this.dgvMatrial.Name = "dgvMatrial";
-            this.dgvMatrial.RowHeadersVisible = false;
-            this.dgvMatrial.RowTemplate.Height = 23;
-            this.dgvMatrial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMatrial.Size = new System.Drawing.Size(754, 454);
-            this.dgvMatrial.TabIndex = 1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEvents.Location = new System.Drawing.Point(3, 17);
+            this.dgvEvents.MultiSelect = false;
+            this.dgvEvents.Name = "dgvEvents";
+            this.dgvEvents.RowHeadersVisible = false;
+            this.dgvEvents.RowTemplate.Height = 23;
+            this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEvents.Size = new System.Drawing.Size(754, 454);
+            this.dgvEvents.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "资料编号";
+            this.Column1.Name = "Column1";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn6.HeaderText = "资料名称";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewLinkColumn1
+            // 
+            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
+            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
+            this.dataGridViewLinkColumn1.ReadOnly = true;
+            this.dataGridViewLinkColumn1.Text = "";
             // 
             // tabPage2
             // 
@@ -630,6 +656,24 @@
             this.toolStrip5.TabIndex = 10;
             this.toolStrip5.Text = "toolStrip5";
             // 
+            // tsbAddImg
+            // 
+            this.tsbAddImg.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddImg.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddImg.Name = "tsbAddImg";
+            this.tsbAddImg.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddImg.Text = "添加";
+            this.tsbAddImg.Click += new System.EventHandler(this.tsbAddImg_Click);
+            // 
+            // tsbDeleteImg
+            // 
+            this.tsbDeleteImg.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteImg.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteImg.Name = "tsbDeleteImg";
+            this.tsbDeleteImg.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteImg.Text = "删除";
+            this.tsbDeleteImg.Click += new System.EventHandler(this.tsbDeleteImg_Click);
+            // 
             // tsDetail
             // 
             this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -657,51 +701,6 @@
             this.tsbRestore.Name = "tsbRestore";
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "资料编号";
-            this.Column1.Name = "Column1";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn6.HeaderText = "资料名称";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewLinkColumn1
-            // 
-            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
-            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
-            this.dataGridViewLinkColumn1.ReadOnly = true;
-            this.dataGridViewLinkColumn1.Text = "";
-            // 
-            // tsbDeleteImg
-            // 
-            this.tsbDeleteImg.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.tsbDeleteImg.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDeleteImg.Name = "tsbDeleteImg";
-            this.tsbDeleteImg.Size = new System.Drawing.Size(52, 22);
-            this.tsbDeleteImg.Text = "删除";
-            this.tsbDeleteImg.Click += new System.EventHandler(this.tsbDeleteImg_Click);
-            // 
-            // tsbAddImg
-            // 
-            this.tsbAddImg.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.tsbAddImg.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddImg.Name = "tsbAddImg";
-            this.tsbAddImg.Size = new System.Drawing.Size(52, 22);
-            this.tsbAddImg.Text = "添加";
-            this.tsbAddImg.Click += new System.EventHandler(this.tsbAddImg_Click);
             // 
             // AddEventsForm
             // 
@@ -734,7 +733,7 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.groupBox20.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMatrial)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -764,7 +763,7 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.GroupBox groupBox20;
-        private System.Windows.Forms.DataGridView dgvMatrial;
+        private System.Windows.Forms.DataGridView dgvEvents;
         private System.Windows.Forms.ToolStrip tsDetail;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton tsbRestore;

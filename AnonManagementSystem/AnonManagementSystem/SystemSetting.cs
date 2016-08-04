@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 using EquipmentInformationData;
@@ -10,6 +11,7 @@ namespace AnonManagementSystem
     {
         readonly SystemManagerEntities _sysManagerEntities = new SystemManagerEntities();
         private List<string> _alluser = new List<string>();
+        //private UserManage um;
 
         public SystemSetting()
         {
@@ -19,29 +21,36 @@ namespace AnonManagementSystem
         private void AddModify(bool modify, int rowindex, int id, string user, string pwd, bool enableedit)
         {
             int j = dgvUserManage.RowCount;
+
+
             if (modify)
             {
                 dgvUserManage[1, rowindex].Value = user;
                 dgvUserManage[2, rowindex].Value = enableedit ? "可写" : "只读";
                 dgvUserManage[3, rowindex].Value = pwd;
 
-                var sms = from u in _sysManagerEntities.UserManage
-                          where u.ID == id
-                          select u;
-                sms.First().User = user;
-                sms.First().Password = pwd;
-                sms.First().Edit = enableedit;
+                if (id != -1)
+                {
+                    var sms = from u in _sysManagerEntities.UserManage
+                              where u.ID == id
+                              select u;
+                    sms.First().User = user;
+                    sms.First().Password = pwd;
+                    sms.First().Edit = enableedit;
+                }
+                else
+                {
+                    var sms = from u in _sysManagerEntities.UserManage
+                              where (_sysManagerEntities.Entry(u).State == EntityState.Added)
+                              select u;
+                    //var us = from userManage in sms
+                    //    where userManage.User == user
+                    //    select userManage;
+                    //_sysManagerEntities.UserManage.Remove(us.First());
+                    dgvUserManage.Rows.RemoveAt(rowindex);
+                }
                 //修改
             }
-            else
-            {
-                if (rowindex != -1)
-                {//增加
-                    dgvUserManage.Rows.RemoveAt(rowindex);
-                    var sms = from u in _sysManagerEntities.UserManage
-                              select u;
-                    _sysManagerEntities.UserManage.Remove(sms.First());
-                }
                 dgvUserManage.Rows.Add(1);
                 int i = dgvUserManage.RowCount - 1;
                 dgvUserManage[0, i].Value = i + 1;
@@ -50,7 +59,9 @@ namespace AnonManagementSystem
                 dgvUserManage[3, i].Value = pwd;
                 UserManage um = new UserManage() { Edit = enableedit, Password = pwd, User = user };
                 _sysManagerEntities.UserManage.Add(um);
-            }
+            //else
+            //{//增加
+            //}
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -92,21 +103,17 @@ namespace AnonManagementSystem
             if (dgvUserManage.CurrentRow != null)
             {
                 int rowindex = dgvUserManage.CurrentRow.Index;
-                if (dgvUserManage[4, rowindex].Value != null)
+                if (MessageBox.Show(@"确定是否删除", @"提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    if (MessageBox.Show(@"确定是否删除", @"提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    if (dgvUserManage[4, rowindex].Value != null)
                     {
-                        int id = int.Parse(dgvUserManage[3, rowindex].Value.ToString());
+                        int id = int.Parse(dgvUserManage[4, rowindex].Value.ToString());
                         var sms = from u in _sysManagerEntities.UserManage
                                   where u.ID == id
                                   select u;
                         _sysManagerEntities.UserManage.Remove(sms.First());
-                        dgvUserManage.Rows.RemoveAt(rowindex);
                     }
-                    else
-                    {
-                        dgvUserManage.Rows.RemoveAt(rowindex);
-                    }
+                    dgvUserManage.Rows.RemoveAt(rowindex);
                 }
             }
         }
@@ -128,7 +135,7 @@ namespace AnonManagementSystem
                 }
                 else
                 {
-                    addModifyUser.Modify = false;
+                    addModifyUser.Modify = true;
                     addModifyUser.RowIndex = rowindex;
                     addModifyUser.User = dgvUserManage[1, rowindex].Value.ToString();
                     addModifyUser.Enableedit = dgvUserManage[2, rowindex].Value.ToString().Equals("可写");
