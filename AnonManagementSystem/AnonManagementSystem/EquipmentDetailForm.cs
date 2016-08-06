@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,14 +23,15 @@ namespace AnonManagementSystem
         private DbRawSqlQuery<Material> _materials;
         private DbRawSqlQuery<CombatVehicles> _vehicleses;
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
-        private List<EquipmentImage> equipImageList = new List<EquipmentImage>();
-        private Dictionary<string, List<EventData>> eventDataDictionary = new Dictionary<string, List<EventData>>();
-        private Dictionary<string, List<EventsImage>> eventsImgDictionary = new Dictionary<string, List<EventsImage>>();
-        private List<Events> eventsList = new List<Events>();
-        private List<Material> materList = new List<Material>();
-        private Dictionary<string, OilEngine> oilEnginesDictionary = new Dictionary<string, OilEngine>();
-        private Dictionary<string, List<OilEngineImage>> oilImgDictionary = new Dictionary<string, List<OilEngineImage>>();
-        private Dictionary<string, List<VehiclesImage>> vehImgDictionary = new Dictionary<string, List<VehiclesImage>>();
+        private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
+        private Dictionary<string, List<EventData>> _eventDataDictionary = new Dictionary<string, List<EventData>>();
+        private Dictionary<string, List<EventsImage>> _eventsImgDictionary = new Dictionary<string, List<EventsImage>>();
+        private List<Events> _eventsList = new List<Events>();
+        private List<Material> _materList = new List<Material>();
+        private Dictionary<string, OilEngine> _oilEnginesDictionary = new Dictionary<string, OilEngine>();
+        private Dictionary<string, List<OilEngineImage>> _oilImgDictionary = new Dictionary<string, List<OilEngineImage>>();
+        private Dictionary<string, List<VehiclesImage>> _vehImgDictionary = new Dictionary<string, List<VehiclesImage>>();
+        private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
         public EquipmentDetailForm()
         {
             InitializeComponent();
@@ -54,14 +56,69 @@ namespace AnonManagementSystem
             //todo:界面更新
             if (add)
             {
-                eventsList.Add(events);
-                dgvEvents.DataSource = eventsList;
-                eventDataDictionary.Add(events.No, eventdatalist);
-                eventsImgDictionary.Add(events.No, eventimglist);
+                _eventsList.Add(events);
+                dgvEvents.DataSource = _eventsList;
+                _eventDataDictionary.Add(events.No, eventdatalist);
+                _eventsImgDictionary.Add(events.No, eventimglist);
 
             }
             else
             {
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.StartTime;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Address;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.EndTime;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.EventType;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.SpecificType;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Code;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.PublishUnit;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.PublishDate;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Publisher;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.According;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.PeopleDescri;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.ProcessDescri;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.HandleStep;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Problem;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Remarks;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Equipment;
+
+                var pointevent = (from ev in _equipEntities.Events
+                                  where ev.No == events.No
+                                  select ev).First();
+                pointevent.Name = events.Name;
+                pointevent.StartTime = events.StartTime;
+                pointevent.Address = events.Address;
+                pointevent.EndTime = events.EndTime;
+                pointevent.EventType = events.EventType;
+                pointevent.SpecificType = events.SpecificType;
+                pointevent.Code = events.Code;
+                pointevent.PublishUnit = events.PublishUnit;
+                pointevent.PublishDate = events.PublishDate;
+                pointevent.Publisher = events.Publisher;
+                pointevent.According = events.According;
+                pointevent.PeopleDescri = events.PeopleDescri;
+                pointevent.ProcessDescri = events.ProcessDescri;
+                pointevent.HandleStep = events.HandleStep;
+                pointevent.Problem = events.Problem;
+                pointevent.Remarks = events.Remarks;
+                pointevent.Equipment = events.Equipment;
+
+                foreach (var eventData in eventdatalist)
+                {
+                    var apointed = from ed in _equipEntities.EventData
+                        where ed.ID == eventData.ID && ed.EventsNo == events.No
+                        select ed;
+                    if (apointed.Any())
+                    {
+                        
+                    }
+                    else
+                    {
+                        _equipEntities.EventData.Remove();
+                    }
+                }
+
+
 
             }
         }
@@ -70,7 +127,8 @@ namespace AnonManagementSystem
         {
             if (add)
             {
-                materList.Add(material);
+                _materList.Add(material);
+                dgvMaterial.DataSource = _materList;
             }
             else
             {
@@ -84,9 +142,10 @@ namespace AnonManagementSystem
             if (add)
             {
                 _comVehList.Add(combatVehicles);
-                vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
-                oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
-                oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
+                dGvCombatVehicles.DataSource = _comVehList;
+                _vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
+                _oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
+                _oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
             }
             else
             {
@@ -103,13 +162,30 @@ namespace AnonManagementSystem
         {
             if (e.ColumnIndex >= 0 && dGvCombatVehicles.Columns[e.ColumnIndex].Name.Equals("VehcileMoreInfo"))
             {
-                VehicleDetailForm equipDetailForm = new VehicleDetailForm()
+                VehicleDetailForm vehicleDetailForm = new VehicleDetailForm()
                 {
                     Enableedit = _enableedit,
+                    Index = e.RowIndex,
                     Add = false,
                     Id = dGvCombatVehicles.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
                 };
-                equipDetailForm.Show();
+                vehicleDetailForm.SaveVehicleSucess += AddVehicleSucess;
+                vehicleDetailForm.Show();
+            }
+        }
+        private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && dgvEvents.Columns[e.ColumnIndex].Name.Equals("EventMoreInfo"))
+            {
+                AddEventsForm eventDetailForm = new AddEventsForm()
+                {
+                    Enableedit = _enableedit,
+                    Index = e.RowIndex,
+                    Add = false,
+                    Id = dgvEvents.Rows[e.RowIndex].Cells["No"].Value.ToString()
+                };
+                eventDetailForm.SaveEventsSucess += AddEventsSucess;
+                eventDetailForm.Show();
             }
         }
 
@@ -117,13 +193,15 @@ namespace AnonManagementSystem
         {
             if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("MaterialMoreInfo"))
             {
-                AddMaterialForm equipDetailForm = new AddMaterialForm()
+                AddMaterialForm materialDetailForm = new AddMaterialForm()
                 {
                     Enableedit = _enableedit,
+                    Index = e.RowIndex,
                     Add = false,
                     Id = dgvMaterial.Rows[e.RowIndex].Cells["No"].Value.ToString()
                 };
-                equipDetailForm.Show();
+                materialDetailForm.SaveMaterialSucess += AddMaterialSucess;
+                materialDetailForm.Show();
             }
             if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("DocumentLink"))
             {
@@ -290,7 +368,7 @@ namespace AnonManagementSystem
                     Images = imgBytes,
                     SerialNo = tbSerialNo.Text
                 };
-                equipImageList.Add(eqImg);
+                _equipImageList.Add(eqImg);
                 //todo：界面增加
             }
         }
@@ -401,6 +479,7 @@ namespace AnonManagementSystem
             }
             eqEntities.SaveChanges();
         }
+
 
         //private void VehicleDataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
         //{
