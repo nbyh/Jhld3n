@@ -64,23 +64,12 @@ namespace AnonManagementSystem
             }
             else
             {
+                dgvEvents.Rows[index].Cells["No"].Value = events.No;
                 dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.StartTime;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Address;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.EndTime;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.EventType;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.SpecificType;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Code;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.PublishUnit;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.PublishDate;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Publisher;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.According;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.PeopleDescri;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.ProcessDescri;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.HandleStep;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Problem;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Remarks;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Equipment;
+                dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
+                dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
+                dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
+                dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
 
                 var pointevent = (from ev in _equipEntities.Events
                                   where ev.No == events.No
@@ -103,23 +92,40 @@ namespace AnonManagementSystem
                 pointevent.Remarks = events.Remarks;
                 pointevent.Equipment = events.Equipment;
 
-                foreach (var eventData in eventdatalist)
+                List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
+                var apointed = from ed in _equipEntities.EventData
+                               where ed.EventsNo == events.No
+                               select ed;
+                List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
+                if (eventdatalist.Any())
                 {
-                    var apointed = from ed in _equipEntities.EventData
-                        where ed.ID == eventData.ID && ed.EventsNo == events.No
-                        select ed;
-                    if (apointed.Any())
+                    foreach (var data in eventdatalist)
                     {
-                        
-                    }
-                    else
-                    {
-                        _equipEntities.EventData.Remove();
+                        if (!sevdnoList.Contains(data.ID))
+                        {//todo：增加
+                            _equipEntities.EventData.Add(data);
+                        }
+                        else
+                        {//todo：修改
+                            var evd = (from ed in _equipEntities.EventData
+                                       where ed.EventsNo == events.No && ed.ID == data.ID
+                                       select ed).First();
+                            evd.Name = data.Name;
+                            evd.Spot = data.Spot;
+                            evd.EventsNo = data.EventsNo;
+                        }
                     }
                 }
-
-
-
+                if (apointed.Any())
+                {
+                    foreach (var data in apointed)
+                    {
+                        if (!devdnoList.Contains(data.ID))
+                        {
+                            _equipEntities.EventData.Remove(data);
+                        }
+                    }
+                }
             }
         }
 
@@ -130,9 +136,29 @@ namespace AnonManagementSystem
                 _materList.Add(material);
                 dgvMaterial.DataSource = _materList;
             }
-            else
             {
+                dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
+                dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
+                dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
+                dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
+                dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
+                dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
+                dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
 
+                var pointmaterial = (from ma in _equipEntities.Material
+                                  where ma.No == material.No
+                                  select ma).First();
+                pointmaterial.Name = material.Name;
+                pointmaterial.Type = material.Type;
+                pointmaterial.PaperSize = material.PaperSize;
+                pointmaterial.Pagination = material.Pagination;
+                pointmaterial.Edition = material.Edition;
+                pointmaterial.Volume = material.Volume;
+                pointmaterial.Date = material.Date;
+                pointmaterial.DocumentLink = material.DocumentLink;
+                pointmaterial.StoreSpot = material.StoreSpot;
+                pointmaterial.Content = material.Content;
+                pointmaterial.Equipment = material.Equipment;
             }
             //todo:界面增加
         }
@@ -142,14 +168,79 @@ namespace AnonManagementSystem
             if (add)
             {
                 _comVehList.Add(combatVehicles);
-                dGvCombatVehicles.DataSource = _comVehList;
+                dgvCombatVehicles.DataSource = _comVehList;
                 _vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
                 _oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
                 _oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
             }
-            else
             {
+                dgvCombatVehicles.Rows[index].Cells["SerialNo"].Value = combatVehicles.SerialNo;
+                dgvCombatVehicles.Rows[index].Cells["cvName"].Value = combatVehicles.Name;
+                dgvCombatVehicles.Rows[index].Cells["cvNo"].Value = combatVehicles.VehiclesNo;
+                dgvCombatVehicles.Rows[index].Cells["cvModel"].Value = combatVehicles.Model;
+                dgvCombatVehicles.Rows[index].Cells["cvFactory"].Value = combatVehicles.Factory;
+                dgvCombatVehicles.Rows[index].Cells["cvProductionDate"].Value = combatVehicles.ProductionDate;
+                dgvCombatVehicles.Rows[index].Cells["cvMotorModel"].Value = combatVehicles.MotorModel;
+                dgvCombatVehicles.Rows[index].Cells["cvTechCondition"].Value = combatVehicles.TechCondition;
 
+                var pointcv = (from cv in _equipEntities.CombatVehicles
+                                  where cv.SerialNo == combatVehicles.SerialNo
+                                  select cv).First();
+                pointcv.Name = combatVehicles.Name;
+                pointcv.Model = combatVehicles.Model;
+                pointcv.VehiclesNo = combatVehicles.VehiclesNo;
+                pointcv.MotorModel = combatVehicles.MotorModel;
+                pointcv.TechCondition = combatVehicles.TechCondition;
+                pointcv.Factory = combatVehicles.Factory;
+                pointcv.ProductionDate = combatVehicles.ProductionDate;
+                pointcv.Mass = combatVehicles.Mass;
+                pointcv.Tankage = combatVehicles.Tankage;
+                pointcv.OverallSize = combatVehicles.OverallSize;
+                pointcv.FuelType = combatVehicles.FuelType;
+                pointcv.DrivingModel = combatVehicles.DrivingModel;
+                pointcv.Mileage = combatVehicles.Mileage;
+                pointcv.Output = combatVehicles.Output;
+                pointcv.LicenseCarry = combatVehicles.LicenseCarry;
+                pointcv.VehicleChargers = combatVehicles.VehicleChargers;
+                pointcv.VehicleSpotNo = combatVehicles.VehicleSpotNo;
+                pointcv.VehicleDescri = combatVehicles.VehicleDescri;
+                pointcv.CombineOe = combatVehicles.CombineOe;
+                pointcv.Equipment = combatVehicles.Equipment;
+
+                List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
+                var apointed = from ed in _equipEntities.EventData
+                               where ed.EventsNo == combatVehicles.No
+                               select ed;
+                List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
+                if (eventdatalist.Any())
+                {
+                    foreach (var data in eventdatalist)
+                    {
+                        if (!sevdnoList.Contains(data.ID))
+                        {//todo：增加
+                            _equipEntities.EventData.Add(data);
+                        }
+                        else
+                        {//todo：修改
+                            var evd = (from ed in _equipEntities.EventData
+                                       where ed.EventsNo == combatVehicles.No && ed.ID == data.ID
+                                       select ed).First();
+                            evd.Name = data.Name;
+                            evd.Spot = data.Spot;
+                            evd.EventsNo = data.EventsNo;
+                        }
+                    }
+                }
+                if (apointed.Any())
+                {
+                    foreach (var data in apointed)
+                    {
+                        if (!devdnoList.Contains(data.ID))
+                        {
+                            _equipEntities.EventData.Remove(data);
+                        }
+                    }
+                }
             }
             //todo:界面增加
         }
@@ -160,14 +251,14 @@ namespace AnonManagementSystem
 
         private void dGvCombatVehicles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && dGvCombatVehicles.Columns[e.ColumnIndex].Name.Equals("VehcileMoreInfo"))
+            if (e.ColumnIndex >= 0 && dgvCombatVehicles.Columns[e.ColumnIndex].Name.Equals("VehcileMoreInfo"))
             {
                 VehicleDetailForm vehicleDetailForm = new VehicleDetailForm()
                 {
                     Enableedit = _enableedit,
                     Index = e.RowIndex,
                     Add = false,
-                    Id = dGvCombatVehicles.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
+                    Id = dgvCombatVehicles.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
                 };
                 vehicleDetailForm.SaveVehicleSucess += AddVehicleSucess;
                 vehicleDetailForm.Show();
@@ -302,7 +393,7 @@ namespace AnonManagementSystem
 
                 var vechiledata = (from v in equipEntities.CombatVehicles
                                    select v).ToList();
-                dGvCombatVehicles.DataSource = vechiledata;
+                dgvCombatVehicles.DataSource = vechiledata;
 
                 var events = (from ev in equipEntities.Events select ev).ToList();
                 dgvEvents.DataSource = events;
