@@ -4,34 +4,35 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VehiclesImagesModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Work\Documents\GitHub\Jhld3n\AnonManagementSystem\Reference\VehiclesImages.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VehiclesImagesModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\Reference\VehiclesImages.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="VehiclesImage">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
           <Property Name="Images" Type="blob" />
           <Property Name="SerialNo" Type="nvarchar" MaxLength="254" />
         </EntityType>
         <EntityContainer Name="VehiclesImagesModelStoreContainer">
           <EntitySet Name="VehiclesImage" EntityType="Self.VehiclesImage" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VehiclesImagesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VehiclesImagesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="VehiclesImage" EntityType="VehiclesImagesModel.VehiclesImage" />
+        </EntityContainer>
         <EntityType Name="VehiclesImage">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="Images" Type="Binary" MaxLength="2147483647" FixedLength="false" />
           <Property Name="SerialNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="VehiclesImagesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="VehiclesImage" EntityType="Self.VehiclesImage" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,9 +42,10 @@
           <EntitySetMapping Name="VehiclesImage">
             <EntityTypeMapping TypeName="VehiclesImagesModel.VehiclesImage">
               <MappingFragment StoreEntitySet="VehiclesImage">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

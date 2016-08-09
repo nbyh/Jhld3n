@@ -13,10 +13,10 @@ namespace EquipmentInformationData
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EquipmentImagesEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public EquipmentImagesEntities()
-            : base("name=EquipmentImagesEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

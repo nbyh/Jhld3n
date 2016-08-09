@@ -15,6 +15,7 @@ namespace EquipmentInformationData
     public partial class EventsImage
     {
         public long ID { get; set; }
+        public string Name { get; set; }
         public byte[] Images { get; set; }
         public string SerialNo { get; set; }
     }

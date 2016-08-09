@@ -190,7 +190,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="EquipmentInformation.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EquipmentInformation.Designer.cs</LastGenOutput>

@@ -243,8 +243,8 @@ namespace AnonManagementSystem
                 #endregion
 
 
-                List<string> devdnoList = vehiclesImgList.Select(ed => ed.SerialNo).ToList();
-                var apointed = from ed in _equipEntities.EventData
+                List<string> devdnoList = vehiclesImgList.Select(ed => ed.Name).ToList();
+                var apointed = from ed in _equipEntities.VehicleImages
                                where ed.EventsNo == combatVehicles.No
                                select ed;
                 List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
@@ -492,6 +492,7 @@ namespace AnonManagementSystem
                 fs.Close();
                 EquipmentImage eqImg = new EquipmentImage
                 {
+                    Name=imgpath,
                     Images = imgBytes,
                     SerialNo = tbSerialNo.Text
                 };
