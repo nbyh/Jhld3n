@@ -53,7 +53,6 @@ namespace AnonManagementSystem
 
         private void AddEventsSucess(bool add, int index, Events events, List<EventData> eventdatalist, List<EventsImage> eventimglist)
         {
-            //todo:界面更新
             if (add)
             {
                 _eventsList.Add(events);
@@ -121,7 +120,7 @@ namespace AnonManagementSystem
                     foreach (var data in apointed)
                     {
                         if (!devdnoList.Contains(data.ID))
-                        {
+                        {//todo:删除
                             _equipEntities.EventData.Remove(data);
                         }
                     }
@@ -160,20 +159,26 @@ namespace AnonManagementSystem
                 pointmaterial.Content = material.Content;
                 pointmaterial.Equipment = material.Equipment;
             }
-            //todo:界面增加
         }
 
         private void AddVehicleSucess(bool add, int index, CombatVehicles combatVehicles, List<VehiclesImage> vehiclesImgList, OilEngine oilEngine, List<OilEngineImage> oilImgList)
         {
             if (add)
             {
+                #region 增加
+
                 _comVehList.Add(combatVehicles);
                 dgvCombatVehicles.DataSource = _comVehList;
                 _vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
                 _oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
                 _oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
+
+                #endregion
             }
+            else
             {
+                #region 界面更新
+
                 dgvCombatVehicles.Rows[index].Cells["SerialNo"].Value = combatVehicles.SerialNo;
                 dgvCombatVehicles.Rows[index].Cells["cvName"].Value = combatVehicles.Name;
                 dgvCombatVehicles.Rows[index].Cells["cvNo"].Value = combatVehicles.VehiclesNo;
@@ -183,9 +188,13 @@ namespace AnonManagementSystem
                 dgvCombatVehicles.Rows[index].Cells["cvMotorModel"].Value = combatVehicles.MotorModel;
                 dgvCombatVehicles.Rows[index].Cells["cvTechCondition"].Value = combatVehicles.TechCondition;
 
+                #endregion
+                
+                #region 车辆更新
+
                 var pointcv = (from cv in _equipEntities.CombatVehicles
-                                  where cv.SerialNo == combatVehicles.SerialNo
-                                  select cv).First();
+                    where cv.SerialNo == combatVehicles.SerialNo
+                    select cv).First();
                 pointcv.Name = combatVehicles.Name;
                 pointcv.Model = combatVehicles.Model;
                 pointcv.VehiclesNo = combatVehicles.VehiclesNo;
@@ -207,7 +216,34 @@ namespace AnonManagementSystem
                 pointcv.CombineOe = combatVehicles.CombineOe;
                 pointcv.Equipment = combatVehicles.Equipment;
 
-                List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
+                #endregion
+                
+                #region 油机更新
+
+                var pointoe = (from oe in _equipEntities.OilEngine
+                    where oe.OeNo == oilEngine.OeNo
+                    select oe).First();
+                pointoe.OeModel = oilEngine.OeModel;
+                pointoe.OutPower = oilEngine.OutPower;
+                pointoe.TechCondition = oilEngine.TechCondition;
+                pointoe.WorkHour = oilEngine.WorkHour;
+                pointoe.OeFactory = oilEngine.OeFactory;
+                pointoe.OeDate = oilEngine.OeDate;
+                pointoe.OeOemNo = oilEngine.OeOemNo;
+                pointoe.MotorNo = oilEngine.MotorNo;
+                pointoe.MotorPower = oilEngine.MotorPower;
+                pointoe.MotorFuel = oilEngine.MotorFuel;
+                pointoe.MotorTankage = oilEngine.MotorTankage;
+                pointoe.MotorFactory = oilEngine.MotorFactory;
+                pointoe.MotorDate = oilEngine.MotorDate;
+                pointoe.MotorOemNo = oilEngine.MotorOemNo;
+                pointoe.FaultDescri = oilEngine.FaultDescri;
+                pointoe.Vehicle = oilEngine.Vehicle;
+
+                #endregion
+
+
+                List<string> devdnoList = vehiclesImgList.Select(ed => ed.SerialNo).ToList();
                 var apointed = from ed in _equipEntities.EventData
                                where ed.EventsNo == combatVehicles.No
                                select ed;
