@@ -31,7 +31,7 @@
           <Property Name="Images" Type="Binary" MaxLength="2147483647" FixedLength="false" />
           <Property Name="SerialNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EquipImageEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EquipmentImage" EntityType="Self.EquipmentImage" />
         </EntityContainer>
       </Schema>
@@ -39,7 +39,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EquipmentImagesModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="EquipmentImagesModelStoreContainer" CdmEntityContainer="EquipImageEntities">
           <EntitySetMapping Name="EquipmentImage">
             <EntityTypeMapping TypeName="EquipmentImagesModel.EquipmentImage">
               <MappingFragment StoreEntitySet="EquipmentImage">

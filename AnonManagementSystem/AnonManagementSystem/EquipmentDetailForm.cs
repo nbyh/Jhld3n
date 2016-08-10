@@ -17,21 +17,23 @@ namespace AnonManagementSystem
     public partial class EquipmentDetailForm : Form, IAddModify
     {
         private bool _add = false;
-        private bool _enableedit = false;
-        private string _id;
-        private DbRawSqlQuery<Events> _events;
-        private DbRawSqlQuery<Material> _materials;
-        private DbRawSqlQuery<CombatVehicles> _vehicleses;
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
-        private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
-        private Dictionary<string, List<EventData>> _eventDataDictionary = new Dictionary<string, List<EventData>>();
-        private Dictionary<string, List<EventsImage>> _eventsImgDictionary = new Dictionary<string, List<EventsImage>>();
-        private List<Events> _eventsList = new List<Events>();
-        private List<Material> _materList = new List<Material>();
-        private Dictionary<string, OilEngine> _oilEnginesDictionary = new Dictionary<string, OilEngine>();
-        private Dictionary<string, List<OilEngineImage>> _oilImgDictionary = new Dictionary<string, List<OilEngineImage>>();
-        private Dictionary<string, List<VehiclesImage>> _vehImgDictionary = new Dictionary<string, List<VehiclesImage>>();
+        private bool _enableedit = false;
         private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
+        private EquipImageEntities _equipImageEntities = new EquipImageEntities();
+        private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
+        private List<EventData> _eventDataList = new List<EventData>();
+        private EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
+        private List<EventsImage> _eventsImgList = new List<EventsImage>();
+        private List<Events> _eventsList = new List<Events>();
+        private string _id;
+        private List<Material> _materList = new List<Material>();
+        private OilEngine _oilEngines;
+        private OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
+        private List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
+        private VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
+        private List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
+
         public EquipmentDetailForm()
         {
             InitializeComponent();
@@ -57,18 +59,23 @@ namespace AnonManagementSystem
             {
                 _eventsList.Add(events);
                 dgvEvents.DataSource = _eventsList;
-                _eventDataDictionary.Add(events.No, eventdatalist);
-                _eventsImgDictionary.Add(events.No, eventimglist);
-
+                _eventDataList.AddRange(eventdatalist);
+                _eventsImgList.AddRange(eventimglist);
             }
             else
             {
+                #region 界面更新
+
                 dgvEvents.Rows[index].Cells["No"].Value = events.No;
                 dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
                 dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
                 dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
                 dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
                 dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
+
+                #endregion
+
+                #region 活动事件更新
 
                 var pointevent = (from ev in _equipEntities.Events
                                   where ev.No == events.No
@@ -91,6 +98,41 @@ namespace AnonManagementSystem
                 pointevent.Remarks = events.Remarks;
                 pointevent.Equipment = events.Equipment;
 
+                #endregion
+
+                #region 活动事件图片更新
+
+                List<string> deinoList = eventimglist.Select(ed => ed.Name).ToList();
+                var apointei = from ed in _eventsImageEntities.EventsImage
+                               where ed.SerialNo == events.No
+                               select ed;
+                List<string> seinoList = apointei.Select(ed => ed.Name).ToList();
+                if (eventimglist.Any())
+                {
+                    foreach (var data in eventimglist)
+                    {
+                        if (!seinoList.Contains(data.Name))
+                        {
+                            //todo：增加
+                            _eventsImageEntities.EventsImage.Add(data);
+                        }
+                    }
+                }
+                if (apointei.Any())
+                {
+                    foreach (var data in apointei)
+                    {
+                        if (!deinoList.Contains(data.Name))
+                        {
+                            _eventsImageEntities.EventsImage.Remove(data);
+                        }
+                    }
+                }
+
+                #endregion
+
+                #region 事件数据更新
+
                 List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
                 var apointed = from ed in _equipEntities.EventData
                                where ed.EventsNo == events.No
@@ -101,11 +143,13 @@ namespace AnonManagementSystem
                     foreach (var data in eventdatalist)
                     {
                         if (!sevdnoList.Contains(data.ID))
-                        {//todo：增加
+                        {
+                            //todo：增加
                             _equipEntities.EventData.Add(data);
                         }
                         else
-                        {//todo：修改
+                        {
+                            //todo：修改
                             var evd = (from ed in _equipEntities.EventData
                                        where ed.EventsNo == events.No && ed.ID == data.ID
                                        select ed).First();
@@ -120,11 +164,14 @@ namespace AnonManagementSystem
                     foreach (var data in apointed)
                     {
                         if (!devdnoList.Contains(data.ID))
-                        {//todo:删除
+                        {
+                            //todo:删除
                             _equipEntities.EventData.Remove(data);
                         }
                     }
                 }
+
+                #endregion
             }
         }
 
@@ -136,6 +183,8 @@ namespace AnonManagementSystem
                 dgvMaterial.DataSource = _materList;
             }
             {
+                #region 界面更新
+
                 dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
                 dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
                 dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
@@ -144,9 +193,13 @@ namespace AnonManagementSystem
                 dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
                 dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
 
+                #endregion
+
+                #region 材料数据更新
+
                 var pointmaterial = (from ma in _equipEntities.Material
-                                  where ma.No == material.No
-                                  select ma).First();
+                                     where ma.No == material.No
+                                     select ma).First();
                 pointmaterial.Name = material.Name;
                 pointmaterial.Type = material.Type;
                 pointmaterial.PaperSize = material.PaperSize;
@@ -158,6 +211,9 @@ namespace AnonManagementSystem
                 pointmaterial.StoreSpot = material.StoreSpot;
                 pointmaterial.Content = material.Content;
                 pointmaterial.Equipment = material.Equipment;
+
+                #endregion
+
             }
         }
 
@@ -169,9 +225,9 @@ namespace AnonManagementSystem
 
                 _comVehList.Add(combatVehicles);
                 dgvCombatVehicles.DataSource = _comVehList;
-                _vehImgDictionary.Add(combatVehicles.SerialNo, vehiclesImgList);
-                _oilEnginesDictionary.Add(combatVehicles.SerialNo, oilEngine);
-                _oilImgDictionary.Add(combatVehicles.SerialNo, oilImgList);
+                _vehImgList.AddRange(vehiclesImgList);
+                _oilEngines = oilEngine;
+                _oilImgList.AddRange(oilImgList);
 
                 #endregion
             }
@@ -189,12 +245,12 @@ namespace AnonManagementSystem
                 dgvCombatVehicles.Rows[index].Cells["cvTechCondition"].Value = combatVehicles.TechCondition;
 
                 #endregion
-                
+
                 #region 车辆更新
 
                 var pointcv = (from cv in _equipEntities.CombatVehicles
-                    where cv.SerialNo == combatVehicles.SerialNo
-                    select cv).First();
+                               where cv.SerialNo == combatVehicles.SerialNo
+                               select cv).First();
                 pointcv.Name = combatVehicles.Name;
                 pointcv.Model = combatVehicles.Model;
                 pointcv.VehiclesNo = combatVehicles.VehiclesNo;
@@ -217,12 +273,12 @@ namespace AnonManagementSystem
                 pointcv.Equipment = combatVehicles.Equipment;
 
                 #endregion
-                
+
                 #region 油机更新
 
                 var pointoe = (from oe in _equipEntities.OilEngine
-                    where oe.OeNo == oilEngine.OeNo
-                    select oe).First();
+                               where oe.OeNo == oilEngine.OeNo
+                               select oe).First();
                 pointoe.OeModel = oilEngine.OeModel;
                 pointoe.OutPower = oilEngine.OutPower;
                 pointoe.TechCondition = oilEngine.TechCondition;
@@ -242,28 +298,21 @@ namespace AnonManagementSystem
 
                 #endregion
 
+                #region 车辆图片更新
 
                 List<string> devdnoList = vehiclesImgList.Select(ed => ed.Name).ToList();
-                var apointed = from ed in _equipEntities.VehicleImages
-                               where ed.EventsNo == combatVehicles.No
+                var apointed = from ed in _vehiclesImageEntities.VehiclesImage
+                               where ed.SerialNo == combatVehicles.SerialNo
                                select ed;
-                List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
-                if (eventdatalist.Any())
+                List<string> sevdnoList = apointed.Select(ed => ed.Name).ToList();
+                if (vehiclesImgList.Any())
                 {
-                    foreach (var data in eventdatalist)
+                    foreach (var data in vehiclesImgList)
                     {
-                        if (!sevdnoList.Contains(data.ID))
-                        {//todo：增加
-                            _equipEntities.EventData.Add(data);
-                        }
-                        else
-                        {//todo：修改
-                            var evd = (from ed in _equipEntities.EventData
-                                       where ed.EventsNo == combatVehicles.No && ed.ID == data.ID
-                                       select ed).First();
-                            evd.Name = data.Name;
-                            evd.Spot = data.Spot;
-                            evd.EventsNo = data.EventsNo;
+                        if (!sevdnoList.Contains(data.Name))
+                        {
+                            //todo：增加
+                            _vehiclesImageEntities.VehiclesImage.Add(data);
                         }
                     }
                 }
@@ -271,14 +320,46 @@ namespace AnonManagementSystem
                 {
                     foreach (var data in apointed)
                     {
-                        if (!devdnoList.Contains(data.ID))
+                        if (!devdnoList.Contains(data.Name))
                         {
-                            _equipEntities.EventData.Remove(data);
+                            _vehiclesImageEntities.VehiclesImage.Remove(data);
                         }
                     }
                 }
+
+                #endregion
+
+                #region 油机图片更新
+
+                List<string> doilnoList = oilImgList.Select(ed => ed.Name).ToList();
+                var apointoi = from ed in _oilImageEntities.OilEngineImage
+                               where ed.SerialNo == combatVehicles.SerialNo
+                               select ed;
+                List<string> soilnoList = apointoi.Select(ed => ed.Name).ToList();
+                if (oilImgList.Any())
+                {
+                    foreach (var data in oilImgList)
+                    {
+                        if (!soilnoList.Contains(data.Name))
+                        {
+                            //todo：增加
+                            _oilImageEntities.OilEngineImage.Add(data);
+                        }
+                    }
+                }
+                if (apointoi.Any())
+                {
+                    foreach (var data in apointoi)
+                    {
+                        if (!doilnoList.Contains(data.Name))
+                        {
+                            _oilImageEntities.OilEngineImage.Remove(data);
+                        }
+                    }
+                }
+
+                #endregion
             }
-            //todo:界面增加
         }
 
         private void cmsPicture_Opening(object sender, CancelEventArgs e)
@@ -492,7 +573,7 @@ namespace AnonManagementSystem
                 fs.Close();
                 EquipmentImage eqImg = new EquipmentImage
                 {
-                    Name=imgpath,
+                    Name = imgpath,
                     Images = imgBytes,
                     SerialNo = tbSerialNo.Text
                 };
@@ -553,7 +634,6 @@ namespace AnonManagementSystem
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
             if (_add)
             {
                 CombatEquipment ce = new CombatEquipment()
@@ -577,11 +657,23 @@ namespace AnonManagementSystem
                     TechRemould = tbTechRemould.Text,
                     SetupVideo = tbSetupVideo.Text
                 };
-                eqEntities.CombatEquipment.Add(ce);
+                _equipEntities.CombatEquipment.Add(ce);
+                _equipEntities.CombatVehicles.AddRange(_comVehList);
+                if (_oilEngines != null)
+                {
+                    _equipEntities.OilEngine.Add(_oilEngines);
+                }
+                _equipEntities.Material.AddRange(_materList);
+                _equipEntities.Events.AddRange(_eventsList);
+                _equipEntities.EventData.AddRange(_eventDataList);
+
+                _vehiclesImageEntities.VehiclesImage.AddRange(_vehImgList);
+                _oilImageEntities.OilEngineImage.AddRange(_oilImgList);
+                _eventsImageEntities.EventsImage.AddRange(_eventsImgList);
             }
             else
             {
-                var equipfirst = (from eq in eqEntities.CombatEquipment
+                var equipfirst = (from eq in _equipEntities.CombatEquipment
                                   where eq.SerialNo == _id
                                   select eq).First();
 
@@ -605,7 +697,7 @@ namespace AnonManagementSystem
                 equipfirst.UseMethod = tbUseMethod.Text;
                 equipfirst.PerformIndex = tbPerformIndex.Text;
             }
-            eqEntities.SaveChanges();
+            _equipEntities.SaveChanges();
         }
 
 
