@@ -1263,6 +1263,7 @@
             this.tsbRestore.Name = "tsbRestore";
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
+            this.tsbRestore.Click += new System.EventHandler(this.tsbRestore_Click);
             // 
             // panel2
             // 
@@ -1291,7 +1292,6 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "EquipmentDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "设备详细信息";
             this.Load += new System.EventHandler(this.EquipmentDetailForm_Load);

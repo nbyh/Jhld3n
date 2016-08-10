@@ -431,8 +431,7 @@ namespace AnonManagementSystem
 
         private void EquipmentDetailForm_Shown(object sender, EventArgs e)
         {
-            EquipmentManagementEntities equipEntities = new EquipmentManagementEntities();
-            var equip = from eq in equipEntities.CombatEquipment
+            var equip = from eq in _equipEntities.CombatEquipment
                         select eq;
 
             #region 下拉列表内容
@@ -482,45 +481,50 @@ namespace AnonManagementSystem
                 cmbUseCondition.SelectedIndex = -1;
                 cmbMajorCategory.SelectedIndex = -1;
                 cmbFactory.SelectedIndex = -1;
+                tsbRestore.Enabled = false;
             }
             else
             {
-                var appointeq = from eq in equip
-                                where eq.SerialNo == _id
-                                select eq;
-                var equipfirst = appointeq.First();
-                cmbName.SelectedItem = equipfirst.Name;
-                cmbModel.SelectedItem = equipfirst.Model;
-                cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
-                tbSerialNo.Text = equipfirst.SerialNo;
-                tbTechRemould.Text = equipfirst.TechRemould;
-                tbOemNo.Text = equipfirst.InventorySpot;
-                cmbTechnician.SelectedItem = equipfirst.Technician;
-                cmbCharger.SelectedItem = equipfirst.Manager;
-                cmbTechCondition.SelectedItem = equipfirst.TechCondition;
-                cmbUseCondition.SelectedItem = equipfirst.UseCondition;
-                cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
-                cmbFactory.SelectedItem = equipfirst.Factory;
-                dtpTime.Value = equipfirst.FactoryTime.Value;
-
-                tbMajorComp.Text = equipfirst.MajorComp;
-                tbMainUsage.Text = equipfirst.MainUsage;
-                tbUseMethod.Text = equipfirst.UseMethod;
-                tbPerformIndex.Text = equipfirst.PerformIndex;
-
-                var vechiledata = (from v in equipEntities.CombatVehicles
-                                   select v).ToList();
-                dgvCombatVehicles.DataSource = vechiledata;
-
-                var events = (from ev in equipEntities.Events select ev).ToList();
-                dgvEvents.DataSource = events;
-
-                var material = (from m in equipEntities.Material select m).ToList();
-                dgvMaterial.DataSource = material;
-
+                LoadEquipData(equip);
             }
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
 
+        }
+
+        private void LoadEquipData(IQueryable<CombatEquipment> equip)
+        {
+            var appointeq = from eq in equip
+                            where eq.SerialNo == _id
+                            select eq;
+            var equipfirst = appointeq.First();
+            cmbName.SelectedItem = equipfirst.Name;
+            cmbModel.SelectedItem = equipfirst.Model;
+            cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
+            tbSerialNo.Text = equipfirst.SerialNo;
+            tbTechRemould.Text = equipfirst.TechRemould;
+            tbOemNo.Text = equipfirst.InventorySpot;
+            cmbTechnician.SelectedItem = equipfirst.Technician;
+            cmbCharger.SelectedItem = equipfirst.Manager;
+            cmbTechCondition.SelectedItem = equipfirst.TechCondition;
+            cmbUseCondition.SelectedItem = equipfirst.UseCondition;
+            cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
+            cmbFactory.SelectedItem = equipfirst.Factory;
+            dtpTime.Value = equipfirst.FactoryTime.Value;
+
+            tbMajorComp.Text = equipfirst.MajorComp;
+            tbMainUsage.Text = equipfirst.MainUsage;
+            tbUseMethod.Text = equipfirst.UseMethod;
+            tbPerformIndex.Text = equipfirst.PerformIndex;
+
+            var vechiledata = (from v in _equipEntities.CombatVehicles
+                               select v).ToList();
+            dgvCombatVehicles.DataSource = vechiledata;
+
+            var events = (from ev in _equipEntities.Events select ev).ToList();
+            dgvEvents.DataSource = events;
+
+            var material = (from m in _equipEntities.Material select m).ToList();
+            dgvMaterial.DataSource = material;
         }
 
         //private void EventsDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Events> iquery)
@@ -698,6 +702,14 @@ namespace AnonManagementSystem
                 equipfirst.PerformIndex = tbPerformIndex.Text;
             }
             _equipEntities.SaveChanges();
+        }
+
+        private void tsbRestore_Click(object sender, EventArgs e)
+        {
+            _equipEntities=new EquipmentManagementEntities();
+            var equip = from eq in _equipEntities.CombatEquipment
+                        select eq;
+            LoadEquipData(equip);
         }
 
 
