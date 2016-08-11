@@ -1171,6 +1171,7 @@
             // lsvImages
             // 
             this.lsvImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lsvImages.LargeImageList = this.imageList1;
             this.lsvImages.Location = new System.Drawing.Point(3, 17);
             this.lsvImages.Name = "lsvImages";
             this.lsvImages.Size = new System.Drawing.Size(764, 459);
@@ -1281,8 +1282,8 @@
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(48, 48);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // AddEquipmentDetail
@@ -1292,6 +1293,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Name = "AddEquipmentDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "设备详细信息";
             this.Load += new System.EventHandler(this.EquipmentDetailForm_Load);
