@@ -17,7 +17,7 @@ namespace AnonManagementSystem
         private bool _enableedit = false;
         private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
-        private DbRawSqlQuery<CombatEquipment> equip;
+        private DbRawSqlQuery<CombatEquipment> _equip;
 
         public EquipMainForm()
         {
@@ -35,7 +35,7 @@ namespace AnonManagementSystem
 
         public void DataAdd()
         {
-            AddEquipmentDetail equipDetailForm = new AddEquipmentDetail()
+            EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
             {
                 Enableedit = true,
                 Add = true
@@ -70,25 +70,25 @@ namespace AnonManagementSystem
         public void LoadData()
         {
             string cmds = "select * from CombatEquipment";
-            equip = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
+            _equip = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
 
-            List<string> equipNameList = (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            List<string> equipNameList = (from s in _equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             cmbName.DataSource = equipNameList;
-            List<string> equipSubdepartList = (from s in equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
+            List<string> equipSubdepartList = (from s in _equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
             cmbSubDepart.DataSource = equipSubdepartList;
-            List<string> equipMajcatList = (from s in equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
+            List<string> equipMajcatList = (from s in _equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
             cmbMajorCategory.DataSource = equipMajcatList;
-            List<string> equipModelList = (from s in equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+            List<string> equipModelList = (from s in _equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
-            List<string> equipTechcanList = (from s in equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
+            List<string> equipTechcanList = (from s in _equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
             cmbTechnician.DataSource = equipTechcanList;
-            List<string> equipManagerList = (from s in equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
+            List<string> equipManagerList = (from s in _equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
             cmbManager.DataSource = equipManagerList;
-            List<string> equipTechconList = (from s in equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
+            List<string> equipTechconList = (from s in _equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
             cmbTechCondition.DataSource = equipTechconList;
-            List<string> equipUseconList = (from s in equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
+            List<string> equipUseconList = (from s in _equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
             cmbUseCondition.DataSource = equipUseconList;
-            List<string> equipFactList = (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            List<string> equipFactList = (from s in _equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
 
             cmbName.SelectedIndex = -1;
@@ -105,13 +105,13 @@ namespace AnonManagementSystem
 
             _pageSize = 20;
             _curPage = 1;
-            DataRefresh(_pageSize, _curPage, equip);
+            DataRefresh(_pageSize, _curPage, _equip);
         }
 
         private void btnFront_Click(object sender, EventArgs e)
         {
             _curPage = 1;
-            DataRefresh(_pageSize, _curPage, equip);
+            DataRefresh(_pageSize, _curPage, _equip);
         }
 
         private void btnGo_Click(object sender, EventArgs e)
@@ -123,12 +123,12 @@ namespace AnonManagementSystem
                 tbPage.Text = _lastPage.ToString();
             }
             _curPage = gopage;
-            DataRefresh(_pageSize, gopage, equip);
+            DataRefresh(_pageSize, gopage, _equip);
         }
 
         private void btnLast_Click(object sender, EventArgs e)
         {
-            DataRefresh(_pageSize, _lastPage, equip);
+            DataRefresh(_pageSize, _lastPage, _equip);
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace AnonManagementSystem
             else
             {
                 _curPage++;
-                DataRefresh(_pageSize, _curPage, equip);
+                DataRefresh(_pageSize, _curPage, _equip);
             }
         }
 
@@ -153,7 +153,7 @@ namespace AnonManagementSystem
             else
             {
                 _curPage--;
-                DataRefresh(_pageSize, _curPage, equip);
+                DataRefresh(_pageSize, _curPage, _equip);
             }
         }
 
@@ -173,7 +173,7 @@ namespace AnonManagementSystem
             if (cmbPageSize.SelectedIndex > -1)
             {
                 _pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
-                DataRefresh(_pageSize, _curPage, equip);
+                DataRefresh(_pageSize, _curPage, _equip);
             }
         }
 
@@ -195,7 +195,7 @@ namespace AnonManagementSystem
         {
             if (e.RowIndex >= 0 && dGvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
             {
-                AddEquipmentDetail equipDetailForm = new AddEquipmentDetail()
+                EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
                 {
                     Enableedit = _enableedit,
                     Add = false,
@@ -211,6 +211,19 @@ namespace AnonManagementSystem
 
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
+            dGvEquip.Rows.Clear();
+            IEnumerable<CombatEquipment> appointeq=new List<CombatEquipment>();
+            if (!string.IsNullOrEmpty(cmbName.Text))
+            {
+                appointeq = from equipment in _equip
+                            where equipment.Name == cmbName.Text
+                            select equipment;
+            }
+            //todo:其他条件
+            if (appointeq.Any())
+            {
+                dGvEquip.DataSource = appointeq;
+            }
         }
 
         private void btnRestInfo_Click(object sender, EventArgs e)
@@ -230,6 +243,22 @@ namespace AnonManagementSystem
 
         private void btnQueryEvent_Click(object sender, EventArgs e)
         {
+            dGvEquip.Rows.Clear();
+            IEnumerable<Events> appointee = new List<Events>();
+            if (!string.IsNullOrEmpty(cmbEventName.Text))
+            {
+                appointee = from ee in _equipEntities.Events
+                            where ee.Name == cmbEventName.Text
+                            select ee;
+            }
+            //todo:其他条件
+            if (appointee.Any())
+            {
+                var appointeq = from equipment in _equip
+                    where equipment.SerialNo == appointee.First().Equipment
+                    select equipment;
+                dGvEquip.DataSource = appointeq;
+            }
         }
 
         private void btnRestEvent_Click(object sender, EventArgs e)

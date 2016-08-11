@@ -81,14 +81,13 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImg = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImg = new System.Windows.Forms.ToolStripButton();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
+            this.imageListViewer = new AnonManagementSystem.ImageListViewer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -104,7 +103,6 @@
             this.groupBox20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             this.tabPage2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.toolStrip5.SuspendLayout();
             this.tsDetail.SuspendLayout();
             this.SuspendLayout();
@@ -616,7 +614,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.imageListViewer);
             this.tabPage2.Controls.Add(this.toolStrip5);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -625,25 +623,6 @@
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "活动图片";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.listView1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 28);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(770, 479);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            // 
-            // listView1
-            // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 17);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(764, 459);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // toolStrip5
             // 
@@ -702,6 +681,15 @@
             this.tsbRestore.Size = new System.Drawing.Size(52, 22);
             this.tsbRestore.Text = "恢复";
             // 
+            // imageListViewer
+            // 
+            this.imageListViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageListViewer.ImgDictionary = null;
+            this.imageListViewer.Location = new System.Drawing.Point(3, 28);
+            this.imageListViewer.Name = "imageListViewer";
+            this.imageListViewer.Size = new System.Drawing.Size(770, 479);
+            this.imageListViewer.TabIndex = 11;
+            // 
             // AddEventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -736,7 +724,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
             this.tsDetail.ResumeLayout(false);
@@ -797,8 +784,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tbRemark;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -806,5 +791,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
         private System.Windows.Forms.ToolStripButton tsbAddImg;
         private System.Windows.Forms.ToolStripButton tsbDeleteImg;
+        private ImageListViewer imageListViewer;
     }
 }

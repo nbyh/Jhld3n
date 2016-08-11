@@ -82,6 +82,12 @@
     <Compile Include="CheckedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ImageListViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImageListViewer.Designer.cs">
+      <DependentUpon>ImageListViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="PublicFunction.cs" />
     <Compile Include="SparePartsForm.cs">
       <SubType>Form</SubType>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AmsAboutBox.resx">
       <DependentUpon>AmsAboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageListViewer.resx">
+      <DependentUpon>ImageListViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SparePartsForm.resx">
       <DependentUpon>SparePartsForm.cs</DependentUpon>

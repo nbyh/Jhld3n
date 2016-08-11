@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
-    public partial class AddEquipmentDetail : Form, IAddModify
+    public partial class EquipmentDetailForm : Form, IAddModify
     {
         private bool _add = false;
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
@@ -34,7 +34,7 @@ namespace AnonManagementSystem
         private VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
         private List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
 
-        public AddEquipmentDetail()
+        public EquipmentDetailForm()
         {
             InitializeComponent();
         }
@@ -515,14 +515,32 @@ namespace AnonManagementSystem
             tbPerformIndex.Text = equipfirst.PerformIndex;
 
             var vechiledata = (from v in _equipEntities.CombatVehicles
+                               where v.Equipment == _id
                                select v).ToList();
             dgvCombatVehicles.DataSource = vechiledata;
 
-            var events = (from ev in _equipEntities.Events select ev).ToList();
+            var events = (from ev in _equipEntities.Events
+                          where ev.Equipment == _id
+                          select ev).ToList();
             dgvEvents.DataSource = events;
 
-            var material = (from m in _equipEntities.Material select m).ToList();
+            var material = (from m in _equipEntities.Material
+                            where m.Equipment == _id
+                            select m).ToList();
             dgvMaterial.DataSource = material;
+
+            var imgs = (from img in _equipImageEntities.EquipmentImage
+                        where img.SerialNo == _id
+                        select img);
+            Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
+            foreach (var equipmentImage in imgs)
+            {
+                MemoryStream ms = new MemoryStream(equipmentImage.Images);
+                Image img = Image.FromStream(ms);
+                imgdic.Add(equipmentImage.Name, img);
+            }
+            ilvEquipment.ImgDictionary = imgdic;
+            ilvEquipment.ShowImages();
         }
 
         //private void EventsDataRefresh(int pagesize, int curpage, DbRawSqlQuery<Events> iquery)
@@ -579,7 +597,7 @@ namespace AnonManagementSystem
                         SerialNo = tbSerialNo.Text
                     };
                     _equipImageList.Add(eqImg);
-                }
+                }//todo:增加界面
             }
         }
 

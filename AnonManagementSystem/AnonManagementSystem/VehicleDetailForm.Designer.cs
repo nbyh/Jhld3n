@@ -111,8 +111,6 @@
             this.dtpOeTime = new System.Windows.Forms.DateTimePicker();
             this.cmbOeModel = new System.Windows.Forms.ComboBox();
             this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,8 +118,6 @@
             this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
@@ -129,6 +125,8 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.imageListViewer = new AnonManagementSystem.ImageListViewer();
+            this.imageListViewer1 = new AnonManagementSystem.ImageListViewer();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -141,12 +139,9 @@
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWorkHour)).BeginInit();
             this.tabPage16.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.cmsPicture.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.toolStrip5.SuspendLayout();
             this.tsDetail.SuspendLayout();
             this.SuspendLayout();
@@ -936,7 +931,7 @@
             // 
             // tabPage16
             // 
-            this.tabPage16.Controls.Add(this.groupBox3);
+            this.tabPage16.Controls.Add(this.imageListViewer1);
             this.tabPage16.Controls.Add(this.toolStrip1);
             this.tabPage16.Location = new System.Drawing.Point(4, 22);
             this.tabPage16.Name = "tabPage16";
@@ -944,26 +939,6 @@
             this.tabPage16.TabIndex = 4;
             this.tabPage16.Text = "油机图片";
             this.tabPage16.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.pictureBox3);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 25);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(762, 453);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.ContextMenuStrip = this.cmsPicture;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(3, 17);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(756, 433);
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
             // 
             // cmsPicture
             // 
@@ -1016,7 +991,7 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.groupBox1);
+            this.tabPage6.Controls.Add(this.imageListViewer);
             this.tabPage6.Controls.Add(this.toolStrip5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
@@ -1024,25 +999,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "车辆图片";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.listView1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 25);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 485);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            // 
-            // listView1
-            // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 17);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(770, 465);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // toolStrip5
             // 
@@ -1106,6 +1062,24 @@
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
             // 
+            // imageListViewer
+            // 
+            this.imageListViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageListViewer.ImgDictionary = null;
+            this.imageListViewer.Location = new System.Drawing.Point(0, 25);
+            this.imageListViewer.Name = "imageListViewer";
+            this.imageListViewer.Size = new System.Drawing.Size(776, 485);
+            this.imageListViewer.TabIndex = 9;
+            // 
+            // imageListViewer1
+            // 
+            this.imageListViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageListViewer1.ImgDictionary = null;
+            this.imageListViewer1.Location = new System.Drawing.Point(0, 25);
+            this.imageListViewer1.Name = "imageListViewer1";
+            this.imageListViewer1.Size = new System.Drawing.Size(762, 453);
+            this.imageListViewer1.TabIndex = 10;
+            // 
             // VehicleDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1135,14 +1109,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudWorkHour)).EndInit();
             this.tabPage16.ResumeLayout(false);
             this.tabPage16.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.cmsPicture.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
             this.tsDetail.ResumeLayout(false);
@@ -1240,10 +1211,6 @@
         private System.Windows.Forms.DateTimePicker dtpOeTime;
         private System.Windows.Forms.ComboBox cmbOeModel;
         private System.Windows.Forms.TabPage tabPage16;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.CheckBox chkCombineOe;
         private System.Windows.Forms.ComboBox cmbMotorTechCon;
@@ -1254,5 +1221,7 @@
         private System.Windows.Forms.ToolStripButton tsbAddImages;
         private System.Windows.Forms.ToolStripButton tsbDeleteImages;
         private System.Windows.Forms.OpenFileDialog ofdImage;
+        private ImageListViewer imageListViewer1;
+        private ImageListViewer imageListViewer;
     }
 }
