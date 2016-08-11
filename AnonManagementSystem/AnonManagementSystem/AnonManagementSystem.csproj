@@ -82,6 +82,7 @@
     <Compile Include="CheckedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PublicFunction.cs" />
     <Compile Include="SparePartsForm.cs">
       <SubType>Form</SubType>
     </Compile>

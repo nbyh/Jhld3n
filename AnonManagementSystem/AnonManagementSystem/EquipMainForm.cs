@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +9,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
@@ -25,6 +25,7 @@ namespace AnonManagementSystem
         }
 
         public delegate void ChangeUser();
+
         public event ChangeUser ChangeCurrentuser;
 
         public bool Enableedit
@@ -34,7 +35,7 @@ namespace AnonManagementSystem
 
         public void DataAdd()
         {
-            EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
+            AddEquipmentDetail equipDetailForm = new AddEquipmentDetail()
             {
                 Enableedit = true,
                 Add = true
@@ -44,7 +45,20 @@ namespace AnonManagementSystem
 
         public void DataDelete()
         {
-            throw new NotImplementedException();
+            if (dGvEquip.CurrentRow != null)
+            {
+                if (MessageBox.Show(@"确定要删除该装备？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int selectRowIndex = dGvEquip.CurrentRow.Index;
+                    dGvEquip.Rows.RemoveAt(selectRowIndex);
+                    string id = dGvEquip.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
+                    var eq = (from eqt in _equipEntities.CombatEquipment
+                              where eqt.SerialNo == id
+                              select eqt).First();
+                    _equipEntities.CombatEquipment.Remove(eq);
+                    _equipEntities.SaveChanges();
+                }
+            }
         }
 
         public void DataRefresh()
@@ -55,9 +69,6 @@ namespace AnonManagementSystem
 
         public void LoadData()
         {
-            //equip = from eq in _equipEntities.CombatEquipment
-            //        select eq;
-
             string cmds = "select * from CombatEquipment";
             equip = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
 
@@ -79,7 +90,7 @@ namespace AnonManagementSystem
             cmbUseCondition.DataSource = equipUseconList;
             List<string> equipFactList = (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
-            
+
             cmbName.SelectedIndex = -1;
             cmbSubDepart.SelectedIndex = -1;
             cmbModel.SelectedIndex = -1;
@@ -91,7 +102,7 @@ namespace AnonManagementSystem
             cmbFactory.SelectedIndex = -1;
             cmbTimeTerm1.SelectedIndex = -1;
             cmbTimeTerm2.SelectedIndex = -1;
-            
+
             _pageSize = 20;
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, equip);
@@ -182,9 +193,9 @@ namespace AnonManagementSystem
 
         private void dGvEquip_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && dGvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
+            if (e.RowIndex >= 0 && dGvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
             {
-                EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
+                AddEquipmentDetail equipDetailForm = new AddEquipmentDetail()
                 {
                     Enableedit = _enableedit,
                     Add = false,
@@ -200,7 +211,6 @@ namespace AnonManagementSystem
 
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnRestInfo_Click(object sender, EventArgs e)
@@ -220,14 +230,12 @@ namespace AnonManagementSystem
 
         private void btnQueryEvent_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnRestEvent_Click(object sender, EventArgs e)
         {
-
         }
-        
+
         private void EquipMainForm_Shown(object sender, EventArgs e)
         {
             LoadData();

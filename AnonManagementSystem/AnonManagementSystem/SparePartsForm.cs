@@ -30,7 +30,7 @@ namespace AnonManagementSystem
         {
             if (e.ColumnIndex >= 0 && dGvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
             {
-                EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
+                AddEquipmentDetail equipDetailForm = new AddEquipmentDetail()
                 {
                     Enableedit = _enableedit,
                     Add = false,
@@ -103,7 +103,7 @@ namespace AnonManagementSystem
         }
         public void DataAdd()
         {
-            EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()
+            AddEquipmentDetail equipDetailForm = new AddEquipmentDetail()
             {
                 Enableedit = true,
                 Add = true

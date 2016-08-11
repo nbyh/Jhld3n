@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
-    public partial class EquipmentDetailForm : Form, IAddModify
+    public partial class AddEquipmentDetail : Form, IAddModify
     {
         private bool _add = false;
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
@@ -34,7 +34,7 @@ namespace AnonManagementSystem
         private VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
         private List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
 
-        public EquipmentDetailForm()
+        public AddEquipmentDetail()
         {
             InitializeComponent();
         }
@@ -73,7 +73,7 @@ namespace AnonManagementSystem
                 dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
                 dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
 
-                #endregion
+                #endregion 界面更新
 
                 #region 活动事件更新
 
@@ -98,7 +98,7 @@ namespace AnonManagementSystem
                 pointevent.Remarks = events.Remarks;
                 pointevent.Equipment = events.Equipment;
 
-                #endregion
+                #endregion 活动事件更新
 
                 #region 活动事件图片更新
 
@@ -129,7 +129,7 @@ namespace AnonManagementSystem
                     }
                 }
 
-                #endregion
+                #endregion 活动事件图片更新
 
                 #region 事件数据更新
 
@@ -171,7 +171,7 @@ namespace AnonManagementSystem
                     }
                 }
 
-                #endregion
+                #endregion 事件数据更新
             }
         }
 
@@ -193,7 +193,7 @@ namespace AnonManagementSystem
                 dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
                 dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
 
-                #endregion
+                #endregion 界面更新
 
                 #region 材料数据更新
 
@@ -212,8 +212,7 @@ namespace AnonManagementSystem
                 pointmaterial.Content = material.Content;
                 pointmaterial.Equipment = material.Equipment;
 
-                #endregion
-
+                #endregion 材料数据更新
             }
         }
 
@@ -229,7 +228,7 @@ namespace AnonManagementSystem
                 _oilEngines = oilEngine;
                 _oilImgList.AddRange(oilImgList);
 
-                #endregion
+                #endregion 增加
             }
             else
             {
@@ -244,7 +243,7 @@ namespace AnonManagementSystem
                 dgvCombatVehicles.Rows[index].Cells["cvMotorModel"].Value = combatVehicles.MotorModel;
                 dgvCombatVehicles.Rows[index].Cells["cvTechCondition"].Value = combatVehicles.TechCondition;
 
-                #endregion
+                #endregion 界面更新
 
                 #region 车辆更新
 
@@ -272,7 +271,7 @@ namespace AnonManagementSystem
                 pointcv.CombineOe = combatVehicles.CombineOe;
                 pointcv.Equipment = combatVehicles.Equipment;
 
-                #endregion
+                #endregion 车辆更新
 
                 #region 油机更新
 
@@ -296,7 +295,7 @@ namespace AnonManagementSystem
                 pointoe.FaultDescri = oilEngine.FaultDescri;
                 pointoe.Vehicle = oilEngine.Vehicle;
 
-                #endregion
+                #endregion 油机更新
 
                 #region 车辆图片更新
 
@@ -327,7 +326,7 @@ namespace AnonManagementSystem
                     }
                 }
 
-                #endregion
+                #endregion 车辆图片更新
 
                 #region 油机图片更新
 
@@ -358,7 +357,7 @@ namespace AnonManagementSystem
                     }
                 }
 
-                #endregion
+                #endregion 油机图片更新
             }
         }
 
@@ -381,6 +380,7 @@ namespace AnonManagementSystem
                 vehicleDetailForm.Show();
             }
         }
+
         private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex >= 0 && dgvEvents.Columns[e.ColumnIndex].Name.Equals("EventMoreInfo"))
@@ -467,8 +467,7 @@ namespace AnonManagementSystem
                 (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
 
-            #endregion
-
+            #endregion 下拉列表内容
 
             if (_add)
             {
@@ -488,7 +487,6 @@ namespace AnonManagementSystem
                 LoadEquipData(equip);
             }
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
-
         }
 
         private void LoadEquipData(IQueryable<CombatEquipment> equip)
@@ -571,18 +569,17 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                byte[] imgBytes = br.ReadBytes((int)fs.Length);
-                fs.Close();
-                EquipmentImage eqImg = new EquipmentImage
+                byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
+                if (imgBytes != null)
                 {
-                    Name = imgpath,
-                    Images = imgBytes,
-                    SerialNo = tbSerialNo.Text
-                };
-                _equipImageList.Add(eqImg);
-                //todo：界面增加
+                    EquipmentImage eqImg = new EquipmentImage
+                    {
+                        Name = imgpath,
+                        Images = imgBytes,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _equipImageList.Add(eqImg);
+                }
             }
         }
 
@@ -614,26 +611,131 @@ namespace AnonManagementSystem
 
         private void tsbDeleteEvents_Click(object sender, EventArgs e)
         {
-            //todo:界面修改
-
+            if (dgvEvents.CurrentRow == null) return;
+            if (MessageBox.Show(@"确定要删除该事件及相关信息？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
+                DialogResult.Yes) return;
+            int selectRowIndex = dgvEvents.CurrentRow.Index;
+            string id = dgvEvents.Rows[selectRowIndex].Cells["No"].Value.ToString();
+            dgvEvents.Rows.RemoveAt(selectRowIndex);
+            if (_add)
+            {
+                foreach (var es in _eventsList.Where(ee => ee.No == id))
+                {
+                    _eventsList.Remove(es);
+                    break;
+                }
+                foreach (var ed in _eventDataList.Where(ee => ee.EventsNo == id))
+                {
+                    _eventDataList.Remove(ed);
+                    return;
+                }
+                foreach (var ei in _eventsImgList.Where(ei => ei.SerialNo == id))
+                {
+                    _eventsImgList.Remove(ei);
+                    return;
+                }
+            }
+            else
+            {
+                var ee = (from eqee in _equipEntities.Events
+                          where eqee.No == id
+                          select eqee).First();
+                _equipEntities.Events.Remove(ee);
+                var ed = (from eqed in _equipEntities.EventData
+                          where eqed.EventsNo == id
+                          select eqed).First();
+                _equipEntities.EventData.Remove(ed);
+                var ei = (from eqei in _eventsImageEntities.EventsImage
+                          where eqei.SerialNo == id
+                          select eqei).First();
+                _eventsImageEntities.EventsImage.Remove(ei);
+            }
         }
 
         private void tsbDeleteImage_Click(object sender, EventArgs e)
         {
             //todo:界面修改
-
         }
 
         private void tsbDeleteMaterial_Click(object sender, EventArgs e)
         {
-            //todo:界面修改
-
+            if (dgvMaterial.CurrentRow == null) return;
+            if (MessageBox.Show(@"确定要删除该材料？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
+                DialogResult.Yes) return;
+            int selectRowIndex = dgvMaterial.CurrentRow.Index;
+            string id = dgvMaterial.Rows[selectRowIndex].Cells["No"].Value.ToString();
+            dgvMaterial.Rows.RemoveAt(selectRowIndex);
+            if (_add)
+            {
+                foreach (var mm in _materList.Where(mm => mm.No == id))
+                {
+                    _materList.Remove(mm);
+                    break;
+                }
+            }
+            else
+            {
+                var mm = (from eqm in _equipEntities.Material
+                          where eqm.No == id
+                          select eqm).First();
+                _equipEntities.Material.Remove(mm);
+            }
         }
 
         private void tsbDeleteVehicle_Click(object sender, EventArgs e)
         {
-            //todo:界面修改
-
+            if (dgvCombatVehicles.CurrentRow == null) return;
+            if (MessageBox.Show(@"确定要删除该车辆及相关信息？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
+                DialogResult.Yes) return;
+            int selectRowIndex = dgvCombatVehicles.CurrentRow.Index;
+            string id = dgvCombatVehicles.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
+            dgvCombatVehicles.Rows.RemoveAt(selectRowIndex);
+            if (_add)
+            {
+                bool isContainsOe = false;
+                foreach (var es in _comVehList.Where(ee => ee.SerialNo == id))
+                {
+                    isContainsOe = es.CombineOe ?? false;
+                    _comVehList.Remove(es);
+                    break;
+                }
+                foreach (var ei in _vehImgList.Where(ei => ei.SerialNo == id))
+                {
+                    _vehImgList.Remove(ei);
+                    return;
+                }
+                if (isContainsOe)
+                {
+                    _oilEngines = null;
+                    foreach (var ed in _oilImgList.Where(ee => ee.SerialNo == id))
+                    {
+                        _oilImgList.Remove(ed);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                var ee = (from eqee in _equipEntities.CombatVehicles
+                          where eqee.SerialNo == id
+                          select eqee).First();
+                _equipEntities.CombatVehicles.Remove(ee);
+                var ei = (from eqei in _vehiclesImageEntities.VehiclesImage
+                          where eqei.SerialNo == id
+                          select eqei).First();
+                _vehiclesImageEntities.VehiclesImage.Remove(ei);
+                if (ee.CombineOe != null && ee.CombineOe == true)
+                {
+                    var oe = (from eqed in _equipEntities.OilEngine
+                              where eqed.Vehicle == id
+                              select eqed).First();
+                    _equipEntities.OilEngine.Remove(oe);
+                    var ed = (from eqed in _oilImageEntities.OilEngineImage
+                              where eqed.SerialNo == id
+                              select eqed).First();
+                    _oilImageEntities.OilEngineImage.Remove(ed);
+                }
+            }
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
@@ -706,12 +808,11 @@ namespace AnonManagementSystem
 
         private void tsbRestore_Click(object sender, EventArgs e)
         {
-            _equipEntities=new EquipmentManagementEntities();
+            _equipEntities = new EquipmentManagementEntities();
             var equip = from eq in _equipEntities.CombatEquipment
                         select eq;
             LoadEquipData(equip);
         }
-
 
         //private void VehicleDataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)
         //{

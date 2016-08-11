@@ -1,6 +1,6 @@
 ﻿namespace AnonManagementSystem
 {
-    partial class EquipmentDetailForm
+    partial class AddEquipmentDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -1285,7 +1285,7 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // EquipmentDetailForm
+            // AddEquipmentDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
