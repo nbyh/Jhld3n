@@ -1,12 +1,10 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
@@ -15,9 +13,13 @@ namespace AnonManagementSystem
         private bool _add = false;
         private bool _enableedit = false;
         private string _id;
+
         public delegate void SaveEvents(bool add, int index, Events events, List<EventData> eventDataList, List<EventsImage> eventImgList);
+
         public event SaveEvents SaveEventsSucess;
 
+        private List<EventsImage> _eventsImgList = new List<EventsImage>();
+        private EventsImagesEntities _eventsImgEntities = new EventsImagesEntities();
         public bool Enableedit { get; set; }
         public int Index { get; set; }
 
@@ -33,7 +35,8 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
-        EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
+        private EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
+
         private void tsbSave_Click(object sender, EventArgs e)
         {
             List<EventData> eventdataList = new List<EventData>();
@@ -84,7 +87,7 @@ namespace AnonManagementSystem
                     eventdataList.Add(ed);
                 }
 
-                SaveEventsSucess(Add, Index, eve, eventdataList, null);
+                SaveEventsSucess?.Invoke(Add, Index, eve, eventdataList, _eventsImgList);
             }
             else
             {
@@ -120,8 +123,7 @@ namespace AnonManagementSystem
                 eventfirst.HandleStep = tbHandleStep.Text;
                 eventfirst.Problem = tbProblems.Text;
                 eventfirst.Remarks = tbRemark.Text;
-                SaveEventsSucess(Add, Index, eventfirst, eventdataList, null);
-
+                SaveEventsSucess?.Invoke(Add, Index, eventfirst, eventdataList, _eventsImgList);
             }
         }
 
@@ -157,12 +159,48 @@ namespace AnonManagementSystem
 
         private void tsbAddImg_Click(object sender, EventArgs e)
         {
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                string imgpath = ofdImage.FileName;
+                byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
+                if (imgBytes != null)
+                {
+                    EventsImage eveImg = new EventsImage
+                    {
+                        Name = imgpath,
+                        Images = imgBytes,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _eventsImgList.Add(eveImg);
 
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvEvents.ImgDictionary.Add(eveImg.Name, img);
+                        ilvEvents.AddImages(eveImg.Name, img);
+                    }
+                }
+            }
         }
 
         private void tsbDeleteImg_Click(object sender, EventArgs e)
         {
-
+            ilvEvents.DeleteImages();
+            if (!string.IsNullOrEmpty(ilvEvents.DeleteImgKey))
+            {
+                string key = ilvEvents.DeleteImgKey;
+                foreach (var equipmentImage in _eventsImgList.Where(equipmentImage => equipmentImage.Name == key))
+                {
+                    _eventsImgList.Remove(equipmentImage);
+                }
+                var eqimg = from img in _eventsImgEntities.EventsImage//todo:得修改
+                            where img.Name == key
+                            select img;
+                if (eqimg.Any())
+                {
+                    _eventsImgEntities.EventsImage.Remove(eqimg.First());
+                }
+            }
         }
     }
 }

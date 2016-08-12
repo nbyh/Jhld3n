@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
     public partial class SparePartsForm : Form, IMdiFunction
     {
         public delegate void ChangeUser();
+
         public event ChangeUser ChangeCurrentuser;
+
         private bool _exitapp = true;
         private bool _enableedit = false;
+
         public SparePartsForm()
         {
             InitializeComponent();
@@ -39,7 +36,6 @@ namespace AnonManagementSystem
                 equipDetailForm.Show();
             }
         }
-
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -73,7 +69,6 @@ namespace AnonManagementSystem
 
         private void tsbDelete_Click(object sender, EventArgs e)
         {
-
         }
 
         private void cmb_DrawItem(object sender, DrawItemEventArgs e)
@@ -81,7 +76,7 @@ namespace AnonManagementSystem
             if (e.Index < 0) return;
             e.DrawBackground();
             e.DrawFocusRectangle();
-            e.Graphics.DrawString(((ComboBox) sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor),
+            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor),
                 e.Bounds.X, e.Bounds.Y + 3);
         }
 
@@ -101,6 +96,7 @@ namespace AnonManagementSystem
         public void DataRefresh()
         {
         }
+
         public void DataAdd()
         {
             EquipmentDetailForm equipDetailForm = new EquipmentDetailForm()

@@ -1,20 +1,18 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
     public partial class VehicleDetailForm : Form, IAddModify
     {
         public delegate void SaveVehicle(bool add, int index, CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
+
         public event SaveVehicle SaveVehicleSucess;
+
         private readonly List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
         private readonly List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
 
@@ -89,12 +87,11 @@ namespace AnonManagementSystem
                     Vehicle = tbVehiclesNo.Text
                 };
                 //eqEntities.OilEngine.Add(oe);
-                SaveVehicleSucess(Add, Index, cv, _vehiclesImagesList, oe, _oilImagesList);
-
+                SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, oe, _oilImagesList);
             }
             else
             {
-                SaveVehicleSucess(Add, Index, cv, _vehiclesImagesList, null, null);
+                SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, null, null);
             }
         }
 
@@ -123,12 +120,17 @@ namespace AnonManagementSystem
                     SerialNo = tbSerialNo.Text
                 };
                 _oilImagesList.Add(oiImg);
+                using (MemoryStream ms = new MemoryStream(imgBytes))
+                {
+                    Image img = Image.FromStream(ms);
+                    ilvOe.ImgDictionary.Add(oiImg.Name, img);
+                    ilvOe.AddImages(oiImg.Name, img);
+                }
             }
         }
 
         private void tsbAddImages_Click(object sender, EventArgs e)
         {
-
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
@@ -142,33 +144,27 @@ namespace AnonManagementSystem
                     SerialNo = tbSerialNo.Text
                 };
                 _vehiclesImagesList.Add(cvImag);
+                using (MemoryStream ms = new MemoryStream(imgBytes))
+                {
+                    Image img = Image.FromStream(ms);
+                    ilvVehicle.ImgDictionary.Add(cvImag.Name, img);
+                    ilvVehicle.AddImages(cvImag.Name, img);
+                }
             }
         }
 
         private void tsbDeleteOeImages_Click(object sender, EventArgs e)
         {
-            foreach (var oilEngineImage in _oilImagesList)
-            {
-                if (VScroll)
-                {
-                    _oilImagesList.Remove(oilEngineImage);
-                    return;
-                }
-                //界面修改
-            }
+            ilvOe.DeleteImages();
         }
 
         private void tsbDeleteImages_Click(object sender, EventArgs e)
         {
-            foreach (var vehiclesImages in _vehiclesImagesList)
-            {
-                if (VScroll)
-                {
-                    _vehiclesImagesList.Remove(vehiclesImages);
-                    return;
-                }
-                //界面修改
-            }
+            ilvVehicle.DeleteImages();
+        }
+
+        private void VehicleDetailForm_Shown(object sender, EventArgs e)
+        {
         }
     }
 }

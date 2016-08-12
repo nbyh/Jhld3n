@@ -2,37 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
     public partial class EquipmentDetailForm : Form, IAddModify
     {
-        private bool _add = false;
-        private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
-        private bool _enableedit = false;
+        private readonly bool _add = false;
+        private readonly List<CombatVehicles> _comVehList = new List<CombatVehicles>();
+        private readonly EquipImageEntities _equipImageEntities = new EquipImageEntities();
+        private readonly List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
+        private readonly List<EventData> _eventDataList = new List<EventData>();
+        private readonly EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
+        private readonly List<EventsImage> _eventsImgList = new List<EventsImage>();
+        private readonly List<Events> _eventsList = new List<Events>();
+        private readonly List<Material> _materList = new List<Material>();
+        private readonly OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
+        private readonly List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
+        private readonly VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
+        private readonly List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
+        private bool _enableedit;
         private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
-        private EquipImageEntities _equipImageEntities = new EquipImageEntities();
-        private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
-        private List<EventData> _eventDataList = new List<EventData>();
-        private EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
-        private List<EventsImage> _eventsImgList = new List<EventsImage>();
-        private List<Events> _eventsList = new List<Events>();
         private string _id;
-        private List<Material> _materList = new List<Material>();
         private OilEngine _oilEngines;
-        private OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
-        private List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
-        private VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
-        private List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
 
         public EquipmentDetailForm()
         {
@@ -416,6 +412,7 @@ namespace AnonManagementSystem
                 string path = dgvMaterial[e.ColumnIndex, e.RowIndex].Value.ToString();
                 FileInfo fInfo = new FileInfo(path);
                 string dir = fInfo.DirectoryName;
+                if (dir == null) return;
                 ProcessStartInfo psi = new ProcessStartInfo("Explorer.exe")
                 {
                     Arguments = dir
@@ -535,9 +532,11 @@ namespace AnonManagementSystem
             Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
             foreach (var equipmentImage in imgs)
             {
-                MemoryStream ms = new MemoryStream(equipmentImage.Images);
-                Image img = Image.FromStream(ms);
-                imgdic.Add(equipmentImage.Name, img);
+                using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                {
+                    Image img = Image.FromStream(ms);
+                    imgdic.Add(equipmentImage.Name, img);
+                }
             }
             ilvEquipment.ImgDictionary = imgdic;
             ilvEquipment.ShowImages();
@@ -597,7 +596,14 @@ namespace AnonManagementSystem
                         SerialNo = tbSerialNo.Text
                     };
                     _equipImageList.Add(eqImg);
-                }//todo:增加界面
+
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvEquipment.ImgDictionary.Add(eqImg.Name, img);
+                        ilvEquipment.AddImages(eqImg.Name, img);
+                    }
+                }
             }
         }
 
@@ -672,7 +678,22 @@ namespace AnonManagementSystem
 
         private void tsbDeleteImage_Click(object sender, EventArgs e)
         {
-            //todo:界面修改
+            ilvEquipment.DeleteImages();
+            if (!string.IsNullOrEmpty(ilvEquipment.DeleteImgKey))
+            {
+                string key = ilvEquipment.DeleteImgKey;
+                foreach (var equipmentImage in _equipImageList.Where(equipmentImage => equipmentImage.Name == key))
+                {
+                    _equipImageList.Remove(equipmentImage);
+                }
+                var eqimg = from img in _equipImageEntities.EquipmentImage
+                            where img.Name == key
+                            select img;
+                if (eqimg.Any())
+                {
+                    _equipImageEntities.EquipmentImage.Remove(eqimg.First());
+                }
+            }
         }
 
         private void tsbDeleteMaterial_Click(object sender, EventArgs e)
@@ -693,10 +714,13 @@ namespace AnonManagementSystem
             }
             else
             {
-                var mm = (from eqm in _equipEntities.Material
-                          where eqm.No == id
-                          select eqm).First();
-                _equipEntities.Material.Remove(mm);
+                var mm = from eqm in _equipEntities.Material
+                         where eqm.No == id
+                         select eqm;
+                if (mm.Any())
+                {
+                    _equipEntities.Material.Remove(mm.First());
+                }
             }
         }
 
@@ -756,6 +780,14 @@ namespace AnonManagementSystem
             }
         }
 
+        private void tsbRestore_Click(object sender, EventArgs e)
+        {
+            _equipEntities = new EquipmentManagementEntities();
+            var equip = from eq in _equipEntities.CombatEquipment
+                        select eq;
+            LoadEquipData(equip);
+        }
+
         private void tsbSave_Click(object sender, EventArgs e)
         {
             if (_add)
@@ -782,17 +814,18 @@ namespace AnonManagementSystem
                     SetupVideo = tbSetupVideo.Text
                 };
                 _equipEntities.CombatEquipment.Add(ce);
+                _equipImageEntities.EquipmentImage.AddRange(_equipImageList);
                 _equipEntities.CombatVehicles.AddRange(_comVehList);
                 if (_oilEngines != null)
                 {
                     _equipEntities.OilEngine.Add(_oilEngines);
+                    _oilImageEntities.OilEngineImage.AddRange(_oilImgList);
                 }
                 _equipEntities.Material.AddRange(_materList);
                 _equipEntities.Events.AddRange(_eventsList);
                 _equipEntities.EventData.AddRange(_eventDataList);
 
                 _vehiclesImageEntities.VehiclesImage.AddRange(_vehImgList);
-                _oilImageEntities.OilEngineImage.AddRange(_oilImgList);
                 _eventsImageEntities.EventsImage.AddRange(_eventsImgList);
             }
             else
@@ -822,14 +855,6 @@ namespace AnonManagementSystem
                 equipfirst.PerformIndex = tbPerformIndex.Text;
             }
             _equipEntities.SaveChanges();
-        }
-
-        private void tsbRestore_Click(object sender, EventArgs e)
-        {
-            _equipEntities = new EquipmentManagementEntities();
-            var equip = from eq in _equipEntities.CombatEquipment
-                        select eq;
-            LoadEquipData(equip);
         }
 
         //private void VehicleDataRefresh(int pagesize, int curpage, DbRawSqlQuery<CombatVehicles> iquery)

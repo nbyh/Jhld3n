@@ -1,13 +1,9 @@
 ﻿using EquipmentInformationData;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
@@ -23,10 +19,6 @@ namespace AnonManagementSystem
         {
             InitializeComponent();
         }
-
-        public delegate void ChangeUser();
-
-        public event ChangeUser ChangeCurrentuser;
 
         public bool Enableedit
         {
@@ -212,7 +204,7 @@ namespace AnonManagementSystem
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
             dGvEquip.Rows.Clear();
-            IEnumerable<CombatEquipment> appointeq=new List<CombatEquipment>();
+            IEnumerable<CombatEquipment> appointeq = new List<CombatEquipment>();
             if (!string.IsNullOrEmpty(cmbName.Text))
             {
                 appointeq = from equipment in _equip
@@ -255,8 +247,8 @@ namespace AnonManagementSystem
             if (appointee.Any())
             {
                 var appointeq = from equipment in _equip
-                    where equipment.SerialNo == appointee.First().Equipment
-                    select equipment;
+                                where equipment.SerialNo == appointee.First().Equipment
+                                select equipment;
                 dGvEquip.DataSource = appointeq;
             }
         }

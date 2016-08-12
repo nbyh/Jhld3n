@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace AnonManagementSystem
 {
     public interface IMdiFunction
     {
         void DataAdd();
+
         void DataDelete();
+
         void DataRefresh();
     }
 
@@ -24,6 +23,11 @@ namespace AnonManagementSystem
     public interface IShowImageList
     {
         Dictionary<string, Image> ImgDictionary { get; set; }
+
         void ShowImages();
+
+        void AddImages(string key, Image img);
+
+        void DeleteImages();
     }
 }
