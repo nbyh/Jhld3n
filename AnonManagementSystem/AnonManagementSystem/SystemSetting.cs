@@ -1,17 +1,16 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
     public partial class SystemSetting : Form
     {
-        readonly SystemManagerEntities _sysManagerEntities = new SystemManagerEntities();
+        private readonly SystemManagerEntities _sysManagerEntities = new SystemManagerEntities();
         private List<string> _alluser = new List<string>();
-        List<UserManage> _userList = new List<UserManage>();
+        private List<UserManage> _userList = new List<UserManage>();
         //private UserManage um;
 
         public SystemSetting()
@@ -22,7 +21,6 @@ namespace AnonManagementSystem
         private void AddModify(bool add, int rowindex, int id, string user, string pwd, bool enableedit)
         {
             int j = dgvUserManage.RowCount;
-
 
             if (add)
             {

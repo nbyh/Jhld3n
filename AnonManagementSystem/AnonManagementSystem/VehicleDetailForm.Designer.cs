@@ -111,22 +111,22 @@
             this.dtpOeTime = new System.Windows.Forms.DateTimePicker();
             this.cmbOeModel = new System.Windows.Forms.ComboBox();
             this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ilvOe = new AnonManagementSystem.ImageListViewer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.ilvVehicle = new AnonManagementSystem.ImageListViewer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
+            this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.imageListViewer = new AnonManagementSystem.ImageListViewer();
-            this.imageListViewer1 = new AnonManagementSystem.ImageListViewer();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -139,10 +139,10 @@
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWorkHour)).BeginInit();
             this.tabPage16.SuspendLayout();
-            this.cmsPicture.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.toolStrip5.SuspendLayout();
+            this.cmsPicture.SuspendLayout();
             this.tsDetail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -931,7 +931,7 @@
             // 
             // tabPage16
             // 
-            this.tabPage16.Controls.Add(this.imageListViewer1);
+            this.tabPage16.Controls.Add(this.ilvOe);
             this.tabPage16.Controls.Add(this.toolStrip1);
             this.tabPage16.Location = new System.Drawing.Point(4, 22);
             this.tabPage16.Name = "tabPage16";
@@ -940,25 +940,14 @@
             this.tabPage16.Text = "油机图片";
             this.tabPage16.UseVisualStyleBackColor = true;
             // 
-            // cmsPicture
+            // ilvOe
             // 
-            this.cmsPicture.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.更新图片ToolStripMenuItem,
-            this.图片另存为ToolStripMenuItem});
-            this.cmsPicture.Name = "cmsPicture";
-            this.cmsPicture.Size = new System.Drawing.Size(137, 48);
-            // 
-            // 更新图片ToolStripMenuItem
-            // 
-            this.更新图片ToolStripMenuItem.Name = "更新图片ToolStripMenuItem";
-            this.更新图片ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.更新图片ToolStripMenuItem.Text = "更新图片";
-            // 
-            // 图片另存为ToolStripMenuItem
-            // 
-            this.图片另存为ToolStripMenuItem.Name = "图片另存为ToolStripMenuItem";
-            this.图片另存为ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.图片另存为ToolStripMenuItem.Text = "图片另存为";
+            this.ilvOe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvOe.ImgDictionary = null;
+            this.ilvOe.Location = new System.Drawing.Point(0, 25);
+            this.ilvOe.Name = "ilvOe";
+            this.ilvOe.Size = new System.Drawing.Size(762, 453);
+            this.ilvOe.TabIndex = 10;
             // 
             // toolStrip1
             // 
@@ -991,7 +980,7 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.imageListViewer);
+            this.tabPage6.Controls.Add(this.ilvVehicle);
             this.tabPage6.Controls.Add(this.toolStrip5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
@@ -999,6 +988,15 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "车辆图片";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // ilvVehicle
+            // 
+            this.ilvVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvVehicle.ImgDictionary = null;
+            this.ilvVehicle.Location = new System.Drawing.Point(0, 25);
+            this.ilvVehicle.Name = "ilvVehicle";
+            this.ilvVehicle.Size = new System.Drawing.Size(776, 485);
+            this.ilvVehicle.TabIndex = 9;
             // 
             // toolStrip5
             // 
@@ -1028,6 +1026,26 @@
             this.tsbDeleteImages.Size = new System.Drawing.Size(52, 22);
             this.tsbDeleteImages.Text = "删除";
             this.tsbDeleteImages.Click += new System.EventHandler(this.tsbDeleteImages_Click);
+            // 
+            // cmsPicture
+            // 
+            this.cmsPicture.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.更新图片ToolStripMenuItem,
+            this.图片另存为ToolStripMenuItem});
+            this.cmsPicture.Name = "cmsPicture";
+            this.cmsPicture.Size = new System.Drawing.Size(137, 48);
+            // 
+            // 更新图片ToolStripMenuItem
+            // 
+            this.更新图片ToolStripMenuItem.Name = "更新图片ToolStripMenuItem";
+            this.更新图片ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.更新图片ToolStripMenuItem.Text = "更新图片";
+            // 
+            // 图片另存为ToolStripMenuItem
+            // 
+            this.图片另存为ToolStripMenuItem.Name = "图片另存为ToolStripMenuItem";
+            this.图片另存为ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.图片另存为ToolStripMenuItem.Text = "图片另存为";
             // 
             // tsDetail
             // 
@@ -1062,24 +1080,6 @@
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
             // 
-            // imageListViewer
-            // 
-            this.imageListViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageListViewer.ImgDictionary = null;
-            this.imageListViewer.Location = new System.Drawing.Point(0, 25);
-            this.imageListViewer.Name = "imageListViewer";
-            this.imageListViewer.Size = new System.Drawing.Size(776, 485);
-            this.imageListViewer.TabIndex = 9;
-            // 
-            // imageListViewer1
-            // 
-            this.imageListViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageListViewer1.ImgDictionary = null;
-            this.imageListViewer1.Location = new System.Drawing.Point(0, 25);
-            this.imageListViewer1.Name = "imageListViewer1";
-            this.imageListViewer1.Size = new System.Drawing.Size(762, 453);
-            this.imageListViewer1.TabIndex = 10;
-            // 
             // VehicleDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1091,6 +1091,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "车辆详细信息";
             this.Load += new System.EventHandler(this.VehicleDetailForm_Load);
+            this.Shown += new System.EventHandler(this.VehicleDetailForm_Shown);
             this.tabCtrlVehicle.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.gbBaseInfo.ResumeLayout(false);
@@ -1109,13 +1110,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudWorkHour)).EndInit();
             this.tabPage16.ResumeLayout(false);
             this.tabPage16.PerformLayout();
-            this.cmsPicture.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
+            this.cmsPicture.ResumeLayout(false);
             this.tsDetail.ResumeLayout(false);
             this.tsDetail.PerformLayout();
             this.ResumeLayout(false);
@@ -1221,7 +1222,7 @@
         private System.Windows.Forms.ToolStripButton tsbAddImages;
         private System.Windows.Forms.ToolStripButton tsbDeleteImages;
         private System.Windows.Forms.OpenFileDialog ofdImage;
-        private ImageListViewer imageListViewer1;
-        private ImageListViewer imageListViewer;
+        private ImageListViewer ilvOe;
+        private ImageListViewer ilvVehicle;
     }
 }

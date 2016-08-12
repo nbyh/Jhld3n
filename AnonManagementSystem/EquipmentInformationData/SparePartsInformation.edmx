@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SparePartManagementModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\Reference\SparePartManagement.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SpareParts">
+          <Key>
+            <PropertyRef Name="SerialNo" />
+          </Key>
+          <Property Name="SerialNo" Type="nvarchar" MaxLength="254" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="Model" Type="nvarchar" MaxLength="254" />
+          <Property Name="Factory" Type="nvarchar" MaxLength="254" />
+          <Property Name="ProductDate" Type="datetime" Nullable="false" />
+          <Property Name="StoreSpot" Type="nvarchar" MaxLength="254" />
+          <Property Name="StoreDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="nvarchar" MaxLength="254" />
+          <Property Name="UseType" Type="nvarchar" MaxLength="254" />
+          <Property Name="Statue" Type="nvarchar" MaxLength="254" />
+        </EntityType>
+        <EntityContainer Name="SparePartManagementModelStoreContainer">
+          <EntitySet Name="SpareParts" EntityType="Self.SpareParts" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SparePartManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SpareParts">
+          <Key>
+            <PropertyRef Name="SerialNo" />
+          </Key>
+          <Property Name="SerialNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Factory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDate" Type="DateTime" Nullable="false" />
+          <Property Name="StoreSpot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="StoreDate" Type="DateTime" Nullable="false" />
+          <Property Name="Amount" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="UseType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Statue" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SparePartManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SpareParts" EntityType="Self.SpareParts" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SparePartManagementModelStoreContainer" CdmEntityContainer="SparePartManagementEntities">
+          <EntitySetMapping Name="SpareParts">
+            <EntityTypeMapping TypeName="SparePartManagementModel.SpareParts">
+              <MappingFragment StoreEntitySet="SpareParts">
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
+                <ScalarProperty Name="StoreSpot" ColumnName="StoreSpot" />
+                <ScalarProperty Name="StoreDate" ColumnName="StoreDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UseType" ColumnName="UseType" />
+                <ScalarProperty Name="Statue" ColumnName="Statue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

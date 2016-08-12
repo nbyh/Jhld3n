@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Log"))
             {
@@ -37,6 +35,7 @@ namespace AnonManagementSystem
                 Application.Run(new MDIParent());
             }
         }
+
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception ex = (Exception)e.ExceptionObject;
@@ -44,6 +43,7 @@ namespace AnonManagementSystem
             //_lg.Fatal(string.Format("\t{0}", ex.ToString()));
             MessageBox.Show(ex.ToString());
         }
+
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Exception ex = e.Exception;

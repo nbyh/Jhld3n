@@ -1,19 +1,15 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
-
     public partial class AddMaterialForm : Form, IAddModify
     {
         public delegate void SaveMaterial(bool add, int index, Material material);
+
         public event SaveMaterial SaveMaterialSucess;
 
         private bool _enableedit = false;
@@ -27,12 +23,14 @@ namespace AnonManagementSystem
 
         private bool _add = false;
         public bool Add { get; set; }
+
         public bool Enableedit
         {
             set { _enableedit = value; }
         }
 
-        EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
+        private EquipmentManagementEntities eqEntities = new EquipmentManagementEntities();
+
         public AddMaterialForm()
         {
             InitializeComponent();
@@ -59,7 +57,6 @@ namespace AnonManagementSystem
 
         private void AddMaterialForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void AddMaterialForm_Shown(object sender, EventArgs e)

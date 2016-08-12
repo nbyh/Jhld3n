@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using EquipmentInformationData;
+using System;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
     public partial class LoginForm : Form
     {
         public delegate void LoginOn(bool enableedit);
+
         public event LoginOn LoginSucess;
+
         public LoginForm()
         {
             InitializeComponent();

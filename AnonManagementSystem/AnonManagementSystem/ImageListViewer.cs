@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
@@ -17,6 +14,7 @@ namespace AnonManagementSystem
         }
 
         public Dictionary<string, Image> ImgDictionary { get; set; }
+        public string DeleteImgKey { get; set; }
 
         public void ShowImages()
         {
@@ -29,14 +27,44 @@ namespace AnonManagementSystem
             lsvImages.BeginUpdate();
             for (int i = 0; i < imgList.Images.Count; i++)
             {
+                FileInfo fi = new FileInfo(imgList.Images.Keys[i]);
                 ListViewItem lvi = new ListViewItem
                 {
-                    ImageIndex = i,
-                    Text = imgList.Images.Keys[i]
+                    ImageKey = imgList.Images.Keys[i],
+                    Text = fi.Name
                 };
                 lsvImages.Items.Add(lvi);
             }
             lsvImages.EndUpdate();
+        }
+
+        public void AddImages(string key, Image img)
+        {
+            FileInfo fi = new FileInfo(key);
+            imgList.Images.Add(key, img);
+            //lsvImages.LargeImageList = imgList;
+            lsvImages.BeginUpdate();
+            ListViewItem lvi = new ListViewItem
+            {
+                ImageKey = key,
+                Text = fi.Name
+            };
+            lsvImages.Items.Add(lvi);
+            lsvImages.EndUpdate();
+        }
+
+        public void DeleteImages()
+        {
+            if (lsvImages.SelectedItems.Count > 0)
+            {
+                lsvImages.BeginUpdate();
+                foreach (ListViewItem lvi in lsvImages.SelectedItems)
+                {
+                    lsvImages.Items.Remove(lvi);
+                    DeleteImgKey = lvi.ImageKey;
+                }
+                lsvImages.EndUpdate();
+            }
         }
 
         private void lsvImages_DoubleClick(object sender, EventArgs e)

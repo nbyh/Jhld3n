@@ -1,0 +1,279 @@
+﻿using EquipmentInformationData;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+
+namespace AnonManagementSystem
+{
+    public partial class SparePartDetailForm : Form, IAddModify
+    {
+        private readonly SynchronizationContext _synchContext;
+        private readonly SparePartImagesEntities _partsImageEntities = new SparePartImagesEntities();
+        private readonly List<SparePartImage> _spImgList = new List<SparePartImage>();
+        private bool _enableedit;
+        private string _id;
+        private SparePartManagementEntities _sparePartEntities = new SparePartManagementEntities();
+        public SparePartDetailForm()
+        {
+            InitializeComponent();
+            _synchContext = SynchronizationContext.Current;
+        }
+
+        public bool Add { get; set; }
+
+        public bool Enableedit
+        {
+            set { _enableedit = value; }
+        }
+
+        public string Id
+        {
+            set { _id = value; }
+        }
+
+        public int Index { get; set; }
+
+        private void cmsPicture_Opening(object sender, CancelEventArgs e)
+        {
+        }
+
+        private void LoadSparePartData(IQueryable<SpareParts> sparePart)
+        {
+            var appointsp = from eq in sparePart
+                            where eq.SerialNo == _id
+                            select eq;
+            var spfirst = appointsp.First();
+            cmbName.SelectedItem = spfirst.Name;
+            cmbModel.SelectedItem = spfirst.Model;
+            cmbStoreSpot.SelectedItem = spfirst.StoreSpot;
+            tbSerialNo.Text = spfirst.SerialNo;
+            cmbStatus.Text = spfirst.Statue;
+            dtpStoreDate.Value = spfirst.StoreDate;
+            cmbUseType.SelectedItem = spfirst.UseType;
+            nUdAmount.Value = int.Parse(spfirst.Amount);
+            cmbFactory.SelectedItem = spfirst.Factory;
+            dtpOemDate.Value = spfirst.ProductDate;
+
+
+            var imgs = (from img in _partsImageEntities.SparePartImage
+                        where img.SerialNo == _id
+                        select img);
+            Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
+            foreach (var spmentImage in imgs)
+            {
+                using (MemoryStream ms = new MemoryStream(spmentImage.Images))
+                {
+                    Image img = Image.FromStream(ms);
+                    imgdic.Add(spmentImage.Name, img);
+                }
+            }
+            ilvEquipment.ImgDictionary = imgdic;
+            ilvEquipment.ShowImages();
+        }
+
+        private void SparePartDetailForm_Load(object sender, EventArgs e)
+        {
+            tsbRestore.Visible = !Add;
+            tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
+        }
+
+        private void SparePartDetailForm_Shown(object sender, EventArgs e)
+        {
+            _synchContext.Post(a =>
+            {
+                try
+                {
+                    var sp = from eq in _sparePartEntities.SpareParts
+                        select eq;
+
+                    #region 下拉列表内容
+
+                    List<string> spNameList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+                    cmbName.DataSource = spNameList;
+                    List<string> spModelList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+                    cmbModel.DataSource = spModelList;
+                    List<string> spFactList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+                    cmbFactory.DataSource = spFactList;
+                    List<string> spSubdepartList =
+                        (from s in sp where !string.IsNullOrEmpty(s.StoreSpot) select s.StoreSpot).Distinct()
+                            .ToList();
+                    cmbStoreSpot.DataSource = spSubdepartList;
+                    List<string> spTechcanList =
+                        (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct().ToList();
+                    cmbUseType.DataSource = spTechcanList;
+                    List<string> spManagerList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Statue) select s.Statue).Distinct().ToList();
+                    cmbStatus.DataSource = spManagerList;
+
+                    #endregion 下拉列表内容
+
+                    if (Add)
+                    {
+                        cmbName.SelectedIndex = -1;
+                        cmbStoreSpot.SelectedIndex = -1;
+                        cmbModel.SelectedIndex = -1;
+                        cmbStatus.SelectedIndex = -1;
+                        cmbUseType.SelectedIndex = -1;
+                        cmbFactory.SelectedIndex = -1;
+                        tsbRestore.Enabled = false;
+                    }
+                    else
+                    {
+                        LoadSparePartData(sp);
+                    }
+                    CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
+                }
+                catch (Exception exception)
+                {
+                    if (Add)
+                    {
+                        MessageBox.Show(this, @"打开添加设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加设备数据失败", exception);
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, $"加载设备数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        CommonLogHelper.GetInstance("LogError").Error($"加载设备数据{_id}失败", exception);
+                    }
+                }
+            }, null);
+        }
+        private void tsbAddImages_Click(object sender, EventArgs e)
+        {
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                string imgpath = ofdImage.FileName;
+                byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
+                if (imgBytes != null)
+                {
+                    SparePartImage eqImg = new SparePartImage
+                    {
+                        Name = imgpath,
+                        Images = imgBytes,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _spImgList.Add(eqImg);
+
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvEquipment.ImgDictionary.Add(eqImg.Name, img);
+                        ilvEquipment.AddImages(eqImg.Name, img);
+                    }
+                }
+            }
+        }
+
+        private void tsbDeleteImage_Click(object sender, EventArgs e)
+        {
+            ilvEquipment.DeleteImages();
+            if (!string.IsNullOrEmpty(ilvEquipment.DeleteImgKey))
+            {
+                try
+                {
+                    string key = ilvEquipment.DeleteImgKey;
+                    foreach (var spImg in _spImgList.Where(spimg => spimg.Name == key))
+                    {
+                        _spImgList.Remove(spImg);
+                    }
+                    var eqimg = from img in _partsImageEntities.SparePartImage
+                        where img.Name == key
+                        select img;
+                    if (eqimg.Any())
+                    {
+                        _partsImageEntities.SparePartImage.Remove(eqimg.First());
+                    }
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
+                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                }
+            }
+        }
+
+        private void tsbRestore_Click(object sender, EventArgs e)
+        {
+            _synchContext.Post(a =>
+            {
+                try
+                {
+                    _sparePartEntities = new SparePartManagementEntities();
+                    var sp = from eq in _sparePartEntities.SpareParts
+                        select eq;
+                    LoadSparePartData(sp);
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
+                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                }
+            }, null);
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Add)
+                {
+                    SpareParts ce = new SpareParts()
+                    {
+                        SerialNo = tbSerialNo.Text,
+                        Name = cmbName.Text,
+                        Model = cmbModel.Text,
+                        Factory = cmbFactory.Text,
+                        ProductDate = dtpOemDate.Value.Date,
+                        StoreSpot = cmbStoreSpot.Text,
+                        StoreDate = dtpStoreDate.Value.Date,
+                        Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture),
+                        UseType = cmbUseType.Text,
+                        Statue = cmbStatus.Text,
+                    };
+                    _sparePartEntities.SpareParts.Add(ce);
+                    _partsImageEntities.SparePartImage.AddRange(_spImgList);
+                }
+                else
+                {
+                    var spfirst = (from eq in _sparePartEntities.SpareParts
+                        where eq.SerialNo == _id
+                        select eq).First();
+
+                    spfirst.SerialNo = tbSerialNo.Text;
+                    spfirst.Name = cmbName.Text;
+                    spfirst.Model = cmbModel.Text;
+                    spfirst.Factory = cmbFactory.Text;
+                    spfirst.ProductDate = dtpOemDate.Value.Date;
+                    spfirst.StoreSpot = cmbStoreSpot.Text;
+                    spfirst.StoreDate = dtpStoreDate.Value.Date;
+                    spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
+                    spfirst.UseType = cmbUseType.Text;
+                    spfirst.Statue = cmbStatus.Text;
+                }
+                _sparePartEntities.SaveChanges();
+                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
+                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+            }
+        }
+    }
+}
