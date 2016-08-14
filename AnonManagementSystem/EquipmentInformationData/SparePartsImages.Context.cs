@@ -13,10 +13,10 @@ namespace EquipmentInformationData
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EquipmentManagementEntities : DbContext
+    public partial class SparePartImagesEntities : DbContext
     {
-        public EquipmentManagementEntities()
-            : base("name=EquipmentManagementEntities")
+        public SparePartImagesEntities()
+            : base("name=SparePartImagesEntities")
         {
         }
     
@@ -25,11 +25,6 @@ namespace EquipmentInformationData
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CombatEquipment> CombatEquipment { get; set; }
-        public virtual DbSet<CombatVehicles> CombatVehicles { get; set; }
-        public virtual DbSet<EventData> EventData { get; set; }
-        public virtual DbSet<Material> Material { get; set; }
-        public virtual DbSet<OilEngine> OilEngine { get; set; }
-        public virtual DbSet<Events> Events { get; set; }
+        public virtual DbSet<SparePartImage> SparePartImage { get; set; }
     }
 }

@@ -51,6 +51,8 @@ namespace AnonManagementSystem
             };
             lsvImages.Items.Add(lvi);
             lsvImages.EndUpdate();
+            lsvImages.Items[key].Selected = true;
+            picBox.Image = img;
         }
 
         public void DeleteImages()
@@ -69,10 +71,17 @@ namespace AnonManagementSystem
 
         private void lsvImages_DoubleClick(object sender, EventArgs e)
         {
-            if (lsvImages.SelectedItems.Count == 0)
-                return;
-            string picname = lsvImages.SelectedItems[0].Text;
-            picBox.Image = ImgDictionary[picname];
+            try
+            {
+                if (lsvImages.SelectedItems.Count == 0)
+                    return;
+                string picname = lsvImages.SelectedItems[0].Text;
+                picBox.Image = ImgDictionary[picname];
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }

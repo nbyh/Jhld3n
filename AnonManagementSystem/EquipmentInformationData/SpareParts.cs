@@ -12,21 +12,17 @@ namespace EquipmentInformationData
     using System;
     using System.Collections.Generic;
     
-    public partial class Material
+    public partial class SpareParts
     {
-        public string No { get; set; }
+        public string SerialNo { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
-        public string PaperSize { get; set; }
-        public string Pagination { get; set; }
-        public string Edition { get; set; }
-        public string Volume { get; set; }
-        public System.DateTime Date { get; set; }
-        public string DocumentLink { get; set; }
+        public string Model { get; set; }
+        public string Factory { get; set; }
+        public System.DateTime ProductDate { get; set; }
         public string StoreSpot { get; set; }
-        public string Content { get; set; }
-        public string Equipment { get; set; }
-    
-        public virtual CombatEquipment CombatEquipment { get; set; }
+        public System.DateTime StoreDate { get; set; }
+        public string Amount { get; set; }
+        public string UseType { get; set; }
+        public string Statue { get; set; }
     }
 }

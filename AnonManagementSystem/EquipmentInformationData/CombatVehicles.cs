@@ -27,7 +27,7 @@ namespace EquipmentInformationData
         public string MotorModel { get; set; }
         public string TechCondition { get; set; }
         public string Factory { get; set; }
-        public Nullable<System.DateTime> ProductionDate { get; set; }
+        public System.DateTime ProductionDate { get; set; }
         public string Mass { get; set; }
         public string Tankage { get; set; }
         public string OverallSize { get; set; }
@@ -39,7 +39,7 @@ namespace EquipmentInformationData
         public string VehicleChargers { get; set; }
         public string VehicleSpotNo { get; set; }
         public string VehicleDescri { get; set; }
-        public Nullable<bool> CombineOe { get; set; }
+        public bool CombineOe { get; set; }
         public string Equipment { get; set; }
     
         public virtual CombatEquipment CombatEquipment { get; set; }
