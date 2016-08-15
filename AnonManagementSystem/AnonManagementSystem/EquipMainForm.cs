@@ -35,6 +35,7 @@ namespace AnonManagementSystem
                 Enableedit = _enableedit,
                 Add = true
             };
+            equipDetailForm.SaveSuccess += SaveDataSuccess;
             equipDetailForm.ShowDialog();
         }
 
@@ -68,17 +69,21 @@ namespace AnonManagementSystem
 
         public void DataRefresh()
         {
-            try
+            Thread refreshThread = new Thread((ThreadStart) delegate
             {
-                _equipEntities = new EquipmentManagementEntities();
-                LoadData();
-                CommonLogHelper.GetInstance("LogInfo").Info(@"刷新设备数据成功");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(this, @"刷新设备数据失败" + e.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"刷新设备数据失败", e);
-            }
+                try
+                {
+                    _equipEntities = new EquipmentManagementEntities();
+                    LoadData();
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"刷新设备数据成功");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(this, @"刷新设备数据失败" + e.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CommonLogHelper.GetInstance("LogError").Error(@"刷新设备数据失败", e);
+                }
+            }) {IsBackground = true};
+            refreshThread.Start();
         }
 
         public void LoadData()
@@ -261,8 +266,15 @@ namespace AnonManagementSystem
                     Add = false,
                     Id = dgvEquip.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
                 };
+                equipDetailForm.SaveSuccess += SaveDataSuccess;
                 equipDetailForm.Show();
             }
+        }
+
+        private void SaveDataSuccess()
+        {
+            DataRefresh();
+            btnLast_Click(null, null);
         }
 
         private void EquipMainForm_Load(object sender, EventArgs e)

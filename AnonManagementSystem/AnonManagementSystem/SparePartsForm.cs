@@ -23,6 +23,12 @@ namespace AnonManagementSystem
             _synchContext = SynchronizationContext.Current;
         }
 
+        private void SaveDataSuccess()
+        {
+            DataRefresh();
+            btnLast_Click(null, null);
+        }
+
         public bool Enableedit
         {
             set { _enableedit = value; }
@@ -35,6 +41,7 @@ namespace AnonManagementSystem
                 Enableedit = _enableedit,
                 Add = true
             };
+            spDetailForm.SaveSuccess += SaveDataSuccess;
             spDetailForm.ShowDialog();
         }
 
@@ -255,6 +262,7 @@ namespace AnonManagementSystem
                     Add = false,
                     Id = dgvSparePart.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
                 };
+                spDetailForm.SaveSuccess += SaveDataSuccess;
                 spDetailForm.Show();
             }
         }

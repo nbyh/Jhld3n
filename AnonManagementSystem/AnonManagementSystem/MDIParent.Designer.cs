@@ -1,6 +1,6 @@
 ﻿namespace AnonManagementSystem
 {
-    partial class MDIParent
+    partial class MdiParent
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -228,7 +228,7 @@
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "MDIParent";
+            this.Name = "MdiParent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "装备和备件管理系统";
             this.Shown += new System.EventHandler(this.MDIParent_Shown);

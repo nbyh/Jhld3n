@@ -13,6 +13,8 @@ namespace AnonManagementSystem
 {
     public partial class SparePartDetailForm : Form, IAddModify
     {
+        public delegate void SaveChangeSuccess();
+        public event SaveChangeSuccess SaveSuccess;
         private readonly SynchronizationContext _synchContext;
         private readonly SparePartImagesEntities _partsImageEntities = new SparePartImagesEntities();
         private readonly List<SparePartImage> _spImgList = new List<SparePartImage>();
@@ -90,7 +92,7 @@ namespace AnonManagementSystem
                 try
                 {
                     var sp = from eq in _sparePartEntities.SpareParts
-                        select eq;
+                             select eq;
 
                     #region 下拉列表内容
 
@@ -142,9 +144,9 @@ namespace AnonManagementSystem
                     }
                     else
                     {
+                        CommonLogHelper.GetInstance("LogError").Error($"加载设备数据{_id}失败", exception);
                         MessageBox.Show(this, $"加载设备数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error($"加载设备数据{_id}失败", exception);
                     }
                 }
             }, null);
@@ -188,19 +190,19 @@ namespace AnonManagementSystem
                         _spImgList.Remove(spImg);
                     }
                     var eqimg = from img in _partsImageEntities.SparePartImage
-                        where img.Name == key
-                        select img;
+                                where img.Name == key
+                                select img;
                     if (eqimg.Any())
                     {
                         _partsImageEntities.SparePartImage.Remove(eqimg.First());
                     }
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CommonLogHelper.GetInstance("LogInfo").Info($"删除图片{key}成功");
+                    MessageBox.Show(this, @"删除图片成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                    CommonLogHelper.GetInstance("LogError").Error(@"删除图片失败", exception);
+                    MessageBox.Show(this, @"删除图片失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -213,15 +215,15 @@ namespace AnonManagementSystem
                 {
                     _sparePartEntities = new SparePartManagementEntities();
                     var sp = from eq in _sparePartEntities.SpareParts
-                        select eq;
+                             select eq;
                     LoadSparePartData(sp);
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"恢复原始备件数据成功");
+                    MessageBox.Show(this, @"恢复原始备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                    CommonLogHelper.GetInstance("LogError").Error(@"恢复原始备件数据失败", exception);
+                    MessageBox.Show(this, @"恢复原始备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }, null);
         }
@@ -230,6 +232,7 @@ namespace AnonManagementSystem
         {
             try
             {
+                _partsImageEntities.SparePartImage.AddRange(_spImgList);
                 if (Add)
                 {
                     SpareParts ce = new SpareParts()
@@ -246,13 +249,12 @@ namespace AnonManagementSystem
                         Statue = cmbStatus.Text,
                     };
                     _sparePartEntities.SpareParts.Add(ce);
-                    _partsImageEntities.SparePartImage.AddRange(_spImgList);
                 }
                 else
                 {
                     var spfirst = (from eq in _sparePartEntities.SpareParts
-                        where eq.SerialNo == _id
-                        select eq).First();
+                                   where eq.SerialNo == _id
+                                   select eq).First();
 
                     spfirst.SerialNo = tbSerialNo.Text;
                     spfirst.Name = cmbName.Text;
@@ -266,13 +268,15 @@ namespace AnonManagementSystem
                     spfirst.Statue = cmbStatus.Text;
                 }
                 _sparePartEntities.SaveChanges();
-                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveSuccess?.Invoke();
+                CommonLogHelper.GetInstance("LogInfo").Info(@"保存备件数据成功");
+                MessageBox.Show(this, @"保存备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                CommonLogHelper.GetInstance("LogError").Error(@"保存备件数据失败", exception);
+                MessageBox.Show(this, @"保存备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

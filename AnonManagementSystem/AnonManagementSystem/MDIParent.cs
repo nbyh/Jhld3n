@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
-    public partial class MDIParent : Form
+    public partial class MdiParent : Form
     {
-        public MDIParent()
+        public MdiParent()
         {
             InitializeComponent();
         }
@@ -17,8 +17,8 @@ namespace AnonManagementSystem
             MessageBox.Show(@"登陆成功");
         }
 
-        private bool _enableedit = false;
-        private bool _islogin = false;
+        private bool _enableedit;
+        private bool _islogin;
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -35,10 +35,10 @@ namespace AnonManagementSystem
             LayoutMdi(MdiLayout.TileHorizontal);
         }
 
-        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.ArrangeIcons);
-        }
+        //private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    LayoutMdi(MdiLayout.ArrangeIcons);
+        //}
 
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -106,7 +106,7 @@ namespace AnonManagementSystem
 
         private void tsbAdd_Click(object sender, EventArgs e)
         {
-            Form form = this.ActiveMdiChild;
+            Form form = ActiveMdiChild;
             var mdiFunction = (IMdiFunction)form;
             mdiFunction?.DataAdd();
         }
@@ -142,7 +142,7 @@ namespace AnonManagementSystem
 
         private void tsbRefresh_Click(object sender, EventArgs e)
         {
-            Form form = this.ActiveMdiChild;
+            Form form = ActiveMdiChild;
             var mdiFunction = (IMdiFunction)form;
             mdiFunction?.DataRefresh();
         }
@@ -156,6 +156,8 @@ namespace AnonManagementSystem
                     childForm.WindowState = FormWindowState.Maximized;
                 }
             }
+            BackgroundImageLayout = ImageLayout.Zoom;
+            OnBackgroundImageLayoutChanged(e);
         }
     }
 }

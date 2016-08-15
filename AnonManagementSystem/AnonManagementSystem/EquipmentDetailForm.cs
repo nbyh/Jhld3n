@@ -13,6 +13,8 @@ namespace AnonManagementSystem
 {
     public partial class EquipmentDetailForm : Form, IAddModify
     {
+        public delegate void SaveChangeSuccess();
+        public event SaveChangeSuccess SaveSuccess;
         private readonly SynchronizationContext _synchContext;
         private readonly List<CombatVehicles> _comVehList = new List<CombatVehicles>();
         private readonly EquipImageEntities _equipImageEntities = new EquipImageEntities();
@@ -639,7 +641,7 @@ namespace AnonManagementSystem
         private void tsbDeleteEvents_Click(object sender, EventArgs e)
         {
             if (dgvEvents.CurrentRow == null) return;
-            if (MessageBox.Show(@"确定要删除该事件及相关信息？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
+            if (MessageBox.Show(@"确定要删除该事件及相关数据？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
                 DialogResult.Yes) return;
             try
             {
@@ -667,25 +669,25 @@ namespace AnonManagementSystem
                 else
                 {
                     var ee = (from eqee in _equipEntities.Events
-                        where eqee.No == id
-                        select eqee).First();
+                              where eqee.No == id
+                              select eqee).First();
                     _equipEntities.Events.Remove(ee);
                     var ed = (from eqed in _equipEntities.EventData
-                        where eqed.EventsNo == id
-                        select eqed).First();
+                              where eqed.EventsNo == id
+                              select eqed).First();
                     _equipEntities.EventData.Remove(ed);
                     var ei = (from eqei in _eventsImageEntities.EventsImage
-                        where eqei.SerialNo == id
-                        select eqei).First();
+                              where eqei.SerialNo == id
+                              select eqei).First();
                     _eventsImageEntities.EventsImage.Remove(ei);
                 }
-                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonLogHelper.GetInstance("LogInfo").Info($"删除事件{id}成功");
+                MessageBox.Show(this, @"删除事件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                CommonLogHelper.GetInstance("LogError").Error(@"删除事件失败", exception);
+                MessageBox.Show(this, @"删除事件失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -702,19 +704,19 @@ namespace AnonManagementSystem
                         _equipImageList.Remove(equipmentImage);
                     }
                     var eqimg = from img in _equipImageEntities.EquipmentImage
-                        where img.Name == key
-                        select img;
+                                where img.Name == key
+                                select img;
                     if (eqimg.Any())
                     {
                         _equipImageEntities.EquipmentImage.Remove(eqimg.First());
                     }
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CommonLogHelper.GetInstance("LogInfo").Info($"删除图片{key}成功");
+                    MessageBox.Show(this, $"删除图片成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                    CommonLogHelper.GetInstance("LogError").Error(@"删除图片失败", exception);
+                    MessageBox.Show(this, @"删除图片失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -740,27 +742,27 @@ namespace AnonManagementSystem
                 else
                 {
                     var mm = from eqm in _equipEntities.Material
-                        where eqm.No == id
-                        select eqm;
+                             where eqm.No == id
+                             select eqm;
                     if (mm.Any())
                     {
                         _equipEntities.Material.Remove(mm.First());
                     }
                 }
-                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonLogHelper.GetInstance("LogInfo").Info($"删除材料{id}成功");
+                MessageBox.Show(this, @"删除材料成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                CommonLogHelper.GetInstance("LogError").Error(@"删除材料失败", exception);
+                MessageBox.Show(this, @"删除材料失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void tsbDeleteVehicle_Click(object sender, EventArgs e)
         {
             if (dgvCombatVehicles.CurrentRow == null) return;
-            if (MessageBox.Show(@"确定要删除该车辆及相关信息？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
+            if (MessageBox.Show(@"确定要删除该车辆及相关数据？删除后将无法找回！", @"警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
                 DialogResult.Yes) return;
             try
             {
@@ -794,32 +796,32 @@ namespace AnonManagementSystem
                 else
                 {
                     var ee = (from eqee in _equipEntities.CombatVehicles
-                        where eqee.SerialNo == id
-                        select eqee).First();
+                              where eqee.SerialNo == id
+                              select eqee).First();
                     _equipEntities.CombatVehicles.Remove(ee);
                     var ei = (from eqei in _vehiclesImageEntities.VehiclesImage
-                        where eqei.SerialNo == id
-                        select eqei).First();
+                              where eqei.SerialNo == id
+                              select eqei).First();
                     _vehiclesImageEntities.VehiclesImage.Remove(ei);
                     if (ee.CombineOe)
                     {
                         var oe = (from eqed in _equipEntities.OilEngine
-                            where eqed.Vehicle == id
-                            select eqed).First();
+                                  where eqed.Vehicle == id
+                                  select eqed).First();
                         _equipEntities.OilEngine.Remove(oe);
                         var ed = (from eqed in _oilImageEntities.OilEngineImage
-                            where eqed.SerialNo == id
-                            select eqed).First();
+                                  where eqed.SerialNo == id
+                                  select eqed).First();
                         _oilImageEntities.OilEngineImage.Remove(ed);
                     }
                 }
-                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonLogHelper.GetInstance("LogInfo").Info($"删除车辆{id}成功");
+                MessageBox.Show(this, @"删除车辆成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                CommonLogHelper.GetInstance("LogError").Error(@"删除车辆失败", exception);
+                MessageBox.Show(this, @"删除车辆失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -831,15 +833,15 @@ namespace AnonManagementSystem
                 {
                     _equipEntities = new EquipmentManagementEntities();
                     var equip = from eq in _equipEntities.CombatEquipment
-                        select eq;
+                                select eq;
                     LoadEquipData(equip);
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"恢复原始设备数据成功");
+                    MessageBox.Show(this, @"恢复原始设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                    CommonLogHelper.GetInstance("LogError").Error(@"恢复原始设备数据失败", exception);
+                    MessageBox.Show(this, @"恢复原始设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }, null);
         }
@@ -850,6 +852,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
+                    _equipImageEntities.EquipmentImage.AddRange(_equipImageList);
                     if (Add)
                     {
                         CombatEquipment ce = new CombatEquipment()
@@ -874,7 +877,6 @@ namespace AnonManagementSystem
                             SetupVideo = tbSetupVideo.Text
                         };
                         _equipEntities.CombatEquipment.Add(ce);
-                        _equipImageEntities.EquipmentImage.AddRange(_equipImageList);
                         _equipEntities.CombatVehicles.AddRange(_comVehList);
                         if (_oilEngines != null)
                         {
@@ -915,13 +917,15 @@ namespace AnonManagementSystem
                         equipfirst.PerformIndex = tbPerformIndex.Text;
                     }
                     _equipEntities.SaveChanges();
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"保存设备信息成功");
-                    MessageBox.Show(this, @"保存设备信息成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SaveSuccess?.Invoke();
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"保存设备数据成功");
+                    MessageBox.Show(this, @"保存设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"保存设备信息失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"保存设备信息失败", exception);
+                    CommonLogHelper.GetInstance("LogError").Error(@"保存设备数据失败", exception);
+                    MessageBox.Show(this, @"保存设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }, null);
         }
