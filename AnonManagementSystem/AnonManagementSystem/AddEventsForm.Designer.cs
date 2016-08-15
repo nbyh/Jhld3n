@@ -706,6 +706,8 @@
             this.Controls.Add(this.tsDetail);
             this.Name = "AddEventsForm";
             this.Text = "活动事件";
+            this.Load += new System.EventHandler(this.AddEventsForm_Load);
+            this.Shown += new System.EventHandler(this.AddEventsForm_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox23.ResumeLayout(false);

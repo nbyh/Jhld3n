@@ -152,6 +152,42 @@
       <DependentUpon>OilEngineImages.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SparePartImage.cs">
+      <DependentUpon>SparePartsImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpareParts.cs">
+      <DependentUpon>SparePartsInformation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SparePartsImages.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparePartsImages.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SparePartsImages.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparePartsImages.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SparePartsImages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparePartsImages.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SparePartsInformation.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparePartsInformation.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SparePartsInformation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparePartsInformation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SparePartsInformation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
+    </Compile>
     <Compile Include="UserManage.cs">
       <DependentUpon>UserManagerModel.tt</DependentUpon>
     </Compile>
@@ -226,6 +262,20 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UserManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="SparePartsInformation.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SparePartsInformation.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="SparePartsImages.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SparePartsImages.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SparePartsImages.edmx.diagram">
+      <DependentUpon>SparePartsImages.edmx</DependentUpon>
+    </None>
+    <None Include="SparePartsInformation.edmx.diagram">
+      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
+    </None>
     <None Include="UserManagerModel.edmx.diagram">
       <DependentUpon>UserManagerModel.edmx</DependentUpon>
     </None>
@@ -277,6 +327,26 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OilEngineImages.edmx</DependentUpon>
       <LastGenOutput>OilEngineImages.cs</LastGenOutput>
+    </Content>
+    <Content Include="SparePartsImages.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparePartsImages.edmx</DependentUpon>
+      <LastGenOutput>SparePartsImages.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SparePartsImages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparePartsImages.edmx</DependentUpon>
+      <LastGenOutput>SparePartsImages.cs</LastGenOutput>
+    </Content>
+    <Content Include="SparePartsInformation.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
+      <LastGenOutput>SparePartsInformation.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SparePartsInformation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
+      <LastGenOutput>SparePartsInformation.cs</LastGenOutput>
     </Content>
     <Content Include="UserManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

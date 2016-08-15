@@ -20,14 +20,14 @@ namespace EquipmentInformationData
         public string TechCondition { get; set; }
         public string WorkHour { get; set; }
         public string OeFactory { get; set; }
-        public string OeDate { get; set; }
+        public System.DateTime OeDate { get; set; }
         public string OeOemNo { get; set; }
         public string MotorNo { get; set; }
         public string MotorPower { get; set; }
         public string MotorFuel { get; set; }
         public string MotorTankage { get; set; }
         public string MotorFactory { get; set; }
-        public string MotorDate { get; set; }
+        public System.DateTime MotorDate { get; set; }
         public string MotorOemNo { get; set; }
         public string FaultDescri { get; set; }
         public string Vehicle { get; set; }

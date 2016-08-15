@@ -22,14 +22,14 @@ namespace EquipmentInformationData
     
         public string No { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public System.DateTime EndTime { get; set; }
         public string Address { get; set; }
         public string EventType { get; set; }
         public string SpecificType { get; set; }
         public string Code { get; set; }
         public string PublishUnit { get; set; }
-        public Nullable<System.DateTime> PublishDate { get; set; }
+        public System.DateTime PublishDate { get; set; }
         public string Publisher { get; set; }
         public string According { get; set; }
         public string PeopleDescri { get; set; }

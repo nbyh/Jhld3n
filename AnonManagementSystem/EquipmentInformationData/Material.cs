@@ -21,7 +21,7 @@ namespace EquipmentInformationData
         public string Pagination { get; set; }
         public string Edition { get; set; }
         public string Volume { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public string DocumentLink { get; set; }
         public string StoreSpot { get; set; }
         public string Content { get; set; }

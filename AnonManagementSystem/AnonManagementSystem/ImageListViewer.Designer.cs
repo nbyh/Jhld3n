@@ -66,6 +66,7 @@
             // 
             this.lsvImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvImages.Location = new System.Drawing.Point(3, 17);
+            this.lsvImages.MultiSelect = false;
             this.lsvImages.Name = "lsvImages";
             this.lsvImages.Size = new System.Drawing.Size(155, 480);
             this.lsvImages.TabIndex = 1;

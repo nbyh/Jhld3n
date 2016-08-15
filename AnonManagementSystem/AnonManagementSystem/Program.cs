@@ -26,7 +26,7 @@ namespace AnonManagementSystem
             Process[] myProcess = Process.GetProcessesByName(pName);
             if (myProcess.Length > 1)
             {
-                MessageBox.Show(@"本程序已在运行！", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"管理系统已在运行！", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -39,16 +39,14 @@ namespace AnonManagementSystem
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception ex = (Exception)e.ExceptionObject;
-            //CommonLogHelper.GetInstance("LogFatal").Fatal(string.Format("\t未知致命错误{0}", ex.ToString()));
-            //_lg.Fatal(string.Format("\t{0}", ex.ToString()));
+            CommonLogHelper.GetInstance("LogFatal").Fatal($"\t未知致命错误{ex}");
             MessageBox.Show(ex.ToString());
         }
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Exception ex = e.Exception;
-            //CommonLogHelper.GetInstance("LogFatal").Fatal(string.Format("\t线程致命错误{0}", ex.ToString()));
-            //_lg.Fatal(string.Format("\t{0}", ex.ToString()));
+            CommonLogHelper.GetInstance("LogFatal").Fatal($"\t线程致命错误{ex}");
             MessageBox.Show(ex.ToString());
         }
     }

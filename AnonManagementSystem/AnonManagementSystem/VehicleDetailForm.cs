@@ -2,19 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
     public partial class VehicleDetailForm : Form, IAddModify
     {
+        private readonly SynchronizationContext _synchContext;
         public delegate void SaveVehicle(bool add, int index, CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
 
         public event SaveVehicle SaveVehicleSucess;
 
-        private readonly List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
-        private readonly List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
+        private List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
+        private List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
 
         private string _id;
         private bool _enableedit = false;
@@ -22,6 +26,7 @@ namespace AnonManagementSystem
         public VehicleDetailForm()
         {
             InitializeComponent();
+            _synchContext = SynchronizationContext.Current;
         }
 
         public int Index { get; set; }
@@ -40,58 +45,67 @@ namespace AnonManagementSystem
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            CombatVehicles cv = new CombatVehicles()
+            try
             {
-                Name = cmbName.Text,
-                SerialNo = tbSerialNo.Text,
-                Model = cmbVehiclesModel.Text,
-                VehiclesNo = tbVehiclesNo.Text,
-                MotorModel = cmbAutoModel.Text,
-                TechCondition = cmbTechCondition.Text,
-                Factory = cmbFactory.Text,
-                ProductionDate = dtpTime.Value.Date,
-                Mass = tbMass.Text,
-                Tankage = tbTankAge.Text,
-                OverallSize = tbSize.Text,
-                FuelType = cmbFuelType.Text,
-                DrivingModel = cmbDriveModel.Text,
-                Mileage = tbMileAge.Text,
-                Output = tbOutput.Text,
-                LicenseCarry = tbLicenseCarry.Text,
-                VehicleChargers = cmbCharger.Text,
-                VehicleSpotNo = cmbSpot.Text,
-                VehicleDescri = tbVehiclesDescri.Text,
-                CombineOe = chkCombineOe.Checked,
-                Equipment = _id
-            };
-            if (chkCombineOe.Checked)
-            {
-                OilEngine oe = new OilEngine()
+                CombatVehicles cv = new CombatVehicles()
                 {
-                    OeNo = tbOilEngineNo.Text,
-                    OeModel = cmbOeModel.Text,
-                    OutPower = tbOePower.Text,
+                    Name = cmbName.Text,
+                    SerialNo = tbSerialNo.Text,
+                    Model = cmbVehiclesModel.Text,
+                    VehiclesNo = tbVehiclesNo.Text,
+                    MotorModel = cmbAutoModel.Text,
                     TechCondition = cmbTechCondition.Text,
-                    WorkHour = nudWorkHour.Value.ToString(),
-                    OeFactory = cmbOeFactory.Text,
-                    OeDate = dtpOeTime.Value.Date.ToString(),
-                    OeOemNo = tbOeOemNo.Text,
-                    MotorNo = cmbMotorModel.Text,
-                    MotorPower = tbMotorPower.Text,
-                    MotorFuel = cmbMotorFuelType.Text,
-                    MotorTankage = tbMotorTankage.Text,
-                    MotorFactory = cmbMotorFactory.Text,
-                    MotorDate = dtpMotorTime.Value.Date.ToString(),
-                    MotorOemNo = tbMotorOemNo.Text,
-                    FaultDescri = tbOeFailDetail.Text,
-                    Vehicle = tbVehiclesNo.Text
+                    Factory = cmbFactory.Text,
+                    ProductionDate = dtpTime.Value.Date,
+                    Mass = tbMass.Text,
+                    Tankage = tbTankAge.Text,
+                    OverallSize = tbSize.Text,
+                    FuelType = cmbFuelType.Text,
+                    DrivingModel = cmbDriveModel.Text,
+                    Mileage = tbMileAge.Text,
+                    Output = tbOutput.Text,
+                    LicenseCarry = tbLicenseCarry.Text,
+                    VehicleChargers = cmbCharger.Text,
+                    VehicleSpotNo = cmbSpot.Text,
+                    VehicleDescri = tbVehiclesDescri.Text,
+                    CombineOe = chkCombineOe.Checked,
+                    Equipment = _id
                 };
-                //eqEntities.OilEngine.Add(oe);
-                SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, oe, _oilImagesList);
+                if (chkCombineOe.Checked)
+                {
+                    OilEngine oe = new OilEngine()
+                    {
+                        OeNo = tbOilEngineNo.Text,
+                        OeModel = cmbOeModel.Text,
+                        OutPower = tbOePower.Text,
+                        TechCondition = cmbTechCondition.Text,
+                        WorkHour = nudWorkHour.Value.ToString(CultureInfo.InvariantCulture),
+                        OeFactory = cmbOeFactory.Text,
+                        OeDate = dtpOeTime.Value.Date,
+                        OeOemNo = tbOeOemNo.Text,
+                        MotorNo = cmbMotorModel.Text,
+                        MotorPower = tbMotorPower.Text,
+                        MotorFuel = cmbMotorFuelType.Text,
+                        MotorTankage = tbMotorTankage.Text,
+                        MotorFactory = cmbMotorFactory.Text,
+                        MotorDate = dtpMotorTime.Value.Date,
+                        MotorOemNo = tbMotorOemNo.Text,
+                        FaultDescri = tbOeFailDetail.Text,
+                        Vehicle = tbVehiclesNo.Text
+                    };
+                    SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, oe, _oilImagesList);
+                }
+                else
+                {
+                    SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, null, null);
+                }
+                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
+                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
+            catch (Exception exception)
             {
-                SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, null, null);
+                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
             }
         }
 
@@ -161,10 +175,85 @@ namespace AnonManagementSystem
         private void tsbDeleteImages_Click(object sender, EventArgs e)
         {
             ilvVehicle.DeleteImages();
+
         }
 
         private void VehicleDetailForm_Shown(object sender, EventArgs e)
         {
+            _synchContext.Post(a =>
+            {
+                try
+                {
+                    if (!Add)
+                    {
+                        EquipmentManagementEntities eme = new EquipmentManagementEntities();
+                        VehiclesImagesEntities vie = new VehiclesImagesEntities();
+                        OilEngineImagesEntities oeie = new OilEngineImagesEntities();
+                        var vh = (from eh in eme.CombatVehicles
+                            where eh.SerialNo == _id
+                            select eh).First();
+
+                        cmbName.Text = vh.Name;
+                        tbSerialNo.Text = vh.SerialNo;
+                        cmbVehiclesModel.Text = vh.Model;
+                        tbVehiclesNo.Text = vh.VehiclesNo;
+                        cmbAutoModel.Text = vh.MotorModel;
+                        cmbTechCondition.Text = vh.TechCondition;
+                        cmbFactory.Text = vh.Factory;
+                        dtpTime.Value = vh.ProductionDate;
+                        tbMass.Text = vh.Mass;
+                        tbTankAge.Text = vh.Tankage;
+                        tbSize.Text = vh.OverallSize;
+                        cmbFuelType.Text = vh.FuelType;
+                        cmbDriveModel.Text = vh.DrivingModel;
+                        tbMileAge.Text = vh.Mileage;
+                        tbOutput.Text = vh.Output;
+                        tbLicenseCarry.Text = vh.LicenseCarry;
+                        cmbCharger.Text = vh.VehicleChargers;
+                        cmbSpot.Text = vh.VehicleSpotNo;
+                        tbVehiclesDescri.Text = vh.VehicleDescri;
+                        chkCombineOe.Checked = vh.CombineOe;
+                        _vehiclesImagesList = (from vhimg in vie.VehiclesImage
+                            where vhimg.SerialNo == _id
+                            select vhimg).ToList();
+                        if (vh.CombineOe)
+                        {
+                            var vhoe = (from oe in eme.OilEngine
+                                where oe.Vehicle == _id
+                                select oe).First();
+
+                            tbOilEngineNo.Text = vhoe.OeNo;
+                            cmbOeModel.Text = vhoe.OeModel;
+                            tbOePower.Text = vhoe.OutPower;
+                            cmbTechCondition.Text = vhoe.TechCondition;
+                            //nudWorkHour.Value = vhoe.WorkHour;
+                            cmbOeFactory.Text = vhoe.OeFactory;
+                            //dtpOeTime.Value= vhoe.OeDate;
+                            tbOeOemNo.Text = vhoe.OeOemNo;
+                            cmbMotorModel.Text = vhoe.MotorNo;
+                            tbMotorPower.Text = vhoe.MotorPower;
+                            cmbMotorFuelType.Text = vhoe.MotorFuel;
+                            tbMotorTankage.Text = vhoe.MotorTankage;
+                            cmbMotorFactory.Text = vhoe.MotorFactory;
+                            //dtpMotorTime.Value = vhoe.MotorDate;
+                            tbMotorOemNo.Text = vhoe.MotorOemNo;
+                            tbOeFailDetail.Text = vhoe.FaultDescri;
+                            tbVehiclesNo.Text = vhoe.Vehicle;
+
+                            _oilImagesList = (from oeimg in oeie.OilEngineImage
+                                where oeimg.SerialNo == _id
+                                select oeimg).ToList();
+                        }
+                    }
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
+                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                }
+            }, null);
         }
     }
 }

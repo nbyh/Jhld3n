@@ -213,15 +213,15 @@
             this.toolStripButton3.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton3.Text = "保存";
-            this.toolStripButton3.Visible = false;
+            this.toolStripButton3.Size = new System.Drawing.Size(81, 22);
+            this.toolStripButton3.Text = "导出Excel";
             // 
             // MDIParent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::AnonManagementSystem.Properties.Resources.user_manage;
+            this.BackgroundImage = global::AnonManagementSystem.Properties.Resources.background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
@@ -230,7 +230,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MDIParent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MDIParent";
+            this.Text = "装备和备件管理系统";
             this.Shown += new System.EventHandler(this.MDIParent_Shown);
             this.SizeChanged += new System.EventHandler(this.MDIParent_SizeChanged);
             this.menuStrip.ResumeLayout(false);

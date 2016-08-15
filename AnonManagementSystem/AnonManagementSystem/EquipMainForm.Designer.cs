@@ -95,7 +95,7 @@
             this.btnPre = new System.Windows.Forms.Button();
             this.btnFront = new System.Windows.Forms.Button();
             this.lbPageInfo = new System.Windows.Forms.Label();
-            this.dGvEquip = new System.Windows.Forms.DataGridView();
+            this.dgvEquip = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,7 +113,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGvEquip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEquip)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -713,7 +713,7 @@
             this.panel2.Controls.Add(this.btnPre);
             this.panel2.Controls.Add(this.btnFront);
             this.panel2.Controls.Add(this.lbPageInfo);
-            this.panel2.Controls.Add(this.dGvEquip);
+            this.panel2.Controls.Add(this.dgvEquip);
             this.panel2.Location = new System.Drawing.Point(0, 130);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(784, 431);
@@ -744,6 +744,7 @@
             this.cmbPageSize.Name = "cmbPageSize";
             this.cmbPageSize.Size = new System.Drawing.Size(46, 22);
             this.cmbPageSize.TabIndex = 8;
+            this.cmbPageSize.SelectedIndex = 0;
             this.cmbPageSize.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
             // 
@@ -820,20 +821,20 @@
             this.lbPageInfo.TabIndex = 1;
             this.lbPageInfo.Text = "总共100条记录，当前第1页，每页10条，共10页";
             // 
-            // dGvEquip
+            // dgvEquip
             // 
-            this.dGvEquip.AllowUserToAddRows = false;
-            this.dGvEquip.AllowUserToDeleteRows = false;
-            this.dGvEquip.AllowUserToResizeColumns = false;
-            this.dGvEquip.AllowUserToResizeRows = false;
+            this.dgvEquip.AllowUserToAddRows = false;
+            this.dgvEquip.AllowUserToDeleteRows = false;
+            this.dgvEquip.AllowUserToResizeColumns = false;
+            this.dgvEquip.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dGvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dGvEquip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEquip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dGvEquip.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
-            this.dGvEquip.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dGvEquip.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvEquip.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
+            this.dgvEquip.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEquip.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -841,9 +842,9 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dGvEquip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGvEquip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvEquip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEquip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.SerialNo,
@@ -863,17 +864,17 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGvEquip.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dGvEquip.Location = new System.Drawing.Point(4, 3);
-            this.dGvEquip.MultiSelect = false;
-            this.dGvEquip.Name = "dGvEquip";
-            this.dGvEquip.ReadOnly = true;
-            this.dGvEquip.RowHeadersVisible = false;
-            this.dGvEquip.RowTemplate.Height = 23;
-            this.dGvEquip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGvEquip.Size = new System.Drawing.Size(776, 387);
-            this.dGvEquip.TabIndex = 0;
-            this.dGvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvEquip_CellContentClick);
+            this.dgvEquip.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvEquip.Location = new System.Drawing.Point(4, 3);
+            this.dgvEquip.MultiSelect = false;
+            this.dgvEquip.Name = "dgvEquip";
+            this.dgvEquip.ReadOnly = true;
+            this.dgvEquip.RowHeadersVisible = false;
+            this.dgvEquip.RowTemplate.Height = 23;
+            this.dgvEquip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEquip.Size = new System.Drawing.Size(776, 387);
+            this.dgvEquip.TabIndex = 0;
+            this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvEquip_CellContentClick);
             // 
             // Column1
             // 
@@ -985,7 +986,7 @@
             this.tabPage2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGvEquip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEquip)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -995,7 +996,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dGvEquip;
+        private System.Windows.Forms.DataGridView dgvEquip;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbPageSize;
         private System.Windows.Forms.TextBox tbPage;
