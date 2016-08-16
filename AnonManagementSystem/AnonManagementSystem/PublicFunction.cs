@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using OfficeOpenXml;
 
 namespace AnonManagementSystem
 {
@@ -40,6 +41,18 @@ namespace AnonManagementSystem
             byte[] imgBytes = br.ReadBytes((int)fs.Length);
             fs.Close();
             return imgBytes;
+        }
+
+        public static bool Export2Excel(string filepath)
+        {
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("test");//创建worksheet
+
+                //todo：填充数据
+                package.Save();//保存excel
+            }
+            return true;
         }
     }
 }

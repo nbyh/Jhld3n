@@ -86,7 +86,22 @@ namespace AnonManagementSystem
                 CommonLogHelper.GetInstance("LogError").Error(@"刷新备件数据失败", e);
             }
         }
-        
+
+        public void Export2Excel()
+        {
+            try
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (Exception exception)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"导出备件数据失败", exception);
+                MessageBox.Show(this, @"导出备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void LoadData()
         {
             string cmds = "select * from SpareParts";

@@ -69,21 +69,37 @@ namespace AnonManagementSystem
 
         public void DataRefresh()
         {
-            Thread refreshThread = new Thread((ThreadStart) delegate
-            {
-                try
-                {
-                    _equipEntities = new EquipmentManagementEntities();
-                    LoadData();
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"刷新设备数据成功");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(this, @"刷新设备数据失败" + e.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"刷新设备数据失败", e);
-                }
-            }) {IsBackground = true};
+            Thread refreshThread = new Thread((ThreadStart)delegate
+           {
+               try
+               {
+                   _equipEntities = new EquipmentManagementEntities();
+                   LoadData();
+                   CommonLogHelper.GetInstance("LogInfo").Info(@"刷新设备数据成功");
+               }
+               catch (Exception e)
+               {
+                   MessageBox.Show(this, @"刷新设备数据失败" + e.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   CommonLogHelper.GetInstance("LogError").Error(@"刷新设备数据失败", e);
+               }
+           })
+            { IsBackground = true };
             refreshThread.Start();
+        }
+
+        public void Export2Excel()
+        {
+            try
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (Exception exception)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"导出备件数据失败", exception);
+                MessageBox.Show(this, @"导出备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void LoadData()
@@ -125,8 +141,8 @@ namespace AnonManagementSystem
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"加载首页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CommonLogHelper.GetInstance("LogError").Error(@"加载首页设备数据失败", exception);
+                MessageBox.Show(this, @"加载首页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -146,8 +162,8 @@ namespace AnonManagementSystem
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"加载设备数据页面失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CommonLogHelper.GetInstance("LogError").Error(@"跳转设备数据页面失败", exception);
+                MessageBox.Show(this, @"加载设备数据页面失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -161,8 +177,8 @@ namespace AnonManagementSystem
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"加载末页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CommonLogHelper.GetInstance("LogError").Error(@"加载末页设备数据失败", exception);
+                MessageBox.Show(this, @"加载末页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -182,8 +198,8 @@ namespace AnonManagementSystem
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"加载下一页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     CommonLogHelper.GetInstance("LogError").Error(@"加载下一页设备数据失败", exception);
+                    MessageBox.Show(this, @"加载下一页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -204,8 +220,8 @@ namespace AnonManagementSystem
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"加载上一页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     CommonLogHelper.GetInstance("LogError").Error(@"加载上一页设备数据失败", exception);
+                    MessageBox.Show(this, @"加载上一页设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -233,8 +249,8 @@ namespace AnonManagementSystem
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"加载设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     CommonLogHelper.GetInstance("LogError").Error(@"切换页数后加载设备数据失败", exception);
+                    MessageBox.Show(this, @"加载设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

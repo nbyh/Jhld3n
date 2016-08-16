@@ -10,6 +10,8 @@ namespace AnonManagementSystem
         void DataDelete();
 
         void DataRefresh();
+
+        void Export2Excel();
     }
 
     public interface IAddModify
