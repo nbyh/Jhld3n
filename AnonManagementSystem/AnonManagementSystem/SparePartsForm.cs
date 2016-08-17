@@ -287,66 +287,55 @@ namespace AnonManagementSystem
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
             dgvSparePart.Rows.Clear();
-            IEnumerable<SpareParts> appointsp = new List<SpareParts>();
+            var appointsp = from ee in _sparePartEntities.SpareParts
+                            select ee;
             if (!string.IsNullOrEmpty(cmbName.Text))
             {
-                appointsp = from sp in _sparePart
-                            where sp.Name == cmbName.Text
-                            select sp;
+                appointsp = appointsp.Where(a => a.Name == cmbName.Text);
             }
-            dgvSparePart.Rows.Clear();
-            var appointee = from ee in _sparePart
-                            select ee;
-            if (!string.IsNullOrEmpty(cmbEventName.Text))
+            if (!string.IsNullOrEmpty(cmbUseType.Text))
             {
-                appointee = appointee.Where(a => a.Name == cmbEventName.Text);
+                appointsp = appointsp.Where(a => a.UseType == cmbUseType.Text);
             }
-            if (!string.IsNullOrEmpty(cmbEventAddress.Text))
+            if (!string.IsNullOrEmpty(cmbModel.Text))
             {
-                appointee = appointee.Where(a => a.Address == cmbEventAddress.Text);
+                appointsp = appointsp.Where(a => a.Model == cmbModel.Text);
             }
-            if (!string.IsNullOrEmpty(cmbPublishUnit.Text))
+            if (!string.IsNullOrEmpty(cmbUseCondition.Text))
             {
-                appointee = appointee.Where(a => a.PublishUnit == cmbPublishUnit.Text);
+                appointsp = appointsp.Where(a => a.Statue == cmbUseCondition.Text);
             }
-            if (!string.IsNullOrEmpty(cmbPublisher.Text))
+            if (!string.IsNullOrEmpty(cmbSpot.Text))
             {
-                appointee = appointee.Where(a => a.Publisher == cmbPublisher.Text);
+                appointsp = appointsp.Where(a => a.StoreSpot == cmbSpot.Text);
             }
-            if (!string.IsNullOrEmpty(cmbEventType.Text))
+            if (!string.IsNullOrEmpty(cmbFactory.Text))
             {
-                appointee = appointee.Where(a => a.EventType == cmbEventType.Text);
+                appointsp = appointsp.Where(a => a.Factory == cmbFactory.Text);
             }
-            if (!string.IsNullOrEmpty(cmbSpecificType.Text))
+            if (!string.IsNullOrEmpty(cmbStore1.Text))
             {
-                appointee = appointee.Where(a => a.SpecificType == cmbSpecificType.Text);
+                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbStore1.Text, a.StoreDate, dtpStore1.Value.Date));
             }
-            if (!string.IsNullOrEmpty(cmbPublishDtTerm.Text))
+            if (!string.IsNullOrEmpty(cmbStore2.Text))
             {
-                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbPublishDtTerm.Text, a.PublishDate, dtpPublish.Value.Date));
+                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbStore2.Text, a.StoreDate, dtpStore2.Value.Date));
             }
-            if (!string.IsNullOrEmpty(cmbEventDtTerm1.Text))
+            if (!string.IsNullOrEmpty(cmbProDate1.Text))
             {
-                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm1.Text, a.StartTime, dtpEventDt1.Value.Date));
+                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate1.Text, a.ProductDate, dtpProTime1.Value.Date));
             }
-            if (!string.IsNullOrEmpty(cmbEventDtTerm2.Text))
+            if (!string.IsNullOrEmpty(cmbProDate2.Text))
             {
-                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm2.Text, a.EndTime, dtpEventDt2.Value.Date));
-            }
-            if (appointee.Any())
-            {
-                var appointeq = from equipment in _equip
-                                where equipment.SerialNo == appointee.First().Equipment
-                                select equipment;
-                dgvEquip.DataSource = appointeq;
-            }
-            else
-            {
-                MessageBox.Show(this, @"没有筛选到相关条件的设备信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate2.Text, a.ProductDate, dtpProTime2.Value.Date));
             }
             if (appointsp.Any())
             {
                 dgvSparePart.DataSource = appointsp;
+            }
+            else
+            {
+                MessageBox.Show(this, @"没有筛选到相关条件的备件信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

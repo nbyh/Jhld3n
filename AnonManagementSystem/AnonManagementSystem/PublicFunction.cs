@@ -1,8 +1,10 @@
 ﻿using OfficeOpenXml;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
@@ -44,11 +46,14 @@ namespace AnonManagementSystem
             return imgBytes;
         }
 
-        public static bool Export2Excel(string filepath)
+        public static bool Export2Excel(string filepath, CombatEquipment equip, List<CombatVehicles> vhList, OilEngine oe, List<Events> events, Dictionary<string, List<EventData>> eventDic, List<EquipmentImage> eqImg)
         {
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("test");//创建worksheet
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
+
+
+
 
                 //todo：填充数据
                 package.Save();//保存excel

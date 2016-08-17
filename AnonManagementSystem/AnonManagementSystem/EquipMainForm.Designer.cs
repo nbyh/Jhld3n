@@ -35,7 +35,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.cmbTimeTerm2 = new System.Windows.Forms.ComboBox();
-            this.dtpTime2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbManager = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -54,25 +54,28 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbTimeTerm1 = new System.Windows.Forms.ComboBox();
-            this.dtpTime1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.cmbSubDepart = new System.Windows.Forms.ComboBox();
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.btnQueryInfo = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dtpPublish = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.cmbSpecificType = new System.Windows.Forms.ComboBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.cmbEventType = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.cmbEventAddress = new System.Windows.Forms.ComboBox();
-            this.cmbPublisher = new System.Windows.Forms.ComboBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.cmbPublishUnit = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.btnRestEvent = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.cmbEventDtTerm2 = new System.Windows.Forms.ComboBox();
             this.dtpEventDt2 = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
@@ -81,6 +84,7 @@
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
             this.cmbEventName = new System.Windows.Forms.ComboBox();
             this.btnQueryEvent = new System.Windows.Forms.Button();
+            this.ccmbDepartment = new CheckComboBox.CheckedComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
@@ -104,7 +108,7 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.cmbPublishDtTerm = new System.Windows.Forms.ComboBox();
+            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -136,7 +140,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.cmbTimeTerm2);
-            this.tabPage1.Controls.Add(this.dtpTime2);
+            this.tabPage1.Controls.Add(this.dateTimePicker2);
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.cmbManager);
             this.tabPage1.Controls.Add(this.label16);
@@ -155,7 +159,7 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.cmbTimeTerm1);
-            this.tabPage1.Controls.Add(this.dtpTime1);
+            this.tabPage1.Controls.Add(this.dtpTime);
             this.tabPage1.Controls.Add(this.cmbModel);
             this.tabPage1.Controls.Add(this.cmbSubDepart);
             this.tabPage1.Controls.Add(this.cmbName);
@@ -184,12 +188,12 @@
             this.cmbTimeTerm2.Size = new System.Drawing.Size(33, 22);
             this.cmbTimeTerm2.TabIndex = 30;
             // 
-            // dtpTime2
+            // dateTimePicker2
             // 
-            this.dtpTime2.Location = new System.Drawing.Point(521, 69);
-            this.dtpTime2.Name = "dtpTime2";
-            this.dtpTime2.Size = new System.Drawing.Size(115, 21);
-            this.dtpTime2.TabIndex = 29;
+            this.dateTimePicker2.Location = new System.Drawing.Point(521, 69);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(115, 21);
+            this.dateTimePicker2.TabIndex = 29;
             // 
             // label15
             // 
@@ -374,12 +378,12 @@
             this.cmbTimeTerm1.TabIndex = 11;
             this.cmbTimeTerm1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
-            // dtpTime1
+            // dtpTime
             // 
-            this.dtpTime1.Location = new System.Drawing.Point(366, 69);
-            this.dtpTime1.Name = "dtpTime1";
-            this.dtpTime1.Size = new System.Drawing.Size(115, 21);
-            this.dtpTime1.TabIndex = 10;
+            this.dtpTime.Location = new System.Drawing.Point(366, 69);
+            this.dtpTime.Name = "dtpTime";
+            this.dtpTime.Size = new System.Drawing.Size(115, 21);
+            this.dtpTime.TabIndex = 10;
             // 
             // cmbModel
             // 
@@ -427,28 +431,31 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.cmbPublishDtTerm);
-            this.tabPage2.Controls.Add(this.dtpPublish);
+            this.tabPage2.Controls.Add(this.dateTimePicker1);
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.label23);
             this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.comboBox7);
+            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.comboBox6);
+            this.tabPage2.Controls.Add(this.label20);
             this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Controls.Add(this.cmbPublisher);
-            this.tabPage2.Controls.Add(this.cmbSpecificType);
+            this.tabPage2.Controls.Add(this.comboBox5);
+            this.tabPage2.Controls.Add(this.comboBox4);
             this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.label21);
-            this.tabPage2.Controls.Add(this.cmbPublishUnit);
+            this.tabPage2.Controls.Add(this.comboBox2);
             this.tabPage2.Controls.Add(this.btnRestEvent);
-            this.tabPage2.Controls.Add(this.cmbEventType);
-            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.cmbEventDtTerm2);
             this.tabPage2.Controls.Add(this.dtpEventDt2);
             this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.cmbEventAddress);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.cmbEventDtTerm1);
             this.tabPage2.Controls.Add(this.dtpEventDt1);
             this.tabPage2.Controls.Add(this.cmbEventName);
             this.tabPage2.Controls.Add(this.btnQueryEvent);
+            this.tabPage2.Controls.Add(this.ccmbDepartment);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -457,56 +464,72 @@
             this.tabPage2.Text = "活动情况";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dtpPublish
+            // dateTimePicker1
             // 
-            this.dtpPublish.Location = new System.Drawing.Point(480, 66);
-            this.dtpPublish.Name = "dtpPublish";
-            this.dtpPublish.Size = new System.Drawing.Size(103, 21);
-            this.dtpPublish.TabIndex = 51;
+            this.dateTimePicker1.Location = new System.Drawing.Point(235, 43);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(103, 21);
+            this.dateTimePicker1.TabIndex = 51;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(391, 69);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(103, 21);
+            this.textBox3.TabIndex = 50;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(356, 73);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(29, 12);
+            this.label23.TabIndex = 49;
+            this.label23.Text = "代号";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(224, 46);
+            this.label22.Location = new System.Drawing.Point(176, 73);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(53, 12);
             this.label22.TabIndex = 47;
             this.label22.Text = "具体类型";
             // 
-            // cmbSpecificType
+            // comboBox7
             // 
-            this.cmbSpecificType.FormattingEnabled = true;
-            this.cmbSpecificType.Location = new System.Drawing.Point(283, 42);
-            this.cmbSpecificType.Name = "cmbSpecificType";
-            this.cmbSpecificType.Size = new System.Drawing.Size(92, 20);
-            this.cmbSpecificType.TabIndex = 46;
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(235, 69);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(103, 20);
+            this.comboBox7.TabIndex = 46;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(56, 46);
+            this.label21.Location = new System.Drawing.Point(8, 73);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 45;
             this.label21.Text = "活动类型";
             // 
-            // cmbEventType
+            // comboBox6
             // 
-            this.cmbEventType.FormattingEnabled = true;
-            this.cmbEventType.Items.AddRange(new object[] {
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Items.AddRange(new object[] {
             "调整类",
             "动用类",
             "使用维护",
             "测试检修"});
-            this.cmbEventType.Location = new System.Drawing.Point(115, 42);
-            this.cmbEventType.Name = "cmbEventType";
-            this.cmbEventType.Size = new System.Drawing.Size(103, 20);
-            this.cmbEventType.TabIndex = 44;
+            this.comboBox6.Location = new System.Drawing.Point(67, 69);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(103, 20);
+            this.comboBox6.TabIndex = 44;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(405, 46);
+            this.label20.Location = new System.Drawing.Point(524, 20);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(29, 12);
             this.label20.TabIndex = 43;
@@ -515,32 +538,32 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(236, 70);
+            this.label19.Location = new System.Drawing.Point(344, 47);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 12);
             this.label19.TabIndex = 43;
             this.label19.Text = "发文人";
             // 
-            // cmbEventAddress
+            // comboBox5
             // 
-            this.cmbEventAddress.FormattingEnabled = true;
-            this.cmbEventAddress.Location = new System.Drawing.Point(440, 42);
-            this.cmbEventAddress.Name = "cmbEventAddress";
-            this.cmbEventAddress.Size = new System.Drawing.Size(143, 20);
-            this.cmbEventAddress.TabIndex = 42;
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(559, 16);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(118, 20);
+            this.comboBox5.TabIndex = 42;
             // 
-            // cmbPublisher
+            // comboBox4
             // 
-            this.cmbPublisher.FormattingEnabled = true;
-            this.cmbPublisher.Location = new System.Drawing.Point(283, 66);
-            this.cmbPublisher.Name = "cmbPublisher";
-            this.cmbPublisher.Size = new System.Drawing.Size(92, 20);
-            this.cmbPublisher.TabIndex = 42;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(391, 43);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(103, 20);
+            this.comboBox4.TabIndex = 42;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(381, 70);
+            this.label18.Location = new System.Drawing.Point(176, 47);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(53, 12);
             this.label18.TabIndex = 41;
@@ -549,30 +572,39 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(56, 70);
+            this.label17.Location = new System.Drawing.Point(8, 47);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(53, 12);
             this.label17.TabIndex = 39;
             this.label17.Text = "发文单位";
             // 
-            // cmbPublishUnit
+            // comboBox2
             // 
-            this.cmbPublishUnit.FormattingEnabled = true;
-            this.cmbPublishUnit.Location = new System.Drawing.Point(115, 66);
-            this.cmbPublishUnit.Name = "cmbPublishUnit";
-            this.cmbPublishUnit.Size = new System.Drawing.Size(103, 20);
-            this.cmbPublishUnit.TabIndex = 38;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(67, 43);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(103, 20);
+            this.comboBox2.TabIndex = 38;
             // 
             // btnRestEvent
             // 
             this.btnRestEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestEvent.Location = new System.Drawing.Point(677, 36);
+            this.btnRestEvent.Location = new System.Drawing.Point(704, 56);
             this.btnRestEvent.Name = "btnRestEvent";
             this.btnRestEvent.Size = new System.Drawing.Size(44, 30);
             this.btnRestEvent.TabIndex = 37;
             this.btnRestEvent.Text = "重置";
             this.btnRestEvent.UseVisualStyleBackColor = false;
             this.btnRestEvent.Click += new System.EventHandler(this.btnRestEvent_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(500, 47);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "参加单位";
             // 
             // cmbEventDtTerm2
             // 
@@ -584,14 +616,14 @@
             "<",
             "≥",
             "≤"});
-            this.cmbEventDtTerm2.Location = new System.Drawing.Point(433, 16);
+            this.cmbEventDtTerm2.Location = new System.Drawing.Point(361, 16);
             this.cmbEventDtTerm2.Name = "cmbEventDtTerm2";
             this.cmbEventDtTerm2.Size = new System.Drawing.Size(40, 20);
             this.cmbEventDtTerm2.TabIndex = 34;
             // 
             // dtpEventDt2
             // 
-            this.dtpEventDt2.Location = new System.Drawing.Point(473, 16);
+            this.dtpEventDt2.Location = new System.Drawing.Point(401, 16);
             this.dtpEventDt2.Name = "dtpEventDt2";
             this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt2.TabIndex = 33;
@@ -599,7 +631,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(80, 20);
+            this.label14.Location = new System.Drawing.Point(32, 20);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 32;
@@ -608,7 +640,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(248, 20);
+            this.label12.Location = new System.Drawing.Point(176, 20);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 30;
@@ -624,14 +656,14 @@
             "<",
             "≥",
             "≤"});
-            this.cmbEventDtTerm1.Location = new System.Drawing.Point(283, 16);
+            this.cmbEventDtTerm1.Location = new System.Drawing.Point(211, 16);
             this.cmbEventDtTerm1.Name = "cmbEventDtTerm1";
             this.cmbEventDtTerm1.Size = new System.Drawing.Size(40, 20);
             this.cmbEventDtTerm1.TabIndex = 22;
             // 
             // dtpEventDt1
             // 
-            this.dtpEventDt1.Location = new System.Drawing.Point(323, 16);
+            this.dtpEventDt1.Location = new System.Drawing.Point(251, 16);
             this.dtpEventDt1.Name = "dtpEventDt1";
             this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt1.TabIndex = 21;
@@ -639,7 +671,7 @@
             // cmbEventName
             // 
             this.cmbEventName.FormattingEnabled = true;
-            this.cmbEventName.Location = new System.Drawing.Point(115, 16);
+            this.cmbEventName.Location = new System.Drawing.Point(67, 16);
             this.cmbEventName.Name = "cmbEventName";
             this.cmbEventName.Size = new System.Drawing.Size(103, 20);
             this.cmbEventName.TabIndex = 19;
@@ -647,13 +679,26 @@
             // btnQueryEvent
             // 
             this.btnQueryEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQueryEvent.Location = new System.Drawing.Point(627, 36);
+            this.btnQueryEvent.Location = new System.Drawing.Point(704, 20);
             this.btnQueryEvent.Name = "btnQueryEvent";
             this.btnQueryEvent.Size = new System.Drawing.Size(44, 30);
             this.btnQueryEvent.TabIndex = 17;
             this.btnQueryEvent.Text = "筛选";
             this.btnQueryEvent.UseVisualStyleBackColor = false;
             this.btnQueryEvent.Click += new System.EventHandler(this.btnQueryEvent_Click);
+            // 
+            // ccmbDepartment
+            // 
+            this.ccmbDepartment.CheckOnClick = true;
+            this.ccmbDepartment.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ccmbDepartment.DropDownHeight = 1;
+            this.ccmbDepartment.FormattingEnabled = true;
+            this.ccmbDepartment.IntegralHeight = false;
+            this.ccmbDepartment.Location = new System.Drawing.Point(559, 42);
+            this.ccmbDepartment.Name = "ccmbDepartment";
+            this.ccmbDepartment.Size = new System.Drawing.Size(118, 22);
+            this.ccmbDepartment.TabIndex = 35;
+            this.ccmbDepartment.ValueSeparator = ", ";
             // 
             // panel2
             // 
@@ -829,7 +874,7 @@
             this.dgvEquip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEquip.Size = new System.Drawing.Size(776, 387);
             this.dgvEquip.TabIndex = 0;
-            this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvEquip_CellContentClick);
+            this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEquip_CellContentClick);
             // 
             // Column1
             // 
@@ -921,20 +966,12 @@
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
             // 
-            // cmbPublishDtTerm
+            // sfdExcel
             // 
-            this.cmbPublishDtTerm.FormattingEnabled = true;
-            this.cmbPublishDtTerm.Items.AddRange(new object[] {
-            "无",
-            ">",
-            "=",
-            "<",
-            "≥",
-            "≤"});
-            this.cmbPublishDtTerm.Location = new System.Drawing.Point(440, 66);
-            this.cmbPublishDtTerm.Name = "cmbPublishDtTerm";
-            this.cmbPublishDtTerm.Size = new System.Drawing.Size(40, 20);
-            this.cmbPublishDtTerm.TabIndex = 52;
+            this.sfdExcel.DefaultExt = "xlsx";
+            this.sfdExcel.Filter = "Excel文件|*.xlsx";
+            this.sfdExcel.InitialDirectory = "Desktop";
+            this.sfdExcel.Title = "请选择文件保存位置";
             // 
             // EquipMainForm
             // 
@@ -983,20 +1020,24 @@
         private System.Windows.Forms.DateTimePicker dtpEventDt2;
         private System.Windows.Forms.ComboBox cmbEventDtTerm1;
         private System.Windows.Forms.DateTimePicker dtpEventDt1;
+        private CheckComboBox.CheckedComboBox ccmbDepartment;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnRestEvent;
         private System.Windows.Forms.Button btnQueryEvent;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox cmbEventAddress;
-        private System.Windows.Forms.ComboBox cmbPublisher;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cmbPublishUnit;
+        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.ComboBox cmbSpecificType;
+        private System.Windows.Forms.ComboBox comboBox7;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox cmbEventType;
-        private System.Windows.Forms.DateTimePicker dtpPublish;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
@@ -1011,7 +1052,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn MoreInfo;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ComboBox cmbTimeTerm2;
-        private System.Windows.Forms.DateTimePicker dtpTime2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbManager;
         private System.Windows.Forms.Label label16;
@@ -1030,12 +1071,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbTimeTerm1;
-        private System.Windows.Forms.DateTimePicker dtpTime1;
+        private System.Windows.Forms.DateTimePicker dtpTime;
         private System.Windows.Forms.ComboBox cmbModel;
         private System.Windows.Forms.ComboBox cmbSubDepart;
         private System.Windows.Forms.ComboBox cmbName;
         private System.Windows.Forms.Button btnQueryInfo;
-        private System.Windows.Forms.ComboBox cmbPublishDtTerm;
+        private System.Windows.Forms.SaveFileDialog sfdExcel;
     }
 }
 
