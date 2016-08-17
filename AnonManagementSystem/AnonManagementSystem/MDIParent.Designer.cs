@@ -48,7 +48,7 @@
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.tsbAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.tsbExportExcel = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -175,7 +175,7 @@
             this.tsbRefresh,
             this.tsbAdd,
             this.tsbDelete,
-            this.toolStripButton3});
+            this.tsbExportExcel});
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(884, 25);
@@ -208,15 +208,16 @@
             this.tsbDelete.Size = new System.Drawing.Size(52, 22);
             this.tsbDelete.Text = "删除";
             // 
-            // toolStripButton3
+            // tsbExportExcel
             // 
-            this.toolStripButton3.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(81, 22);
-            this.toolStripButton3.Text = "导出Excel";
+            this.tsbExportExcel.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbExportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExportExcel.Name = "tsbExportExcel";
+            this.tsbExportExcel.Size = new System.Drawing.Size(81, 22);
+            this.tsbExportExcel.Text = "导出Excel";
+            this.tsbExportExcel.Click += new System.EventHandler(this.tsbExportExcel_Click);
             // 
-            // MDIParent
+            // MdiParent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,7 +265,7 @@
         private System.Windows.Forms.ToolStripButton tsbRefresh;
         private System.Windows.Forms.ToolStripButton tsbAdd;
         private System.Windows.Forms.ToolStripButton tsbDelete;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton tsbExportExcel;
         private System.Windows.Forms.ToolStripMenuItem ChangeUserMenu;
     }
 }

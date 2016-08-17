@@ -159,5 +159,12 @@ namespace AnonManagementSystem
             BackgroundImageLayout = ImageLayout.Zoom;
             OnBackgroundImageLayoutChanged(e);
         }
+
+        private void tsbExportExcel_Click(object sender, EventArgs e)
+        {
+            Form form = ActiveMdiChild;
+            var mdiFunction = (IMdiFunction)form;
+            mdiFunction?.Export2Excel();
+        }
     }
 }
