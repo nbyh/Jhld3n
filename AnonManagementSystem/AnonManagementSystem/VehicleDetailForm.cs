@@ -13,6 +13,7 @@ namespace AnonManagementSystem
     public partial class VehicleDetailForm : Form, IAddModify
     {
         private readonly SynchronizationContext _synchContext;
+
         public delegate void SaveVehicle(bool add, int index, CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
 
         public event SaveVehicle SaveVehicleSucess;
@@ -99,13 +100,13 @@ namespace AnonManagementSystem
                 {
                     SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, null, null);
                 }
-                CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonLogHelper.GetInstance("LogInfo").Info(@"车辆数据保存成功");
+                MessageBox.Show(this, @"车辆数据保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                MessageBox.Show(this, @"车辆数据保存失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLogHelper.GetInstance("LogError").Error(@"车辆数据保存失败", exception);
             }
         }
 
@@ -170,12 +171,31 @@ namespace AnonManagementSystem
         private void tsbDeleteOeImages_Click(object sender, EventArgs e)
         {
             ilvOe.DeleteImages();
+            if (!string.IsNullOrEmpty(ilvOe.DeleteImgKey))
+            {
+                string key = ilvOe.DeleteImgKey;
+                foreach (var ei in _oilImagesList.Where(d => d.Name == key))
+                {
+                    _oilImagesList.Remove(ei);
+                    MessageBox.Show(this, @"图片删除成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
         }
 
         private void tsbDeleteImages_Click(object sender, EventArgs e)
         {
             ilvVehicle.DeleteImages();
-
+            if (!string.IsNullOrEmpty(ilvVehicle.DeleteImgKey))
+            {
+                string key = ilvVehicle.DeleteImgKey;
+                foreach (var ei in _vehiclesImagesList.Where(d => d.Name == key))
+                {
+                    _vehiclesImagesList.Remove(ei);
+                    MessageBox.Show(this, @"图片删除成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
         }
 
         private void VehicleDetailForm_Shown(object sender, EventArgs e)
@@ -190,8 +210,8 @@ namespace AnonManagementSystem
                         VehiclesImagesEntities vie = new VehiclesImagesEntities();
                         OilEngineImagesEntities oeie = new OilEngineImagesEntities();
                         var vh = (from eh in eme.CombatVehicles
-                            where eh.SerialNo == _id
-                            select eh).First();
+                                  where eh.SerialNo == _id
+                                  select eh).First();
 
                         cmbName.Text = vh.Name;
                         tbSerialNo.Text = vh.SerialNo;
@@ -214,44 +234,53 @@ namespace AnonManagementSystem
                         tbVehiclesDescri.Text = vh.VehicleDescri;
                         chkCombineOe.Checked = vh.CombineOe;
                         _vehiclesImagesList = (from vhimg in vie.VehiclesImage
-                            where vhimg.SerialNo == _id
-                            select vhimg).ToList();
+                                               where vhimg.SerialNo == _id
+                                               select vhimg).ToList();
                         if (vh.CombineOe)
                         {
                             var vhoe = (from oe in eme.OilEngine
-                                where oe.Vehicle == _id
-                                select oe).First();
+                                        where oe.Vehicle == _id
+                                        select oe).First();
 
                             tbOilEngineNo.Text = vhoe.OeNo;
                             cmbOeModel.Text = vhoe.OeModel;
                             tbOePower.Text = vhoe.OutPower;
                             cmbTechCondition.Text = vhoe.TechCondition;
-                            //nudWorkHour.Value = vhoe.WorkHour;
+                            nudWorkHour.Value = int.Parse(vhoe.WorkHour);
                             cmbOeFactory.Text = vhoe.OeFactory;
-                            //dtpOeTime.Value= vhoe.OeDate;
+                            dtpOeTime.Value = vhoe.OeDate;
                             tbOeOemNo.Text = vhoe.OeOemNo;
                             cmbMotorModel.Text = vhoe.MotorNo;
                             tbMotorPower.Text = vhoe.MotorPower;
                             cmbMotorFuelType.Text = vhoe.MotorFuel;
                             tbMotorTankage.Text = vhoe.MotorTankage;
                             cmbMotorFactory.Text = vhoe.MotorFactory;
-                            //dtpMotorTime.Value = vhoe.MotorDate;
+                            dtpMotorTime.Value = vhoe.MotorDate;
                             tbMotorOemNo.Text = vhoe.MotorOemNo;
                             tbOeFailDetail.Text = vhoe.FaultDescri;
                             tbVehiclesNo.Text = vhoe.Vehicle;
 
                             _oilImagesList = (from oeimg in oeie.OilEngineImage
-                                where oeimg.SerialNo == _id
-                                select oeimg).ToList();
+                                              where oeimg.SerialNo == _id
+                                              select oeimg).ToList();
                         }
                     }
-                    CommonLogHelper.GetInstance("LogInfo").Info(@"成功");
-                    MessageBox.Show(this, @"成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CommonLogHelper.GetInstance("LogInfo").Info($"加载车辆数据{_id}成功");
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                    if (Add)
+                    {
+                        MessageBox.Show(this, @"打开添加车辆数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加车辆数据失败", exception);
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, $"加载车辆数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        CommonLogHelper.GetInstance("LogError").Error($"加载车辆数据{_id}失败", exception);
+                    }
                 }
             }, null);
         }

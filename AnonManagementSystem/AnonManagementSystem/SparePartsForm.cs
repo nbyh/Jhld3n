@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
@@ -57,8 +57,8 @@ namespace AnonManagementSystem
                         dgvSparePart.Rows.RemoveAt(selectRowIndex);
                         string id = dgvSparePart.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
                         var eq = (from eqt in _sparePartEntities.SpareParts
-                            where eqt.SerialNo == id
-                            select eqt).First();
+                                  where eqt.SerialNo == id
+                                  select eqt).First();
                         _sparePartEntities.SpareParts.Remove(eq);
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除备件{id}成功");
                         MessageBox.Show(this, @"删除备件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -93,7 +93,6 @@ namespace AnonManagementSystem
             {
                 CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
                 MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
             catch (Exception exception)
             {
@@ -119,7 +118,7 @@ namespace AnonManagementSystem
             cmbSpot.DataSource = equipSubdepartList;
             List<string> equipMajcatList = (from s in _sparePart where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct().ToList();
             cmbUseType.DataSource = equipMajcatList;
-            
+
             _pageSize = 20;
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, _sparePart);
@@ -127,7 +126,7 @@ namespace AnonManagementSystem
 
         private void btnFront_Click(object sender, EventArgs e)
         {
-                _curPage = 1;
+            _curPage = 1;
             try
             {
                 DataRefresh(_pageSize, _curPage, _sparePart);
@@ -178,7 +177,6 @@ namespace AnonManagementSystem
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-
             if (_curPage + 1 > _lastPage)
             {
                 MessageBox.Show(@"已经是尾页了", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -296,7 +294,56 @@ namespace AnonManagementSystem
                             where sp.Name == cmbName.Text
                             select sp;
             }
-            //todo:其他条件
+            dgvSparePart.Rows.Clear();
+            var appointee = from ee in _sparePart
+                            select ee;
+            if (!string.IsNullOrEmpty(cmbEventName.Text))
+            {
+                appointee = appointee.Where(a => a.Name == cmbEventName.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbEventAddress.Text))
+            {
+                appointee = appointee.Where(a => a.Address == cmbEventAddress.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbPublishUnit.Text))
+            {
+                appointee = appointee.Where(a => a.PublishUnit == cmbPublishUnit.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbPublisher.Text))
+            {
+                appointee = appointee.Where(a => a.Publisher == cmbPublisher.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbEventType.Text))
+            {
+                appointee = appointee.Where(a => a.EventType == cmbEventType.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbSpecificType.Text))
+            {
+                appointee = appointee.Where(a => a.SpecificType == cmbSpecificType.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbPublishDtTerm.Text))
+            {
+                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbPublishDtTerm.Text, a.PublishDate, dtpPublish.Value.Date));
+            }
+            if (!string.IsNullOrEmpty(cmbEventDtTerm1.Text))
+            {
+                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm1.Text, a.StartTime, dtpEventDt1.Value.Date));
+            }
+            if (!string.IsNullOrEmpty(cmbEventDtTerm2.Text))
+            {
+                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm2.Text, a.EndTime, dtpEventDt2.Value.Date));
+            }
+            if (appointee.Any())
+            {
+                var appointeq = from equipment in _equip
+                                where equipment.SerialNo == appointee.First().Equipment
+                                select equipment;
+                dgvEquip.DataSource = appointeq;
+            }
+            else
+            {
+                MessageBox.Show(this, @"没有筛选到相关条件的设备信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             if (appointsp.Any())
             {
                 dgvSparePart.DataSource = appointsp;
@@ -312,7 +359,7 @@ namespace AnonManagementSystem
             cmbSpot.SelectedIndex = -1;
             cmbUseType.SelectedIndex = -1;
         }
-        
+
         private void SparePartsForm_Shown(object sender, EventArgs e)
         {
             Thread loadDataThread = new Thread((ThreadStart)delegate

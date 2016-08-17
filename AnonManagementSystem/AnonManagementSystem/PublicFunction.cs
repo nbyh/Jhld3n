@@ -1,7 +1,8 @@
-﻿using System.Drawing;
+﻿using OfficeOpenXml;
+using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using OfficeOpenXml;
 
 namespace AnonManagementSystem
 {
@@ -53,6 +54,27 @@ namespace AnonManagementSystem
                 package.Save();//保存excel
             }
             return true;
+        }
+
+        public static bool CompareTime(string express, DateTime dt1, DateTime dt2)
+        {
+            switch (express)
+            {
+                case ">":
+                    return dt1 > dt2;
+
+                case "<":
+                    return dt1 < dt2;
+
+                case "≥":
+                    return dt1 >= dt2;
+
+                case "≤":
+                    return dt1 <= dt2;
+
+                default:
+                    return dt1 == dt2;
+            }
         }
     }
 }

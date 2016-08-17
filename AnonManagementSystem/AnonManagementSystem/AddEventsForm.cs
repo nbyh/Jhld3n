@@ -28,11 +28,14 @@ namespace AnonManagementSystem
         public delegate void SaveEvents(bool add, int index, Events events, List<EventData> eventDataList, List<EventsImage> eventImgList);
 
         public event SaveEvents SaveEventsSucess;
+
         public bool Add { get; set; }
+
         public bool Enableedit
         {
             set { _enableedit = value; }
         }
+
         public string Id
         {
             set { _id = value; }
@@ -42,7 +45,6 @@ namespace AnonManagementSystem
 
         private void AddEventsForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void AddEventsForm_Shown(object sender, EventArgs e)
@@ -85,7 +87,7 @@ namespace AnonManagementSystem
                         _eventsImgList = (from vhimg in vie.EventsImage
                                           where vhimg.SerialNo == _id
                                           select vhimg).ToList();
-                        CommonLogHelper.GetInstance("LogInfo").Info(@"加载事件数据{_id}成功");
+                        CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
                     }
                 }
                 catch (Exception exception)

@@ -93,7 +93,6 @@ namespace AnonManagementSystem
             {
                 CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
                 MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
             catch (Exception exception)
             {
@@ -300,17 +299,59 @@ namespace AnonManagementSystem
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
             dgvEquip.Rows.Clear();
-            IEnumerable<CombatEquipment> appointeq = new List<CombatEquipment>();
+            var appointeq = from equipment in _equip
+                            select equipment;
             if (!string.IsNullOrEmpty(cmbName.Text))
             {
-                appointeq = from equipment in _equip
-                            where equipment.Name == cmbName.Text
-                            select equipment;
+                appointeq = appointeq.Where(a => a.Name == cmbName.Text);
             }
-            //todo:其他条件
+            if (!string.IsNullOrEmpty(cmbMajorCategory.Text))
+            {
+                appointeq = appointeq.Where(a => a.MajorCategory == cmbMajorCategory.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbModel.Text))
+            {
+                appointeq = appointeq.Where(a => a.Model == cmbModel.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbManager.Text))
+            {
+                appointeq = appointeq.Where(a => a.Manager == cmbManager.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbTechnician.Text))
+            {
+                appointeq = appointeq.Where(a => a.Technician == cmbTechnician.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbUseCondition.Text))
+            {
+                appointeq = appointeq.Where(a => a.UseCondition == cmbUseCondition.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbTechCondition.Text))
+            {
+                appointeq = appointeq.Where(a => a.TechCondition == cmbTechCondition.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbSubDepart.Text))
+            {
+                appointeq = appointeq.Where(a => a.SubDepartment == cmbSubDepart.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbFactory.Text))
+            {
+                appointeq = appointeq.Where(a => a.Factory == cmbFactory.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbTimeTerm1.Text))
+            {
+                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm1.Text, a.FactoryTime, dtpTime1.Value.Date));
+            }
+            if (!string.IsNullOrEmpty(cmbTimeTerm2.Text))
+            {
+                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm2.Text, a.FactoryTime, dtpTime2.Value.Date));
+            }
             if (appointeq.Any())
             {
                 dgvEquip.DataSource = appointeq;
+            }
+            else
+            {
+                MessageBox.Show(this, @"没有筛选到相关条件的设备信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -332,20 +373,54 @@ namespace AnonManagementSystem
         private void btnQueryEvent_Click(object sender, EventArgs e)
         {
             dgvEquip.Rows.Clear();
-            IEnumerable<Events> appointee = new List<Events>();
+            var appointee = from ee in _equipEntities.Events
+                            select ee;
             if (!string.IsNullOrEmpty(cmbEventName.Text))
             {
-                appointee = from ee in _equipEntities.Events
-                            where ee.Name == cmbEventName.Text
-                            select ee;
+                appointee = appointee.Where(a => a.Name == cmbEventName.Text);
             }
-            //todo:其他条件
+            if (!string.IsNullOrEmpty(cmbEventAddress.Text))
+            {
+                appointee = appointee.Where(a => a.Address == cmbEventAddress.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbPublishUnit.Text))
+            {
+                appointee = appointee.Where(a => a.PublishUnit == cmbPublishUnit.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbPublisher.Text))
+            {
+                appointee = appointee.Where(a => a.Publisher == cmbPublisher.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbEventType.Text))
+            {
+                appointee = appointee.Where(a => a.EventType == cmbEventType.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbSpecificType.Text))
+            {
+                appointee = appointee.Where(a => a.SpecificType == cmbSpecificType.Text);
+            }
+            if (!string.IsNullOrEmpty(cmbPublishDtTerm.Text))
+            {
+                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbPublishDtTerm.Text, a.PublishDate, dtpPublish.Value.Date));
+            }
+            if (!string.IsNullOrEmpty(cmbEventDtTerm1.Text))
+            {
+                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm1.Text, a.StartTime, dtpEventDt1.Value.Date));
+            }
+            if (!string.IsNullOrEmpty(cmbEventDtTerm2.Text))
+            {
+                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm2.Text, a.EndTime, dtpEventDt2.Value.Date));
+            }
             if (appointee.Any())
             {
                 var appointeq = from equipment in _equip
                                 where equipment.SerialNo == appointee.First().Equipment
                                 select equipment;
                 dgvEquip.DataSource = appointeq;
+            }
+            else
+            {
+                MessageBox.Show(this, @"没有筛选到相关条件的设备信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
