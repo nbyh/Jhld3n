@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.cmbProDate2 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dtpProTime2 = new System.Windows.Forms.DateTimePicker();
             this.cmbStore2 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpStore2 = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbStore1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpStore1 = new System.Windows.Forms.DateTimePicker();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbUseCondition = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbProDate1 = new System.Windows.Forms.ComboBox();
-            this.dtpTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpProTime1 = new System.Windows.Forms.DateTimePicker();
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.btnQueryInfo = new System.Windows.Forms.Button();
@@ -110,12 +110,12 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.cmbProDate2);
-            this.tabPage1.Controls.Add(this.dateTimePicker3);
+            this.tabPage1.Controls.Add(this.dtpProTime2);
             this.tabPage1.Controls.Add(this.cmbStore2);
-            this.tabPage1.Controls.Add(this.dateTimePicker2);
+            this.tabPage1.Controls.Add(this.dtpStore2);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.cmbStore1);
-            this.tabPage1.Controls.Add(this.dateTimePicker1);
+            this.tabPage1.Controls.Add(this.dtpStore1);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.cmbUseCondition);
             this.tabPage1.Controls.Add(this.label11);
@@ -129,7 +129,7 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.cmbProDate1);
-            this.tabPage1.Controls.Add(this.dtpTime);
+            this.tabPage1.Controls.Add(this.dtpProTime1);
             this.tabPage1.Controls.Add(this.cmbModel);
             this.tabPage1.Controls.Add(this.cmbName);
             this.tabPage1.Controls.Add(this.btnQueryInfo);
@@ -152,17 +152,17 @@
             "<",
             "≥",
             "≤"});
-            this.cmbProDate2.Location = new System.Drawing.Point(468, 68);
+            this.cmbProDate2.Location = new System.Drawing.Point(465, 68);
             this.cmbProDate2.Name = "cmbProDate2";
             this.cmbProDate2.Size = new System.Drawing.Size(33, 22);
             this.cmbProDate2.TabIndex = 33;
             // 
-            // dateTimePicker3
+            // dtpProTime2
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(501, 69);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(115, 21);
-            this.dateTimePicker3.TabIndex = 32;
+            this.dtpProTime2.Location = new System.Drawing.Point(498, 69);
+            this.dtpProTime2.Name = "dtpProTime2";
+            this.dtpProTime2.Size = new System.Drawing.Size(115, 21);
+            this.dtpProTime2.TabIndex = 32;
             // 
             // cmbStore2
             // 
@@ -175,22 +175,22 @@
             "<",
             "≥",
             "≤"});
-            this.cmbStore2.Location = new System.Drawing.Point(468, 41);
+            this.cmbStore2.Location = new System.Drawing.Point(465, 41);
             this.cmbStore2.Name = "cmbStore2";
             this.cmbStore2.Size = new System.Drawing.Size(33, 22);
             this.cmbStore2.TabIndex = 31;
             // 
-            // dateTimePicker2
+            // dtpStore2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(501, 42);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(115, 21);
-            this.dateTimePicker2.TabIndex = 30;
+            this.dtpStore2.Location = new System.Drawing.Point(498, 42);
+            this.dtpStore2.Name = "dtpStore2";
+            this.dtpStore2.Size = new System.Drawing.Size(115, 21);
+            this.dtpStore2.TabIndex = 30;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(250, 46);
+            this.label6.Location = new System.Drawing.Point(247, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 29;
@@ -207,22 +207,22 @@
             "<",
             "≥",
             "≤"});
-            this.cmbStore1.Location = new System.Drawing.Point(309, 41);
+            this.cmbStore1.Location = new System.Drawing.Point(306, 41);
             this.cmbStore1.Name = "cmbStore1";
             this.cmbStore1.Size = new System.Drawing.Size(33, 22);
             this.cmbStore1.TabIndex = 28;
             // 
-            // dateTimePicker1
+            // dtpStore1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(342, 42);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(115, 21);
-            this.dateTimePicker1.TabIndex = 27;
+            this.dtpStore1.Location = new System.Drawing.Point(339, 42);
+            this.dtpStore1.Name = "dtpStore1";
+            this.dtpStore1.Size = new System.Drawing.Size(115, 21);
+            this.dtpStore1.TabIndex = 27;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(509, 18);
+            this.label16.Location = new System.Drawing.Point(506, 18);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(29, 12);
             this.label16.TabIndex = 26;
@@ -233,7 +233,7 @@
             this.cmbUseCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbUseCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUseCondition.FormattingEnabled = true;
-            this.cmbUseCondition.Location = new System.Drawing.Point(546, 13);
+            this.cmbUseCondition.Location = new System.Drawing.Point(543, 13);
             this.cmbUseCondition.Name = "cmbUseCondition";
             this.cmbUseCondition.Size = new System.Drawing.Size(70, 22);
             this.cmbUseCondition.TabIndex = 25;
@@ -241,7 +241,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(252, 18);
+            this.label11.Location = new System.Drawing.Point(249, 18);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 22;
@@ -250,7 +250,7 @@
             // cmbFactory
             // 
             this.cmbFactory.FormattingEnabled = true;
-            this.cmbFactory.Location = new System.Drawing.Point(96, 69);
+            this.cmbFactory.Location = new System.Drawing.Point(93, 69);
             this.cmbFactory.Name = "cmbFactory";
             this.cmbFactory.Size = new System.Drawing.Size(148, 20);
             this.cmbFactory.TabIndex = 19;
@@ -258,7 +258,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(37, 73);
+            this.label10.Location = new System.Drawing.Point(34, 73);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 12);
             this.label10.TabIndex = 18;
@@ -267,7 +267,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(37, 46);
+            this.label7.Location = new System.Drawing.Point(34, 46);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 16;
@@ -284,7 +284,7 @@
             "<",
             "≥",
             "≤"});
-            this.cmbUseType.Location = new System.Drawing.Point(313, 13);
+            this.cmbUseType.Location = new System.Drawing.Point(310, 13);
             this.cmbUseType.Name = "cmbUseType";
             this.cmbUseType.Size = new System.Drawing.Size(75, 22);
             this.cmbUseType.TabIndex = 21;
@@ -294,7 +294,7 @@
             this.cmbSpot.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbSpot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSpot.FormattingEnabled = true;
-            this.cmbSpot.Location = new System.Drawing.Point(96, 41);
+            this.cmbSpot.Location = new System.Drawing.Point(93, 41);
             this.cmbSpot.Name = "cmbSpot";
             this.cmbSpot.Size = new System.Drawing.Size(148, 22);
             this.cmbSpot.TabIndex = 14;
@@ -303,7 +303,7 @@
             // btnRestInfo
             // 
             this.btnRestInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestInfo.Location = new System.Drawing.Point(706, 36);
+            this.btnRestInfo.Location = new System.Drawing.Point(699, 36);
             this.btnRestInfo.Name = "btnRestInfo";
             this.btnRestInfo.Size = new System.Drawing.Size(44, 30);
             this.btnRestInfo.TabIndex = 17;
@@ -314,7 +314,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(250, 73);
+            this.label5.Location = new System.Drawing.Point(247, 73);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 16;
@@ -323,7 +323,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(396, 18);
+            this.label4.Location = new System.Drawing.Point(393, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 16;
@@ -332,7 +332,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 18);
+            this.label3.Location = new System.Drawing.Point(34, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 15;
@@ -349,25 +349,25 @@
             "<",
             "≥",
             "≤"});
-            this.cmbProDate1.Location = new System.Drawing.Point(309, 68);
+            this.cmbProDate1.Location = new System.Drawing.Point(306, 68);
             this.cmbProDate1.Name = "cmbProDate1";
             this.cmbProDate1.Size = new System.Drawing.Size(33, 22);
             this.cmbProDate1.TabIndex = 11;
             this.cmbProDate1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
-            // dtpTime
+            // dtpProTime1
             // 
-            this.dtpTime.Location = new System.Drawing.Point(342, 69);
-            this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(115, 21);
-            this.dtpTime.TabIndex = 10;
+            this.dtpProTime1.Location = new System.Drawing.Point(339, 69);
+            this.dtpProTime1.Name = "dtpProTime1";
+            this.dtpProTime1.Size = new System.Drawing.Size(115, 21);
+            this.dtpProTime1.TabIndex = 10;
             // 
             // cmbModel
             // 
             this.cmbModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(433, 13);
+            this.cmbModel.Location = new System.Drawing.Point(430, 13);
             this.cmbModel.Name = "cmbModel";
             this.cmbModel.Size = new System.Drawing.Size(68, 22);
             this.cmbModel.TabIndex = 9;
@@ -378,7 +378,7 @@
             this.cmbName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbName.FormattingEnabled = true;
-            this.cmbName.Location = new System.Drawing.Point(96, 13);
+            this.cmbName.Location = new System.Drawing.Point(93, 13);
             this.cmbName.Name = "cmbName";
             this.cmbName.Size = new System.Drawing.Size(148, 22);
             this.cmbName.TabIndex = 8;
@@ -387,7 +387,7 @@
             // btnQueryInfo
             // 
             this.btnQueryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQueryInfo.Location = new System.Drawing.Point(656, 36);
+            this.btnQueryInfo.Location = new System.Drawing.Point(649, 36);
             this.btnQueryInfo.Name = "btnQueryInfo";
             this.btnQueryInfo.Size = new System.Drawing.Size(44, 30);
             this.btnQueryInfo.TabIndex = 7;
@@ -437,7 +437,6 @@
             this.cmbPageSize.Location = new System.Drawing.Point(434, 399);
             this.cmbPageSize.Name = "cmbPageSize";
             this.cmbPageSize.Size = new System.Drawing.Size(46, 20);
-            this.cmbPageSize.SelectedIndex = 0;
             this.cmbPageSize.TabIndex = 8;
             this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
             // 
@@ -520,22 +519,22 @@
             this.dgvSparePart.AllowUserToDeleteRows = false;
             this.dgvSparePart.AllowUserToResizeColumns = false;
             this.dgvSparePart.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvSparePart.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvSparePart.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSparePart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSparePart.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvSparePart.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSparePart.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSparePart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSparePart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSparePart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSparePart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -550,14 +549,14 @@
             this.Column5,
             this.Column12,
             this.MoreInfo});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSparePart.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSparePart.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSparePart.Location = new System.Drawing.Point(4, 3);
             this.dgvSparePart.MultiSelect = false;
             this.dgvSparePart.Name = "dgvSparePart";
@@ -710,14 +709,14 @@
         private System.Windows.Forms.ComboBox cmbUseType;
         private System.Windows.Forms.ComboBox cmbFactory;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dtpTime;
+        private System.Windows.Forms.DateTimePicker dtpProTime1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmbStore1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpStore1;
         private System.Windows.Forms.ComboBox cmbProDate2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dtpProTime2;
         private System.Windows.Forms.ComboBox cmbStore2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpStore2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;

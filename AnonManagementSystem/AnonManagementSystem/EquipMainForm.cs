@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace AnonManagementSystem
         private bool _enableedit = false;
         private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
-        private DbRawSqlQuery<CombatEquipment> _equip;
+        private DbRawSqlQuery<CombatEquipment> _equipDbRaw;
 
         public EquipMainForm()
         {
@@ -91,8 +92,46 @@ namespace AnonManagementSystem
         {
             try
             {
-                CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int? r = dgvEquip.CurrentRow?.Index;
+                if (r != null && r >= 0)
+                {
+                    sfdExcel.ShowDialog();
+                    string fn = sfdExcel.FileName;
+                    string excelid = dgvEquip.Rows[r.Value].Cells["SerialNo"].Value.ToString();
+                    var firsteq = (from eq in _equipEntities.CombatEquipment
+                                   where eq.SerialNo == excelid
+                                   select eq).First();
+                    var vehicles = (from vh in _equipEntities.CombatVehicles
+                                    where vh.Equipment == excelid
+                                    select vh).ToList();
+                    var comboevhid = vehicles.First(a => a.CombineOe).SerialNo;
+
+                    var oe = (from o in _equipEntities.OilEngine
+                              where o.Vehicle == comboevhid
+                              select o).First();
+
+                    var events = (from ev in _equipEntities.Events
+                                  where ev.Equipment == excelid
+                                  select ev).ToList();
+                    var eventsd = new Dictionary<string, List<EventData>>();
+                    foreach (var ee in events)
+                    {
+                        var ed = (from d in _equipEntities.EventData
+                                  where d.EventsNo == ee.No
+                                  select d).ToList();
+                        eventsd.Add(ee.No, ed);
+                    }
+
+                    EquipImageEntities eqImgEntities = new EquipImageEntities();
+                    List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
+                                                      where img.SerialNo == excelid
+                                                      select img).Take(3).ToList();
+                    if (PublicFunction.Export2Excel(fn, firsteq, vehicles, oe, events, eventsd, eqimgList))
+                    {
+                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                        MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception exception)
             {
@@ -104,30 +143,30 @@ namespace AnonManagementSystem
         public void LoadData()
         {
             string cmds = "select * from CombatEquipment";
-            _equip = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
+            _equipDbRaw = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
 
-            List<string> equipNameList = (from s in _equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            List<string> equipNameList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             cmbName.DataSource = equipNameList;
-            List<string> equipSubdepartList = (from s in _equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
+            List<string> equipSubdepartList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
             cmbSubDepart.DataSource = equipSubdepartList;
-            List<string> equipMajcatList = (from s in _equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
+            List<string> equipMajcatList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
             cmbMajorCategory.DataSource = equipMajcatList;
-            List<string> equipModelList = (from s in _equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+            List<string> equipModelList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
-            List<string> equipTechcanList = (from s in _equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
+            List<string> equipTechcanList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
             cmbTechnician.DataSource = equipTechcanList;
-            List<string> equipManagerList = (from s in _equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
+            List<string> equipManagerList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
             cmbManager.DataSource = equipManagerList;
-            List<string> equipTechconList = (from s in _equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
+            List<string> equipTechconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
             cmbTechCondition.DataSource = equipTechconList;
-            List<string> equipUseconList = (from s in _equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
+            List<string> equipUseconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
             cmbUseCondition.DataSource = equipUseconList;
-            List<string> equipFactList = (from s in _equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            List<string> equipFactList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
 
             _pageSize = 20;
             _curPage = 1;
-            DataRefresh(_pageSize, _curPage, _equip);
+            DataRefresh(_pageSize, _curPage, _equipDbRaw);
         }
 
         private void btnFront_Click(object sender, EventArgs e)
@@ -135,7 +174,7 @@ namespace AnonManagementSystem
             _curPage = 1;
             try
             {
-                DataRefresh(_pageSize, _curPage, _equip);
+                DataRefresh(_pageSize, _curPage, _equipDbRaw);
                 CommonLogHelper.GetInstance("LogInfo").Info(@"加载首页设备数据成功");
             }
             catch (Exception exception)
@@ -156,7 +195,7 @@ namespace AnonManagementSystem
             _curPage = gopage;
             try
             {
-                DataRefresh(_pageSize, gopage, _equip);
+                DataRefresh(_pageSize, gopage, _equipDbRaw);
                 CommonLogHelper.GetInstance("LogInfo").Info(@"跳转设备数据页面成功");
             }
             catch (Exception exception)
@@ -171,7 +210,7 @@ namespace AnonManagementSystem
             _curPage = _lastPage;
             try
             {
-                DataRefresh(_pageSize, _lastPage, _equip);
+                DataRefresh(_pageSize, _lastPage, _equipDbRaw);
                 CommonLogHelper.GetInstance("LogInfo").Info(@"加载末页设备数据成功");
             }
             catch (Exception exception)
@@ -192,7 +231,7 @@ namespace AnonManagementSystem
                 _curPage++;
                 try
                 {
-                    DataRefresh(_pageSize, _curPage, _equip);
+                    DataRefresh(_pageSize, _curPage, _equipDbRaw);
                     CommonLogHelper.GetInstance("LogInfo").Info(@"加载下一页设备数据成功");
                 }
                 catch (Exception exception)
@@ -214,7 +253,7 @@ namespace AnonManagementSystem
                 _curPage--;
                 try
                 {
-                    DataRefresh(_pageSize, _curPage, _equip);
+                    DataRefresh(_pageSize, _curPage, _equipDbRaw);
                     CommonLogHelper.GetInstance("LogInfo").Info(@"加载上一页设备数据成功");
                 }
                 catch (Exception exception)
@@ -243,7 +282,7 @@ namespace AnonManagementSystem
                 _pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
                 try
                 {
-                    DataRefresh(_pageSize, _curPage, _equip);
+                    DataRefresh(_pageSize, _curPage, _equipDbRaw);
                     CommonLogHelper.GetInstance("LogInfo").Info(@"切换页数后加载设备数据成功");
                 }
                 catch (Exception exception)
@@ -271,7 +310,7 @@ namespace AnonManagementSystem
             }, null);
         }
 
-        private void dGvEquip_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvEquip_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvEquip.Columns[e.ColumnIndex].Name.Equals("MoreInfo"))
             {
@@ -299,7 +338,7 @@ namespace AnonManagementSystem
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
             dgvEquip.Rows.Clear();
-            var appointeq = from equipment in _equip
+            var appointeq = from equipment in _equipDbRaw
                             select equipment;
             if (!string.IsNullOrEmpty(cmbName.Text))
             {
@@ -413,7 +452,7 @@ namespace AnonManagementSystem
             }
             if (appointee.Any())
             {
-                var appointeq = from equipment in _equip
+                var appointeq = from equipment in _equipDbRaw
                                 where equipment.SerialNo == appointee.First().Equipment
                                 select equipment;
                 dgvEquip.DataSource = appointeq;

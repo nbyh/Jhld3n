@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -60,22 +60,23 @@
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.btnQueryInfo = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cmbPublishDtTerm = new System.Windows.Forms.ComboBox();
             this.dtpPublish = new System.Windows.Forms.DateTimePicker();
             this.label22 = new System.Windows.Forms.Label();
-            this.cmbSpecificType = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.cmbEventType = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.cmbEventAddress = new System.Windows.Forms.ComboBox();
             this.cmbPublisher = new System.Windows.Forms.ComboBox();
+            this.cmbSpecificType = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.cmbPublishUnit = new System.Windows.Forms.ComboBox();
             this.btnRestEvent = new System.Windows.Forms.Button();
+            this.cmbEventType = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.cmbEventDtTerm2 = new System.Windows.Forms.ComboBox();
             this.dtpEventDt2 = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
+            this.cmbEventAddress = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbEventDtTerm1 = new System.Windows.Forms.ComboBox();
             this.dtpEventDt1 = new System.Windows.Forms.DateTimePicker();
@@ -104,7 +105,7 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.cmbPublishDtTerm = new System.Windows.Forms.ComboBox();
+            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -457,6 +458,21 @@
             this.tabPage2.Text = "活动情况";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // cmbPublishDtTerm
+            // 
+            this.cmbPublishDtTerm.FormattingEnabled = true;
+            this.cmbPublishDtTerm.Items.AddRange(new object[] {
+            "无",
+            ">",
+            "=",
+            "<",
+            "≥",
+            "≤"});
+            this.cmbPublishDtTerm.Location = new System.Drawing.Point(446, 66);
+            this.cmbPublishDtTerm.Name = "cmbPublishDtTerm";
+            this.cmbPublishDtTerm.Size = new System.Drawing.Size(40, 20);
+            this.cmbPublishDtTerm.TabIndex = 52;
+            // 
             // dtpPublish
             // 
             this.dtpPublish.Location = new System.Drawing.Point(486, 66);
@@ -473,6 +489,23 @@
             this.label22.TabIndex = 47;
             this.label22.Text = "具体类型";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(242, 70);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 12);
+            this.label19.TabIndex = 43;
+            this.label19.Text = "发文人";
+            // 
+            // cmbPublisher
+            // 
+            this.cmbPublisher.FormattingEnabled = true;
+            this.cmbPublisher.Location = new System.Drawing.Point(289, 66);
+            this.cmbPublisher.Name = "cmbPublisher";
+            this.cmbPublisher.Size = new System.Drawing.Size(92, 20);
+            this.cmbPublisher.TabIndex = 42;
+            // 
             // cmbSpecificType
             // 
             this.cmbSpecificType.FormattingEnabled = true;
@@ -480,6 +513,24 @@
             this.cmbSpecificType.Name = "cmbSpecificType";
             this.cmbSpecificType.Size = new System.Drawing.Size(92, 20);
             this.cmbSpecificType.TabIndex = 46;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(387, 70);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.TabIndex = 41;
+            this.label18.Text = "发文时间";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(62, 70);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(53, 12);
+            this.label17.TabIndex = 39;
+            this.label17.Text = "发文单位";
             // 
             // label21
             // 
@@ -489,6 +540,25 @@
             this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 45;
             this.label21.Text = "活动类型";
+            // 
+            // cmbPublishUnit
+            // 
+            this.cmbPublishUnit.FormattingEnabled = true;
+            this.cmbPublishUnit.Location = new System.Drawing.Point(121, 66);
+            this.cmbPublishUnit.Name = "cmbPublishUnit";
+            this.cmbPublishUnit.Size = new System.Drawing.Size(103, 20);
+            this.cmbPublishUnit.TabIndex = 38;
+            // 
+            // btnRestEvent
+            // 
+            this.btnRestEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestEvent.Location = new System.Drawing.Point(671, 36);
+            this.btnRestEvent.Name = "btnRestEvent";
+            this.btnRestEvent.Size = new System.Drawing.Size(44, 30);
+            this.btnRestEvent.TabIndex = 37;
+            this.btnRestEvent.Text = "重置";
+            this.btnRestEvent.UseVisualStyleBackColor = false;
+            this.btnRestEvent.Click += new System.EventHandler(this.btnRestEvent_Click);
             // 
             // cmbEventType
             // 
@@ -511,68 +581,6 @@
             this.label20.Size = new System.Drawing.Size(29, 12);
             this.label20.TabIndex = 43;
             this.label20.Text = "地点";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(242, 70);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 12);
-            this.label19.TabIndex = 43;
-            this.label19.Text = "发文人";
-            // 
-            // cmbEventAddress
-            // 
-            this.cmbEventAddress.FormattingEnabled = true;
-            this.cmbEventAddress.Location = new System.Drawing.Point(446, 42);
-            this.cmbEventAddress.Name = "cmbEventAddress";
-            this.cmbEventAddress.Size = new System.Drawing.Size(143, 20);
-            this.cmbEventAddress.TabIndex = 42;
-            // 
-            // cmbPublisher
-            // 
-            this.cmbPublisher.FormattingEnabled = true;
-            this.cmbPublisher.Location = new System.Drawing.Point(289, 66);
-            this.cmbPublisher.Name = "cmbPublisher";
-            this.cmbPublisher.Size = new System.Drawing.Size(92, 20);
-            this.cmbPublisher.TabIndex = 42;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(387, 70);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(53, 12);
-            this.label18.TabIndex = 41;
-            this.label18.Text = "发文时间";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(62, 70);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(53, 12);
-            this.label17.TabIndex = 39;
-            this.label17.Text = "发文单位";
-            // 
-            // cmbPublishUnit
-            // 
-            this.cmbPublishUnit.FormattingEnabled = true;
-            this.cmbPublishUnit.Location = new System.Drawing.Point(121, 66);
-            this.cmbPublishUnit.Name = "cmbPublishUnit";
-            this.cmbPublishUnit.Size = new System.Drawing.Size(103, 20);
-            this.cmbPublishUnit.TabIndex = 38;
-            // 
-            // btnRestEvent
-            // 
-            this.btnRestEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestEvent.Location = new System.Drawing.Point(671, 36);
-            this.btnRestEvent.Name = "btnRestEvent";
-            this.btnRestEvent.Size = new System.Drawing.Size(44, 30);
-            this.btnRestEvent.TabIndex = 37;
-            this.btnRestEvent.Text = "重置";
-            this.btnRestEvent.UseVisualStyleBackColor = false;
-            this.btnRestEvent.Click += new System.EventHandler(this.btnRestEvent_Click);
             // 
             // cmbEventDtTerm2
             // 
@@ -604,6 +612,14 @@
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 32;
             this.label14.Text = "名称";
+            // 
+            // cmbEventAddress
+            // 
+            this.cmbEventAddress.FormattingEnabled = true;
+            this.cmbEventAddress.Location = new System.Drawing.Point(446, 42);
+            this.cmbEventAddress.Name = "cmbEventAddress";
+            this.cmbEventAddress.Size = new System.Drawing.Size(143, 20);
+            this.cmbEventAddress.TabIndex = 42;
             // 
             // label12
             // 
@@ -782,22 +798,22 @@
             this.dgvEquip.AllowUserToDeleteRows = false;
             this.dgvEquip.AllowUserToResizeColumns = false;
             this.dgvEquip.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEquip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEquip.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvEquip.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEquip.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEquip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEquip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -812,14 +828,14 @@
             this.Column11,
             this.Column6,
             this.MoreInfo});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEquip.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEquip.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEquip.Location = new System.Drawing.Point(4, 3);
             this.dgvEquip.MultiSelect = false;
             this.dgvEquip.Name = "dgvEquip";
@@ -829,7 +845,7 @@
             this.dgvEquip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEquip.Size = new System.Drawing.Size(776, 387);
             this.dgvEquip.TabIndex = 0;
-            this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGvEquip_CellContentClick);
+            this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEquip_CellContentClick);
             // 
             // Column1
             // 
@@ -921,20 +937,12 @@
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
             // 
-            // cmbPublishDtTerm
+            // sfdExcel
             // 
-            this.cmbPublishDtTerm.FormattingEnabled = true;
-            this.cmbPublishDtTerm.Items.AddRange(new object[] {
-            "无",
-            ">",
-            "=",
-            "<",
-            "≥",
-            "≤"});
-            this.cmbPublishDtTerm.Location = new System.Drawing.Point(446, 66);
-            this.cmbPublishDtTerm.Name = "cmbPublishDtTerm";
-            this.cmbPublishDtTerm.Size = new System.Drawing.Size(40, 20);
-            this.cmbPublishDtTerm.TabIndex = 52;
+            this.sfdExcel.DefaultExt = "xlsx";
+            this.sfdExcel.Filter = "Excel文件|*.xlsx";
+            this.sfdExcel.InitialDirectory = "Desktop";
+            this.sfdExcel.Title = "请选择文件保存位置";
             // 
             // EquipMainForm
             // 
@@ -1036,6 +1044,7 @@
         private System.Windows.Forms.ComboBox cmbName;
         private System.Windows.Forms.Button btnQueryInfo;
         private System.Windows.Forms.ComboBox cmbPublishDtTerm;
+        private System.Windows.Forms.SaveFileDialog sfdExcel;
     }
 }
 
