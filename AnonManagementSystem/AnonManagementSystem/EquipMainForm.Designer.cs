@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -459,7 +459,7 @@
             // 
             // dtpPublish
             // 
-            this.dtpPublish.Location = new System.Drawing.Point(480, 66);
+            this.dtpPublish.Location = new System.Drawing.Point(486, 66);
             this.dtpPublish.Name = "dtpPublish";
             this.dtpPublish.Size = new System.Drawing.Size(103, 21);
             this.dtpPublish.TabIndex = 51;
@@ -467,7 +467,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(224, 46);
+            this.label22.Location = new System.Drawing.Point(230, 46);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(53, 12);
             this.label22.TabIndex = 47;
@@ -476,7 +476,7 @@
             // cmbSpecificType
             // 
             this.cmbSpecificType.FormattingEnabled = true;
-            this.cmbSpecificType.Location = new System.Drawing.Point(283, 42);
+            this.cmbSpecificType.Location = new System.Drawing.Point(289, 42);
             this.cmbSpecificType.Name = "cmbSpecificType";
             this.cmbSpecificType.Size = new System.Drawing.Size(92, 20);
             this.cmbSpecificType.TabIndex = 46;
@@ -484,7 +484,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(56, 46);
+            this.label21.Location = new System.Drawing.Point(62, 46);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 45;
@@ -498,7 +498,7 @@
             "动用类",
             "使用维护",
             "测试检修"});
-            this.cmbEventType.Location = new System.Drawing.Point(115, 42);
+            this.cmbEventType.Location = new System.Drawing.Point(121, 42);
             this.cmbEventType.Name = "cmbEventType";
             this.cmbEventType.Size = new System.Drawing.Size(103, 20);
             this.cmbEventType.TabIndex = 44;
@@ -506,7 +506,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(405, 46);
+            this.label20.Location = new System.Drawing.Point(411, 46);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(29, 12);
             this.label20.TabIndex = 43;
@@ -515,7 +515,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(236, 70);
+            this.label19.Location = new System.Drawing.Point(242, 70);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 12);
             this.label19.TabIndex = 43;
@@ -524,7 +524,7 @@
             // cmbEventAddress
             // 
             this.cmbEventAddress.FormattingEnabled = true;
-            this.cmbEventAddress.Location = new System.Drawing.Point(440, 42);
+            this.cmbEventAddress.Location = new System.Drawing.Point(446, 42);
             this.cmbEventAddress.Name = "cmbEventAddress";
             this.cmbEventAddress.Size = new System.Drawing.Size(143, 20);
             this.cmbEventAddress.TabIndex = 42;
@@ -532,7 +532,7 @@
             // cmbPublisher
             // 
             this.cmbPublisher.FormattingEnabled = true;
-            this.cmbPublisher.Location = new System.Drawing.Point(283, 66);
+            this.cmbPublisher.Location = new System.Drawing.Point(289, 66);
             this.cmbPublisher.Name = "cmbPublisher";
             this.cmbPublisher.Size = new System.Drawing.Size(92, 20);
             this.cmbPublisher.TabIndex = 42;
@@ -540,7 +540,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(381, 70);
+            this.label18.Location = new System.Drawing.Point(387, 70);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(53, 12);
             this.label18.TabIndex = 41;
@@ -549,7 +549,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(56, 70);
+            this.label17.Location = new System.Drawing.Point(62, 70);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(53, 12);
             this.label17.TabIndex = 39;
@@ -558,7 +558,7 @@
             // cmbPublishUnit
             // 
             this.cmbPublishUnit.FormattingEnabled = true;
-            this.cmbPublishUnit.Location = new System.Drawing.Point(115, 66);
+            this.cmbPublishUnit.Location = new System.Drawing.Point(121, 66);
             this.cmbPublishUnit.Name = "cmbPublishUnit";
             this.cmbPublishUnit.Size = new System.Drawing.Size(103, 20);
             this.cmbPublishUnit.TabIndex = 38;
@@ -566,7 +566,7 @@
             // btnRestEvent
             // 
             this.btnRestEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestEvent.Location = new System.Drawing.Point(677, 36);
+            this.btnRestEvent.Location = new System.Drawing.Point(671, 36);
             this.btnRestEvent.Name = "btnRestEvent";
             this.btnRestEvent.Size = new System.Drawing.Size(44, 30);
             this.btnRestEvent.TabIndex = 37;
@@ -584,14 +584,14 @@
             "<",
             "≥",
             "≤"});
-            this.cmbEventDtTerm2.Location = new System.Drawing.Point(433, 16);
+            this.cmbEventDtTerm2.Location = new System.Drawing.Point(439, 16);
             this.cmbEventDtTerm2.Name = "cmbEventDtTerm2";
             this.cmbEventDtTerm2.Size = new System.Drawing.Size(40, 20);
             this.cmbEventDtTerm2.TabIndex = 34;
             // 
             // dtpEventDt2
             // 
-            this.dtpEventDt2.Location = new System.Drawing.Point(473, 16);
+            this.dtpEventDt2.Location = new System.Drawing.Point(479, 16);
             this.dtpEventDt2.Name = "dtpEventDt2";
             this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt2.TabIndex = 33;
@@ -599,7 +599,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(80, 20);
+            this.label14.Location = new System.Drawing.Point(86, 20);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 32;
@@ -608,7 +608,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(248, 20);
+            this.label12.Location = new System.Drawing.Point(254, 20);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 30;
@@ -624,14 +624,14 @@
             "<",
             "≥",
             "≤"});
-            this.cmbEventDtTerm1.Location = new System.Drawing.Point(283, 16);
+            this.cmbEventDtTerm1.Location = new System.Drawing.Point(289, 16);
             this.cmbEventDtTerm1.Name = "cmbEventDtTerm1";
             this.cmbEventDtTerm1.Size = new System.Drawing.Size(40, 20);
             this.cmbEventDtTerm1.TabIndex = 22;
             // 
             // dtpEventDt1
             // 
-            this.dtpEventDt1.Location = new System.Drawing.Point(323, 16);
+            this.dtpEventDt1.Location = new System.Drawing.Point(329, 16);
             this.dtpEventDt1.Name = "dtpEventDt1";
             this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt1.TabIndex = 21;
@@ -639,7 +639,7 @@
             // cmbEventName
             // 
             this.cmbEventName.FormattingEnabled = true;
-            this.cmbEventName.Location = new System.Drawing.Point(115, 16);
+            this.cmbEventName.Location = new System.Drawing.Point(121, 16);
             this.cmbEventName.Name = "cmbEventName";
             this.cmbEventName.Size = new System.Drawing.Size(103, 20);
             this.cmbEventName.TabIndex = 19;
@@ -647,7 +647,7 @@
             // btnQueryEvent
             // 
             this.btnQueryEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQueryEvent.Location = new System.Drawing.Point(627, 36);
+            this.btnQueryEvent.Location = new System.Drawing.Point(621, 36);
             this.btnQueryEvent.Name = "btnQueryEvent";
             this.btnQueryEvent.Size = new System.Drawing.Size(44, 30);
             this.btnQueryEvent.TabIndex = 17;
@@ -782,22 +782,22 @@
             this.dgvEquip.AllowUserToDeleteRows = false;
             this.dgvEquip.AllowUserToResizeColumns = false;
             this.dgvEquip.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvEquip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEquip.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvEquip.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEquip.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEquip.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvEquip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEquip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -812,14 +812,14 @@
             this.Column11,
             this.Column6,
             this.MoreInfo});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEquip.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEquip.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvEquip.Location = new System.Drawing.Point(4, 3);
             this.dgvEquip.MultiSelect = false;
             this.dgvEquip.Name = "dgvEquip";
@@ -931,7 +931,7 @@
             "<",
             "≥",
             "≤"});
-            this.cmbPublishDtTerm.Location = new System.Drawing.Point(440, 66);
+            this.cmbPublishDtTerm.Location = new System.Drawing.Point(446, 66);
             this.cmbPublishDtTerm.Name = "cmbPublishDtTerm";
             this.cmbPublishDtTerm.Size = new System.Drawing.Size(40, 20);
             this.cmbPublishDtTerm.TabIndex = 52;
