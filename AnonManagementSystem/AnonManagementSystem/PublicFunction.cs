@@ -26,38 +26,6 @@ namespace AnonManagementSystem
             return img.Width <= MAX_IMAGE_WIDTH && img.Height <= MAX_IMAGE_HEIGHT;
         }
 
-        public static byte[] ReturnImgBytes(string imgpath)
-        {
-            if (!CheckFileSize(imgpath))
-            {
-                MessageBox.Show(@"文件尺寸太大，请选择小于1MB的图片", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return null;
-            }
-            FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-            Image img = Image.FromStream(fs);
-            if (!CheckImageSize(img))
-            {
-                MessageBox.Show(@"图片尺寸太大，请选择宽小于1024、高小于768像素的图片", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return null;
-            }
-            BinaryReader br = new BinaryReader(fs);
-            byte[] imgBytes = br.ReadBytes((int)fs.Length);
-            fs.Close();
-            return imgBytes;
-        }
-
-        public static bool Export2Excel(string filepath, CombatEquipment equip, List<CombatVehicles> vhList, OilEngine oe, List<Events> events, Dictionary<string, List<EventData>> eventDic, List<EquipmentImage> eqImg)
-        {
-            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
-            {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
-
-                //todo：填充数据
-                package.Save();//保存excel
-            }
-            return true;
-        }
-
         public static bool CompareTime(string express, DateTime dt1, DateTime dt2)
         {
             switch (express)
@@ -79,11 +47,53 @@ namespace AnonManagementSystem
             }
         }
 
-        internal static bool Export2Excel(string filepath, SpareParts firstsp, List<SparePartImage> spimgList)
+        public static bool Export2Excel(string filepath, CombatEquipment equip, List<CombatVehicles> vhList, OilEngine oe, List<Events> events, Dictionary<string, List<EventData>> eventDic, List<EquipmentImage> eqImg)
         {
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
+                List<string> titlesList = new List<string>()
+                {
+                    "设备编号","设备名称","型号","生产厂家","出厂编号","出厂日期","专业分类","隶属单位","技术状态","使用状态","负责人","技术员","主要组成","性能指标","主要用途","运用方法","技术改造情况","架设视频链接"
+                 };
+                worksheet.Cells.LoadFromCollection(titlesList, true);
+
+                //todo：填充数据
+                package.Save();//保存excel
+            }
+            return true;
+        }
+
+        public static byte[] ReturnImgBytes(string imgpath)
+        {
+            if (!CheckFileSize(imgpath))
+            {
+                MessageBox.Show(@"文件尺寸太大，请选择小于1MB的图片", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+            FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+            Image img = Image.FromStream(fs);
+            if (!CheckImageSize(img))
+            {
+                MessageBox.Show(@"图片尺寸太大，请选择宽小于1024、高小于768像素的图片", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+            BinaryReader br = new BinaryReader(fs);
+            byte[] imgBytes = br.ReadBytes((int)fs.Length);
+            fs.Close();
+            return imgBytes;
+        }
+
+        internal static bool Export2Excel(string filepath, SpareParts firstsp, List<SparePartImage> spimgList)
+        {
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("备件信息");//创建worksheet
+                List<string> titlesList = new List<string>()
+                {
+                    "备件编号","备件名称","型号","用于型号","数量","状态","生产厂家","出厂日期","库存位置","入库时间"
+                };
+                worksheet.Cells.LoadFromCollection(titlesList, true);
 
                 //todo：填充数据
                 package.Save();//保存excel

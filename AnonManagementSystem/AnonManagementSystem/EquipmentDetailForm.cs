@@ -320,7 +320,7 @@ namespace AnonManagementSystem
                     pointoe.OeFactory = oilEngine.OeFactory;
                     pointoe.OeDate = oilEngine.OeDate;
                     pointoe.OeOemNo = oilEngine.OeOemNo;
-                    pointoe.MotorNo = oilEngine.MotorNo;
+                    pointoe.MotorModel = oilEngine.MotorModel;
                     pointoe.MotorPower = oilEngine.MotorPower;
                     pointoe.MotorFuel = oilEngine.MotorFuel;
                     pointoe.MotorTankage = oilEngine.MotorTankage;
@@ -528,14 +528,14 @@ namespace AnonManagementSystem
             cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
             tbSerialNo.Text = equipfirst.SerialNo;
             tbTechRemould.Text = equipfirst.TechRemould;
-            tbOemNo.Text = equipfirst.InventorySpot;
+            tbOemNo.Text = equipfirst.OemNo;
             cmbTechnician.SelectedItem = equipfirst.Technician;
             cmbCharger.SelectedItem = equipfirst.Manager;
             cmbTechCondition.SelectedItem = equipfirst.TechCondition;
             cmbUseCondition.SelectedItem = equipfirst.UseCondition;
             cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
             cmbFactory.SelectedItem = equipfirst.Factory;
-            dtpTime.Value = equipfirst.FactoryTime;
+            dtpTime.Value = equipfirst.ProductionDate;
 
             tbMajorComp.Text = equipfirst.MajorComp;
             tbMainUsage.Text = equipfirst.MainUsage;
@@ -865,8 +865,8 @@ namespace AnonManagementSystem
                             TechCondition = cmbTechCondition.Text,
                             UseCondition = cmbUseCondition.Text,
                             Factory = cmbFactory.Text,
-                            FactoryTime = dtpTime.Value.Date,
-
+                            ProductionDate = dtpTime.Value.Date,
+                            OemNo = tbOemNo.Text,
                             MajorComp = tbMajorComp.Text,
                             MainUsage = tbMainUsage.Text,
                             PerformIndex = tbPerformIndex.Text,
@@ -896,7 +896,7 @@ namespace AnonManagementSystem
                                           where eq.SerialNo == _id
                                           select eq).First();
 
-                        equipfirst.InventorySpot = tbOemNo.Text;
+                        equipfirst.OemNo = tbOemNo.Text;
                         equipfirst.Technician = cmbTechnician.Text;
                         equipfirst.SubDepartment = cmbSubDepart.Text;
                         equipfirst.Manager = cmbCharger.Text;
@@ -904,7 +904,8 @@ namespace AnonManagementSystem
                         equipfirst.UseCondition = cmbUseCondition.Text;
                         equipfirst.MajorCategory = cmbMajorCategory.Text;
                         equipfirst.Factory = cmbFactory.Text;
-                        equipfirst.FactoryTime = dtpTime.Value.Date;
+                        equipfirst.OemNo = tbOemNo.Text;
+                        equipfirst.ProductionDate = dtpTime.Value.Date;
                         equipfirst.Model = cmbModel.Text;
                         equipfirst.Name = cmbName.Text;
                         equipfirst.SubDepartment = cmbSubDepart.Text;

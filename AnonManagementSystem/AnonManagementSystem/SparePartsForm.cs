@@ -97,18 +97,25 @@ namespace AnonManagementSystem
                     sfdExcel.ShowDialog();
                     string fn = sfdExcel.FileName;
                     string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                    var firstsp = (from sp in _sparePartEntities.SpareParts
-                                   where sp.SerialNo == excelid
-                                   select sp).First();
-
-                    SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
-                    List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
-                                                      where img.SerialNo == excelid
-                                                      select img).Take(3).ToList();
-                    if (PublicFunction.Export2Excel(fn, firstsp, spimgList))
+                    var firstsp = from sp in _sparePartEntities.SpareParts
+                                  where sp.SerialNo == excelid
+                                  select sp;
+                    if (firstsp.Any())
                     {
-                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                        MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
+                        List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
+                                                          where img.SerialNo == excelid
+                                                          select img).Take(3).ToList();
+                        if (PublicFunction.Export2Excel(fn, firstsp.First(), spimgList))
+                        {
+                            CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                            MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("");
+                        return;
                     }
                 }
             }
@@ -128,7 +135,7 @@ namespace AnonManagementSystem
             cmbName.DataSource = equipNameList;
             List<string> equipModelList = (from s in _sparePart where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
-            List<string> equipUseconList = (from s in _sparePart where !string.IsNullOrEmpty(s.Statue) select s.Statue).Distinct().ToList();
+            List<string> equipUseconList = (from s in _sparePart where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct().ToList();
             cmbUseCondition.DataSource = equipUseconList;
             List<string> equipFactList = (from s in _sparePart where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
@@ -321,7 +328,7 @@ namespace AnonManagementSystem
             }
             if (!string.IsNullOrEmpty(cmbUseCondition.Text))
             {
-                appointsp = appointsp.Where(a => a.Statue == cmbUseCondition.Text);
+                appointsp = appointsp.Where(a => a.Status == cmbUseCondition.Text);
             }
             if (!string.IsNullOrEmpty(cmbSpot.Text))
             {
@@ -341,11 +348,11 @@ namespace AnonManagementSystem
             }
             if (!string.IsNullOrEmpty(cmbProDate1.Text))
             {
-                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate1.Text, a.ProductDate, dtpProTime1.Value.Date));
+                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate1.Text, a.ProductionDate, dtpProTime1.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbProDate2.Text))
             {
-                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate2.Text, a.ProductDate, dtpProTime2.Value.Date));
+                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate2.Text, a.ProductionDate, dtpProTime2.Value.Date));
             }
             if (appointsp.Any())
             {

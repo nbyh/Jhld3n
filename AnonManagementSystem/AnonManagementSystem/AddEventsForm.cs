@@ -68,6 +68,9 @@ namespace AnonManagementSystem
                         cmbEventType.Text = vh.EventType;
                         cmbSpecificType.Text = vh.SpecificType;
                         tbCode.Text = vh.Code;
+                        cmbHigherUnit.Text = vh.HigherUnit;
+                        cmbExecutor.Text = vh.Executor;
+                        tbNoInEvents.Text = vh.NoInEvents;
                         cmbPulishUnit.Text = vh.PublishUnit;
                         dtpPulishDt.Value = vh.PublishDate;
                         cmbPulisher.Text = vh.Publisher;
@@ -205,6 +208,9 @@ namespace AnonManagementSystem
                         SpecificType = cmbSpecificType.Text,
                         Code = tbCode.Text,
 
+                        HigherUnit = cmbHigherUnit.Text,
+                        Executor = cmbExecutor.Text,
+                        NoInEvents = tbNoInEvents.Text,
                         PublishUnit = cmbPulishUnit.Text,
                         PublishDate = dtpPulishDt.Value.Date,
                         Publisher = cmbPulisher.Text,
@@ -255,6 +261,9 @@ namespace AnonManagementSystem
                     eventfirst.EventType = cmbEventType.Text;
                     eventfirst.SpecificType = cmbSpecificType.Text;
                     eventfirst.Code = tbCode.Text;
+                    eventfirst.HigherUnit = cmbHigherUnit.Text;
+                    eventfirst.Executor = cmbExecutor.Text;
+                    eventfirst.NoInEvents = tbNoInEvents.Text;
                     eventfirst.PublishUnit = cmbPulishUnit.Text;
                     eventfirst.PublishDate = dtpPulishDt.Value.Date;
                     eventfirst.Publisher = cmbPulisher.Text;

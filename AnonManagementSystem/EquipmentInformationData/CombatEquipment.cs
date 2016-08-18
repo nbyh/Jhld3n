@@ -18,8 +18,8 @@ namespace EquipmentInformationData
         public CombatEquipment()
         {
             this.CombatVehicles = new HashSet<CombatVehicles>();
-            this.Material = new HashSet<Material>();
             this.Events = new HashSet<Events>();
+            this.Material = new HashSet<Material>();
         }
     
         public string SerialNo { get; set; }
@@ -30,7 +30,8 @@ namespace EquipmentInformationData
         public string TechCondition { get; set; }
         public string UseCondition { get; set; }
         public string Factory { get; set; }
-        public System.DateTime FactoryTime { get; set; }
+        public string OemNo { get; set; }
+        public System.DateTime ProductionDate { get; set; }
         public string InventorySpot { get; set; }
         public string MajorComp { get; set; }
         public string MainUsage { get; set; }
@@ -44,8 +45,8 @@ namespace EquipmentInformationData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CombatVehicles> CombatVehicles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Material> Material { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Events> Events { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Material> Material { get; set; }
     }
 }

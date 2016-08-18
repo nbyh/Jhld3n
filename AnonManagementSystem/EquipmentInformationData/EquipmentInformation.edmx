@@ -17,7 +17,8 @@
           <Property Name="TechCondition" Type="nvarchar" MaxLength="254" />
           <Property Name="UseCondition" Type="nvarchar" MaxLength="254" />
           <Property Name="Factory" Type="nvarchar" MaxLength="254" />
-          <Property Name="FactoryTime" Type="datetime" Nullable="false" />
+          <Property Name="OemNo" Type="nvarchar" MaxLength="254" />
+          <Property Name="ProductionDate" Type="datetime" Nullable="false" />
           <Property Name="InventorySpot" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="MajorComp" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="MainUsage" Type="nvarchar" MaxLength="2147483647" />
@@ -75,6 +76,9 @@
           <Property Name="EventType" Type="nvarchar" MaxLength="254" />
           <Property Name="SpecificType" Type="nvarchar" MaxLength="254" />
           <Property Name="Code" Type="nvarchar" MaxLength="254" />
+          <Property Name="NoInEvents" Type="nvarchar" MaxLength="254" />
+          <Property Name="HigherUnit" Type="nvarchar" MaxLength="254" />
+          <Property Name="Executor" Type="nvarchar" MaxLength="254" />
           <Property Name="PublishUnit" Type="nvarchar" MaxLength="254" />
           <Property Name="PublishDate" Type="datetime" Nullable="false" />
           <Property Name="Publisher" Type="nvarchar" MaxLength="254" />
@@ -115,7 +119,7 @@
           <Property Name="OeFactory" Type="nvarchar" MaxLength="254" />
           <Property Name="OeDate" Type="datetime" Nullable="false" />
           <Property Name="OeOemNo" Type="nvarchar" MaxLength="254" />
-          <Property Name="MotorNo" Type="nvarchar" MaxLength="254" Nullable="false" />
+          <Property Name="MotorModel" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="MotorPower" Type="nvarchar" MaxLength="254" />
           <Property Name="MotorFuel" Type="nvarchar" MaxLength="254" />
           <Property Name="MotorTankage" Type="nvarchar" MaxLength="254" />
@@ -221,11 +225,16 @@
           <EntitySet Name="CombatEquipment" EntityType="EquipmentManagementModel.CombatEquipment" />
           <EntitySet Name="CombatVehicles" EntityType="EquipmentManagementModel.CombatVehicles" />
           <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
+          <EntitySet Name="Events" EntityType="EquipmentManagementModel.Events" />
           <EntitySet Name="Material" EntityType="EquipmentManagementModel.Material" />
           <EntitySet Name="OilEngine" EntityType="EquipmentManagementModel.OilEngine" />
           <AssociationSet Name="FK_CombatVehicles_0_0" Association="EquipmentManagementModel.FK_CombatVehicles_0_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_0_0" Association="EquipmentManagementModel.FK_Events_0_0">
+            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
           <AssociationSet Name="FK_Material_0_0" Association="EquipmentManagementModel.FK_Material_0_0">
             <End Role="CombatEquipment" EntitySet="CombatEquipment" />
@@ -234,11 +243,6 @@
           <AssociationSet Name="FK_OilEngine_0_0" Association="EquipmentManagementModel.FK_OilEngine_0_0">
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
             <End Role="OilEngine" EntitySet="OilEngine" />
-          </AssociationSet>
-          <EntitySet Name="Events" EntityType="EquipmentManagementModel.Events" />
-          <AssociationSet Name="FK_Events_0_0" Association="EquipmentManagementModel.FK_Events_0_0">
-            <End Role="CombatEquipment" EntitySet="CombatEquipment" />
-            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
           <AssociationSet Name="FK_EventData_0_0" Association="EquipmentManagementModel.FK_EventData_0_0">
             <End Role="Events" EntitySet="Events" />
@@ -257,7 +261,8 @@
           <Property Name="TechCondition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="UseCondition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="Factory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="FactoryTime" Type="DateTime" Nullable="false" />
+          <Property Name="OemNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionDate" Type="DateTime" Nullable="false" />
           <Property Name="InventorySpot" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="MajorComp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="MainUsage" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -268,8 +273,8 @@
           <Property Name="TechRemould" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="SetupVideo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CombatVehicles" Relationship="EquipmentManagementModel.FK_CombatVehicles_0_0" FromRole="CombatEquipment" ToRole="CombatVehicles" />
-          <NavigationProperty Name="Material" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="CombatEquipment" ToRole="Material" />
           <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="CombatEquipment" ToRole="Events" />
+          <NavigationProperty Name="Material" Relationship="EquipmentManagementModel.FK_Material_0_0" FromRole="CombatEquipment" ToRole="Material" />
         </EntityType>
         <EntityType Name="CombatVehicles">
           <Key>
@@ -309,6 +314,34 @@
           <Property Name="EventsNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="EventData" ToRole="Events" />
         </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="EventType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="SpecificType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="NoInEvents" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="HigherUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Executor" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PublishUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="According" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PeopleDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessDescri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="HandleStep" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Problem" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="Events" ToRole="CombatEquipment" />
+          <NavigationProperty Name="EventData" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="Events" ToRole="EventData" />
+        </EntityType>
         <EntityType Name="Material">
           <Key>
             <PropertyRef Name="No" />
@@ -339,7 +372,7 @@
           <Property Name="OeFactory" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="OeDate" Type="DateTime" Nullable="false" />
           <Property Name="OeOemNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="MotorNo" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="MotorModel" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="MotorPower" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="MotorFuel" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="MotorTankage" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
@@ -358,6 +391,18 @@
               <PropertyRef Name="SerialNo" />
             </Principal>
             <Dependent Role="CombatVehicles">
+              <PropertyRef Name="Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_0_0">
+          <End Type="EquipmentManagementModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
+          <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CombatEquipment">
+              <PropertyRef Name="SerialNo" />
+            </Principal>
+            <Dependent Role="Events">
               <PropertyRef Name="Equipment" />
             </Dependent>
           </ReferentialConstraint>
@@ -383,43 +428,6 @@
             </Principal>
             <Dependent Role="OilEngine">
               <PropertyRef Name="Vehicle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Events">
-          <Key>
-            <PropertyRef Name="No" />
-          </Key>
-          <Property Name="No" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" />
-          <Property Name="EndTime" Type="DateTime" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="EventType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="SpecificType" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="PublishUnit" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="PublishDate" Type="DateTime" Nullable="false" />
-          <Property Name="Publisher" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="According" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="PeopleDescri" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="ProcessDescri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="HandleStep" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Problem" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_Events_0_0" FromRole="Events" ToRole="CombatEquipment" />
-          <NavigationProperty Name="EventData" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="Events" ToRole="EventData" />
-        </EntityType>
-        <Association Name="FK_Events_0_0">
-          <End Type="EquipmentManagementModel.CombatEquipment" Role="CombatEquipment" Multiplicity="0..1" />
-          <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CombatEquipment">
-              <PropertyRef Name="SerialNo" />
-            </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="Equipment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -453,7 +461,8 @@
                 <ScalarProperty Name="MainUsage" ColumnName="MainUsage" />
                 <ScalarProperty Name="MajorComp" ColumnName="MajorComp" />
                 <ScalarProperty Name="InventorySpot" ColumnName="InventorySpot" />
-                <ScalarProperty Name="FactoryTime" ColumnName="FactoryTime" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="OemNo" ColumnName="OemNo" />
                 <ScalarProperty Name="Factory" ColumnName="Factory" />
                 <ScalarProperty Name="UseCondition" ColumnName="UseCondition" />
                 <ScalarProperty Name="TechCondition" ColumnName="TechCondition" />
@@ -502,6 +511,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="EquipmentManagementModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="HandleStep" ColumnName="HandleStep" />
+                <ScalarProperty Name="ProcessDescri" ColumnName="ProcessDescri" />
+                <ScalarProperty Name="PeopleDescri" ColumnName="PeopleDescri" />
+                <ScalarProperty Name="According" ColumnName="According" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="PublishUnit" ColumnName="PublishUnit" />
+                <ScalarProperty Name="Executor" ColumnName="Executor" />
+                <ScalarProperty Name="HigherUnit" ColumnName="HigherUnit" />
+                <ScalarProperty Name="NoInEvents" ColumnName="NoInEvents" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SpecificType" ColumnName="SpecificType" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Material">
             <EntityTypeMapping TypeName="EquipmentManagementModel.Material">
               <MappingFragment StoreEntitySet="Material">
@@ -531,7 +567,7 @@
                 <ScalarProperty Name="MotorTankage" ColumnName="MotorTankage" />
                 <ScalarProperty Name="MotorFuel" ColumnName="MotorFuel" />
                 <ScalarProperty Name="MotorPower" ColumnName="MotorPower" />
-                <ScalarProperty Name="MotorNo" ColumnName="MotorNo" />
+                <ScalarProperty Name="MotorModel" ColumnName="MotorModel" />
                 <ScalarProperty Name="OeOemNo" ColumnName="OeOemNo" />
                 <ScalarProperty Name="OeDate" ColumnName="OeDate" />
                 <ScalarProperty Name="OeFactory" ColumnName="OeFactory" />
@@ -540,30 +576,6 @@
                 <ScalarProperty Name="OutPower" ColumnName="OutPower" />
                 <ScalarProperty Name="OeModel" ColumnName="OeModel" />
                 <ScalarProperty Name="OeNo" ColumnName="OeNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="EquipmentManagementModel.Events">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="Equipment" ColumnName="Equipment" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Problem" ColumnName="Problem" />
-                <ScalarProperty Name="HandleStep" ColumnName="HandleStep" />
-                <ScalarProperty Name="ProcessDescri" ColumnName="ProcessDescri" />
-                <ScalarProperty Name="PeopleDescri" ColumnName="PeopleDescri" />
-                <ScalarProperty Name="According" ColumnName="According" />
-                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
-                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-                <ScalarProperty Name="PublishUnit" ColumnName="PublishUnit" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="SpecificType" ColumnName="SpecificType" />
-                <ScalarProperty Name="EventType" ColumnName="EventType" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="No" ColumnName="No" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

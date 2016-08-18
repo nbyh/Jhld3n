@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox23 = new System.Windows.Forms.GroupBox();
@@ -89,6 +89,12 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.tbNoInEvents = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbExecutor = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbHigherUnit = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -137,9 +143,9 @@
             // groupBox23
             // 
             this.groupBox23.Controls.Add(this.tbDesci);
-            this.groupBox23.Location = new System.Drawing.Point(8, 205);
+            this.groupBox23.Location = new System.Drawing.Point(8, 245);
             this.groupBox23.Name = "groupBox23";
-            this.groupBox23.Size = new System.Drawing.Size(760, 299);
+            this.groupBox23.Size = new System.Drawing.Size(760, 259);
             this.groupBox23.TabIndex = 2;
             this.groupBox23.TabStop = false;
             this.groupBox23.Text = "参加单位及人员描述";
@@ -151,13 +157,19 @@
             this.tbDesci.Multiline = true;
             this.tbDesci.Name = "tbDesci";
             this.tbDesci.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbDesci.Size = new System.Drawing.Size(754, 279);
+            this.tbDesci.Size = new System.Drawing.Size(754, 239);
             this.tbDesci.TabIndex = 0;
             // 
             // groupBox22
             // 
             this.groupBox22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox22.Controls.Add(this.tbNoInEvents);
+            this.groupBox22.Controls.Add(this.label4);
+            this.groupBox22.Controls.Add(this.label6);
+            this.groupBox22.Controls.Add(this.cmbExecutor);
+            this.groupBox22.Controls.Add(this.label7);
+            this.groupBox22.Controls.Add(this.cmbHigherUnit);
             this.groupBox22.Controls.Add(this.dtpPulishDt);
             this.groupBox22.Controls.Add(this.tbAccording);
             this.groupBox22.Controls.Add(this.cmbPulishUnit);
@@ -166,9 +178,9 @@
             this.groupBox22.Controls.Add(this.label5);
             this.groupBox22.Controls.Add(this.label19);
             this.groupBox22.Controls.Add(this.cmbPulisher);
-            this.groupBox22.Location = new System.Drawing.Point(8, 111);
+            this.groupBox22.Location = new System.Drawing.Point(8, 124);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(760, 88);
+            this.groupBox22.Size = new System.Drawing.Size(760, 115);
             this.groupBox22.TabIndex = 1;
             this.groupBox22.TabStop = false;
             // 
@@ -260,14 +272,14 @@
             this.gbBaseInfo.Controls.Add(this.label9);
             this.gbBaseInfo.Location = new System.Drawing.Point(8, 3);
             this.gbBaseInfo.Name = "gbBaseInfo";
-            this.gbBaseInfo.Size = new System.Drawing.Size(760, 102);
+            this.gbBaseInfo.Size = new System.Drawing.Size(760, 115);
             this.gbBaseInfo.TabIndex = 0;
             this.gbBaseInfo.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(314, 47);
+            this.label2.Location = new System.Drawing.Point(314, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 72;
@@ -276,7 +288,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(465, 20);
+            this.label3.Location = new System.Drawing.Point(465, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 79;
@@ -285,7 +297,7 @@
             // cmbEventName
             // 
             this.cmbEventName.FormattingEnabled = true;
-            this.cmbEventName.Location = new System.Drawing.Point(174, 43);
+            this.cmbEventName.Location = new System.Drawing.Point(174, 51);
             this.cmbEventName.Name = "cmbEventName";
             this.cmbEventName.Size = new System.Drawing.Size(110, 20);
             this.cmbEventName.TabIndex = 56;
@@ -293,14 +305,14 @@
             // cmbAddress
             // 
             this.cmbAddress.FormattingEnabled = true;
-            this.cmbAddress.Location = new System.Drawing.Point(349, 43);
+            this.cmbAddress.Location = new System.Drawing.Point(349, 51);
             this.cmbAddress.Name = "cmbAddress";
             this.cmbAddress.Size = new System.Drawing.Size(261, 20);
             this.cmbAddress.TabIndex = 70;
             // 
             // tbCode
             // 
-            this.tbCode.Location = new System.Drawing.Point(500, 69);
+            this.tbCode.Location = new System.Drawing.Point(500, 77);
             this.tbCode.Name = "tbCode";
             this.tbCode.Size = new System.Drawing.Size(110, 21);
             this.tbCode.TabIndex = 78;
@@ -309,7 +321,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(139, 44);
+            this.label14.Location = new System.Drawing.Point(139, 52);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 60;
@@ -318,7 +330,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(465, 73);
+            this.label23.Location = new System.Drawing.Point(465, 81);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(29, 12);
             this.label23.TabIndex = 77;
@@ -328,7 +340,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(290, 73);
+            this.label1.Location = new System.Drawing.Point(290, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 76;
@@ -337,7 +349,7 @@
             // cmbSpecificType
             // 
             this.cmbSpecificType.FormattingEnabled = true;
-            this.cmbSpecificType.Location = new System.Drawing.Point(349, 69);
+            this.cmbSpecificType.Location = new System.Drawing.Point(349, 77);
             this.cmbSpecificType.Name = "cmbSpecificType";
             this.cmbSpecificType.Size = new System.Drawing.Size(110, 20);
             this.cmbSpecificType.TabIndex = 75;
@@ -345,7 +357,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(115, 73);
+            this.label21.Location = new System.Drawing.Point(115, 81);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(53, 12);
             this.label21.TabIndex = 74;
@@ -359,14 +371,14 @@
             "动用类",
             "使用维护",
             "测试检修"});
-            this.cmbEventType.Location = new System.Drawing.Point(174, 69);
+            this.cmbEventType.Location = new System.Drawing.Point(174, 77);
             this.cmbEventType.Name = "cmbEventType";
             this.cmbEventType.Size = new System.Drawing.Size(110, 20);
             this.cmbEventType.TabIndex = 73;
             // 
             // dtpEventDt2
             // 
-            this.dtpEventDt2.Location = new System.Drawing.Point(500, 16);
+            this.dtpEventDt2.Location = new System.Drawing.Point(500, 24);
             this.dtpEventDt2.Name = "dtpEventDt2";
             this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt2.TabIndex = 61;
@@ -374,7 +386,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(314, 20);
+            this.label12.Location = new System.Drawing.Point(314, 28);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 59;
@@ -382,14 +394,14 @@
             // 
             // dtpEventDt1
             // 
-            this.dtpEventDt1.Location = new System.Drawing.Point(349, 16);
+            this.dtpEventDt1.Location = new System.Drawing.Point(349, 24);
             this.dtpEventDt1.Name = "dtpEventDt1";
             this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
             this.dtpEventDt1.TabIndex = 57;
             // 
             // tbSerialNo
             // 
-            this.tbSerialNo.Location = new System.Drawing.Point(174, 16);
+            this.tbSerialNo.Location = new System.Drawing.Point(174, 24);
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(110, 21);
             this.tbSerialNo.TabIndex = 55;
@@ -397,7 +409,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(139, 20);
+            this.label9.Location = new System.Drawing.Point(139, 28);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 54;
@@ -550,32 +562,32 @@
             this.dgvEvents.AllowUserToDeleteRows = false;
             this.dgvEvents.AllowUserToResizeColumns = false;
             this.dgvEvents.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEvents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
             this.Column1,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewLinkColumn1});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEvents.Location = new System.Drawing.Point(3, 17);
             this.dgvEvents.MultiSelect = false;
@@ -697,6 +709,63 @@
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
             // 
+            // tbNoInEvents
+            // 
+            this.tbNoInEvents.Location = new System.Drawing.Point(560, 77);
+            this.tbNoInEvents.Name = "tbNoInEvents";
+            this.tbNoInEvents.Size = new System.Drawing.Size(50, 21);
+            this.tbNoInEvents.TabIndex = 86;
+            this.tbNoInEvents.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(465, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 85;
+            this.label4.Text = "活动中本套编号";
+            this.label4.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(290, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 84;
+            this.label6.Text = "本级单位";
+            // 
+            // cmbExecutor
+            // 
+            this.cmbExecutor.FormattingEnabled = true;
+            this.cmbExecutor.Location = new System.Drawing.Point(349, 77);
+            this.cmbExecutor.Name = "cmbExecutor";
+            this.cmbExecutor.Size = new System.Drawing.Size(110, 20);
+            this.cmbExecutor.TabIndex = 83;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(115, 81);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 82;
+            this.label7.Text = "上级单位";
+            // 
+            // cmbHigherUnit
+            // 
+            this.cmbHigherUnit.FormattingEnabled = true;
+            this.cmbHigherUnit.Items.AddRange(new object[] {
+            "调整类",
+            "动用类",
+            "使用维护",
+            "测试检修"});
+            this.cmbHigherUnit.Location = new System.Drawing.Point(174, 77);
+            this.cmbHigherUnit.Name = "cmbHigherUnit";
+            this.cmbHigherUnit.Size = new System.Drawing.Size(110, 20);
+            this.cmbHigherUnit.TabIndex = 81;
+            // 
             // AddEventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -802,5 +871,11 @@
         private System.Windows.Forms.ToolStripButton tsbDeleteImg;
         private ImageListViewer ilvEvents;
         private System.Windows.Forms.OpenFileDialog ofdImage;
+        private System.Windows.Forms.TextBox tbNoInEvents;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbExecutor;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbHigherUnit;
     }
 }

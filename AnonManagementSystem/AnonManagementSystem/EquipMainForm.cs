@@ -378,11 +378,11 @@ namespace AnonManagementSystem
             }
             if (!string.IsNullOrEmpty(cmbTimeTerm1.Text))
             {
-                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm1.Text, a.FactoryTime, dtpTime1.Value.Date));
+                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm1.Text, a.ProductionDate, dtpTime1.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbTimeTerm2.Text))
             {
-                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm2.Text, a.FactoryTime, dtpTime2.Value.Date));
+                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm2.Text, a.ProductionDate, dtpTime2.Value.Date));
             }
             if (appointeq.Any())
             {

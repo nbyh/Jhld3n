@@ -22,7 +22,7 @@ namespace EquipmentInformationData
         public string OeFactory { get; set; }
         public System.DateTime OeDate { get; set; }
         public string OeOemNo { get; set; }
-        public string MotorNo { get; set; }
+        public string MotorModel { get; set; }
         public string MotorPower { get; set; }
         public string MotorFuel { get; set; }
         public string MotorTankage { get; set; }

@@ -55,12 +55,12 @@ namespace AnonManagementSystem
             cmbModel.SelectedItem = spfirst.Model;
             cmbStoreSpot.SelectedItem = spfirst.StoreSpot;
             tbSerialNo.Text = spfirst.SerialNo;
-            cmbStatus.Text = spfirst.Statue;
+            cmbStatus.Text = spfirst.Status;
             dtpStoreDate.Value = spfirst.StoreDate;
             cmbUseType.SelectedItem = spfirst.UseType;
             nUdAmount.Value = int.Parse(spfirst.Amount);
             cmbFactory.SelectedItem = spfirst.Factory;
-            dtpOemDate.Value = spfirst.ProductDate;
+            dtpOemDate.Value = spfirst.ProductionDate;
 
 
             var imgs = (from img in _partsImageEntities.SparePartImage
@@ -113,7 +113,7 @@ namespace AnonManagementSystem
                         (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct().ToList();
                     cmbUseType.DataSource = spTechcanList;
                     List<string> spManagerList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Statue) select s.Statue).Distinct().ToList();
+                        (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct().ToList();
                     cmbStatus.DataSource = spManagerList;
 
                     #endregion 下拉列表内容
@@ -241,12 +241,12 @@ namespace AnonManagementSystem
                         Name = cmbName.Text,
                         Model = cmbModel.Text,
                         Factory = cmbFactory.Text,
-                        ProductDate = dtpOemDate.Value.Date,
+                        ProductionDate = dtpOemDate.Value.Date,
                         StoreSpot = cmbStoreSpot.Text,
                         StoreDate = dtpStoreDate.Value.Date,
                         Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture),
                         UseType = cmbUseType.Text,
-                        Statue = cmbStatus.Text,
+                        Status = cmbStatus.Text,
                     };
                     _sparePartEntities.SpareParts.Add(ce);
                 }
@@ -260,12 +260,12 @@ namespace AnonManagementSystem
                     spfirst.Name = cmbName.Text;
                     spfirst.Model = cmbModel.Text;
                     spfirst.Factory = cmbFactory.Text;
-                    spfirst.ProductDate = dtpOemDate.Value.Date;
+                    spfirst.ProductionDate = dtpOemDate.Value.Date;
                     spfirst.StoreSpot = cmbStoreSpot.Text;
                     spfirst.StoreDate = dtpStoreDate.Value.Date;
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
                     spfirst.UseType = cmbUseType.Text;
-                    spfirst.Statue = cmbStatus.Text;
+                    spfirst.Status = cmbStatus.Text;
                 }
                 _sparePartEntities.SaveChanges();
                 SaveSuccess?.Invoke();

@@ -28,6 +28,9 @@ namespace EquipmentInformationData
         public string EventType { get; set; }
         public string SpecificType { get; set; }
         public string Code { get; set; }
+        public string NoInEvents { get; set; }
+        public string HigherUnit { get; set; }
+        public string Executor { get; set; }
         public string PublishUnit { get; set; }
         public System.DateTime PublishDate { get; set; }
         public string Publisher { get; set; }

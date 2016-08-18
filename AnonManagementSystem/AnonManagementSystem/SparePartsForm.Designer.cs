@@ -629,7 +629,7 @@
             // 
             // Column7
             // 
-            this.Column7.DataPropertyName = "InventorySpot";
+            this.Column7.DataPropertyName = "OemNo";
             this.Column7.HeaderText = "库存位置";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;

@@ -18,11 +18,11 @@ namespace EquipmentInformationData
         public string Name { get; set; }
         public string Model { get; set; }
         public string Factory { get; set; }
-        public System.DateTime ProductDate { get; set; }
+        public System.DateTime ProductionDate { get; set; }
         public string StoreSpot { get; set; }
         public System.DateTime StoreDate { get; set; }
         public string Amount { get; set; }
         public string UseType { get; set; }
-        public string Statue { get; set; }
+        public string Status { get; set; }
     }
 }

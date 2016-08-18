@@ -84,7 +84,7 @@ namespace AnonManagementSystem
                         OeFactory = cmbOeFactory.Text,
                         OeDate = dtpOeTime.Value.Date,
                         OeOemNo = tbOeOemNo.Text,
-                        MotorNo = cmbMotorModel.Text,
+                        MotorModel = cmbMotorModel.Text,
                         MotorPower = tbMotorPower.Text,
                         MotorFuel = cmbMotorFuelType.Text,
                         MotorTankage = tbMotorTankage.Text,
@@ -156,6 +156,7 @@ namespace AnonManagementSystem
                 VehiclesImage cvImag = new VehiclesImage
                 {
                     Images = imgBytes,
+                    Name = imgpath,
                     SerialNo = tbSerialNo.Text
                 };
                 _vehiclesImagesList.Add(cvImag);
@@ -250,7 +251,7 @@ namespace AnonManagementSystem
                             cmbOeFactory.Text = vhoe.OeFactory;
                             dtpOeTime.Value = vhoe.OeDate;
                             tbOeOemNo.Text = vhoe.OeOemNo;
-                            cmbMotorModel.Text = vhoe.MotorNo;
+                            cmbMotorModel.Text = vhoe.MotorModel;
                             tbMotorPower.Text = vhoe.MotorPower;
                             cmbMotorFuelType.Text = vhoe.MotorFuel;
                             tbMotorTankage.Text = vhoe.MotorTankage;

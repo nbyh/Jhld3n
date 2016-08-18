@@ -13,12 +13,18 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
-        public Dictionary<string, Image> ImgDictionary { get; set; }
+        private Dictionary<string, Image> _imgDictionary = new Dictionary<string, Image>();
         public string DeleteImgKey { get; set; }
+
+        public Dictionary<string, Image> ImgDictionary//todo:初始化
+        {
+            get { return _imgDictionary; }
+            set { _imgDictionary = value; }
+        }
 
         public void ShowImages()
         {
-            foreach (var imgdic in ImgDictionary)
+            foreach (var imgdic in _imgDictionary)
             {
                 imgList.Images.Add(imgdic.Key, imgdic.Value);
             }
@@ -64,6 +70,7 @@ namespace AnonManagementSystem
                 {
                     lsvImages.Items.Remove(lvi);
                     DeleteImgKey = lvi.ImageKey;
+                    _imgDictionary.Remove(DeleteImgKey);
                 }
                 lsvImages.EndUpdate();
             }
@@ -76,7 +83,7 @@ namespace AnonManagementSystem
                 if (lsvImages.SelectedItems.Count == 0)
                     return;
                 string picname = lsvImages.SelectedItems[0].Text;
-                picBox.Image = ImgDictionary[picname];
+                picBox.Image = _imgDictionary[picname];
             }
             catch (Exception exception)
             {
