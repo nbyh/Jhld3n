@@ -1,10 +1,10 @@
-﻿using OfficeOpenXml;
+﻿using EquipmentInformationData;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using EquipmentInformationData;
 
 namespace AnonManagementSystem
 {
@@ -52,9 +52,6 @@ namespace AnonManagementSystem
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
 
-
-
-
                 //todo：填充数据
                 package.Save();//保存excel
             }
@@ -80,6 +77,18 @@ namespace AnonManagementSystem
                 default:
                     return dt1 == dt2;
             }
+        }
+
+        internal static bool Export2Excel(string filepath, SpareParts firstsp, List<SparePartImage> spimgList)
+        {
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
+
+                //todo：填充数据
+                package.Save();//保存excel
+            }
+            return true;
         }
     }
 }

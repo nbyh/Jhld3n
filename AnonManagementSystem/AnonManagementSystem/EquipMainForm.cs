@@ -128,15 +128,15 @@ namespace AnonManagementSystem
                                                       select img).Take(3).ToList();
                     if (PublicFunction.Export2Excel(fn, firsteq, vehicles, oe, events, eventsd, eqimgList))
                     {
-                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                        MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
+                        MessageBox.Show(this, @"导出设备数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception exception)
             {
-                CommonLogHelper.GetInstance("LogError").Error(@"导出备件数据失败", exception);
-                MessageBox.Show(this, @"导出备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLogHelper.GetInstance("LogError").Error(@"导出设备数据失败", exception);
+                MessageBox.Show(this, @"导出设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

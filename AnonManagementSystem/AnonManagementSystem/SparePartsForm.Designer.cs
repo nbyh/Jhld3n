@@ -81,6 +81,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -655,6 +656,13 @@
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
             // 
+            // sfdExcel
+            // 
+            this.sfdExcel.DefaultExt = "xlsx";
+            this.sfdExcel.Filter = "Excel文件|*.xlsx";
+            this.sfdExcel.InitialDirectory = "Desktop";
+            this.sfdExcel.Title = "请选择文件保存位置";
+            // 
             // SparePartsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -729,6 +737,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewLinkColumn MoreInfo;
+        private System.Windows.Forms.SaveFileDialog sfdExcel;
     }
 }
 

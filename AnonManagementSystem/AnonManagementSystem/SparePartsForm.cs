@@ -91,8 +91,26 @@ namespace AnonManagementSystem
         {
             try
             {
-                CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int? r = dgvSparePart.CurrentRow?.Index;
+                if (r != null && r >= 0)
+                {
+                    sfdExcel.ShowDialog();
+                    string fn = sfdExcel.FileName;
+                    string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
+                    var firstsp = (from sp in _sparePartEntities.SpareParts
+                                   where sp.SerialNo == excelid
+                                   select sp).First();
+
+                    SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
+                    List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
+                                                      where img.SerialNo == excelid
+                                                      select img).Take(3).ToList();
+                    if (PublicFunction.Export2Excel(fn, firstsp, spimgList))
+                    {
+                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                        MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception exception)
             {
