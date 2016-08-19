@@ -49,7 +49,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(161, 500);
+            this.panel1.Size = new System.Drawing.Size(202, 500);
             this.panel1.TabIndex = 0;
             // 
             // groupBox2
@@ -58,17 +58,18 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(161, 500);
+            this.groupBox2.Size = new System.Drawing.Size(202, 500);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
             // lsvImages
             // 
             this.lsvImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lsvImages.LargeImageList = this.imgList;
             this.lsvImages.Location = new System.Drawing.Point(3, 17);
             this.lsvImages.MultiSelect = false;
             this.lsvImages.Name = "lsvImages";
-            this.lsvImages.Size = new System.Drawing.Size(155, 480);
+            this.lsvImages.Size = new System.Drawing.Size(196, 480);
             this.lsvImages.TabIndex = 1;
             this.lsvImages.UseCompatibleStateImageBehavior = false;
             this.lsvImages.DoubleClick += new System.EventHandler(this.lsvImages_DoubleClick);
@@ -79,9 +80,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(167, 0);
+            this.panel2.Location = new System.Drawing.Point(205, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(533, 500);
+            this.panel2.Size = new System.Drawing.Size(495, 500);
             this.panel2.TabIndex = 1;
             // 
             // groupBox1
@@ -90,7 +91,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(533, 500);
+            this.groupBox1.Size = new System.Drawing.Size(495, 500);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -99,7 +100,7 @@
             this.picBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picBox.Location = new System.Drawing.Point(3, 17);
             this.picBox.Name = "picBox";
-            this.picBox.Size = new System.Drawing.Size(527, 480);
+            this.picBox.Size = new System.Drawing.Size(489, 480);
             this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBox.TabIndex = 0;
             this.picBox.TabStop = false;
@@ -107,7 +108,7 @@
             // imgList
             // 
             this.imgList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imgList.ImageSize = new System.Drawing.Size(48, 48);
+            this.imgList.ImageSize = new System.Drawing.Size(128, 128);
             this.imgList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // ImageListViewer

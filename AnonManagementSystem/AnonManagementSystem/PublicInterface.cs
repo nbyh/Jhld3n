@@ -24,8 +24,6 @@ namespace AnonManagementSystem
 
     public interface IShowImageList
     {
-        Dictionary<string, Image> ImgDictionary { get; set; }
-
         void ShowImages();
 
         void AddImages(string key, Image img);

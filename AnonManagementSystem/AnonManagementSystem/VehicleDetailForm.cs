@@ -163,8 +163,8 @@ namespace AnonManagementSystem
                 using (MemoryStream ms = new MemoryStream(imgBytes))
                 {
                     Image img = Image.FromStream(ms);
-                    ilvVehicle.ImgDictionary.Add(cvImag.Name, img);
                     ilvVehicle.AddImages(cvImag.Name, img);
+                    ilvVehicle.ImgDictionary.Add(cvImag.Name, img);
                 }
             }
         }
