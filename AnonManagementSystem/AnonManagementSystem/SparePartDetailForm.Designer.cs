@@ -378,9 +378,7 @@
             // 
             // ilvEquipment
             // 
-            this.ilvEquipment.DeleteImgKey = null;
             this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvEquipment.ImgDictionary = null;
             this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
             this.ilvEquipment.Name = "ilvEquipment";
             this.ilvEquipment.Size = new System.Drawing.Size(770, 479);

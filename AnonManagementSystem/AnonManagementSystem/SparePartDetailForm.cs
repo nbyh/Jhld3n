@@ -156,9 +156,12 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
-                if (imgBytes != null)
+                if (PublicFunction.CheckImgCondition(imgpath))
                 {
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
                     SparePartImage eqImg = new SparePartImage
                     {
                         Name = imgpath,
@@ -170,7 +173,6 @@ namespace AnonManagementSystem
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
                         Image img = Image.FromStream(ms);
-                        ilvEquipment.ImgDictionary.Add(eqImg.Name, img);
                         ilvEquipment.AddImages(eqImg.Name, img);
                     }
                 }

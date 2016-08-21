@@ -333,6 +333,7 @@ namespace AnonManagementSystem
 
         private void EquipMainForm_Load(object sender, EventArgs e)
         {
+            
         }
 
         private void btnQueryInfo_Click(object sender, EventArgs e)

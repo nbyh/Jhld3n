@@ -49,17 +49,33 @@ namespace AnonManagementSystem
 
         private void AddEventsForm_Shown(object sender, EventArgs e)
         {
-            _synchContext.Post(a =>
+            try
             {
-                try
+                if (!Add)
                 {
-                    if (!Add)
-                    {
-                        EventsImagesEntities vie = new EventsImagesEntities();
-                        var vh = (from eh in _eqEntities.Events
-                                  where eh.No == _id
-                                  select eh).First();
+                    EventsImagesEntities vie = new EventsImagesEntities();
+                    var vh = (from eh in _eqEntities.Events
+                              where eh.No == _id
+                              select eh).First();
+                    var ed = from d in _eqEntities.EventData
+                             where d.EventsNo == _id
+                             select d;
+                    _eventdataList = ed.ToList();
+                    _eventsImgList = (from vhimg in vie.EventsImage
+                                      where vhimg.SerialNo == _id
+                                      select vhimg).ToList();
 
+                    Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
+                    foreach (var equipmentImage in _eventsImgList)
+                    {
+                        using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                        {
+                            Image img = Image.FromStream(ms);
+                            imgdic.Add(equipmentImage.Name, img);
+                        }
+                    }
+                    _synchContext.Post(a =>
+                    {
                         tbSerialNo.Text = vh.No;
                         cmbEventName.Text = vh.Name;
                         cmbAddress.Text = vh.Address;
@@ -81,34 +97,30 @@ namespace AnonManagementSystem
                         tbProblems.Text = vh.Problem;
                         tbRemark.Text = vh.Remarks;
 
-                        var ed = from d in _eqEntities.EventData
-                                 where d.EventsNo == _id
-                                 select d;
-                        _eventdataList = ed.ToList();
                         dgvEvents.DataSource = _eventdataList;
 
-                        _eventsImgList = (from vhimg in vie.EventsImage
-                                          where vhimg.SerialNo == _id
-                                          select vhimg).ToList();
-                        CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
-                    }
+                        ilvEvents.ImgDictionary = imgdic;
+                        ilvEvents.ShowImages();
+
+                    }, null);
+                    CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
                 }
-                catch (Exception exception)
+            }
+            catch (Exception exception)
+            {
+                if (Add)
                 {
-                    if (Add)
-                    {
-                        MessageBox.Show(this, @"打开添加事件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加事件数据失败", exception);
-                    }
-                    else
-                    {
-                        MessageBox.Show(this, $"加载事件数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error($"加载事件数据{_id}失败", exception);
-                    }
+                    CommonLogHelper.GetInstance("LogError").Error(@"打开添加事件数据失败", exception);
+                    MessageBox.Show(this, @"打开添加事件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
-            }, null);
+                else
+                {
+                    CommonLogHelper.GetInstance("LogError").Error($"加载事件数据{_id}失败", exception);
+                    MessageBox.Show(this, $"加载事件数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void tsbAddEventsData_Click(object sender, EventArgs e)
@@ -123,22 +135,23 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
-                if (imgBytes != null)
+                if (PublicFunction.CheckImgCondition(imgpath))
                 {
-                    EventsImage eveImg = new EventsImage
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
+                    EventsImage cvImag = new EventsImage
                     {
-                        Name = imgpath,
                         Images = imgBytes,
+                        Name = imgpath,
                         SerialNo = tbSerialNo.Text
                     };
-                    _eventsImgList.Add(eveImg);
-
+                    _eventsImgList.Add(cvImag);
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
                         Image img = Image.FromStream(ms);
-                        ilvEvents.ImgDictionary.Add(eveImg.Name, img);
-                        ilvEvents.AddImages(eveImg.Name, img);
+                        ilvEvents.AddImages(cvImag.Name, img);
                     }
                 }
             }
@@ -277,6 +290,7 @@ namespace AnonManagementSystem
                 }
                 CommonLogHelper.GetInstance("LogInfo").Info(@"活动事件保存成功");
                 MessageBox.Show(this, @"活动事件保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception exception)
             {

@@ -59,6 +59,7 @@ namespace AnonManagementSystem
                 SaveMaterialSucess?.Invoke(Add, Index, ma);
                 CommonLogHelper.GetInstance("LogInfo").Info(@"随机材料保存成功");
                 MessageBox.Show(this, @"随机材料保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception exception)
             {
@@ -105,15 +106,15 @@ namespace AnonManagementSystem
                 {
                     if (Add)
                     {
+                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加随机材料失败", exception);
                         MessageBox.Show(this, @"打开添加随机材料失败" + exception.Message, @"错误", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加随机材料失败", exception);
                     }
                     else
                     {
+                        CommonLogHelper.GetInstance("LogError").Error($"加载随机材料{_id}失败", exception);
                         MessageBox.Show(this, $"加载随机材料{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error($"加载随机材料{_id}失败", exception);
                     }
                 }
             }, null);
@@ -125,6 +126,11 @@ namespace AnonManagementSystem
             {
                 tbDocumentLink.Text = ofdMaterial.FileName;
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

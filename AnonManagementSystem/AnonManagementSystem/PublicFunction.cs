@@ -64,24 +64,20 @@ namespace AnonManagementSystem
             return true;
         }
 
-        public static byte[] ReturnImgBytes(string imgpath)
+        public static bool CheckImgCondition(string imgpath)
         {
             if (!CheckFileSize(imgpath))
             {
                 MessageBox.Show(@"文件尺寸太大，请选择小于1MB的图片", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return null;
+                return false;
             }
-            FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-            Image img = Image.FromStream(fs);
+            Image img = Image.FromFile(imgpath);
             if (!CheckImageSize(img))
             {
                 MessageBox.Show(@"图片尺寸太大，请选择宽小于1024、高小于768像素的图片", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return null;
+                return false;
             }
-            BinaryReader br = new BinaryReader(fs);
-            byte[] imgBytes = br.ReadBytes((int)fs.Length);
-            fs.Close();
-            return imgBytes;
+            return true;
         }
 
         internal static bool Export2Excel(string filepath, SpareParts firstsp, List<SparePartImage> spimgList)

@@ -227,8 +227,11 @@ namespace AnonManagementSystem
                 _comVehList.Add(combatVehicles);
                 dgvCombatVehicles.DataSource = _comVehList;
                 _vehImgList.AddRange(vehiclesImgList);
-                _oilEngines = oilEngine;
-                _oilImgList.AddRange(oilImgList);
+                if (combatVehicles.CombineOe)
+                {
+                    _oilEngines = oilEngine;
+                    _oilImgList.AddRange(oilImgList);
+                }
 
                 #endregion 增加
             }
@@ -438,83 +441,90 @@ namespace AnonManagementSystem
 
         private void EquipmentDetailForm_Shown(object sender, EventArgs e)
         {
-            _synchContext.Post(a =>
-            {
-                try
-                {
-                    var equip = from eq in _equipEntities.CombatEquipment
-                                select eq;
+            Thread initThread = new Thread((ThreadStart)delegate
+           {
+               try
+               {
+                   var equip = from eq in _equipEntities.CombatEquipment
+                               select eq;
 
-                    #region 下拉列表内容
+                   #region 下拉列表内容
 
-                    List<string> equipNameList =
-                        (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-                    cmbName.DataSource = equipNameList;
-                    List<string> equipSubdepartList =
+                   List<string> equipNameList =
+                       (from s in equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+                   List<string> equipSubdepartList =
                         (from s in equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct()
                             .ToList();
-                    cmbSubDepart.DataSource = equipSubdepartList;
-                    List<string> equipModelList =
+                   List<string> equipModelList =
                         (from s in equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
-                    cmbModel.DataSource = equipModelList;
-                    List<string> equipTechcanList =
+                   List<string> equipTechcanList =
                         (from s in equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
-                    cmbTechnician.DataSource = equipTechcanList;
-                    List<string> equipManagerList =
+                   List<string> equipManagerList =
                         (from s in equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
-                    cmbCharger.DataSource = equipManagerList;
-                    List<string> equipTechconList =
+                   List<string> equipTechconList =
                         (from s in equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct()
                             .ToList();
-                    cmbTechCondition.DataSource = equipTechconList;
-                    List<string> equipUseconList =
+                   List<string> equipUseconList =
                         (from s in equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
-                    cmbUseCondition.DataSource = equipUseconList;
-                    List<string> equipMajcatList =
+                   List<string> equipMajcatList =
                         (from s in equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct()
                             .ToList();
-                    cmbMajorCategory.DataSource = equipMajcatList;
-                    List<string> equipFactList =
+                   List<string> equipFactList =
                         (from s in equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
-                    cmbFactory.DataSource = equipFactList;
 
-                    #endregion 下拉列表内容
+                   _synchContext.Post(a =>
+                   {
+                       cmbName.DataSource = equipNameList;
+                       cmbSubDepart.DataSource = equipSubdepartList;
+                       cmbModel.DataSource = equipModelList;
+                       cmbTechnician.DataSource = equipTechcanList;
+                       cmbCharger.DataSource = equipManagerList;
+                       cmbTechCondition.DataSource = equipTechconList;
+                       cmbUseCondition.DataSource = equipUseconList;
+                       cmbMajorCategory.DataSource = equipMajcatList;
+                       cmbFactory.DataSource = equipFactList;
+                       cmbName.SelectedIndex = -1;
+                       cmbSubDepart.SelectedIndex = -1;
+                       cmbModel.SelectedIndex = -1;
+                       cmbTechnician.SelectedIndex = -1;
+                       cmbCharger.SelectedIndex = -1;
+                       cmbTechCondition.SelectedIndex = -1;
+                       cmbUseCondition.SelectedIndex = -1;
+                       cmbMajorCategory.SelectedIndex = -1;
+                       cmbFactory.SelectedIndex = -1;
 
-                    if (Add)
+                       tsbRestore.Enabled = !Add;
+                   }, null);
+
+                   #endregion 下拉列表内容
+
+                   if (!Add)
+                   {
+                       LoadEquipData(equip);
+                       CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
+                   }
+               }
+               catch (Exception exception)
+               {
+                   _synchContext.Post(a =>
                     {
-                        cmbName.SelectedIndex = -1;
-                        cmbSubDepart.SelectedIndex = -1;
-                        cmbModel.SelectedIndex = -1;
-                        cmbTechnician.SelectedIndex = -1;
-                        cmbCharger.SelectedIndex = -1;
-                        cmbTechCondition.SelectedIndex = -1;
-                        cmbUseCondition.SelectedIndex = -1;
-                        cmbMajorCategory.SelectedIndex = -1;
-                        cmbFactory.SelectedIndex = -1;
-                        tsbRestore.Enabled = false;
-                    }
-                    else
-                    {
-                        LoadEquipData(equip);
-                        CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
-                    }
-                }
-                catch (Exception exception)
-                {
-                    if (Add)
-                    {
-                        MessageBox.Show(this, @"打开添加设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加设备数据失败", exception);
-                    }
-                    else
-                    {
-                        MessageBox.Show(this, $"加载设备数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error($"加载设备数据{_id}失败", exception);
-                    }
-                }
-            }, null);
+                        if (Add)
+                        {
+                            CommonLogHelper.GetInstance("LogError").Error(@"打开添加设备数据失败", exception);
+                            MessageBox.Show(this, @"打开添加设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            CommonLogHelper.GetInstance("LogError").Error($"加载设备数据{_id}失败", exception);
+                            MessageBox.Show(this, $"加载设备数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                    }, null);
+               }
+           })
+            { IsBackground = true };
+            initThread.Start();
         }
 
         private void LoadEquipData(IQueryable<CombatEquipment> equip)
@@ -523,40 +533,15 @@ namespace AnonManagementSystem
                             where eq.SerialNo == _id
                             select eq;
             var equipfirst = appointeq.First();
-            cmbName.SelectedItem = equipfirst.Name;
-            cmbModel.SelectedItem = equipfirst.Model;
-            cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
-            tbSerialNo.Text = equipfirst.SerialNo;
-            tbTechRemould.Text = equipfirst.TechRemould;
-            tbOemNo.Text = equipfirst.OemNo;
-            cmbTechnician.SelectedItem = equipfirst.Technician;
-            cmbCharger.SelectedItem = equipfirst.Manager;
-            cmbTechCondition.SelectedItem = equipfirst.TechCondition;
-            cmbUseCondition.SelectedItem = equipfirst.UseCondition;
-            cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
-            cmbFactory.SelectedItem = equipfirst.Factory;
-            dtpTime.Value = equipfirst.ProductionDate;
-
-            tbMajorComp.Text = equipfirst.MajorComp;
-            tbMainUsage.Text = equipfirst.MainUsage;
-            tbUseMethod.Text = equipfirst.UseMethod;
-            tbPerformIndex.Text = equipfirst.PerformIndex;
-
             var vechiledata = (from v in _equipEntities.CombatVehicles
                                where v.Equipment == _id
                                select v).ToList();
-            dgvCombatVehicles.DataSource = vechiledata;
-
             var events = (from ev in _equipEntities.Events
                           where ev.Equipment == _id
                           select ev).ToList();
-            dgvEvents.DataSource = events;
-
             var material = (from m in _equipEntities.Material
                             where m.Equipment == _id
                             select m).ToList();
-            dgvMaterial.DataSource = material;
-
             var imgs = (from img in _equipImageEntities.EquipmentImage
                         where img.SerialNo == _id
                         select img);
@@ -569,8 +554,36 @@ namespace AnonManagementSystem
                     imgdic.Add(equipmentImage.Name, img);
                 }
             }
-            ilvEquipment.ImgDictionary = imgdic;
-            ilvEquipment.ShowImages();
+            _synchContext.Post(a =>
+            {
+                cmbName.SelectedItem = equipfirst.Name;
+                cmbModel.SelectedItem = equipfirst.Model;
+                cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
+                tbSerialNo.Text = equipfirst.SerialNo;
+                tbTechRemould.Text = equipfirst.TechRemould;
+                tbOemNo.Text = equipfirst.OemNo;
+                cmbTechnician.SelectedItem = equipfirst.Technician;
+                cmbCharger.SelectedItem = equipfirst.Manager;
+                cmbTechCondition.SelectedItem = equipfirst.TechCondition;
+                cmbUseCondition.SelectedItem = equipfirst.UseCondition;
+                cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
+                cmbFactory.SelectedItem = equipfirst.Factory;
+                dtpTime.Value = equipfirst.ProductionDate;
+                tbMajorComp.Text = equipfirst.MajorComp;
+                tbMainUsage.Text = equipfirst.MainUsage;
+                tbUseMethod.Text = equipfirst.UseMethod;
+                tbPerformIndex.Text = equipfirst.PerformIndex;
+
+                dgvCombatVehicles.DataSource = vechiledata;
+
+                dgvEvents.DataSource = events;
+
+                dgvMaterial.DataSource = material;
+
+                ilvEquipment.ImgDictionary = imgdic;
+                ilvEquipment.ShowImages();
+            }, null);
+
         }
 
         private void tsbAddEvents_Click(object sender, EventArgs e)
@@ -591,7 +604,11 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
+                //byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
+                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                fs.Close();
                 if (imgBytes != null)
                 {
                     EquipmentImage eqImg = new EquipmentImage
@@ -602,10 +619,10 @@ namespace AnonManagementSystem
                     };
                     _equipImageList.Add(eqImg);
 
+
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
                         Image img = Image.FromStream(ms);
-                        ilvEquipment.ImgDictionary.Add(eqImg.Name, img);
                         ilvEquipment.AddImages(eqImg.Name, img);
                     }
                 }

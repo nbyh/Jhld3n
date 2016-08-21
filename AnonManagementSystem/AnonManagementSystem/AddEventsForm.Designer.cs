@@ -639,9 +639,7 @@
             // 
             // ilvEvents
             // 
-            this.ilvEvents.DeleteImgKey = null;
             this.ilvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvEvents.ImgDictionary = null;
             this.ilvEvents.Location = new System.Drawing.Point(3, 28);
             this.ilvEvents.Name = "ilvEvents";
             this.ilvEvents.Size = new System.Drawing.Size(770, 479);

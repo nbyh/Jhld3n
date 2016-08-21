@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleDetailForm));
             this.tabCtrlVehicle = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gbBaseInfo = new System.Windows.Forms.GroupBox();
@@ -272,12 +273,6 @@
             // cmbFuelType
             // 
             this.cmbFuelType.FormattingEnabled = true;
-            this.cmbFuelType.Items.AddRange(new object[] {
-            ">",
-            "=",
-            "<",
-            "≥",
-            "≤"});
             this.cmbFuelType.Location = new System.Drawing.Point(139, 134);
             this.cmbFuelType.Name = "cmbFuelType";
             this.cmbFuelType.Size = new System.Drawing.Size(46, 20);
@@ -942,8 +937,9 @@
             // 
             // ilvOe
             // 
+            this.ilvOe.DeleteImgKey = null;
             this.ilvOe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvOe.ImgDictionary = null;
+            this.ilvOe.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvOe.ImgDictionary")));
             this.ilvOe.Location = new System.Drawing.Point(0, 25);
             this.ilvOe.Name = "ilvOe";
             this.ilvOe.Size = new System.Drawing.Size(762, 453);
@@ -991,8 +987,9 @@
             // 
             // ilvVehicle
             // 
+            this.ilvVehicle.DeleteImgKey = null;
             this.ilvVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvVehicle.ImgDictionary = null;
+            this.ilvVehicle.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvVehicle.ImgDictionary")));
             this.ilvVehicle.Location = new System.Drawing.Point(0, 25);
             this.ilvVehicle.Name = "ilvVehicle";
             this.ilvVehicle.Size = new System.Drawing.Size(776, 485);

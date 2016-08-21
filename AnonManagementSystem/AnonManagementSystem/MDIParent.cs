@@ -12,8 +12,8 @@ namespace AnonManagementSystem
 
         private void LoginOnSucess(bool enableedit)
         {
-            _enableedit = enableedit;
             _islogin = true;
+            tsbAdd.Enabled = _enableedit = enableedit;
             MessageBox.Show(@"登陆成功");
         }
 
@@ -165,6 +165,13 @@ namespace AnonManagementSystem
             Form form = ActiveMdiChild;
             var mdiFunction = (IMdiFunction)form;
             mdiFunction?.Export2Excel();
+        }
+
+        private void tsbDelete_Click(object sender, EventArgs e)
+        {
+            Form form = ActiveMdiChild;
+            var mdiFunction = (IMdiFunction)form;
+            mdiFunction?.DataDelete();
         }
     }
 }

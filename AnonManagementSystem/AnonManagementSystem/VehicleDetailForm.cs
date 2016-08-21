@@ -102,11 +102,12 @@ namespace AnonManagementSystem
                 }
                 CommonLogHelper.GetInstance("LogInfo").Info(@"车辆数据保存成功");
                 MessageBox.Show(this, @"车辆数据保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, @"车辆数据保存失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CommonLogHelper.GetInstance("LogError").Error(@"车辆数据保存失败", exception);
+                MessageBox.Show(this, @"车辆数据保存失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -125,21 +126,23 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                byte[] imgBytes = br.ReadBytes((int)fs.Length);
-                fs.Close();
-                OilEngineImage oiImg = new OilEngineImage
+                if (PublicFunction.CheckImgCondition(imgpath))
                 {
-                    Images = imgBytes,
-                    SerialNo = tbSerialNo.Text
-                };
-                _oilImagesList.Add(oiImg);
-                using (MemoryStream ms = new MemoryStream(imgBytes))
-                {
-                    Image img = Image.FromStream(ms);
-                    ilvOe.ImgDictionary.Add(oiImg.Name, img);
-                    ilvOe.AddImages(oiImg.Name, img);
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
+                    OilEngineImage oiImg = new OilEngineImage
+                    {
+                        Images = imgBytes,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _oilImagesList.Add(oiImg);
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvOe.AddImages(oiImg.Name, img);
+                    }
                 }
             }
         }
@@ -149,22 +152,24 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                byte[] imgBytes = br.ReadBytes((int)fs.Length);
-                fs.Close();
-                VehiclesImage cvImag = new VehiclesImage
+                if (PublicFunction.CheckImgCondition(imgpath))
                 {
-                    Images = imgBytes,
-                    Name = imgpath,
-                    SerialNo = tbSerialNo.Text
-                };
-                _vehiclesImagesList.Add(cvImag);
-                using (MemoryStream ms = new MemoryStream(imgBytes))
-                {
-                    Image img = Image.FromStream(ms);
-                    ilvVehicle.AddImages(cvImag.Name, img);
-                    ilvVehicle.ImgDictionary.Add(cvImag.Name, img);
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
+                    VehiclesImage cvImag = new VehiclesImage
+                    {
+                        Images = imgBytes,
+                        Name = imgpath,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _vehiclesImagesList.Add(cvImag);
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvVehicle.AddImages(cvImag.Name, img);
+                    }
                 }
             }
         }
@@ -201,89 +206,123 @@ namespace AnonManagementSystem
 
         private void VehicleDetailForm_Shown(object sender, EventArgs e)
         {
-            _synchContext.Post(a =>
-            {
-                try
-                {
-                    if (!Add)
-                    {
-                        EquipmentManagementEntities eme = new EquipmentManagementEntities();
-                        VehiclesImagesEntities vie = new VehiclesImagesEntities();
-                        OilEngineImagesEntities oeie = new OilEngineImagesEntities();
-                        var vh = (from eh in eme.CombatVehicles
-                                  where eh.SerialNo == _id
-                                  select eh).First();
+            Thread loadVhDataThread = new Thread((ThreadStart)delegate
+           {
+               try
+               {
+                   if (!Add)
+                   {
+                       EquipmentManagementEntities eme = new EquipmentManagementEntities();
+                       VehiclesImagesEntities vie = new VehiclesImagesEntities();
+                       OilEngineImagesEntities oeie = new OilEngineImagesEntities();
+                       var vh = (from eh in eme.CombatVehicles
+                                 where eh.SerialNo == _id
+                                 select eh).First();
 
-                        cmbName.Text = vh.Name;
-                        tbSerialNo.Text = vh.SerialNo;
-                        cmbVehiclesModel.Text = vh.Model;
-                        tbVehiclesNo.Text = vh.VehiclesNo;
-                        cmbAutoModel.Text = vh.MotorModel;
-                        cmbTechCondition.Text = vh.TechCondition;
-                        cmbFactory.Text = vh.Factory;
-                        dtpTime.Value = vh.ProductionDate;
-                        tbMass.Text = vh.Mass;
-                        tbTankAge.Text = vh.Tankage;
-                        tbSize.Text = vh.OverallSize;
-                        cmbFuelType.Text = vh.FuelType;
-                        cmbDriveModel.Text = vh.DrivingModel;
-                        tbMileAge.Text = vh.Mileage;
-                        tbOutput.Text = vh.Output;
-                        tbLicenseCarry.Text = vh.LicenseCarry;
-                        cmbCharger.Text = vh.VehicleChargers;
-                        cmbSpot.Text = vh.VehicleSpotNo;
-                        tbVehiclesDescri.Text = vh.VehicleDescri;
-                        chkCombineOe.Checked = vh.CombineOe;
-                        _vehiclesImagesList = (from vhimg in vie.VehiclesImage
-                                               where vhimg.SerialNo == _id
-                                               select vhimg).ToList();
-                        if (vh.CombineOe)
-                        {
-                            var vhoe = (from oe in eme.OilEngine
-                                        where oe.Vehicle == _id
-                                        select oe).First();
+                       _vehiclesImagesList = (from vhimg in vie.VehiclesImage
+                                              where vhimg.SerialNo == _id
+                                              select vhimg).ToList();
+                       Dictionary<string, Image> vhimgdic = new Dictionary<string, Image>();
+                       foreach (var equipmentImage in _vehiclesImagesList)
+                       {
+                           using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                           {
+                               Image img = Image.FromStream(ms);
+                               vhimgdic.Add(equipmentImage.Name, img);
+                           }
+                       }
+                       _synchContext.Post(a =>
+                       {
+                           cmbName.Text = vh.Name;
+                           tbSerialNo.Text = vh.SerialNo;
+                           cmbVehiclesModel.Text = vh.Model;
+                           tbVehiclesNo.Text = vh.VehiclesNo;
+                           cmbAutoModel.Text = vh.MotorModel;
+                           cmbTechCondition.Text = vh.TechCondition;
+                           cmbFactory.Text = vh.Factory;
+                           dtpTime.Value = vh.ProductionDate;
+                           tbMass.Text = vh.Mass;
+                           tbTankAge.Text = vh.Tankage;
+                           tbSize.Text = vh.OverallSize;
+                           cmbFuelType.Text = vh.FuelType;
+                           cmbDriveModel.Text = vh.DrivingModel;
+                           tbMileAge.Text = vh.Mileage;
+                           tbOutput.Text = vh.Output;
+                           tbLicenseCarry.Text = vh.LicenseCarry;
+                           cmbCharger.Text = vh.VehicleChargers;
+                           cmbSpot.Text = vh.VehicleSpotNo;
+                           tbVehiclesDescri.Text = vh.VehicleDescri;
+                           chkCombineOe.Checked = vh.CombineOe;
+                           ilvVehicle.ImgDictionary = vhimgdic;
+                           ilvVehicle.ShowImages();
+                       }, null);
+                       if (vh.CombineOe)
+                       {
+                           var vhoe = (from oe in eme.OilEngine
+                                       where oe.Vehicle == _id
+                                       select oe).First();
 
-                            tbOilEngineNo.Text = vhoe.OeNo;
-                            cmbOeModel.Text = vhoe.OeModel;
-                            tbOePower.Text = vhoe.OutPower;
-                            cmbTechCondition.Text = vhoe.TechCondition;
-                            nudWorkHour.Value = int.Parse(vhoe.WorkHour);
-                            cmbOeFactory.Text = vhoe.OeFactory;
-                            dtpOeTime.Value = vhoe.OeDate;
-                            tbOeOemNo.Text = vhoe.OeOemNo;
-                            cmbMotorModel.Text = vhoe.MotorModel;
-                            tbMotorPower.Text = vhoe.MotorPower;
-                            cmbMotorFuelType.Text = vhoe.MotorFuel;
-                            tbMotorTankage.Text = vhoe.MotorTankage;
-                            cmbMotorFactory.Text = vhoe.MotorFactory;
-                            dtpMotorTime.Value = vhoe.MotorDate;
-                            tbMotorOemNo.Text = vhoe.MotorOemNo;
-                            tbOeFailDetail.Text = vhoe.FaultDescri;
-                            tbVehiclesNo.Text = vhoe.Vehicle;
 
-                            _oilImagesList = (from oeimg in oeie.OilEngineImage
-                                              where oeimg.SerialNo == _id
-                                              select oeimg).ToList();
-                        }
-                    }
-                    CommonLogHelper.GetInstance("LogInfo").Info($"加载车辆数据{_id}成功");
-                }
-                catch (Exception exception)
-                {
-                    if (Add)
-                    {
-                        MessageBox.Show(this, @"打开添加车辆数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加车辆数据失败", exception);
-                    }
-                    else
-                    {
-                        MessageBox.Show(this, $"加载车辆数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        CommonLogHelper.GetInstance("LogError").Error($"加载车辆数据{_id}失败", exception);
-                    }
-                }
-            }, null);
+                           _oilImagesList = (from oeimg in oeie.OilEngineImage
+                                             where oeimg.SerialNo == _id
+                                             select oeimg).ToList();
+
+                           Dictionary<string, Image> oeimgdic = new Dictionary<string, Image>();
+                           foreach (var equipmentImage in _oilImagesList)
+                           {
+                               using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                               {
+                                   Image img = Image.FromStream(ms);
+                                   oeimgdic.Add(equipmentImage.Name, img);
+                               }
+                           }
+                           _synchContext.Post(a =>
+                           {
+                               tbOilEngineNo.Text = vhoe.OeNo;
+                               cmbOeModel.Text = vhoe.OeModel;
+                               tbOePower.Text = vhoe.OutPower;
+                               cmbTechCondition.Text = vhoe.TechCondition;
+                               nudWorkHour.Value = int.Parse(vhoe.WorkHour);
+                               cmbOeFactory.Text = vhoe.OeFactory;
+                               dtpOeTime.Value = vhoe.OeDate;
+                               tbOeOemNo.Text = vhoe.OeOemNo;
+                               cmbMotorModel.Text = vhoe.MotorModel;
+                               tbMotorPower.Text = vhoe.MotorPower;
+                               cmbMotorFuelType.Text = vhoe.MotorFuel;
+                               tbMotorTankage.Text = vhoe.MotorTankage;
+                               cmbMotorFactory.Text = vhoe.MotorFactory;
+                               dtpMotorTime.Value = vhoe.MotorDate;
+                               tbMotorOemNo.Text = vhoe.MotorOemNo;
+                               tbOeFailDetail.Text = vhoe.FaultDescri;
+                               tbVehiclesNo.Text = vhoe.Vehicle;
+                               ilvOe.ImgDictionary = oeimgdic;
+                               ilvOe.ShowImages();
+                           }, null);
+                       }
+                   }
+                   CommonLogHelper.GetInstance("LogInfo").Info($"加载车辆数据{_id}成功");
+               }
+               catch (Exception exception)
+               {
+                   _synchContext.Post(a =>
+                   {
+                       if (Add)
+                       {
+                           CommonLogHelper.GetInstance("LogError").Error(@"打开添加车辆数据失败", exception);
+                           MessageBox.Show(this, @"打开添加车辆数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                               MessageBoxIcon.Error);
+                       }
+                       else
+                       {
+                           CommonLogHelper.GetInstance("LogError").Error($"加载车辆数据{_id}失败", exception);
+                           MessageBox.Show(this, $"加载车辆数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                               MessageBoxIcon.Error);
+                       }
+                   }, null);
+               }
+           })
+            { IsBackground = true };
+            loadVhDataThread.Start();
         }
     }
 }

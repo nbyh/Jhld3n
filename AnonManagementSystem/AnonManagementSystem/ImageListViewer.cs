@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
-    public partial class ImageListViewer : UserControl, IShowImageList
+    public partial class ImageListViewer : UserControl
     {
         public ImageListViewer()
         {
@@ -14,6 +14,7 @@ namespace AnonManagementSystem
         }
 
         public string DeleteImgKey { get; set; }
+
         private Dictionary<string, Image> _imgDic = new Dictionary<string, Image>();
 
         public Dictionary<string, Image> ImgDictionary
@@ -48,6 +49,7 @@ namespace AnonManagementSystem
         {
             FileInfo fi = new FileInfo(key);
             imgList.Images.Add(key, img);
+            _imgDic.Add(key, img);
             //lsvImages.LargeImageList = imgList;
             lsvImages.BeginUpdate();
             ListViewItem lvi = new ListViewItem
@@ -72,6 +74,16 @@ namespace AnonManagementSystem
                     DeleteImgKey = lvi.ImageKey;
                     _imgDic.Remove(DeleteImgKey);
                 }
+                if (lsvImages.Items.Count - 1 >= 0)
+                {
+                    int selectindex = lsvImages.Items.Count - 1;
+                    lsvImages.Items[selectindex].Selected = true;
+                    picBox.Image = _imgDic[lsvImages.Items[selectindex].ImageKey];
+                }
+                else
+                {
+                    picBox.Image = null;
+                }
                 lsvImages.EndUpdate();
             }
         }
@@ -82,7 +94,7 @@ namespace AnonManagementSystem
             {
                 if (lsvImages.SelectedItems.Count == 0)
                     return;
-                string picname = lsvImages.SelectedItems[0].Text;
+                string picname = lsvImages.SelectedItems[0].ImageKey;
                 picBox.Image = _imgDic[picname];
             }
             catch (Exception exception)
