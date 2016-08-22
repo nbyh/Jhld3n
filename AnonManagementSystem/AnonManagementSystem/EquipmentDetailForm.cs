@@ -14,16 +14,18 @@ namespace AnonManagementSystem
     public partial class EquipmentDetailForm : Form, IAddModify
     {
         public delegate void SaveChangeSuccess();
+
         public event SaveChangeSuccess SaveSuccess;
+
         private readonly SynchronizationContext _synchContext;
-        private readonly List<CombatVehicles> _comVehList = new List<CombatVehicles>();
+        private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
         private readonly EquipImageEntities _equipImageEntities = new EquipImageEntities();
-        private readonly List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
+        private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
         private readonly List<EventData> _eventDataList = new List<EventData>();
         private readonly EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
         private readonly List<EventsImage> _eventsImgList = new List<EventsImage>();
-        private readonly List<Events> _eventsList = new List<Events>();
-        private readonly List<Material> _materList = new List<Material>();
+        private List<Events> _eventsList = new List<Events>();
+        private List<Material> _materList = new List<Material>();
         private readonly OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
         private readonly List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
         private readonly VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
@@ -62,6 +64,11 @@ namespace AnonManagementSystem
                 dgvEvents.DataSource = _eventsList;
                 _eventDataList.AddRange(eventdatalist);
                 _eventsImgList.AddRange(eventimglist);
+                for (int i = 0; i < dgvEvents.RowCount; i++)
+                {
+                    dgvEvents[0, i].Value = i + 1;
+                    dgvEvents[7, i].Value = "详细信息";
+                }
             }
             else
             {
@@ -182,6 +189,11 @@ namespace AnonManagementSystem
             {
                 _materList.Add(material);
                 dgvMaterial.DataSource = _materList;
+                for (int i = 0; i < dgvMaterial.RowCount; i++)
+                {
+                    dgvMaterial[0, i].Value = i + 1;
+                    dgvMaterial[8, i].Value = "详细信息";
+                }
             }
             {
                 #region 界面更新
@@ -231,6 +243,11 @@ namespace AnonManagementSystem
                 {
                     _oilEngines = oilEngine;
                     _oilImgList.AddRange(oilImgList);
+                }
+                for (int i = 0; i < dgvCombatVehicles.RowCount; i++)
+                {
+                    dgvCombatVehicles[0, i].Value = i + 1;
+                    dgvCombatVehicles[9, i].Value = "详细信息";
                 }
 
                 #endregion 增加
@@ -364,7 +381,7 @@ namespace AnonManagementSystem
                         }
                     }
 
-                    #endregion 油机图片更新}
+                    #endregion 油机图片更新
                 }
             }
         }
@@ -533,20 +550,20 @@ namespace AnonManagementSystem
                             where eq.SerialNo == _id
                             select eq;
             var equipfirst = appointeq.First();
-            var vechiledata = (from v in _equipEntities.CombatVehicles
-                               where v.Equipment == _id
-                               select v).ToList();
-            var events = (from ev in _equipEntities.Events
-                          where ev.Equipment == _id
-                          select ev).ToList();
-            var material = (from m in _equipEntities.Material
-                            where m.Equipment == _id
-                            select m).ToList();
-            var imgs = (from img in _equipImageEntities.EquipmentImage
-                        where img.SerialNo == _id
-                        select img);
+            _comVehList = (from v in _equipEntities.CombatVehicles
+                           where v.Equipment == _id
+                           select v).ToList();
+            _eventsList = (from ev in _equipEntities.Events
+                           where ev.Equipment == _id
+                           select ev).ToList();
+            _materList = (from m in _equipEntities.Material
+                          where m.Equipment == _id
+                          select m).ToList();
+            _equipImageList = (from img in _equipImageEntities.EquipmentImage
+                               where img.SerialNo == _id
+                               select img).ToList();
             Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
-            foreach (var equipmentImage in imgs)
+            foreach (var equipmentImage in _equipImageList)
             {
                 using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
                 {
@@ -574,16 +591,27 @@ namespace AnonManagementSystem
                 tbUseMethod.Text = equipfirst.UseMethod;
                 tbPerformIndex.Text = equipfirst.PerformIndex;
 
-                dgvCombatVehicles.DataSource = vechiledata;
-
-                dgvEvents.DataSource = events;
-
-                dgvMaterial.DataSource = material;
-
+                dgvCombatVehicles.DataSource = _comVehList;
+                for (int i = 0; i < dgvCombatVehicles.RowCount; i++)
+                {
+                    dgvCombatVehicles[0, i].Value = i + 1;
+                    dgvCombatVehicles[9, i].Value = "详细信息";
+                }
+                dgvEvents.DataSource = _eventsList;
+                for (int i = 0; i < dgvEvents.RowCount; i++)
+                {
+                    dgvEvents[0, i].Value = i + 1;
+                    dgvEvents[7, i].Value = "详细信息";
+                }
+                dgvMaterial.DataSource = _materList;
+                for (int i = 0; i < dgvMaterial.RowCount; i++)
+                {
+                    dgvMaterial[0, i].Value = i + 1;
+                    dgvMaterial[8, i].Value = "详细信息";
+                }
                 ilvEquipment.ImgDictionary = imgdic;
                 ilvEquipment.ShowImages();
             }, null);
-
         }
 
         private void tsbAddEvents_Click(object sender, EventArgs e)
@@ -618,7 +646,6 @@ namespace AnonManagementSystem
                         SerialNo = tbSerialNo.Text
                     };
                     _equipImageList.Add(eqImg);
-
 
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
@@ -664,7 +691,7 @@ namespace AnonManagementSystem
             {
                 int selectRowIndex = dgvEvents.CurrentRow.Index;
                 string id = dgvEvents.Rows[selectRowIndex].Cells["No"].Value.ToString();
-                dgvEvents.Rows.RemoveAt(selectRowIndex);
+                //dgvEvents.Rows.RemoveAt(selectRowIndex);
                 if (Add)
                 {
                     foreach (var es in _eventsList.Where(ee => ee.No == id))
@@ -698,6 +725,7 @@ namespace AnonManagementSystem
                               select eqei).First();
                     _eventsImageEntities.EventsImage.Remove(ei);
                 }
+                dgvEvents.DataSource = _eventsList;
                 CommonLogHelper.GetInstance("LogInfo").Info($"删除事件{id}成功");
                 MessageBox.Show(this, @"删除事件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -747,7 +775,7 @@ namespace AnonManagementSystem
             {
                 int selectRowIndex = dgvMaterial.CurrentRow.Index;
                 string id = dgvMaterial.Rows[selectRowIndex].Cells["No"].Value.ToString();
-                dgvMaterial.Rows.RemoveAt(selectRowIndex);
+                //dgvMaterial.Rows.RemoveAt(selectRowIndex);
                 if (Add)
                 {
                     foreach (var mm in _materList.Where(mm => mm.No == id))
@@ -766,6 +794,7 @@ namespace AnonManagementSystem
                         _equipEntities.Material.Remove(mm.First());
                     }
                 }
+                dgvMaterial.DataSource = _materList;
                 CommonLogHelper.GetInstance("LogInfo").Info($"删除材料{id}成功");
                 MessageBox.Show(this, @"删除材料成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -785,7 +814,6 @@ namespace AnonManagementSystem
             {
                 int selectRowIndex = dgvCombatVehicles.CurrentRow.Index;
                 string id = dgvCombatVehicles.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
-                dgvCombatVehicles.Rows.RemoveAt(selectRowIndex);
                 if (Add)
                 {
                     bool isContainsOe = false;
@@ -832,6 +860,8 @@ namespace AnonManagementSystem
                         _oilImageEntities.OilEngineImage.Remove(ed);
                     }
                 }
+                //dgvCombatVehicles.Rows.RemoveAt(selectRowIndex);
+                dgvCombatVehicles.DataSource = _comVehList;
                 CommonLogHelper.GetInstance("LogInfo").Info($"删除车辆{id}成功");
                 MessageBox.Show(this, @"删除车辆成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -894,18 +924,22 @@ namespace AnonManagementSystem
                             SetupVideo = tbSetupVideo.Text
                         };
                         _equipEntities.CombatEquipment.Add(ce);
+                        _equipEntities.SaveChanges();
+                        _equipEntities.Events.AddRange(_eventsList);
+                        _equipEntities.SaveChanges();
                         _equipEntities.CombatVehicles.AddRange(_comVehList);
+                        _equipEntities.SaveChanges();
                         if (_oilEngines != null)
                         {
                             _equipEntities.OilEngine.Add(_oilEngines);
                             _oilImageEntities.OilEngineImage.AddRange(_oilImgList);
                         }
                         _equipEntities.Material.AddRange(_materList);
-                        _equipEntities.Events.AddRange(_eventsList);
                         _equipEntities.EventData.AddRange(_eventDataList);
 
                         _vehiclesImageEntities.VehiclesImage.AddRange(_vehImgList);
                         _eventsImageEntities.EventsImage.AddRange(_eventsImgList);
+                        _equipEntities.SaveChanges();
                     }
                     else
                     {
@@ -933,8 +967,8 @@ namespace AnonManagementSystem
                         equipfirst.MainUsage = tbMainUsage.Text;
                         equipfirst.UseMethod = tbUseMethod.Text;
                         equipfirst.PerformIndex = tbPerformIndex.Text;
+                        _equipEntities.SaveChanges();
                     }
-                    _equipEntities.SaveChanges();
                     SaveSuccess?.Invoke();
                     CommonLogHelper.GetInstance("LogInfo").Info(@"保存设备数据成功");
                     MessageBox.Show(this, @"保存设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);

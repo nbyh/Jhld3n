@@ -61,6 +61,10 @@ namespace AnonManagementSystem
                     }
                 }
                 EquipMainForm subMainForm = new EquipMainForm { MdiParent = this, Enableedit = _enableedit, Tag = "Equipment" };
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    subMainForm.WindowState = FormWindowState.Maximized;
+                }
                 subMainForm.Show();
             }
             else
@@ -124,6 +128,10 @@ namespace AnonManagementSystem
                     }
                 }
                 SparePartsForm sparePartsForm = new SparePartsForm { MdiParent = this, Tag = "SpareParts" };
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    sparePartsForm.WindowState = FormWindowState.Maximized;
+                }
                 sparePartsForm.Show();
             }
             else
