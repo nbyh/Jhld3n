@@ -51,6 +51,27 @@ namespace AnonManagementSystem
                         int selectRowIndex = dgvEquip.CurrentRow.Index;
                         dgvEquip.Rows.RemoveAt(selectRowIndex);
                         string id = dgvEquip.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
+                        var vh = from comvh in _equipEntities.CombatVehicles
+                            where comvh.Equipment == id
+                            select comvh;
+                        _equipEntities.CombatVehicles.RemoveRange(vh);
+                        _equipEntities.SaveChanges();
+                        var ev = from eve in _equipEntities.Events
+                            where eve.Equipment == id
+                            select eve;
+                        if (ev.Any())
+                        {
+                            foreach (var eventse in ev)
+                            {
+                                var ed = from evd in _equipEntities.EventData
+                                    where evd.EventsNo == eventse.No
+                                    select evd;
+                                _equipEntities.EventData.RemoveRange(ed);
+                                _equipEntities.SaveChanges();
+                            }
+                        }
+                        _equipEntities.Events.RemoveRange(ev);
+                        _equipEntities.SaveChanges();
                         var eq = (from eqt in _equipEntities.CombatEquipment
                                   where eqt.SerialNo == id
                                   select eqt).First();
