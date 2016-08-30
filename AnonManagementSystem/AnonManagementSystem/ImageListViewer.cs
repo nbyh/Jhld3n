@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -99,8 +100,30 @@ namespace AnonManagementSystem
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                MessageBox.Show($"图片显示失败！{exception.Message}", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void 图片另存为ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sfdImg.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap bmp = new Bitmap(picBox.Image);
+                    bmp.Save(sfdImg.FileName, ImageFormat.Jpeg);
+                    bmp.Dispose();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"图片保存失败！{exception.Message}", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmsSaveImg_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            图片另存为ToolStripMenuItem.Enabled = (picBox.Image != null);
         }
     }
 }
