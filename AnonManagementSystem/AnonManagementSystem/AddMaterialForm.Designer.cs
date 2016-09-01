@@ -155,6 +155,7 @@
             this.tbDocNo.Name = "tbDocNo";
             this.tbDocNo.Size = new System.Drawing.Size(141, 21);
             this.tbDocNo.TabIndex = 18;
+            this.tbDocNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDocNo_KeyPress);
             // 
             // label8
             // 

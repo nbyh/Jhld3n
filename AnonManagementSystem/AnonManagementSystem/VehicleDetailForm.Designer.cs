@@ -398,6 +398,7 @@
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(166, 21);
             this.tbSerialNo.TabIndex = 55;
+            this.tbSerialNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
             // 
             // label9
             // 
@@ -458,6 +459,7 @@
             this.cmbSpot.Name = "cmbSpot";
             this.cmbSpot.Size = new System.Drawing.Size(98, 20);
             this.cmbSpot.TabIndex = 36;
+            this.cmbSpot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
             // 
             // label5
             // 
@@ -825,6 +827,7 @@
             this.tbOilEngineNo.Name = "tbOilEngineNo";
             this.tbOilEngineNo.Size = new System.Drawing.Size(103, 21);
             this.tbOilEngineNo.TabIndex = 55;
+            this.tbOilEngineNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
             // 
             // label27
             // 

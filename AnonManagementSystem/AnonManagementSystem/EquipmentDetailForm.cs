@@ -981,5 +981,13 @@ namespace AnonManagementSystem
                 }
             }, null);
         }
+
+        private void SerialNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar < 48 || e.KeyChar > 57 || e.KeyChar != 8 || e.KeyChar != 127)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

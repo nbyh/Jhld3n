@@ -31,11 +31,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEventsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox23 = new System.Windows.Forms.GroupBox();
             this.tbDesci = new System.Windows.Forms.TextBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.tbNoInEvents = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbExecutor = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbHigherUnit = new System.Windows.Forms.ComboBox();
             this.dtpPulishDt = new System.Windows.Forms.DateTimePicker();
             this.tbAccording = new System.Windows.Forms.TextBox();
             this.cmbPulishUnit = new System.Windows.Forms.ComboBox();
@@ -89,12 +96,6 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.tbNoInEvents = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbExecutor = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbHigherUnit = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -183,6 +184,64 @@
             this.groupBox22.Size = new System.Drawing.Size(760, 115);
             this.groupBox22.TabIndex = 1;
             this.groupBox22.TabStop = false;
+            // 
+            // tbNoInEvents
+            // 
+            this.tbNoInEvents.Location = new System.Drawing.Point(560, 77);
+            this.tbNoInEvents.Name = "tbNoInEvents";
+            this.tbNoInEvents.Size = new System.Drawing.Size(50, 21);
+            this.tbNoInEvents.TabIndex = 86;
+            this.tbNoInEvents.Visible = false;
+            this.tbNoInEvents.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(465, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 85;
+            this.label4.Text = "活动中本套编号";
+            this.label4.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(290, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 84;
+            this.label6.Text = "本级单位";
+            // 
+            // cmbExecutor
+            // 
+            this.cmbExecutor.FormattingEnabled = true;
+            this.cmbExecutor.Location = new System.Drawing.Point(349, 77);
+            this.cmbExecutor.Name = "cmbExecutor";
+            this.cmbExecutor.Size = new System.Drawing.Size(110, 20);
+            this.cmbExecutor.TabIndex = 83;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(115, 81);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 82;
+            this.label7.Text = "上级单位";
+            // 
+            // cmbHigherUnit
+            // 
+            this.cmbHigherUnit.FormattingEnabled = true;
+            this.cmbHigherUnit.Items.AddRange(new object[] {
+            "调整类",
+            "动用类",
+            "使用维护",
+            "测试检修"});
+            this.cmbHigherUnit.Location = new System.Drawing.Point(174, 77);
+            this.cmbHigherUnit.Name = "cmbHigherUnit";
+            this.cmbHigherUnit.Size = new System.Drawing.Size(110, 20);
+            this.cmbHigherUnit.TabIndex = 81;
             // 
             // dtpPulishDt
             // 
@@ -405,6 +464,7 @@
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(110, 21);
             this.tbSerialNo.TabIndex = 55;
+            this.tbSerialNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
             // 
             // label9
             // 
@@ -639,7 +699,9 @@
             // 
             // ilvEvents
             // 
+            this.ilvEvents.DeleteImgKey = null;
             this.ilvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvEvents.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEvents.ImgDictionary")));
             this.ilvEvents.Location = new System.Drawing.Point(3, 28);
             this.ilvEvents.Name = "ilvEvents";
             this.ilvEvents.Size = new System.Drawing.Size(770, 479);
@@ -706,63 +768,6 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
-            // 
-            // tbNoInEvents
-            // 
-            this.tbNoInEvents.Location = new System.Drawing.Point(560, 77);
-            this.tbNoInEvents.Name = "tbNoInEvents";
-            this.tbNoInEvents.Size = new System.Drawing.Size(50, 21);
-            this.tbNoInEvents.TabIndex = 86;
-            this.tbNoInEvents.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(465, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 12);
-            this.label4.TabIndex = 85;
-            this.label4.Text = "活动中本套编号";
-            this.label4.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(290, 81);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 84;
-            this.label6.Text = "本级单位";
-            // 
-            // cmbExecutor
-            // 
-            this.cmbExecutor.FormattingEnabled = true;
-            this.cmbExecutor.Location = new System.Drawing.Point(349, 77);
-            this.cmbExecutor.Name = "cmbExecutor";
-            this.cmbExecutor.Size = new System.Drawing.Size(110, 20);
-            this.cmbExecutor.TabIndex = 83;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(115, 81);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 82;
-            this.label7.Text = "上级单位";
-            // 
-            // cmbHigherUnit
-            // 
-            this.cmbHigherUnit.FormattingEnabled = true;
-            this.cmbHigherUnit.Items.AddRange(new object[] {
-            "调整类",
-            "动用类",
-            "使用维护",
-            "测试检修"});
-            this.cmbHigherUnit.Location = new System.Drawing.Point(174, 77);
-            this.cmbHigherUnit.Name = "cmbHigherUnit";
-            this.cmbHigherUnit.Size = new System.Drawing.Size(110, 20);
-            this.cmbHigherUnit.TabIndex = 81;
             // 
             // AddEventsForm
             // 

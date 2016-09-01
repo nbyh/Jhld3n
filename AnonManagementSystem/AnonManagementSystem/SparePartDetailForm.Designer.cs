@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SparePartDetailForm));
             this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -278,6 +279,7 @@
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(154, 21);
             this.tbSerialNo.TabIndex = 0;
+            this.tbSerialNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSerialNo_KeyPress);
             // 
             // label9
             // 
@@ -378,7 +380,9 @@
             // 
             // ilvEquipment
             // 
+            this.ilvEquipment.DeleteImgKey = null;
             this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
             this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
             this.ilvEquipment.Name = "ilvEquipment";
             this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
@@ -427,7 +431,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "SparePartDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "设备详细信息";
+            this.Text = "备件详细信息";
             this.Load += new System.EventHandler(this.SparePartDetailForm_Load);
             this.Shown += new System.EventHandler(this.SparePartDetailForm_Shown);
             this.cmsPicture.ResumeLayout(false);

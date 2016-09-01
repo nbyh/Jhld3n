@@ -281,5 +281,13 @@ namespace AnonManagementSystem
                 MessageBox.Show(this, @"保存备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void tbSerialNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar < 48 || e.KeyChar > 57 || e.KeyChar != 8 || e.KeyChar != 127)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
