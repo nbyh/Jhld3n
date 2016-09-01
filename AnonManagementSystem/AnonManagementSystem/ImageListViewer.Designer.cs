@@ -36,11 +36,15 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.picBox = new System.Windows.Forms.PictureBox();
+            this.sfdImg = new System.Windows.Forms.SaveFileDialog();
+            this.cmsSaveImg = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
+            this.cmsSaveImg.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -103,6 +107,7 @@
             // 
             // picBox
             // 
+            this.picBox.ContextMenuStrip = this.cmsSaveImg;
             this.picBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picBox.Location = new System.Drawing.Point(3, 17);
             this.picBox.Name = "picBox";
@@ -110,6 +115,25 @@
             this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBox.TabIndex = 0;
             this.picBox.TabStop = false;
+            // 
+            // sfdImg
+            // 
+            this.sfdImg.Title = "选择文件保存路径";
+            // 
+            // cmsSaveImg
+            // 
+            this.cmsSaveImg.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.图片另存为ToolStripMenuItem});
+            this.cmsSaveImg.Name = "cmsSaveImg";
+            this.cmsSaveImg.Size = new System.Drawing.Size(153, 48);
+            this.cmsSaveImg.Opening += new System.ComponentModel.CancelEventHandler(this.cmsSaveImg_Opening);
+            // 
+            // 图片另存为ToolStripMenuItem
+            // 
+            this.图片另存为ToolStripMenuItem.Name = "图片另存为ToolStripMenuItem";
+            this.图片另存为ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.图片另存为ToolStripMenuItem.Text = "图片另存为";
+            this.图片另存为ToolStripMenuItem.Click += new System.EventHandler(this.图片另存为ToolStripMenuItem_Click);
             // 
             // ImageListViewer
             // 
@@ -124,6 +148,7 @@
             this.panel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
+            this.cmsSaveImg.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -137,5 +162,8 @@
         private System.Windows.Forms.ListView lsvImages;
         private System.Windows.Forms.PictureBox picBox;
         private System.Windows.Forms.ImageList imgList;
+        private System.Windows.Forms.SaveFileDialog sfdImg;
+        private System.Windows.Forms.ContextMenuStrip cmsSaveImg;
+        private System.Windows.Forms.ToolStripMenuItem 图片另存为ToolStripMenuItem;
     }
 }

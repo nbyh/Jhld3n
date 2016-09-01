@@ -134,17 +134,12 @@
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImage = new System.Windows.Forms.ToolStripButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -169,7 +164,6 @@
             this.toolStrip2.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.toolStrip4.SuspendLayout();
-            this.cmsPicture.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tsDetail.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1198,33 +1192,6 @@
             this.tsbDeleteImage.Text = "删除";
             this.tsbDeleteImage.Click += new System.EventHandler(this.tsbDeleteImage_Click);
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(48, 48);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // cmsPicture
-            // 
-            this.cmsPicture.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.更新图片ToolStripMenuItem,
-            this.图片另存为ToolStripMenuItem});
-            this.cmsPicture.Name = "cmsPicture";
-            this.cmsPicture.Size = new System.Drawing.Size(137, 48);
-            this.cmsPicture.Opening += new System.ComponentModel.CancelEventHandler(this.cmsPicture_Opening);
-            // 
-            // 更新图片ToolStripMenuItem
-            // 
-            this.更新图片ToolStripMenuItem.Name = "更新图片ToolStripMenuItem";
-            this.更新图片ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.更新图片ToolStripMenuItem.Text = "更新图片";
-            // 
-            // 图片另存为ToolStripMenuItem
-            // 
-            this.图片另存为ToolStripMenuItem.Name = "图片另存为ToolStripMenuItem";
-            this.图片另存为ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.图片另存为ToolStripMenuItem.Text = "图片另存为";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tsDetail);
@@ -1328,7 +1295,6 @@
             this.tabPage6.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
-            this.cmsPicture.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tsDetail.ResumeLayout(false);
@@ -1352,11 +1318,7 @@
         private System.Windows.Forms.ToolStripButton tsbRestore;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox gbBaseInfo;
-        private System.Windows.Forms.ContextMenuStrip cmsPicture;
-        private System.Windows.Forms.ToolStripMenuItem 更新图片ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 图片另存为ToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog ofdImage;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView dgvCombatVehicles;
         private System.Windows.Forms.TabPage tabPage6;
@@ -1390,7 +1352,6 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.GroupBox groupBox20;
         private System.Windows.Forms.DataGridView dgvMaterial;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox groupBox16;
         private System.Windows.Forms.TextBox tbTechRemould;
         private System.Windows.Forms.TextBox tbOemNo;

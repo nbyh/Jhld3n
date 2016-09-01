@@ -52,20 +52,20 @@ namespace AnonManagementSystem
                         dgvEquip.Rows.RemoveAt(selectRowIndex);
                         string id = dgvEquip.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
                         var vh = from comvh in _equipEntities.CombatVehicles
-                            where comvh.Equipment == id
-                            select comvh;
+                                 where comvh.Equipment == id
+                                 select comvh;
                         _equipEntities.CombatVehicles.RemoveRange(vh);
                         _equipEntities.SaveChanges();
                         var ev = from eve in _equipEntities.Events
-                            where eve.Equipment == id
-                            select eve;
+                                 where eve.Equipment == id
+                                 select eve;
                         if (ev.Any())
                         {
                             foreach (var eventse in ev)
                             {
                                 var ed = from evd in _equipEntities.EventData
-                                    where evd.EventsNo == eventse.No
-                                    select evd;
+                                         where evd.EventsNo == eventse.No
+                                         select evd;
                                 _equipEntities.EventData.RemoveRange(ed);
                                 _equipEntities.SaveChanges();
                             }
@@ -77,6 +77,7 @@ namespace AnonManagementSystem
                                   select eqt).First();
                         _equipEntities.CombatEquipment.Remove(eq);
                         _equipEntities.SaveChanges();
+                        DataRefresh();
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除设备数据{id}成功");
                         MessageBox.Show(this, @"删除设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -125,11 +126,15 @@ namespace AnonManagementSystem
                     var vehicles = (from vh in _equipEntities.CombatVehicles
                                     where vh.Equipment == excelid
                                     select vh).ToList();
-                    var comboevhid = vehicles.First(a => a.CombineOe).SerialNo;
+                    var comboevhid = vehicles.FirstOrDefault(a => a.CombineOe);
 
-                    var oe = (from o in _equipEntities.OilEngine
-                              where o.Vehicle == comboevhid
-                              select o).First();
+                    OilEngine oe = null;
+                    if (comboevhid != null)
+                    {
+                        oe = (from o in _equipEntities.OilEngine
+                              where o.Vehicle == comboevhid.SerialNo
+                              select o).FirstOrDefault();
+                    }
 
                     var events = (from ev in _equipEntities.Events
                                   where ev.Equipment == excelid
@@ -354,7 +359,6 @@ namespace AnonManagementSystem
 
         private void EquipMainForm_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void btnQueryInfo_Click(object sender, EventArgs e)

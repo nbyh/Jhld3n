@@ -453,7 +453,7 @@ namespace AnonManagementSystem
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
             tsbRestore.Visible = !Add;
-            tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
+            tsDetail.Enabled = gbBaseInfo.Enabled = _enableedit;
         }
 
         private void EquipmentDetailForm_Shown(object sender, EventArgs e)
@@ -632,13 +632,12 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                //byte[] imgBytes = PublicFunction.ReturnImgBytes(imgpath);
-                FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                byte[] imgBytes = br.ReadBytes((int)fs.Length);
-                fs.Close();
-                if (imgBytes != null)
+                if (PublicFunction.CheckImgCondition(imgpath))
                 {
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
                     EquipmentImage eqImg = new EquipmentImage
                     {
                         Name = imgpath,
@@ -646,7 +645,6 @@ namespace AnonManagementSystem
                         SerialNo = tbSerialNo.Text
                     };
                     _equipImageList.Add(eqImg);
-
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
                         Image img = Image.FromStream(ms);
