@@ -139,23 +139,32 @@ namespace AnonManagementSystem
                     var events = (from ev in _equipEntities.Events
                                   where ev.Equipment == excelid
                                   select ev).ToList();
-                    var eventsd = new Dictionary<string, List<EventData>>();
-                    foreach (var ee in events)
-                    {
-                        var ed = (from d in _equipEntities.EventData
-                                  where d.EventsNo == ee.No
-                                  select d).ToList();
-                        eventsd.Add(ee.No, ed);
-                    }
+                    //var eventsd = new Dictionary<string, List<EventData>>();
+                    //foreach (var ee in events)
+                    //{
+                    //    var ed = (from d in _equipEntities.EventData
+                    //              where d.EventsNo == ee.No
+                    //              select d).ToList();
+                    //    eventsd.Add(ee.No, ed);
+                    //}
 
                     EquipImageEntities eqImgEntities = new EquipImageEntities();
                     List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
                                                       where img.SerialNo == excelid
                                                       select img).Take(3).ToList();
-                    if (PublicFunction.Export2Excel(fn, firsteq, vehicles, oe, events, eventsd, eqimgList))
+                    EquipExcelDataStruct eeds=new EquipExcelDataStruct()
+                    {
+                        Equip = firsteq,
+                        VhList = vehicles,
+                        Oe = oe,
+                        Events = events,
+                        //EventDic = eventsd,
+                        EqImg = eqimgList
+                    };
+                    if (ExportData2Excel.ExportData(fn, eeds))
                     {
                         CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
-                        MessageBox.Show(this, @"导出设备数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

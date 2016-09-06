@@ -83,9 +83,7 @@
     <Compile Include="AmsAboutBox.Designer.cs">
       <DependentUpon>AmsAboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="CheckedComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ExportData2Excel.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="SparePartDetailForm.cs">
       <SubType>Form</SubType>

@@ -97,25 +97,22 @@ namespace AnonManagementSystem
                     sfdExcel.ShowDialog();
                     string fn = sfdExcel.FileName;
                     string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                    var firstsp = from sp in _sparePartEntities.SpareParts
-                                  where sp.SerialNo == excelid
-                                  select sp;
-                    if (firstsp.Any())
+                    var firstsp = (from sp in _sparePartEntities.SpareParts
+                                   where sp.SerialNo == excelid
+                                   select sp).First();
+                    SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
+                    List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
+                                                      where img.SerialNo == excelid
+                                                      select img).Take(3).ToList();
+                    SpareExcelDataStruct seds = new SpareExcelDataStruct()
                     {
-                        SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
-                        List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
-                                                          where img.SerialNo == excelid
-                                                          select img).Take(3).ToList();
-                        if (PublicFunction.Export2Excel(fn, firstsp.First(), spimgList))
-                        {
-                            CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                            MessageBox.Show(this, @"导出备件数据成功", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
+                        SparePart = firstsp,
+                        SpImgList = spimgList
+                    };
+                    if (ExportData2Excel.ExportData(fn, seds))
                     {
-                        MessageBox.Show("");
-                        return;
+                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                        MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
