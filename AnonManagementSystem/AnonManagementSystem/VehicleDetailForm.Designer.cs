@@ -97,8 +97,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbOeOemNo = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.tbOeSize = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
             this.tbOilEngineNo = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.tbOePower = new System.Windows.Forms.TextBox();
@@ -751,8 +749,6 @@
             this.groupBox12.Controls.Add(this.label2);
             this.groupBox12.Controls.Add(this.tbOeOemNo);
             this.groupBox12.Controls.Add(this.label33);
-            this.groupBox12.Controls.Add(this.tbOeSize);
-            this.groupBox12.Controls.Add(this.label40);
             this.groupBox12.Controls.Add(this.tbOilEngineNo);
             this.groupBox12.Controls.Add(this.label27);
             this.groupBox12.Controls.Add(this.tbOePower);
@@ -775,7 +771,7 @@
             // cmbMotorTechCon
             // 
             this.cmbMotorTechCon.FormattingEnabled = true;
-            this.cmbMotorTechCon.Location = new System.Drawing.Point(605, 48);
+            this.cmbMotorTechCon.Location = new System.Drawing.Point(612, 22);
             this.cmbMotorTechCon.Name = "cmbMotorTechCon";
             this.cmbMotorTechCon.Size = new System.Drawing.Size(123, 20);
             this.cmbMotorTechCon.TabIndex = 61;
@@ -783,7 +779,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(544, 53);
+            this.label2.Location = new System.Drawing.Point(548, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 62;
@@ -804,22 +800,6 @@
             this.label33.Size = new System.Drawing.Size(53, 12);
             this.label33.TabIndex = 59;
             this.label33.Text = "出厂编号";
-            // 
-            // tbOeSize
-            // 
-            this.tbOeSize.Location = new System.Drawing.Point(503, 22);
-            this.tbOeSize.Name = "tbOeSize";
-            this.tbOeSize.Size = new System.Drawing.Size(103, 21);
-            this.tbOeSize.TabIndex = 57;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(418, 26);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(77, 12);
-            this.label40.TabIndex = 56;
-            this.label40.Text = "机组外廓尺寸";
             // 
             // tbOilEngineNo
             // 
@@ -874,11 +854,11 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(614, 26);
+            this.label35.Location = new System.Drawing.Point(420, 26);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(65, 12);
+            this.label35.Size = new System.Drawing.Size(53, 12);
             this.label35.TabIndex = 40;
-            this.label35.Text = "工作小时数";
+            this.label35.Text = "工作时数";
             // 
             // label36
             // 
@@ -900,14 +880,14 @@
             // 
             // nudWorkHour
             // 
-            this.nudWorkHour.Location = new System.Drawing.Point(687, 22);
+            this.nudWorkHour.Location = new System.Drawing.Point(483, 22);
             this.nudWorkHour.Maximum = new decimal(new int[] {
             268435456,
             1042612833,
             542101086,
             0});
             this.nudWorkHour.Name = "nudWorkHour";
-            this.nudWorkHour.Size = new System.Drawing.Size(56, 21);
+            this.nudWorkHour.Size = new System.Drawing.Size(54, 21);
             this.nudWorkHour.TabIndex = 35;
             // 
             // dtpOeTime
@@ -1197,8 +1177,6 @@
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.TextBox tbOeOemNo;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.TextBox tbOeSize;
-        private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TextBox tbOilEngineNo;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox tbOePower;

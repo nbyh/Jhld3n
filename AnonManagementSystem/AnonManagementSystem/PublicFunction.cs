@@ -63,5 +63,11 @@ namespace AnonManagementSystem
             return true;
         }
 
+        public static bool JudgeKeyPress(char key)
+        {
+            int keyValue = key;
+            return (keyValue < 48 || keyValue > 57) && keyValue != 45 && keyValue != 8 && keyValue != 127 && keyValue != 1 &&
+                   keyValue != 3 && keyValue != 22 && keyValue != 24 && keyValue != 25 && keyValue != 26;
+        }
     }
 }

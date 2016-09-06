@@ -17,7 +17,7 @@ namespace AnonManagementSystem
         public event SaveChangeSuccess SaveSuccess;
         private readonly SynchronizationContext _synchContext;
         private readonly SparePartImagesEntities _partsImageEntities = new SparePartImagesEntities();
-        private readonly List<SparePartImage> _spImgList = new List<SparePartImage>();
+        private List<SparePartImage> _spImgList = new List<SparePartImage>();
         private bool _enableedit;
         private string _id;
         private SparePartManagementEntities _sparePartEntities = new SparePartManagementEntities();
@@ -66,6 +66,7 @@ namespace AnonManagementSystem
             var imgs = (from img in _partsImageEntities.SparePartImage
                         where img.SerialNo == _id
                         select img);
+            _spImgList = imgs.ToList();
             Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
             foreach (var spmentImage in imgs)
             {
@@ -234,7 +235,6 @@ namespace AnonManagementSystem
         {
             try
             {
-                _partsImageEntities.SparePartImage.AddRange(_spImgList);
                 if (Add)
                 {
                     SpareParts ce = new SpareParts()
@@ -251,6 +251,7 @@ namespace AnonManagementSystem
                         Status = cmbStatus.Text,
                     };
                     _sparePartEntities.SpareParts.Add(ce);
+                    _partsImageEntities.SparePartImage.AddRange(_spImgList);
                 }
                 else
                 {
@@ -268,8 +269,32 @@ namespace AnonManagementSystem
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
                     spfirst.UseType = cmbUseType.Text;
                     spfirst.Status = cmbStatus.Text;
+                    var spImginDb = from img in _partsImageEntities.SparePartImage
+                                     where img.SerialNo == spfirst.SerialNo
+                                     select img;
+                    foreach (var sp in spImginDb)
+                    {
+                        var noimg = from n in _spImgList
+                                    where n.Name == sp.Name
+                                    select n;
+                        if (!noimg.Any())
+                        {
+                            _partsImageEntities.SparePartImage.Remove(sp);
+                        }
+                    }
+                    foreach (var sparePartImage in _spImgList)
+                    {
+                        var spimg = from img in _partsImageEntities.SparePartImage
+                                    where img.Name == sparePartImage.Name
+                                    select img;
+                        if (!spimg.Any())
+                        {
+                            _partsImageEntities.SparePartImage.Add(sparePartImage);
+                        }
+                    }
                 }
                 _sparePartEntities.SaveChanges();
+                _partsImageEntities.SaveChanges();
                 SaveSuccess?.Invoke();
                 CommonLogHelper.GetInstance("LogInfo").Info(@"保存备件数据成功");
                 MessageBox.Show(this, @"保存备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -284,10 +309,7 @@ namespace AnonManagementSystem
 
         private void tbSerialNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar < 48 || e.KeyChar > 57 || e.KeyChar != 8 || e.KeyChar != 127)
-            {
-                e.Handled = true;
-            }
+            e.Handled = PublicFunction.JudgeKeyPress(e.KeyChar);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace AnonManagementSystem
                     try
                     {
                         int selectRowIndex = dgvEquip.CurrentRow.Index;
-                        dgvEquip.Rows.RemoveAt(selectRowIndex);
+                        //dgvEquip.Rows.RemoveAt(selectRowIndex);
                         string id = dgvEquip.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
                         var vh = from comvh in _equipEntities.CombatVehicles
                                  where comvh.Equipment == id
@@ -139,6 +139,9 @@ namespace AnonManagementSystem
                     var events = (from ev in _equipEntities.Events
                                   where ev.Equipment == excelid
                                   select ev).ToList();
+                    var material = (from mt in _equipEntities.Material
+                                    where mt.Equipment == excelid
+                                    select mt).ToList();
                     //var eventsd = new Dictionary<string, List<EventData>>();
                     //foreach (var ee in events)
                     //{
@@ -152,13 +155,14 @@ namespace AnonManagementSystem
                     List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
                                                       where img.SerialNo == excelid
                                                       select img).Take(3).ToList();
-                    EquipExcelDataStruct eeds=new EquipExcelDataStruct()
+                    EquipExcelDataStruct eeds = new EquipExcelDataStruct()
                     {
                         Equip = firsteq,
                         VhList = vehicles,
                         Oe = oe,
                         Events = events,
                         //EventDic = eventsd,
+                        MaterialList = material,
                         EqImg = eqimgList
                     };
                     if (ExportData2Excel.ExportData(fn, eeds))
