@@ -170,7 +170,6 @@ namespace AnonManagementSystem
                         SerialNo = tbSerialNo.Text
                     };
                     _spImgList.Add(eqImg);
-
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
                         Image img = Image.FromStream(ms);
@@ -192,9 +191,7 @@ namespace AnonManagementSystem
                     {
                         _spImgList.Remove(spImg);
                     }
-                    var eqimg = from img in _partsImageEntities.SparePartImage
-                                where img.Name == key
-                                select img;
+                    var eqimg = _partsImageEntities.SparePartImage.Where(img => img.Name == key);
                     if (eqimg.Any())
                     {
                         _partsImageEntities.SparePartImage.Remove(eqimg.First());
@@ -269,19 +266,19 @@ namespace AnonManagementSystem
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
                     spfirst.UseType = cmbUseType.Text;
                     spfirst.Status = cmbStatus.Text;
-                    var spImginDb = from img in _partsImageEntities.SparePartImage
-                                     where img.SerialNo == spfirst.SerialNo
-                                     select img;
-                    foreach (var sp in spImginDb)
-                    {
-                        var noimg = from n in _spImgList
-                                    where n.Name == sp.Name
-                                    select n;
-                        if (!noimg.Any())
-                        {
-                            _partsImageEntities.SparePartImage.Remove(sp);
-                        }
-                    }
+                    //var spImginDb = from img in _partsImageEntities.SparePartImage
+                    //                 where img.SerialNo == spfirst.SerialNo
+                    //                 select img;
+                    //foreach (var sp in spImginDb)
+                    //{
+                    //    var noimg = from n in _spImgList
+                    //                where n.Name == sp.Name
+                    //                select n;
+                    //    if (!noimg.Any())
+                    //    {
+                    //        _partsImageEntities.SparePartImage.Remove(sp);
+                    //    }
+                    //}
                     foreach (var sparePartImage in _spImgList)
                     {
                         var spimg = from img in _partsImageEntities.SparePartImage

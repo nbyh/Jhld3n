@@ -178,11 +178,9 @@ namespace AnonManagementSystem
                             MaterialList = material,
                             EqImg = eqimgList
                         };
-                        if (ExportData2Excel.ExportData(fn, eeds))
-                        {
-                            CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
-                            MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        ExportData2Excel.ExportData(fn, eeds);
+                        CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
+                        MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -215,7 +213,7 @@ namespace AnonManagementSystem
             List<string> equipTechconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
             List<string> equipUseconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
             List<string> equipFactList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
-            
+
             List<string> eventNameList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             List<string> eventSpecificList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.SpecificType) select s.SpecificType).Distinct().ToList();
             List<string> eventAddressList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
@@ -233,7 +231,7 @@ namespace AnonManagementSystem
                 cmbTechCondition.DataSource = equipTechconList;
                 cmbUseCondition.DataSource = equipUseconList;
                 cmbFactory.DataSource = equipFactList;
-                
+
                 cmbEventName.DataSource = eventNameList;
                 cmbSpecificType.DataSource = eventSpecificList;
                 cmbEventAddress.DataSource = eventAddressList;
@@ -390,7 +388,7 @@ namespace AnonManagementSystem
             _synchContext.Post(a =>
             {
                 lbPageInfo.Text = $"总共{all}条记录，当前第{curpage}页，每页{pagesize}条，共{_lastPage}页";
-                dgvEquip.DataSource = equippage.ToList();
+                dgvEquip.DataSource = equippage;
                 for (int i = 0; i < dgvEquip.RowCount; i++)
                 {
                     dgvEquip[0, i].Value = i + 1;

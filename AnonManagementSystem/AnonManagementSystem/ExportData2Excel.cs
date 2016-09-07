@@ -8,144 +8,128 @@ namespace AnonManagementSystem
 {
     public static class ExportData2Excel
     {
-        public static bool ExportData(string filepath, EquipExcelDataStruct eeds)
+        public static void ExportData(string filepath, EquipExcelDataStruct eeds)
         {
-            try
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
-                using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
+
+                #region 添加设备信息表
+                ExcelWorksheet worksheeteq = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
+                worksheeteq.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
+                EquipTitleCollection eqtitle = new EquipTitleCollection();
+                for (int i = 0; i < eqtitle.Length; i++)
                 {
-
-                    #region 添加设备信息表
-                    ExcelWorksheet worksheeteq = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
-                    worksheeteq.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
-                    EquipTitleCollection eqtitle = new EquipTitleCollection();
-                    for (int i = 0; i < eqtitle.Length; i++)
-                    {
-                        worksheeteq.Cells[1, i + 1].Value = eqtitle[i];
-                    }
-                    List<string> eqContentList = DataConvert(eeds.Equip);
-                    for (int i = 0; i < eqContentList.Count; i++)
-                    {
-                        worksheeteq.Cells[2, i + 1].Value = eqContentList[i];
-                    }
-
-                    #endregion
-
-                    #region 添加车辆信息表
-
-                    ExcelWorksheet worksheetvh = package.Workbook.Worksheets.Add("车辆信息"); //创建workshee
-                    worksheetvh.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
-                    VehicleTitleCollection vhtitle = new VehicleTitleCollection();
-                    for (int i = 0; i < vhtitle.Length; i++)
-                    {
-                        worksheetvh.Cells[1, i + 1].Value = vhtitle[i];
-                    }
-                    for (int i = 0; i < eeds.VhList.Count; i++)
-                    {
-                        List<string> vhContentList = DataConvert(eeds.VhList[i]);
-                        for (int j = 0; j < vhContentList.Count; j++)
-                        {
-                            worksheetvh.Cells[i + 1, j + 1].Value = vhContentList[i];
-                        }
-                    }
-                    #endregion
-
-                    #region 添加油机信息表
-
-                    if (eeds.Oe != null)
-                    {
-                        ExcelWorksheet worksheetoe = package.Workbook.Worksheets.Add("油机信息"); //创建workshee
-                        worksheetoe.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
-                        OeTitleCollection oetitle = new OeTitleCollection();
-                        for (int i = 0; i < oetitle.Length; i++)
-                        {
-                            worksheetoe.Cells[1, i + 1].Value = oetitle[i];
-                        }
-                        List<string> oeContentList = DataConvert(eeds.Oe);
-                        for (int i = 0; i < oeContentList.Count; i++)
-                        {
-                            worksheetoe.Cells[2, i + 1].Value = oeContentList[i];
-                        }
-                    }
-                    #endregion
-
-                    #region 添加活动信息表
-
-                    ExcelWorksheet worksheetee = package.Workbook.Worksheets.Add("活动信息"); //创建workshee
-                    worksheetee.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
-                    EventTitleCollection eetitle = new EventTitleCollection();
-                    for (int i = 0; i < eetitle.Length; i++)
-                    {
-                        worksheetee.Cells[1, i + 1].Value = eetitle[i];
-                    }
-                    for (int i = 0; i < eeds.Events.Count; i++)
-                    {
-                        List<string> eeContentList = DataConvert(eeds.Events[i]);
-                        for (int j = 0; j < eeContentList.Count; j++)
-                        {
-                            worksheetee.Cells[i + 1, j + 1].Value = eeContentList[i];
-                        }
-                    }
-                    #endregion
-
-                    #region 添加材料信息表
-
-                    ExcelWorksheet worksheetmt = package.Workbook.Worksheets.Add("材料信息"); //创建workshee
-                    worksheetmt.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
-                    MaterialTitleCollection mttitle = new MaterialTitleCollection();
-                    for (int i = 0; i < mttitle.Length; i++)
-                    {
-                        worksheetmt.Cells[1, i + 1].Value = mttitle[i];
-                    }
-                    for (int i = 0; i < eeds.MaterialList.Count; i++)
-                    {
-                        List<string> mtContentList = DataConvert(eeds.MaterialList[i]);
-                        for (int j = 0; j < mtContentList.Count; j++)
-                        {
-                            worksheetmt.Cells[i + 1, j + 1].Value = mtContentList[i];
-                        }
-                    }
-                    #endregion
-                    //todo：填充数据
-                    package.Save();//保存excel
+                    worksheeteq.Cells[1, i + 1].Value = eqtitle[i];
                 }
-                return true;
-            }
-            catch
-            {
-                throw;
+                List<string> eqContentList = DataConvert(eeds.Equip);
+                for (int i = 0; i < eqContentList.Count; i++)
+                {
+                    worksheeteq.Cells[2, i + 1].Value = eqContentList[i];
+                }
+
+                #endregion
+
+                #region 添加车辆信息表
+
+                ExcelWorksheet worksheetvh = package.Workbook.Worksheets.Add("车辆信息"); //创建workshee
+                worksheetvh.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                VehicleTitleCollection vhtitle = new VehicleTitleCollection();
+                for (int i = 0; i < vhtitle.Length; i++)
+                {
+                    worksheetvh.Cells[1, i + 1].Value = vhtitle[i];
+                }
+                for (int i = 0; i < eeds.VhList.Count; i++)
+                {
+                    List<string> vhContentList = DataConvert(eeds.VhList[i]);
+                    for (int j = 0; j < vhContentList.Count; j++)
+                    {
+                        worksheetvh.Cells[i + 1, j + 1].Value = vhContentList[i];
+                    }
+                }
+                #endregion
+
+                #region 添加油机信息表
+
+                if (eeds.Oe != null)
+                {
+                    ExcelWorksheet worksheetoe = package.Workbook.Worksheets.Add("油机信息"); //创建workshee
+                    worksheetoe.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                    OeTitleCollection oetitle = new OeTitleCollection();
+                    for (int i = 0; i < oetitle.Length; i++)
+                    {
+                        worksheetoe.Cells[1, i + 1].Value = oetitle[i];
+                    }
+                    List<string> oeContentList = DataConvert(eeds.Oe);
+                    for (int i = 0; i < oeContentList.Count; i++)
+                    {
+                        worksheetoe.Cells[2, i + 1].Value = oeContentList[i];
+                    }
+                }
+                #endregion
+
+                #region 添加活动信息表
+
+                ExcelWorksheet worksheetee = package.Workbook.Worksheets.Add("活动信息"); //创建workshee
+                worksheetee.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                EventTitleCollection eetitle = new EventTitleCollection();
+                for (int i = 0; i < eetitle.Length; i++)
+                {
+                    worksheetee.Cells[1, i + 1].Value = eetitle[i];
+                }
+                for (int i = 0; i < eeds.Events.Count; i++)
+                {
+                    List<string> eeContentList = DataConvert(eeds.Events[i]);
+                    for (int j = 0; j < eeContentList.Count; j++)
+                    {
+                        worksheetee.Cells[i + 1, j + 1].Value = eeContentList[i];
+                    }
+                }
+                #endregion
+
+                #region 添加材料信息表
+
+                ExcelWorksheet worksheetmt = package.Workbook.Worksheets.Add("材料信息"); //创建workshee
+                worksheetmt.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                MaterialTitleCollection mttitle = new MaterialTitleCollection();
+                for (int i = 0; i < mttitle.Length; i++)
+                {
+                    worksheetmt.Cells[1, i + 1].Value = mttitle[i];
+                }
+                for (int i = 0; i < eeds.MaterialList.Count; i++)
+                {
+                    List<string> mtContentList = DataConvert(eeds.MaterialList[i]);
+                    for (int j = 0; j < mtContentList.Count; j++)
+                    {
+                        worksheetmt.Cells[i + 1, j + 1].Value = mtContentList[i];
+                    }
+                }
+                #endregion
+                //todo：填充数据
+                package.Save();//保存excel
             }
         }
 
-        public static bool ExportData(string filepath, SpareExcelDataStruct seds)
+        public static void ExportData(string filepath, SpareExcelDataStruct seds)
         {
-            try
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
-                using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
-                {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("备件信息");//创建worksheet
-                    worksheet.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
-                    List<string> sptitlesList = new List<string>()
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("备件信息");//创建worksheet
+                worksheet.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
+                List<string> sptitlesList = new List<string>()
                     {
                         "备件编号","备件名称","型号","用于型号","数量","状态","生产厂家","出厂日期","库存位置","入库时间"
                     };
-                    for (int i = 0; i < sptitlesList.Count; i++)
-                    {
-                        worksheet.Cells[1, i + 1].Value = sptitlesList[i];
-                    }
-                    List<string> eqContentList = DataConvert(seds.SparePart);
-                    for (int i = 0; i < eqContentList.Count; i++)
-                    {
-                        worksheet.Cells[2, i + 1].Value = eqContentList[i];
-                    }
-                    //todo：填充数据
-                    package.Save();//保存excel
+                for (int i = 0; i < sptitlesList.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = sptitlesList[i];
                 }
-                return true;
-            }
-            catch (Exception e)
-            {
-                throw e;
+                List<string> eqContentList = DataConvert(seds.SparePart);
+                for (int i = 0; i < eqContentList.Count; i++)
+                {
+                    worksheet.Cells[2, i + 1].Value = eqContentList[i];
+                }
+                //todo：填充数据
+                package.Save();//保存excel
             }
         }
 

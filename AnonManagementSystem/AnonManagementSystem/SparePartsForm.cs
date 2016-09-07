@@ -112,22 +112,20 @@ namespace AnonManagementSystem
                         }
                         string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
                         var firstsp = (from sp in _sparePartEntities.SpareParts
-                            where sp.SerialNo == excelid
-                            select sp).First();
+                                       where sp.SerialNo == excelid
+                                       select sp).First();
                         SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
                         List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
-                            where img.SerialNo == excelid
-                            select img).Take(3).ToList();
+                                                          where img.SerialNo == excelid
+                                                          select img).Take(3).ToList();
                         SpareExcelDataStruct seds = new SpareExcelDataStruct()
                         {
                             SparePart = firstsp,
                             SpImgList = spimgList
                         };
-                        if (ExportData2Excel.ExportData(fn, seds))
-                        {
-                            CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                            MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        ExportData2Excel.ExportData(fn, seds);
+                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                        MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -297,7 +295,7 @@ namespace AnonManagementSystem
                 for (int i = 0; i < dgvSparePart.RowCount; i++)
                 {
                     dgvSparePart[0, i].Value = i + 1;
-                    dgvSparePart.Rows[i].Cells["MoreInfo"].Value = "查看图片";
+                    dgvSparePart.Rows[i].Cells["MoreInfo"].Value = "详细信息";
                 }
             }, null);
         }
