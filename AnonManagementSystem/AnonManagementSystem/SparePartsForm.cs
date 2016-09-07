@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -94,25 +95,39 @@ namespace AnonManagementSystem
                 int? r = dgvSparePart.CurrentRow?.Index;
                 if (r != null && r >= 0)
                 {
-                    sfdExcel.ShowDialog();
-                    string fn = sfdExcel.FileName;
-                    string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                    var firstsp = (from sp in _sparePartEntities.SpareParts
-                                   where sp.SerialNo == excelid
-                                   select sp).First();
-                    SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
-                    List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
-                                                      where img.SerialNo == excelid
-                                                      select img).Take(3).ToList();
-                    SpareExcelDataStruct seds = new SpareExcelDataStruct()
+                    if (sfdExcel.ShowDialog() == DialogResult.OK)
                     {
-                        SparePart = firstsp,
-                        SpImgList = spimgList
-                    };
-                    if (ExportData2Excel.ExportData(fn, seds))
-                    {
-                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
-                        MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string fn = sfdExcel.FileName;
+                        if (File.Exists(fn))
+                        {
+                            try
+                            {
+                                File.Delete(fn);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                            }
+                        }
+                        string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
+                        var firstsp = (from sp in _sparePartEntities.SpareParts
+                            where sp.SerialNo == excelid
+                            select sp).First();
+                        SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
+                        List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
+                            where img.SerialNo == excelid
+                            select img).Take(3).ToList();
+                        SpareExcelDataStruct seds = new SpareExcelDataStruct()
+                        {
+                            SparePart = firstsp,
+                            SpImgList = spimgList
+                        };
+                        if (ExportData2Excel.ExportData(fn, seds))
+                        {
+                            CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                            MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
             }

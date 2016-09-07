@@ -127,7 +127,7 @@ namespace AnonManagementSystem
                         return;
                     }
                 }
-                SparePartsForm sparePartsForm = new SparePartsForm { MdiParent = this, Tag = "SpareParts" };
+                SparePartsForm sparePartsForm = new SparePartsForm { MdiParent = this, Enableedit = _enableedit, Tag = "SpareParts" };
                 if (WindowState == FormWindowState.Maximized)
                 {
                     sparePartsForm.WindowState = FormWindowState.Maximized;

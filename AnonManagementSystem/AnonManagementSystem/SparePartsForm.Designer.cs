@@ -157,6 +157,7 @@
             this.cmbProDate2.Name = "cmbProDate2";
             this.cmbProDate2.Size = new System.Drawing.Size(33, 22);
             this.cmbProDate2.TabIndex = 33;
+            this.cmbProDate2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpProTime2
             // 
@@ -180,6 +181,7 @@
             this.cmbStore2.Name = "cmbStore2";
             this.cmbStore2.Size = new System.Drawing.Size(33, 22);
             this.cmbStore2.TabIndex = 31;
+            this.cmbStore2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpStore2
             // 
@@ -212,6 +214,7 @@
             this.cmbStore1.Name = "cmbStore1";
             this.cmbStore1.Size = new System.Drawing.Size(33, 22);
             this.cmbStore1.TabIndex = 28;
+            this.cmbStore1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpStore1
             // 
@@ -238,6 +241,7 @@
             this.cmbUseCondition.Name = "cmbUseCondition";
             this.cmbUseCondition.Size = new System.Drawing.Size(70, 22);
             this.cmbUseCondition.TabIndex = 25;
+            this.cmbUseCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label11
             // 
@@ -255,6 +259,7 @@
             this.cmbFactory.Name = "cmbFactory";
             this.cmbFactory.Size = new System.Drawing.Size(148, 20);
             this.cmbFactory.TabIndex = 19;
+            this.cmbFactory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label10
             // 
@@ -289,6 +294,7 @@
             this.cmbUseType.Name = "cmbUseType";
             this.cmbUseType.Size = new System.Drawing.Size(75, 22);
             this.cmbUseType.TabIndex = 21;
+            this.cmbUseType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbSpot
             // 

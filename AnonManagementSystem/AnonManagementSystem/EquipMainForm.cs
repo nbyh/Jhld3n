@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Threading;
@@ -117,58 +118,71 @@ namespace AnonManagementSystem
                 int? r = dgvEquip.CurrentRow?.Index;
                 if (r != null && r >= 0)
                 {
-                    sfdExcel.ShowDialog();
-                    string fn = sfdExcel.FileName;
-                    string excelid = dgvEquip.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                    var firsteq = (from eq in _equipEntities.CombatEquipment
-                                   where eq.SerialNo == excelid
-                                   select eq).First();
-                    var vehicles = (from vh in _equipEntities.CombatVehicles
-                                    where vh.Equipment == excelid
-                                    select vh).ToList();
-                    var comboevhid = vehicles.FirstOrDefault(a => a.CombineOe);
-
-                    OilEngine oe = null;
-                    if (comboevhid != null)
+                    if (sfdExcel.ShowDialog() == DialogResult.OK)
                     {
-                        oe = (from o in _equipEntities.OilEngine
-                              where o.Vehicle == comboevhid.SerialNo
-                              select o).FirstOrDefault();
-                    }
+                        string fn = sfdExcel.FileName;
+                        if (File.Exists(fn))
+                        {
+                            try
+                            {
+                                File.Delete(fn);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        string excelid = dgvEquip.Rows[r.Value].Cells["SerialNo"].Value.ToString();
+                        var firsteq = (from eq in _equipEntities.CombatEquipment
+                                       where eq.SerialNo == excelid
+                                       select eq).First();
+                        var vehicles = (from vh in _equipEntities.CombatVehicles
+                                        where vh.Equipment == excelid
+                                        select vh).ToList();
+                        var comboevhid = vehicles.FirstOrDefault(a => a.CombineOe);
 
-                    var events = (from ev in _equipEntities.Events
-                                  where ev.Equipment == excelid
-                                  select ev).ToList();
-                    var material = (from mt in _equipEntities.Material
-                                    where mt.Equipment == excelid
-                                    select mt).ToList();
-                    //var eventsd = new Dictionary<string, List<EventData>>();
-                    //foreach (var ee in events)
-                    //{
-                    //    var ed = (from d in _equipEntities.EventData
-                    //              where d.EventsNo == ee.No
-                    //              select d).ToList();
-                    //    eventsd.Add(ee.No, ed);
-                    //}
+                        OilEngine oe = null;
+                        if (comboevhid != null)
+                        {
+                            oe = (from o in _equipEntities.OilEngine
+                                  where o.Vehicle == comboevhid.SerialNo
+                                  select o).FirstOrDefault();
+                        }
 
-                    EquipImageEntities eqImgEntities = new EquipImageEntities();
-                    List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
-                                                      where img.SerialNo == excelid
-                                                      select img).Take(3).ToList();
-                    EquipExcelDataStruct eeds = new EquipExcelDataStruct()
-                    {
-                        Equip = firsteq,
-                        VhList = vehicles,
-                        Oe = oe,
-                        Events = events,
-                        //EventDic = eventsd,
-                        MaterialList = material,
-                        EqImg = eqimgList
-                    };
-                    if (ExportData2Excel.ExportData(fn, eeds))
-                    {
-                        CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
-                        MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var events = (from ev in _equipEntities.Events
+                                      where ev.Equipment == excelid
+                                      select ev).ToList();
+                        var material = (from mt in _equipEntities.Material
+                                        where mt.Equipment == excelid
+                                        select mt).ToList();
+                        //var eventsd = new Dictionary<string, List<EventData>>();
+                        //foreach (var ee in events)
+                        //{
+                        //    var ed = (from d in _equipEntities.EventData
+                        //              where d.EventsNo == ee.No
+                        //              select d).ToList();
+                        //    eventsd.Add(ee.No, ed);
+                        //}
+
+                        EquipImageEntities eqImgEntities = new EquipImageEntities();
+                        List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
+                                                          where img.SerialNo == excelid
+                                                          select img).Take(3).ToList();
+                        EquipExcelDataStruct eeds = new EquipExcelDataStruct()
+                        {
+                            Equip = firsteq,
+                            VhList = vehicles,
+                            Oe = oe,
+                            Events = events,
+                            //EventDic = eventsd,
+                            MaterialList = material,
+                            EqImg = eqimgList
+                        };
+                        if (ExportData2Excel.ExportData(fn, eeds))
+                        {
+                            CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
+                            MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
             }
@@ -183,29 +197,65 @@ namespace AnonManagementSystem
         {
             string cmds = "select * from CombatEquipment";
             _equipDbRaw = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
-
-            List<string> equipNameList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-            cmbName.DataSource = equipNameList;
-            List<string> equipSubdepartList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
-            cmbSubDepart.DataSource = equipSubdepartList;
-            List<string> equipMajcatList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
-            cmbMajorCategory.DataSource = equipMajcatList;
-            List<string> equipModelList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
-            cmbModel.DataSource = equipModelList;
-            List<string> equipTechcanList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
-            cmbTechnician.DataSource = equipTechcanList;
-            List<string> equipManagerList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
-            cmbManager.DataSource = equipManagerList;
-            List<string> equipTechconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
-            cmbTechCondition.DataSource = equipTechconList;
-            List<string> equipUseconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
-            cmbUseCondition.DataSource = equipUseconList;
-            List<string> equipFactList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
-            cmbFactory.DataSource = equipFactList;
+            FillSelectionData();
 
             _pageSize = 20;
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, _equipDbRaw);
+        }
+
+        private void FillSelectionData()
+        {
+            List<string> equipNameList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            List<string> equipSubdepartList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
+            List<string> equipMajcatList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
+            List<string> equipModelList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+            List<string> equipTechcanList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
+            List<string> equipManagerList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
+            List<string> equipTechconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
+            List<string> equipUseconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
+            List<string> equipFactList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            
+            List<string> eventNameList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            List<string> eventSpecificList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.SpecificType) select s.SpecificType).Distinct().ToList();
+            List<string> eventAddressList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
+            List<string> eventPublishUnitList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct().ToList();
+            List<string> eventPublisherList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+
+            _synchContext.Post(a =>
+            {
+                cmbName.DataSource = equipNameList;
+                cmbSubDepart.DataSource = equipSubdepartList;
+                cmbMajorCategory.DataSource = equipMajcatList;
+                cmbModel.DataSource = equipModelList;
+                cmbTechnician.DataSource = equipTechcanList;
+                cmbManager.DataSource = equipManagerList;
+                cmbTechCondition.DataSource = equipTechconList;
+                cmbUseCondition.DataSource = equipUseconList;
+                cmbFactory.DataSource = equipFactList;
+                
+                cmbEventName.DataSource = eventNameList;
+                cmbSpecificType.DataSource = eventSpecificList;
+                cmbEventAddress.DataSource = eventAddressList;
+                cmbPublishUnit.DataSource = eventPublishUnitList;
+                cmbPublisher.DataSource = eventPublisherList;
+
+                cmbName.SelectedIndex = -1;
+                cmbSubDepart.SelectedIndex = -1;
+                cmbMajorCategory.SelectedIndex = -1;
+                cmbModel.SelectedIndex = -1;
+                cmbTechnician.SelectedIndex = -1;
+                cmbManager.SelectedIndex = -1;
+                cmbTechCondition.SelectedIndex = -1;
+                cmbUseCondition.SelectedIndex = -1;
+                cmbFactory.SelectedIndex = -1;
+
+                cmbEventName.SelectedIndex = -1;
+                cmbSpecificType.SelectedIndex = -1;
+                cmbEventAddress.SelectedIndex = -1;
+                cmbPublishUnit.SelectedIndex = -1;
+                cmbPublisher.SelectedIndex = -1;
+            }, null);
         }
 
         private void btnFront_Click(object sender, EventArgs e)

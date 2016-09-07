@@ -93,7 +93,6 @@
             this.btnFront = new System.Windows.Forms.Button();
             this.lbPageInfo = new System.Windows.Forms.Label();
             this.dgvEquip = new System.Windows.Forms.DataGridView();
-            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,6 +106,7 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -180,11 +180,13 @@
             "=",
             "<",
             "≥",
-            "≤"});
+            "≤",
+            "无"});
             this.cmbTimeTerm2.Location = new System.Drawing.Point(488, 68);
             this.cmbTimeTerm2.Name = "cmbTimeTerm2";
             this.cmbTimeTerm2.Size = new System.Drawing.Size(33, 22);
             this.cmbTimeTerm2.TabIndex = 30;
+            this.cmbTimeTerm2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpTime2
             // 
@@ -211,6 +213,7 @@
             this.cmbManager.Name = "cmbManager";
             this.cmbManager.Size = new System.Drawing.Size(87, 22);
             this.cmbManager.TabIndex = 27;
+            this.cmbManager.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label16
             // 
@@ -230,6 +233,7 @@
             this.cmbUseCondition.Name = "cmbUseCondition";
             this.cmbUseCondition.Size = new System.Drawing.Size(76, 22);
             this.cmbUseCondition.TabIndex = 25;
+            this.cmbUseCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label13
             // 
@@ -249,6 +253,7 @@
             this.cmbMajorCategory.Name = "cmbMajorCategory";
             this.cmbMajorCategory.Size = new System.Drawing.Size(76, 22);
             this.cmbMajorCategory.TabIndex = 23;
+            this.cmbMajorCategory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label11
             // 
@@ -266,6 +271,7 @@
             this.cmbFactory.Name = "cmbFactory";
             this.cmbFactory.Size = new System.Drawing.Size(185, 20);
             this.cmbFactory.TabIndex = 19;
+            this.cmbFactory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label10
             // 
@@ -300,6 +306,7 @@
             this.cmbTechnician.Name = "cmbTechnician";
             this.cmbTechnician.Size = new System.Drawing.Size(87, 22);
             this.cmbTechnician.TabIndex = 21;
+            this.cmbTechnician.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbTechCondition
             // 
@@ -369,7 +376,8 @@
             "=",
             "<",
             "≥",
-            "≤"});
+            "≤",
+            "无"});
             this.cmbTimeTerm1.Location = new System.Drawing.Point(333, 68);
             this.cmbTimeTerm1.Name = "cmbTimeTerm1";
             this.cmbTimeTerm1.Size = new System.Drawing.Size(33, 22);
@@ -463,16 +471,17 @@
             // 
             this.cmbPublishDtTerm.FormattingEnabled = true;
             this.cmbPublishDtTerm.Items.AddRange(new object[] {
-            "无",
             ">",
             "=",
             "<",
             "≥",
-            "≤"});
+            "≤",
+            "无"});
             this.cmbPublishDtTerm.Location = new System.Drawing.Point(446, 66);
             this.cmbPublishDtTerm.Name = "cmbPublishDtTerm";
             this.cmbPublishDtTerm.Size = new System.Drawing.Size(40, 20);
             this.cmbPublishDtTerm.TabIndex = 52;
+            this.cmbPublishDtTerm.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpPublish
             // 
@@ -506,6 +515,7 @@
             this.cmbPublisher.Name = "cmbPublisher";
             this.cmbPublisher.Size = new System.Drawing.Size(92, 20);
             this.cmbPublisher.TabIndex = 42;
+            this.cmbPublisher.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbSpecificType
             // 
@@ -514,6 +524,7 @@
             this.cmbSpecificType.Name = "cmbSpecificType";
             this.cmbSpecificType.Size = new System.Drawing.Size(92, 20);
             this.cmbSpecificType.TabIndex = 46;
+            this.cmbSpecificType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label18
             // 
@@ -549,6 +560,7 @@
             this.cmbPublishUnit.Name = "cmbPublishUnit";
             this.cmbPublishUnit.Size = new System.Drawing.Size(103, 20);
             this.cmbPublishUnit.TabIndex = 38;
+            this.cmbPublishUnit.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnRestEvent
             // 
@@ -573,6 +585,7 @@
             this.cmbEventType.Name = "cmbEventType";
             this.cmbEventType.Size = new System.Drawing.Size(103, 20);
             this.cmbEventType.TabIndex = 44;
+            this.cmbEventType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label20
             // 
@@ -587,16 +600,17 @@
             // 
             this.cmbEventDtTerm2.FormattingEnabled = true;
             this.cmbEventDtTerm2.Items.AddRange(new object[] {
-            "无",
             ">",
             "=",
             "<",
             "≥",
-            "≤"});
+            "≤",
+            "无"});
             this.cmbEventDtTerm2.Location = new System.Drawing.Point(439, 16);
             this.cmbEventDtTerm2.Name = "cmbEventDtTerm2";
             this.cmbEventDtTerm2.Size = new System.Drawing.Size(40, 20);
             this.cmbEventDtTerm2.TabIndex = 34;
+            this.cmbEventDtTerm2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpEventDt2
             // 
@@ -621,6 +635,7 @@
             this.cmbEventAddress.Name = "cmbEventAddress";
             this.cmbEventAddress.Size = new System.Drawing.Size(143, 20);
             this.cmbEventAddress.TabIndex = 42;
+            this.cmbEventAddress.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label12
             // 
@@ -635,16 +650,17 @@
             // 
             this.cmbEventDtTerm1.FormattingEnabled = true;
             this.cmbEventDtTerm1.Items.AddRange(new object[] {
-            "无",
             ">",
             "=",
             "<",
             "≥",
-            "≤"});
+            "≤",
+            "无"});
             this.cmbEventDtTerm1.Location = new System.Drawing.Point(289, 16);
             this.cmbEventDtTerm1.Name = "cmbEventDtTerm1";
             this.cmbEventDtTerm1.Size = new System.Drawing.Size(40, 20);
             this.cmbEventDtTerm1.TabIndex = 22;
+            this.cmbEventDtTerm1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpEventDt1
             // 
@@ -660,6 +676,7 @@
             this.cmbEventName.Name = "cmbEventName";
             this.cmbEventName.Size = new System.Drawing.Size(103, 20);
             this.cmbEventName.TabIndex = 19;
+            this.cmbEventName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnQueryEvent
             // 
@@ -849,13 +866,6 @@
             this.dgvEquip.TabIndex = 0;
             this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEquip_CellContentClick);
             // 
-            // sfdExcel
-            // 
-            this.sfdExcel.DefaultExt = "xlsx";
-            this.sfdExcel.Filter = "Excel文件|*.xlsx";
-            this.sfdExcel.InitialDirectory = "Desktop";
-            this.sfdExcel.Title = "请选择文件保存位置";
-            // 
             // Column1
             // 
             this.Column1.HeaderText = "序号";
@@ -911,7 +921,7 @@
             // 
             // Column4
             // 
-            this.Column4.DataPropertyName = "FactoryTime";
+            this.Column4.DataPropertyName = "ProductionDate";
             this.Column4.HeaderText = "出厂时间";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -953,6 +963,13 @@
             this.MoreInfo.Name = "MoreInfo";
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
+            // 
+            // sfdExcel
+            // 
+            this.sfdExcel.DefaultExt = "xlsx";
+            this.sfdExcel.Filter = "Excel文件|*.xlsx";
+            this.sfdExcel.InitialDirectory = "Desktop";
+            this.sfdExcel.Title = "请选择文件保存位置";
             // 
             // EquipMainForm
             // 

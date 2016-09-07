@@ -57,7 +57,7 @@ namespace AnonManagementSystem
                         ExcelWorksheet worksheetoe = package.Workbook.Worksheets.Add("油机信息"); //创建workshee
                         worksheetoe.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
                         OeTitleCollection oetitle = new OeTitleCollection();
-                        for (int i = 0; i < vhtitle.Length; i++)
+                        for (int i = 0; i < oetitle.Length; i++)
                         {
                             worksheetoe.Cells[1, i + 1].Value = oetitle[i];
                         }
@@ -74,7 +74,7 @@ namespace AnonManagementSystem
                     ExcelWorksheet worksheetee = package.Workbook.Worksheets.Add("活动信息"); //创建workshee
                     worksheetee.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
                     EventTitleCollection eetitle = new EventTitleCollection();
-                    for (int i = 0; i < vhtitle.Length; i++)
+                    for (int i = 0; i < eetitle.Length; i++)
                     {
                         worksheetee.Cells[1, i + 1].Value = eetitle[i];
                     }
@@ -93,7 +93,7 @@ namespace AnonManagementSystem
                     ExcelWorksheet worksheetmt = package.Workbook.Worksheets.Add("材料信息"); //创建workshee
                     worksheetmt.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
                     MaterialTitleCollection mttitle = new MaterialTitleCollection();
-                    for (int i = 0; i < vhtitle.Length; i++)
+                    for (int i = 0; i < mttitle.Length; i++)
                     {
                         worksheetmt.Cells[1, i + 1].Value = mttitle[i];
                     }
@@ -111,9 +111,9 @@ namespace AnonManagementSystem
                 }
                 return true;
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
         }
 
@@ -207,22 +207,22 @@ namespace AnonManagementSystem
         {
             List<string> oeStrList = new List<string>
             {
-                oe.OeNo                               ,
-                oe.OeModel                            ,
-                oe.OutPower                           ,
-                oe.TechCondition                      ,
-                oe.WorkHour                           ,
-                oe.OeFactory                          ,
+                oe.OeNo,
+                oe.OeModel,
+                oe.OutPower,
+                oe.TechCondition,
+                oe.WorkHour,
+                oe.OeFactory,
                 oe.OeDate.ToString("yyyy/MM/dd"),
-                oe.OeOemNo                            ,
-                oe.MotorModel                         ,
-                oe.MotorPower                         ,
-                oe.MotorFuel                          ,
-                oe.MotorTankage                       ,
-                oe.MotorFactory                       ,
+                oe.OeOemNo,
+                oe.MotorModel,
+                oe.MotorPower,
+                oe.MotorFuel,
+                oe.MotorTankage,
+                oe.MotorFactory,
                 oe.MotorDate.ToString("yyyy/MM/dd"),
-                oe.MotorOemNo                         ,
-                oe.FaultDescri                        ,
+                oe.MotorOemNo,
+                oe.FaultDescri,
             };
             return oeStrList;
         }
