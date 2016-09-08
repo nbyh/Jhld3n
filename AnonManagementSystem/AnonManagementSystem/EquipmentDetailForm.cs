@@ -15,44 +15,34 @@ namespace AnonManagementSystem
     {
         private readonly EquipImageEntities _equipImageEntities = new EquipImageEntities();
 
-        private readonly List<EventData> _eventDataList = new List<EventData>();
+        private  List<EventData> _eventDataList = new List<EventData>();
 
-        private readonly EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
+        private  EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
 
-        private readonly List<EventsImage> _eventsImgList = new List<EventsImage>();
+        private  List<EventsImage> _eventsImgList = new List<EventsImage>();
 
-        private readonly OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
+        private  OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
 
-        private readonly List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
+        private  List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
 
-        private readonly SynchronizationContext _synchContext;
+        private  SynchronizationContext _synchContext;
 
-        private readonly VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
+        private  VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
 
-        private readonly List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
+        private  List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
 
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
 
-        private BindingList<CombatVehicles> _vhBindingList = new BindingList<CombatVehicles>();
-
-        private BindingList<Events> _eveBindingList = new BindingList<Events>();
-
-        private BindingList<Material> _materBindingList = new BindingList<Material>();
-
         private bool _enableedit;
-
         private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
-
         private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
-
+        private BindingList<Events> _eveBindingList = new BindingList<Events>();
         private List<Events> _eventsList = new List<Events>();
-
         private string _id;
-
+        private BindingList<Material> _materBindingList = new BindingList<Material>();
         private List<Material> _materList = new List<Material>();
-
         private OilEngine _oilEngines;
-
+        private BindingList<CombatVehicles> _vhBindingList = new BindingList<CombatVehicles>();
         public EquipmentDetailForm()
         {
             InitializeComponent();
@@ -62,6 +52,7 @@ namespace AnonManagementSystem
         public delegate void SaveChangeSuccess();
 
         public event SaveChangeSuccess SaveSuccess;
+
         public bool Add { get; set; }
 
         public bool Enableedit
@@ -76,175 +67,265 @@ namespace AnonManagementSystem
 
         public int Index { get; set; }
 
-        private void AddEventsSucess(bool add, int index, Events events, List<EventData> eventdatalist,
+        private void AddModifyEventsSucess(bool add, int index, Events events, List<EventData> eventdatalist,
             List<EventsImage> eventimglist)
         {
-            if (add)
+            if (Add)
             {
-                _eventsList.Add(events);
-                _eveBindingList = new BindingList<Events>(_eventsList);
-                dgvEvents.DataSource = _eveBindingList;
-                _eventDataList.AddRange(eventdatalist);
-                _eventsImgList.AddRange(eventimglist);
-                DgvSetup();
+                if (add)
+                {
+                    _eventsList.Add(events);
+                    _eveBindingList = new BindingList<Events>(_eventsList);
+                    dgvEvents.DataSource = _eveBindingList;
+                    _eventDataList.AddRange(eventdatalist);
+                    _eventsImgList.AddRange(eventimglist);
+                    DgvSetup();
+                }
+                else
+                {
+                    #region 界面更新
+
+                    dgvEvents.Rows[index].Cells["No"].Value = events.No;
+                    dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
+                    dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
+                    dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
+                    dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
+                    dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
+
+                    #endregion 界面更新
+
+                    #region 活动事件更新
+
+                    var pointevent = _eventsList.First(ev => ev.No == events.No);
+                    pointevent.Name = events.Name;
+                    pointevent.StartTime = events.StartTime;
+                    pointevent.Address = events.Address;
+                    pointevent.EndTime = events.EndTime;
+                    pointevent.EventType = events.EventType;
+                    pointevent.SpecificType = events.SpecificType;
+                    pointevent.Code = events.Code;
+                    pointevent.PublishUnit = events.PublishUnit;
+                    pointevent.PublishDate = events.PublishDate;
+                    pointevent.Publisher = events.Publisher;
+                    pointevent.According = events.According;
+                    pointevent.PeopleDescri = events.PeopleDescri;
+                    pointevent.ProcessDescri = events.ProcessDescri;
+                    pointevent.HandleStep = events.HandleStep;
+                    pointevent.Problem = events.Problem;
+                    pointevent.Remarks = events.Remarks;
+                    pointevent.Equipment = events.Equipment;
+
+                    _eventDataList = eventdatalist;
+                    _eventsImgList = eventimglist;
+
+                    #endregion 活动事件更新
+                }
             }
             else
             {
-                #region 界面更新
-
-                dgvEvents.Rows[index].Cells["No"].Value = events.No;
-                dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
-                dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
-                dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
-                dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
-                dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
-
-                #endregion 界面更新
-
-                #region 活动事件更新
-
-                var pointevent = (from ev in _equipEntities.Events
-                                  where ev.No == events.No
-                                  select ev).First();
-                pointevent.Name = events.Name;
-                pointevent.StartTime = events.StartTime;
-                pointevent.Address = events.Address;
-                pointevent.EndTime = events.EndTime;
-                pointevent.EventType = events.EventType;
-                pointevent.SpecificType = events.SpecificType;
-                pointevent.Code = events.Code;
-                pointevent.PublishUnit = events.PublishUnit;
-                pointevent.PublishDate = events.PublishDate;
-                pointevent.Publisher = events.Publisher;
-                pointevent.According = events.According;
-                pointevent.PeopleDescri = events.PeopleDescri;
-                pointevent.ProcessDescri = events.ProcessDescri;
-                pointevent.HandleStep = events.HandleStep;
-                pointevent.Problem = events.Problem;
-                pointevent.Remarks = events.Remarks;
-                pointevent.Equipment = events.Equipment;
-
-                #endregion 活动事件更新
-
-                #region 活动事件图片更新
-
-                List<string> deinoList = eventimglist.Select(ed => ed.Name).ToList();
-                var apointei = from ed in _eventsImageEntities.EventsImage
-                               where ed.SerialNo == events.No
-                               select ed;
-                List<string> seinoList = apointei.Select(ed => ed.Name).ToList();
-                if (eventimglist.Any())
+                if (add)
                 {
-                    foreach (var data in eventimglist)
+                    _eventsList.Add(events);
+                    _eveBindingList = new BindingList<Events>(_eventsList);
+                    dgvEvents.DataSource = _eveBindingList;
+                    _eventDataList.AddRange(eventdatalist);
+                    _eventsImgList.AddRange(eventimglist);
+                    DgvSetup();
+                }
+                else
+                {
+                    #region 界面更新
+
+                    dgvEvents.Rows[index].Cells["No"].Value = events.No;
+                    dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
+                    dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
+                    dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
+                    dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
+                    dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
+
+                    #endregion 界面更新
+
+                    #region 活动事件更新
+
+                    var pointevent = (from ev in _equipEntities.Events
+                                      where ev.No == events.No
+                                      select ev).First();
+                    pointevent.Name = events.Name;
+                    pointevent.StartTime = events.StartTime;
+                    pointevent.Address = events.Address;
+                    pointevent.EndTime = events.EndTime;
+                    pointevent.EventType = events.EventType;
+                    pointevent.SpecificType = events.SpecificType;
+                    pointevent.Code = events.Code;
+                    pointevent.PublishUnit = events.PublishUnit;
+                    pointevent.PublishDate = events.PublishDate;
+                    pointevent.Publisher = events.Publisher;
+                    pointevent.According = events.According;
+                    pointevent.PeopleDescri = events.PeopleDescri;
+                    pointevent.ProcessDescri = events.ProcessDescri;
+                    pointevent.HandleStep = events.HandleStep;
+                    pointevent.Problem = events.Problem;
+                    pointevent.Remarks = events.Remarks;
+                    pointevent.Equipment = events.Equipment;
+
+                    #endregion 活动事件更新
+
+                    #region 事件数据更新
+
+                    List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
+                    var apointed = _equipEntities.EventData.Where(ed => ed.EventsNo == events.No);
+                    List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
+                    if (eventdatalist.Any())
                     {
-                        if (!seinoList.Contains(data.Name))
+                        foreach (var data in eventdatalist)
                         {
-                            //todo：增加
-                            _eventsImageEntities.EventsImage.Add(data);
+                            if (!sevdnoList.Contains(data.ID))
+                            {
+                                _equipEntities.EventData.Add(data);
+                            }
+                            else
+                            {
+                                var evd = _equipEntities.EventData.First(ed => ed.EventsNo == events.No && ed.ID == data.ID);
+                                evd.Name = data.Name;
+                                evd.Spot = data.Spot;
+                                evd.EventsNo = data.EventsNo;
+                            }
                         }
                     }
-                }
-                if (apointei.Any())
-                {
-                    foreach (var data in apointei)
+                    if (apointed.Any())
                     {
-                        if (!deinoList.Contains(data.Name))
+                        foreach (var data in apointed)
                         {
-                            _eventsImageEntities.EventsImage.Remove(data);
+                            if (!devdnoList.Contains(data.ID))
+                            {
+                                _equipEntities.EventData.Remove(data);
+                            }
                         }
                     }
-                }
 
-                #endregion 活动事件图片更新
+                    #endregion 事件数据更新
 
-                #region 事件数据更新
+                    #region 活动事件图片更新
 
-                List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
-                var apointed = from ed in _equipEntities.EventData
-                               where ed.EventsNo == events.No
-                               select ed;
-                List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
-                if (eventdatalist.Any())
-                {
-                    foreach (var data in eventdatalist)
+                    List<string> deinoList = eventimglist.Select(ed => ed.Name).ToList();
+                    var apointei = _eventsImageEntities.EventsImage.Where(ed => ed.SerialNo == events.No);
+                    List<string> seinoList = apointei.Select(ed => ed.Name).ToList();
+                    if (eventimglist.Any())
                     {
-                        if (!sevdnoList.Contains(data.ID))
+                        foreach (var data in eventimglist)
                         {
-                            //todo：增加
-                            _equipEntities.EventData.Add(data);
-                        }
-                        else
-                        {
-                            //todo：修改
-                            var evd = (from ed in _equipEntities.EventData
-                                       where ed.EventsNo == events.No && ed.ID == data.ID
-                                       select ed).First();
-                            evd.Name = data.Name;
-                            evd.Spot = data.Spot;
-                            evd.EventsNo = data.EventsNo;
+                            if (!seinoList.Contains(data.Name))
+                            {
+                                _eventsImageEntities.EventsImage.Add(data);
+                            }
                         }
                     }
-                }
-                if (apointed.Any())
-                {
-                    foreach (var data in apointed)
+                    if (apointei.Any())
                     {
-                        if (!devdnoList.Contains(data.ID))
+                        foreach (var data in apointei)
                         {
-                            //todo:删除
-                            _equipEntities.EventData.Remove(data);
+                            if (!deinoList.Contains(data.Name))
+                            {
+                                _eventsImageEntities.EventsImage.Remove(data);
+                            }
                         }
                     }
-                }
 
-                #endregion 事件数据更新
+                    #endregion 活动事件图片更新
+
+
+                }
             }
         }
 
-        private void AddMaterialSucess(bool add, int index, Material material)
+        private void AddModifyMaterialSucess(bool add, int index, Material material)
         {
-            if (add)
+            if (Add)
             {
-                _materList.Add(material);
-                _materBindingList = new BindingList<Material>(_materList);
-                dgvMaterial.DataSource = _materBindingList;
-                DgvSetup();
+                if (add)
+                {
+                    _materList.Add(material);
+                    _materBindingList = new BindingList<Material>(_materList);
+                    dgvMaterial.DataSource = _materBindingList;
+                    DgvSetup();
+                }
+                else
+                {
+                    #region 界面更新
+
+                    dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
+                    dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
+                    dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
+                    dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
+                    dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
+                    dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
+                    dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
+
+                    #endregion 界面更新
+
+                    #region 材料临时数据更新
+
+                    var pointmaterial = _materList.First(m => m.No == material.No);
+                    pointmaterial.Name = material.Name;
+                    pointmaterial.Type = material.Type;
+                    pointmaterial.PaperSize = material.PaperSize;
+                    pointmaterial.Pagination = material.Pagination;
+                    pointmaterial.Edition = material.Edition;
+                    pointmaterial.Volume = material.Volume;
+                    pointmaterial.Date = material.Date;
+                    pointmaterial.DocumentLink = material.DocumentLink;
+                    pointmaterial.StoreSpot = material.StoreSpot;
+                    pointmaterial.Content = material.Content;
+                    pointmaterial.Equipment = material.Equipment;
+
+                    #endregion 材料数据更新
+                }
             }
+            else
             {
-                #region 界面更新
+                if (add)
+                {
+                    _materList.Add(material);
+                    _materBindingList = new BindingList<Material>(_materList);
+                    dgvMaterial.DataSource = _materBindingList;
+                    DgvSetup();
+                }
+                else
+                {
+                    #region 界面更新
 
-                dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
-                dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
-                dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
-                dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
-                dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
-                dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
-                dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
+                    dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
+                    dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
+                    dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
+                    dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
+                    dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
+                    dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
+                    dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
 
-                #endregion 界面更新
+                    #endregion 界面更新
 
-                #region 材料数据更新
+                    #region 材料数据更新
 
-                var pointmaterial = (from ma in _equipEntities.Material
-                                     where ma.No == material.No
-                                     select ma).First();
-                pointmaterial.Name = material.Name;
-                pointmaterial.Type = material.Type;
-                pointmaterial.PaperSize = material.PaperSize;
-                pointmaterial.Pagination = material.Pagination;
-                pointmaterial.Edition = material.Edition;
-                pointmaterial.Volume = material.Volume;
-                pointmaterial.Date = material.Date;
-                pointmaterial.DocumentLink = material.DocumentLink;
-                pointmaterial.StoreSpot = material.StoreSpot;
-                pointmaterial.Content = material.Content;
-                pointmaterial.Equipment = material.Equipment;
+                    var pointmaterial = _equipEntities.Material.First(ma => ma.No == material.No);
+                    pointmaterial.Name = material.Name;
+                    pointmaterial.Type = material.Type;
+                    pointmaterial.PaperSize = material.PaperSize;
+                    pointmaterial.Pagination = material.Pagination;
+                    pointmaterial.Edition = material.Edition;
+                    pointmaterial.Volume = material.Volume;
+                    pointmaterial.Date = material.Date;
+                    pointmaterial.DocumentLink = material.DocumentLink;
+                    pointmaterial.StoreSpot = material.StoreSpot;
+                    pointmaterial.Content = material.Content;
+                    pointmaterial.Equipment = material.Equipment;
 
-                #endregion 材料数据更新
+                    #endregion 材料数据更新
+                }
+
             }
         }
 
-        private void AddVehicleSucess(bool add, int index, CombatVehicles combatVehicles,
+        private void AddModifyVehicleSucess(bool add, int index, CombatVehicles combatVehicles,
             List<VehiclesImage> vehiclesImgList, OilEngine oilEngine, List<OilEngineImage> oilImgList)
         {
             if (add)
@@ -398,23 +479,87 @@ namespace AnonManagementSystem
             }
         }
 
-        private void cmsPicture_Opening(object sender, CancelEventArgs e)
+        private void dgvCombatVehicles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-        }
-
-        private void dGvCombatVehicles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && dgvCombatVehicles.Columns[e.ColumnIndex].Name.Equals("VehcileMoreInfo"))
+            if (e.ColumnIndex >= 0 && dgvCombatVehicles.Columns[e.ColumnIndex].Name.Equals("VehicleMoreInfo"))
             {
+                string id = dgvCombatVehicles.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString();
+                OilEngine oe = null;
+                List<OilEngineImage> oeImgList = new List<OilEngineImage>();
+                CombatVehicles vh = Add ? _comVehList.First(mm => mm.SerialNo == id) : _equipEntities.CombatVehicles.First(mm => mm.SerialNo == id);
+                if (vh.CombineOe)
+                {
+                    oe = Add ? _oilEngines : _equipEntities.OilEngine.First(mm => mm.Vehicle == id);
+                    oeImgList = Add ? _oilImgList.Where(mm => mm.SerialNo == id).ToList() : _oilImageEntities.OilEngineImage.Where(mm => mm.SerialNo == id).ToList();
+                }
+                List<VehiclesImage> vilist = Add ? _vehImgList.Where(mm => mm.SerialNo == id).ToList() : _vehiclesImageEntities.VehiclesImage.Where(mm => mm.SerialNo == id).ToList();
                 VehicleDetailForm vehicleDetailForm = new VehicleDetailForm()
                 {
                     Enableedit = _enableedit,
                     Index = e.RowIndex,
                     Add = false,
-                    Id = dgvCombatVehicles.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString()
+                    Id = id,
+                    Comvh = vh,
+                    VehiclesImagesList = vilist,
+                    Oe = oe,
+                    OilImagesList = oeImgList
                 };
-                vehicleDetailForm.SaveVehicleSucess += AddVehicleSucess;
+                vehicleDetailForm.SaveVehicleSucess += AddModifyVehicleSucess;
                 vehicleDetailForm.Show();
+            }
+        }
+
+        private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && dgvEvents.Columns[e.ColumnIndex].Name.Equals("EventMoreInfo"))
+            {
+                string id = dgvEvents.Rows[e.RowIndex].Cells["No"].Value.ToString();
+                Events ee = Add ? _eventsList.First(mm => mm.No == id) : _equipEntities.Events.First(mm => mm.No == id);
+                List<EventData> edlist = Add ? _eventDataList.Where(mm => mm.EventsNo == id).ToList() : _equipEntities.EventData.Where(mm => mm.EventsNo == id).ToList();
+                List<EventsImage> eilist = Add ? _eventsImgList.Where(mm => mm.SerialNo == id).ToList() : _eventsImageEntities.EventsImage.Where(mm => mm.SerialNo == id).ToList();
+                AddEventsForm eventDetailForm = new AddEventsForm()
+                {
+                    Enableedit = _enableedit,
+                    Index = e.RowIndex,
+                    Add = false,
+                    Id = id,
+                    Eqevents = ee,
+                    EventdataList = edlist,
+                    EventsImgList = eilist
+                };
+                eventDetailForm.SaveEventsSucess += AddModifyEventsSucess;
+                eventDetailForm.Show();
+            }
+        }
+
+        private void dgvMaterial_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("MaterialMoreInfo"))
+            {
+                string id = dgvMaterial.Rows[e.RowIndex].Cells["No"].Value.ToString();
+                Material m = Add ? _materList.First(mm => mm.No == id) : _equipEntities.Material.First(mm => mm.No == id);
+                AddMaterialForm materialDetailForm = new AddMaterialForm()
+                {
+                    Enableedit = _enableedit,
+                    Index = e.RowIndex,
+                    Add = false,
+                    Id = id,
+                    Material1 = m
+                };
+                materialDetailForm.SaveMaterialSucess += AddModifyMaterialSucess;
+                materialDetailForm.Show();
+            }
+            if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("DocumentLink"))
+            {
+                string path = dgvMaterial[e.ColumnIndex, e.RowIndex].Value.ToString();
+                FileInfo fInfo = new FileInfo(path);
+                string dir = fInfo.DirectoryName;
+                if (dir == null) return;
+                ProcessStartInfo psi = new ProcessStartInfo("Explorer.exe")
+                {
+                    Arguments = dir
+                };
+                Process.Start(psi);
             }
         }
 
@@ -436,50 +581,6 @@ namespace AnonManagementSystem
                 dgvMaterial[8, i].Value = "详细信息";
             }
         }
-        private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && dgvEvents.Columns[e.ColumnIndex].Name.Equals("EventMoreInfo"))
-            {
-                AddEventsForm eventDetailForm = new AddEventsForm()
-                {
-                    Enableedit = _enableedit,
-                    Index = e.RowIndex,
-                    Add = false,
-                    Id = dgvEvents.Rows[e.RowIndex].Cells["No"].Value.ToString()
-                };
-                eventDetailForm.SaveEventsSucess += AddEventsSucess;
-                eventDetailForm.Show();
-            }
-        }
-
-        private void dgvMaterial_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("MaterialMoreInfo"))
-            {
-                AddMaterialForm materialDetailForm = new AddMaterialForm()
-                {
-                    Enableedit = _enableedit,
-                    Index = e.RowIndex,
-                    Add = false,
-                    Id = dgvMaterial.Rows[e.RowIndex].Cells["No"].Value.ToString()
-                };
-                materialDetailForm.SaveMaterialSucess += AddMaterialSucess;
-                materialDetailForm.Show();
-            }
-            if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("DocumentLink"))
-            {
-                string path = dgvMaterial[e.ColumnIndex, e.RowIndex].Value.ToString();
-                FileInfo fInfo = new FileInfo(path);
-                string dir = fInfo.DirectoryName;
-                if (dir == null) return;
-                ProcessStartInfo psi = new ProcessStartInfo("Explorer.exe")
-                {
-                    Arguments = dir
-                };
-                Process.Start(psi);
-            }
-        }
-
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
             tsbRestore.Visible = !Add;
@@ -649,7 +750,7 @@ namespace AnonManagementSystem
                 Enabled = _enableedit,
                 Id = tbSerialNo.Text
             };
-            eFrom.SaveEventsSucess += AddEventsSucess;
+            eFrom.SaveEventsSucess += AddModifyEventsSucess;
             eFrom.ShowDialog();
         }
 
@@ -689,7 +790,7 @@ namespace AnonManagementSystem
                 Enabled = _enableedit,
                 Id = tbSerialNo.Text
             };
-            addMaterialForm.SaveMaterialSucess += AddMaterialSucess;
+            addMaterialForm.SaveMaterialSucess += AddModifyMaterialSucess;
             addMaterialForm.ShowDialog();
         }
 
@@ -702,7 +803,7 @@ namespace AnonManagementSystem
                 Enabled = _enableedit,
                 Id = tbSerialNo.Text
             };
-            vdForm.SaveVehicleSucess += AddVehicleSucess;
+            vdForm.SaveVehicleSucess += AddModifyVehicleSucess;
             vdForm.ShowDialog();
         }
 
@@ -1026,32 +1127,54 @@ namespace AnonManagementSystem
 
                         #region 修改活动
 
-                        var eventinDb = _equipEntities.CombatVehicles.Where(vh => vh.Equipment == equipfirst.SerialNo);
+                        var eventinDb = _equipEntities.Events.Where(ee => ee.Equipment == equipfirst.SerialNo);
                         foreach (var item in eventinDb)
                         {
-                            var noimg = _comVehList.Where(n => n.SerialNo == item.SerialNo).ToList();
+                            var noimg = _eventsList.Where(n => n.No == item.No).ToList();
                             if (noimg.Any())
                             {
                                 var temp = noimg.First();
-                                item.SerialNo = temp.SerialNo;
-                                //todo:等等
-
+                                item.Name = temp.Name;
+                                item.Address = temp.Address;
+                                item.StartTime = temp.StartTime;
+                                item.EndTime = temp.EndTime;
+                                item.EventType = temp.EventType;
+                                item.SpecificType = temp.SpecificType;
+                                item.Code = temp.Code;
+                                item.HigherUnit = temp.HigherUnit;
+                                item.Executor = temp.Executor;
+                                item.NoInEvents = temp.NoInEvents;
+                                item.PublishUnit = temp.PublishUnit;
+                                item.PublishDate = temp.PublishDate;
+                                item.Publisher = temp.Publisher;
+                                item.According = temp.According;
+                                item.PeopleDescri = temp.PeopleDescri;
+                                item.ProcessDescri = temp.ProcessDescri;
+                                item.HandleStep = temp.HandleStep;
+                                item.Problem = temp.Problem;
+                                item.Remarks = temp.Remarks;
 
                                 //活动材料修改
                             }
                             else
                             {
-                                _equipEntities.CombatVehicles.Remove(item);
-                                //todo：删除图片，活动材料
+                                var ed = _equipEntities.EventData.Where(d => d.EventsNo == item.No);
+                                _equipEntities.EventData.RemoveRange(ed);
+                                var ei = _eventsImageEntities.EventsImage.Where(i => i.SerialNo == item.No);
+                                _eventsImageEntities.EventsImage.RemoveRange(ei);
+                                _equipEntities.Events.Remove(item);
                             }
                         }
-                        foreach (var item in _comVehList)
+                        foreach (var item in _eventsList)
                         {
-                            var eqimg = _equipEntities.CombatVehicles.Where(n => n.SerialNo == item.SerialNo);
+                            var eqimg = _equipEntities.Events.Where(n => n.No == item.No);
                             if (!eqimg.Any())
                             {
-                                _equipEntities.CombatVehicles.Add(item);
-                                //todo：增加图片，活动材料
+                                _equipEntities.Events.Add(item);
+                                var ed = _eventDataList.Where(i => i.EventsNo == item.No);
+                                _equipEntities.EventData.AddRange(ed);
+                                var ei = _eventsImgList.Where(i => i.SerialNo == item.No);
+                                _eventsImageEntities.EventsImage.AddRange(ei);
                             }
                         }
 
@@ -1066,9 +1189,16 @@ namespace AnonManagementSystem
                             if (noimg.Any())
                             {
                                 var temp = noimg.First();
-                                item.No = temp.No;
-                                //todo:等等
-
+                                item.Name = temp.Name;
+                                item.PaperSize = temp.PaperSize;
+                                item.Pagination = temp.Pagination;
+                                item.Edition = temp.Edition;
+                                item.Volume = temp.Volume;
+                                item.Date = temp.Date;
+                                item.DocumentLink = temp.DocumentLink;
+                                item.StoreSpot = temp.StoreSpot;
+                                item.Content = temp.Content;
+                                item.Equipment = temp.Equipment;
                             }
                             else
                             {

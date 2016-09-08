@@ -14,6 +14,7 @@ namespace AnonManagementSystem
         public event SaveMaterial SaveMaterialSucess;
 
         private bool _enableedit = false;
+
         private string _id;
         public int Index { get; set; }
 
@@ -22,12 +23,20 @@ namespace AnonManagementSystem
             set { _id = value; }
         }
 
-        public bool Add { get; set; }
+        public bool Add{ get; set; }
 
         public bool Enableedit
         {
             set { _enableedit = value; }
         }
+
+        public Material Material1
+        {
+            get { return _material; }
+            set { _material = value; }
+        }
+
+        private Material _material;
 
         private readonly EquipmentManagementEntities _eqEntities = new EquipmentManagementEntities();
         private readonly SynchronizationContext _synchContext;
@@ -42,7 +51,7 @@ namespace AnonManagementSystem
         {
             try
             {
-                Material ma = new Material()
+                _material = new Material()
                 {
                     No = tbDocNo.Text,
                     Name = tbDocName.Text,
@@ -56,7 +65,7 @@ namespace AnonManagementSystem
                     Content = tbBrief.Text,
                     Equipment = _id
                 };
-                SaveMaterialSucess?.Invoke(Add, Index, ma);
+                SaveMaterialSucess?.Invoke(Add, Index, _material);
                 CommonLogHelper.GetInstance("LogInfo").Info(@"随机材料保存成功");
                 MessageBox.Show(this, @"随机材料保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
@@ -79,26 +88,22 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    var material = from eq in _eqEntities.Material
+                    var qmaterial = from eq in _eqEntities.Material
                                    select eq;
-                    List<string> sharpList = (from s in material where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
+                    List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
                     cmbShape.DataSource = sharpList;
                     if (!Add)
                     {
-                        var appointma = from ma in material
-                                        where ma.No.ToString() == _id
-                                        select ma;
-                        var mafirst = appointma.First();
-                        tbDocNo.Text = mafirst.No.ToString();
-                        tbDocName.Text = mafirst.Name;
-                        cmbShape.Text = mafirst.PaperSize;
-                        nUdPages.Value = decimal.Parse(mafirst.Pagination);
-                        tbEdition.Text = mafirst.Edition;
-                        nUdCopybook.Value = decimal.Parse(mafirst.Volume);
-                        dtpDate.Value = mafirst.Date;
-                        tbDocumentLink.Text = mafirst.DocumentLink;
-                        tbStoreSpot.Text = mafirst.StoreSpot;
-                        tbBrief.Text = mafirst.Content;
+                        tbDocNo.Text = _material.No.ToString();
+                        tbDocName.Text = _material.Name;
+                        cmbShape.Text = _material.PaperSize;
+                        nUdPages.Value = decimal.Parse(_material.Pagination);
+                        tbEdition.Text = _material.Edition;
+                        nUdCopybook.Value = decimal.Parse(_material.Volume);
+                        dtpDate.Value = _material.Date;
+                        tbDocumentLink.Text = _material.DocumentLink;
+                        tbStoreSpot.Text = _material.StoreSpot;
+                        tbBrief.Text = _material.Content;
                         CommonLogHelper.GetInstance("LogInfo").Info($"加载随机材料{_id}成功");
                     }
                 }

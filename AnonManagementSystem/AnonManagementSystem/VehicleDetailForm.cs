@@ -20,7 +20,8 @@ namespace AnonManagementSystem
 
         private List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
         private List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
-
+        private CombatVehicles _comvh;
+        private OilEngine _oe;
         private string _id;
         private bool _enableedit = false;
 
@@ -44,11 +45,35 @@ namespace AnonManagementSystem
             set { _enableedit = value; }
         }
 
+        public List<VehiclesImage> VehiclesImagesList
+        {
+            get { return _vehiclesImagesList; }
+            set { _vehiclesImagesList = value; }
+        }
+
+        public List<OilEngineImage> OilImagesList
+        {
+            get { return _oilImagesList; }
+            set { _oilImagesList = value; }
+        }
+
+        public CombatVehicles Comvh
+        {
+            get { return _comvh; }
+            set { _comvh = value; }
+        }
+
+        public OilEngine Oe
+        {
+            get { return _oe; }
+            set { _oe = value; }
+        }
+
         private void tsbSave_Click(object sender, EventArgs e)
         {
             try
             {
-                CombatVehicles cv = new CombatVehicles()
+                _comvh = new CombatVehicles()
                 {
                     Name = cmbName.Text,
                     SerialNo = tbSerialNo.Text,
@@ -74,7 +99,7 @@ namespace AnonManagementSystem
                 };
                 if (chkCombineOe.Checked)
                 {
-                    OilEngine oe = new OilEngine()
+                    _oe = new OilEngine()
                     {
                         OeNo = tbOilEngineNo.Text,
                         OeModel = cmbOeModel.Text,
@@ -94,11 +119,11 @@ namespace AnonManagementSystem
                         FaultDescri = tbOeFailDetail.Text,
                         Vehicle = tbVehiclesNo.Text
                     };
-                    SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, oe, _oilImagesList);
+                    SaveVehicleSucess?.Invoke(Add, Index, _comvh, _vehiclesImagesList,_oe, _oilImagesList);
                 }
                 else
                 {
-                    SaveVehicleSucess?.Invoke(Add, Index, cv, _vehiclesImagesList, null, null);
+                    SaveVehicleSucess?.Invoke(Add, Index, _comvh, _vehiclesImagesList, null, null);
                 }
                 CommonLogHelper.GetInstance("LogInfo").Info(@"车辆数据保存成功");
                 MessageBox.Show(this, @"车辆数据保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -212,16 +237,6 @@ namespace AnonManagementSystem
                {
                    if (!Add)
                    {
-                       EquipmentManagementEntities eme = new EquipmentManagementEntities();
-                       VehiclesImagesEntities vie = new VehiclesImagesEntities();
-                       OilEngineImagesEntities oeie = new OilEngineImagesEntities();
-                       var vh = (from eh in eme.CombatVehicles
-                                 where eh.SerialNo == _id
-                                 select eh).First();
-
-                       _vehiclesImagesList = (from vhimg in vie.VehiclesImage
-                                              where vhimg.SerialNo == _id
-                                              select vhimg).ToList();
                        Dictionary<string, Image> vhimgdic = new Dictionary<string, Image>();
                        foreach (var equipmentImage in _vehiclesImagesList)
                        {
@@ -233,39 +248,31 @@ namespace AnonManagementSystem
                        }
                        _synchContext.Post(a =>
                        {
-                           cmbName.Text = vh.Name;
-                           tbSerialNo.Text = vh.SerialNo;
-                           cmbVehiclesModel.Text = vh.Model;
-                           tbVehiclesNo.Text = vh.VehiclesNo;
-                           cmbAutoModel.Text = vh.MotorModel;
-                           cmbTechCondition.Text = vh.TechCondition;
-                           cmbFactory.Text = vh.Factory;
-                           dtpTime.Value = vh.ProductionDate;
-                           tbMass.Text = vh.Mass;
-                           tbTankAge.Text = vh.Tankage;
-                           tbSize.Text = vh.OverallSize;
-                           cmbFuelType.Text = vh.FuelType;
-                           cmbDriveModel.Text = vh.DrivingModel;
-                           tbMileAge.Text = vh.Mileage;
-                           tbOutput.Text = vh.Output;
-                           tbLicenseCarry.Text = vh.LicenseCarry;
-                           cmbCharger.Text = vh.VehicleChargers;
-                           cmbSpot.Text = vh.VehicleSpotNo;
-                           tbVehiclesDescri.Text = vh.VehicleDescri;
-                           chkCombineOe.Checked = vh.CombineOe;
+                           cmbName.Text = _comvh.Name;
+                           tbSerialNo.Text = _comvh.SerialNo;
+                           cmbVehiclesModel.Text = _comvh.Model;
+                           tbVehiclesNo.Text = _comvh.VehiclesNo;
+                           cmbAutoModel.Text = _comvh.MotorModel;
+                           cmbTechCondition.Text = _comvh.TechCondition;
+                           cmbFactory.Text = _comvh.Factory;
+                           dtpTime.Value = _comvh.ProductionDate;
+                           tbMass.Text = _comvh.Mass;
+                           tbTankAge.Text = _comvh.Tankage;
+                           tbSize.Text = _comvh.OverallSize;
+                           cmbFuelType.Text = _comvh.FuelType;
+                           cmbDriveModel.Text = _comvh.DrivingModel;
+                           tbMileAge.Text = _comvh.Mileage;
+                           tbOutput.Text = _comvh.Output;
+                           tbLicenseCarry.Text = _comvh.LicenseCarry;
+                           cmbCharger.Text = _comvh.VehicleChargers;
+                           cmbSpot.Text = _comvh.VehicleSpotNo;
+                           tbVehiclesDescri.Text = _comvh.VehicleDescri;
+                           chkCombineOe.Checked = _comvh.CombineOe;
                            ilvVehicle.ImgDictionary = vhimgdic;
                            ilvVehicle.ShowImages();
                        }, null);
-                       if (vh.CombineOe)
+                       if (_comvh.CombineOe)
                        {
-                           var vhoe = (from oe in eme.OilEngine
-                                       where oe.Vehicle == _id
-                                       select oe).First();
-
-
-                           _oilImagesList = (from oeimg in oeie.OilEngineImage
-                                             where oeimg.SerialNo == _id
-                                             select oeimg).ToList();
 
                            Dictionary<string, Image> oeimgdic = new Dictionary<string, Image>();
                            foreach (var equipmentImage in _oilImagesList)
@@ -278,23 +285,23 @@ namespace AnonManagementSystem
                            }
                            _synchContext.Post(a =>
                            {
-                               tbOilEngineNo.Text = vhoe.OeNo;
-                               cmbOeModel.Text = vhoe.OeModel;
-                               tbOePower.Text = vhoe.OutPower;
-                               cmbTechCondition.Text = vhoe.TechCondition;
-                               nudWorkHour.Value = int.Parse(vhoe.WorkHour);
-                               cmbOeFactory.Text = vhoe.OeFactory;
-                               dtpOeTime.Value = vhoe.OeDate;
-                               tbOeOemNo.Text = vhoe.OeOemNo;
-                               cmbMotorModel.Text = vhoe.MotorModel;
-                               tbMotorPower.Text = vhoe.MotorPower;
-                               cmbMotorFuelType.Text = vhoe.MotorFuel;
-                               tbMotorTankage.Text = vhoe.MotorTankage;
-                               cmbMotorFactory.Text = vhoe.MotorFactory;
-                               dtpMotorTime.Value = vhoe.MotorDate;
-                               tbMotorOemNo.Text = vhoe.MotorOemNo;
-                               tbOeFailDetail.Text = vhoe.FaultDescri;
-                               tbVehiclesNo.Text = vhoe.Vehicle;
+                               tbOilEngineNo.Text = _oe.OeNo;
+                               cmbOeModel.Text = _oe.OeModel;
+                               tbOePower.Text = _oe.OutPower;
+                               cmbTechCondition.Text = _oe.TechCondition;
+                               nudWorkHour.Value = int.Parse(_oe.WorkHour);
+                               cmbOeFactory.Text = _oe.OeFactory;
+                               dtpOeTime.Value = _oe.OeDate;
+                               tbOeOemNo.Text = _oe.OeOemNo;
+                               cmbMotorModel.Text = _oe.MotorModel;
+                               tbMotorPower.Text = _oe.MotorPower;
+                               cmbMotorFuelType.Text = _oe.MotorFuel;
+                               tbMotorTankage.Text = _oe.MotorTankage;
+                               cmbMotorFactory.Text = _oe.MotorFactory;
+                               dtpMotorTime.Value = _oe.MotorDate;
+                               tbMotorOemNo.Text = _oe.MotorOemNo;
+                               tbOeFailDetail.Text = _oe.FaultDescri;
+                               tbVehiclesNo.Text = _oe.Vehicle;
                                ilvOe.ImgDictionary = oeimgdic;
                                ilvOe.ShowImages();
                            }, null);

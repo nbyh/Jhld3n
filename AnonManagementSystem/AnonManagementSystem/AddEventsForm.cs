@@ -1,6 +1,7 @@
 ﻿using EquipmentInformationData;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace AnonManagementSystem
         private readonly SynchronizationContext _synchContext;
         private bool _add = false;
         private bool _enableedit = false;
+        private Events _events;
         private List<EventData> _eventdataList = new List<EventData>();
         private List<EventsImage> _eventsImgList = new List<EventsImage>();
         private string _id;
@@ -43,6 +45,24 @@ namespace AnonManagementSystem
 
         public int Index { get; set; }
 
+        public List<EventData> EventdataList
+        {
+            get { return _eventdataList; }
+            set { _eventdataList = value; }
+        }
+
+        public List<EventsImage> EventsImgList
+        {
+            get { return _eventsImgList; }
+            set { _eventsImgList = value; }
+        }
+
+        public Events Eqevents
+        {
+            get { return _events; }
+            set { _events = value; }
+        }
+
         private void AddEventsForm_Load(object sender, EventArgs e)
         {
         }
@@ -53,18 +73,6 @@ namespace AnonManagementSystem
             {
                 if (!Add)
                 {
-                    EventsImagesEntities vie = new EventsImagesEntities();
-                    var vh = (from eh in _eqEntities.Events
-                              where eh.No == _id
-                              select eh).First();
-                    var ed = from d in _eqEntities.EventData
-                             where d.EventsNo == _id
-                             select d;
-                    _eventdataList = ed.ToList();
-                    _eventsImgList = (from vhimg in vie.EventsImage
-                                      where vhimg.SerialNo == _id
-                                      select vhimg).ToList();
-
                     Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
                     foreach (var equipmentImage in _eventsImgList)
                     {
@@ -76,26 +84,26 @@ namespace AnonManagementSystem
                     }
                     _synchContext.Post(a =>
                     {
-                        tbSerialNo.Text = vh.No;
-                        cmbEventName.Text = vh.Name;
-                        cmbAddress.Text = vh.Address;
-                        dtpEventDt1.Value = vh.StartTime;
-                        dtpEventDt2.Value = vh.EndTime;
-                        cmbEventType.Text = vh.EventType;
-                        cmbSpecificType.Text = vh.SpecificType;
-                        tbCode.Text = vh.Code;
-                        cmbHigherUnit.Text = vh.HigherUnit;
-                        cmbExecutor.Text = vh.Executor;
-                        tbNoInEvents.Text = vh.NoInEvents;
-                        cmbPulishUnit.Text = vh.PublishUnit;
-                        dtpPulishDt.Value = vh.PublishDate;
-                        cmbPulisher.Text = vh.Publisher;
-                        tbAccording.Text = vh.According;
-                        tbDesci.Text = vh.PeopleDescri;
-                        tbProcessDescri.Text = vh.ProcessDescri;
-                        tbHandleStep.Text = vh.HandleStep;
-                        tbProblems.Text = vh.Problem;
-                        tbRemark.Text = vh.Remarks;
+                        tbSerialNo.Text = _events.No;
+                        cmbEventName.Text = _events.Name;
+                        cmbAddress.Text = _events.Address;
+                        dtpEventDt1.Value = _events.StartTime;
+                        dtpEventDt2.Value = _events.EndTime;
+                        cmbEventType.Text = _events.EventType;
+                        cmbSpecificType.Text = _events.SpecificType;
+                        tbCode.Text = _events.Code;
+                        cmbHigherUnit.Text = _events.HigherUnit;
+                        cmbExecutor.Text = _events.Executor;
+                        tbNoInEvents.Text = _events.NoInEvents;
+                        cmbPulishUnit.Text = _events.PublishUnit;
+                        dtpPulishDt.Value = _events.PublishDate;
+                        cmbPulisher.Text = _events.Publisher;
+                        tbAccording.Text = _events.According;
+                        tbDesci.Text = _events.PeopleDescri;
+                        tbProcessDescri.Text = _events.ProcessDescri;
+                        tbHandleStep.Text = _events.HandleStep;
+                        tbProblems.Text = _events.Problem;
+                        tbRemark.Text = _events.Remarks;
 
                         dgvEvents.DataSource = _eventdataList;
 
@@ -210,7 +218,7 @@ namespace AnonManagementSystem
                 }
                 if (_add)
                 {
-                    Events eve = new Events()
+                    _events = new Events()
                     {
                         No = tbSerialNo.Text,
                         Name = cmbEventName.Text,
@@ -247,20 +255,16 @@ namespace AnonManagementSystem
                         _eventdataList.Add(ed);
                     }
 
-                    SaveEventsSucess?.Invoke(Add, Index, eve, _eventdataList, _eventsImgList);
+                    SaveEventsSucess?.Invoke(Add, Index, _events, _eventdataList, _eventsImgList);
                 }
                 else
                 {
-                    var eventfirst = (from eq in _eqEntities.Events
-                                      where eq.Equipment == _id
-                                      select eq).First();
+                    var eventfirst = _eqEntities.Events.First(eq => eq.Equipment == _id);
 
                     for (int i = 0; i < dgvEvents.RowCount; i++)
                     {
                         string no = dgvEvents[1, i].Value.ToString();
-                        var eventsdata = (from ed in _eqEntities.EventData
-                                          where ed.EventsNo == no
-                                          select ed).First();
+                        var eventsdata = _eqEntities.EventData.First(ed => ed.EventsNo == no);
                         eventsdata.Name = dgvEvents[2, i].Value.ToString();
                         eventsdata.Spot = dgvEvents[3, i].Value.ToString();
                         _eventdataList.Add(eventsdata);

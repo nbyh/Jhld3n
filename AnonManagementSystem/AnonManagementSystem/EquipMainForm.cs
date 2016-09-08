@@ -57,9 +57,7 @@ namespace AnonManagementSystem
                                  select comvh;
                         _equipEntities.CombatVehicles.RemoveRange(vh);
                         _equipEntities.SaveChanges();
-                        var ev = from eve in _equipEntities.Events
-                                 where eve.Equipment == id
-                                 select eve;
+                        var ev = _equipEntities.Events.Where(eve => eve.Equipment == id);
                         if (ev.Any())
                         {
                             foreach (var eventse in ev)
