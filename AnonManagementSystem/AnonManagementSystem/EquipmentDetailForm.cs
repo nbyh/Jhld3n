@@ -15,21 +15,21 @@ namespace AnonManagementSystem
     {
         private readonly EquipImageEntities _equipImageEntities = new EquipImageEntities();
 
-        private  List<EventData> _eventDataList = new List<EventData>();
+        private List<EventData> _eventDataList = new List<EventData>();
 
-        private  EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
+        private EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
 
-        private  List<EventsImage> _eventsImgList = new List<EventsImage>();
+        private List<EventsImage> _eventsImgList = new List<EventsImage>();
 
-        private  OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
+        private OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
 
-        private  List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
+        private List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
 
-        private  SynchronizationContext _synchContext;
+        private SynchronizationContext _synchContext;
 
-        private  VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
+        private VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
 
-        private  List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
+        private List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
 
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
 
@@ -43,6 +43,7 @@ namespace AnonManagementSystem
         private List<Material> _materList = new List<Material>();
         private OilEngine _oilEngines;
         private BindingList<CombatVehicles> _vhBindingList = new BindingList<CombatVehicles>();
+
         public EquipmentDetailForm()
         {
             InitializeComponent();
@@ -70,30 +71,30 @@ namespace AnonManagementSystem
         private void AddModifyEventsSucess(bool add, int index, Events events, List<EventData> eventdatalist,
             List<EventsImage> eventimglist)
         {
-            if (Add)
+            if (add)
             {
-                if (add)
+                _eventsList.Add(events);
+                _eveBindingList = new BindingList<Events>(_eventsList);
+                dgvEvents.DataSource = _eveBindingList;
+                _eventDataList.AddRange(eventdatalist);
+                _eventsImgList.AddRange(eventimglist);
+                DgvSetup();
+            }
+            else
+            {
+                #region 界面更新
+
+                dgvEvents.Rows[index].Cells["No"].Value = events.No;
+                dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
+                dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
+                dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
+                dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
+                dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
+
+                #endregion 界面更新
+
+                if (Add)
                 {
-                    _eventsList.Add(events);
-                    _eveBindingList = new BindingList<Events>(_eventsList);
-                    dgvEvents.DataSource = _eveBindingList;
-                    _eventDataList.AddRange(eventdatalist);
-                    _eventsImgList.AddRange(eventimglist);
-                    DgvSetup();
-                }
-                else
-                {
-                    #region 界面更新
-
-                    dgvEvents.Rows[index].Cells["No"].Value = events.No;
-                    dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
-                    dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
-                    dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
-                    dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
-                    dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
-
-                    #endregion 界面更新
-
                     #region 活动事件更新
 
                     var pointevent = _eventsList.First(ev => ev.No == events.No);
@@ -120,36 +121,11 @@ namespace AnonManagementSystem
 
                     #endregion 活动事件更新
                 }
-            }
-            else
-            {
-                if (add)
-                {
-                    _eventsList.Add(events);
-                    _eveBindingList = new BindingList<Events>(_eventsList);
-                    dgvEvents.DataSource = _eveBindingList;
-                    _eventDataList.AddRange(eventdatalist);
-                    _eventsImgList.AddRange(eventimglist);
-                    DgvSetup();
-                }
                 else
                 {
-                    #region 界面更新
-
-                    dgvEvents.Rows[index].Cells["No"].Value = events.No;
-                    dgvEvents.Rows[index].Cells["Name"].Value = events.Name;
-                    dgvEvents.Rows[index].Cells["StartTime"].Value = events.StartTime;
-                    dgvEvents.Rows[index].Cells["Address"].Value = events.Address;
-                    dgvEvents.Rows[index].Cells["EndTime"].Value = events.EndTime;
-                    dgvEvents.Rows[index].Cells["SpecificType"].Value = events.SpecificType;
-
-                    #endregion 界面更新
-
                     #region 活动事件更新
 
-                    var pointevent = (from ev in _equipEntities.Events
-                                      where ev.No == events.No
-                                      select ev).First();
+                    var pointevent = _equipEntities.Events.First(ev => ev.No == events.No);
                     pointevent.Name = events.Name;
                     pointevent.StartTime = events.StartTime;
                     pointevent.Address = events.Address;
@@ -232,36 +208,35 @@ namespace AnonManagementSystem
                     }
 
                     #endregion 活动事件图片更新
-
-
                 }
             }
         }
 
         private void AddModifyMaterialSucess(bool add, int index, Material material)
         {
-            if (Add)
+            if (add)
             {
-                if (add)
-                {
-                    _materList.Add(material);
-                    _materBindingList = new BindingList<Material>(_materList);
-                    dgvMaterial.DataSource = _materBindingList;
-                    DgvSetup();
-                }
-                else
-                {
-                    #region 界面更新
+                _materList.Add(material);
+                _materBindingList = new BindingList<Material>(_materList);
+                dgvMaterial.DataSource = _materBindingList;
+                DgvSetup();
+            }
+            else
+            {
+                #region 界面更新
 
-                    dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
-                    dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
-                    dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
-                    dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
-                    dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
-                    dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
-                    dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
+                dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
+                dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
+                dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
+                dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
+                dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
+                dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
+                dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
 
-                    #endregion 界面更新
+                #endregion 界面更新
+
+                if (Add)
+                {
 
                     #region 材料临时数据更新
 
@@ -280,30 +255,8 @@ namespace AnonManagementSystem
 
                     #endregion 材料数据更新
                 }
-            }
-            else
-            {
-                if (add)
-                {
-                    _materList.Add(material);
-                    _materBindingList = new BindingList<Material>(_materList);
-                    dgvMaterial.DataSource = _materBindingList;
-                    DgvSetup();
-                }
                 else
                 {
-                    #region 界面更新
-
-                    dgvMaterial.Rows[index].Cells["MaterialNo"].Value = material.No;
-                    dgvMaterial.Rows[index].Cells["MaterialName"].Value = material.Name;
-                    dgvMaterial.Rows[index].Cells["MaterialEdition"].Value = material.Edition;
-                    dgvMaterial.Rows[index].Cells["MaterialPagination"].Value = material.Pagination;
-                    dgvMaterial.Rows[index].Cells["PaginationDate"].Value = material.Date;
-                    dgvMaterial.Rows[index].Cells["PaginationSpot"].Value = material.StoreSpot;
-                    dgvMaterial.Rows[index].Cells["DocumentLink"].Value = material.DocumentLink;
-
-                    #endregion 界面更新
-
                     #region 材料数据更新
 
                     var pointmaterial = _equipEntities.Material.First(ma => ma.No == material.No);
@@ -360,121 +313,157 @@ namespace AnonManagementSystem
 
                 #endregion 界面更新
 
-                #region 车辆更新
-
-                var pointcv = (from cv in _equipEntities.CombatVehicles
-                               where cv.SerialNo == combatVehicles.SerialNo
-                               select cv).First();
-                pointcv.Name = combatVehicles.Name;
-                pointcv.Model = combatVehicles.Model;
-                pointcv.VehiclesNo = combatVehicles.VehiclesNo;
-                pointcv.MotorModel = combatVehicles.MotorModel;
-                pointcv.TechCondition = combatVehicles.TechCondition;
-                pointcv.Factory = combatVehicles.Factory;
-                pointcv.ProductionDate = combatVehicles.ProductionDate;
-                pointcv.Mass = combatVehicles.Mass;
-                pointcv.Tankage = combatVehicles.Tankage;
-                pointcv.OverallSize = combatVehicles.OverallSize;
-                pointcv.FuelType = combatVehicles.FuelType;
-                pointcv.DrivingModel = combatVehicles.DrivingModel;
-                pointcv.Mileage = combatVehicles.Mileage;
-                pointcv.Output = combatVehicles.Output;
-                pointcv.LicenseCarry = combatVehicles.LicenseCarry;
-                pointcv.VehicleChargers = combatVehicles.VehicleChargers;
-                pointcv.VehicleSpotNo = combatVehicles.VehicleSpotNo;
-                pointcv.VehicleDescri = combatVehicles.VehicleDescri;
-                pointcv.CombineOe = combatVehicles.CombineOe;
-                pointcv.Equipment = combatVehicles.Equipment;
-
-                #endregion 车辆更新
-
-                #region 车辆图片更新
-
-                List<string> devdnoList = vehiclesImgList.Select(ed => ed.Name).ToList();
-                var apointed = from ed in _vehiclesImageEntities.VehiclesImage
-                               where ed.SerialNo == combatVehicles.SerialNo
-                               select ed;
-                List<string> sevdnoList = apointed.Select(ed => ed.Name).ToList();
-                if (vehiclesImgList.Any())
+                if (Add)
                 {
-                    foreach (var data in vehiclesImgList)
-                    {
-                        if (!sevdnoList.Contains(data.Name))
-                        {
-                            //todo：增加
-                            _vehiclesImageEntities.VehiclesImage.Add(data);
-                        }
-                    }
+                    #region 车辆信息更新
+
+                    var vh = _comVehList.First(v => v.SerialNo == combatVehicles.SerialNo);
+                    vh.Name = combatVehicles.Name;
+                    vh.Model = combatVehicles.Model;
+                    vh.VehiclesNo = combatVehicles.VehiclesNo;
+                    vh.MotorModel = combatVehicles.MotorModel;
+                    vh.TechCondition = combatVehicles.TechCondition;
+                    vh.Factory = combatVehicles.Factory;
+                    vh.ProductionDate = combatVehicles.ProductionDate;
+                    vh.Mass = combatVehicles.Mass;
+                    vh.Tankage = combatVehicles.Tankage;
+                    vh.OverallSize = combatVehicles.OverallSize;
+                    vh.FuelType = combatVehicles.FuelType;
+                    vh.DrivingModel = combatVehicles.DrivingModel;
+                    vh.Mileage = combatVehicles.Mileage;
+                    vh.Output = combatVehicles.Output;
+                    vh.LicenseCarry = combatVehicles.LicenseCarry;
+                    vh.VehicleChargers = combatVehicles.VehicleChargers;
+                    vh.VehicleSpotNo = combatVehicles.VehicleSpotNo;
+                    vh.VehicleDescri = combatVehicles.VehicleDescri;
+                    vh.CombineOe = combatVehicles.CombineOe;
+                    vh.Equipment = combatVehicles.Equipment;
+                    _vehImgList = vehiclesImgList;
+                    _oilEngines = oilEngine;
+                    _oilImgList = oilImgList;
+
+                    #endregion
+
                 }
-                if (apointed.Any())
+                else
                 {
-                    foreach (var data in apointed)
+                    #region 车辆更新
+
+                    var pointcv = (from cv in _equipEntities.CombatVehicles
+                        where cv.SerialNo == combatVehicles.SerialNo
+                        select cv).First();
+                    pointcv.Name = combatVehicles.Name;
+                    pointcv.Model = combatVehicles.Model;
+                    pointcv.VehiclesNo = combatVehicles.VehiclesNo;
+                    pointcv.MotorModel = combatVehicles.MotorModel;
+                    pointcv.TechCondition = combatVehicles.TechCondition;
+                    pointcv.Factory = combatVehicles.Factory;
+                    pointcv.ProductionDate = combatVehicles.ProductionDate;
+                    pointcv.Mass = combatVehicles.Mass;
+                    pointcv.Tankage = combatVehicles.Tankage;
+                    pointcv.OverallSize = combatVehicles.OverallSize;
+                    pointcv.FuelType = combatVehicles.FuelType;
+                    pointcv.DrivingModel = combatVehicles.DrivingModel;
+                    pointcv.Mileage = combatVehicles.Mileage;
+                    pointcv.Output = combatVehicles.Output;
+                    pointcv.LicenseCarry = combatVehicles.LicenseCarry;
+                    pointcv.VehicleChargers = combatVehicles.VehicleChargers;
+                    pointcv.VehicleSpotNo = combatVehicles.VehicleSpotNo;
+                    pointcv.VehicleDescri = combatVehicles.VehicleDescri;
+                    pointcv.CombineOe = combatVehicles.CombineOe;
+                    pointcv.Equipment = combatVehicles.Equipment;
+
+                    #endregion 车辆更新
+
+                    #region 车辆图片更新
+
+                    List<string> devdnoList = vehiclesImgList.Select(ed => ed.Name).ToList();
+                    var apointed = from ed in _vehiclesImageEntities.VehiclesImage
+                        where ed.SerialNo == combatVehicles.SerialNo
+                        select ed;
+                    List<string> sevdnoList = apointed.Select(ed => ed.Name).ToList();
+                    if (vehiclesImgList.Any())
                     {
-                        if (!devdnoList.Contains(data.Name))
+                        foreach (var data in vehiclesImgList)
                         {
-                            _vehiclesImageEntities.VehiclesImage.Remove(data);
-                        }
-                    }
-                }
-
-                #endregion 车辆图片更新
-
-                if (combatVehicles.CombineOe)
-                {
-                    #region 油机更新
-
-                    var pointoe = (from oe in _equipEntities.OilEngine
-                                   where oe.OeNo == oilEngine.OeNo
-                                   select oe).First();
-                    pointoe.OeModel = oilEngine.OeModel;
-                    pointoe.OutPower = oilEngine.OutPower;
-                    pointoe.TechCondition = oilEngine.TechCondition;
-                    pointoe.WorkHour = oilEngine.WorkHour;
-                    pointoe.OeFactory = oilEngine.OeFactory;
-                    pointoe.OeDate = oilEngine.OeDate;
-                    pointoe.OeOemNo = oilEngine.OeOemNo;
-                    pointoe.MotorModel = oilEngine.MotorModel;
-                    pointoe.MotorPower = oilEngine.MotorPower;
-                    pointoe.MotorFuel = oilEngine.MotorFuel;
-                    pointoe.MotorTankage = oilEngine.MotorTankage;
-                    pointoe.MotorFactory = oilEngine.MotorFactory;
-                    pointoe.MotorDate = oilEngine.MotorDate;
-                    pointoe.MotorOemNo = oilEngine.MotorOemNo;
-                    pointoe.FaultDescri = oilEngine.FaultDescri;
-                    pointoe.Vehicle = oilEngine.Vehicle;
-
-                    #endregion 油机更新
-
-                    #region 油机图片更新
-
-                    List<string> doilnoList = oilImgList.Select(ed => ed.Name).ToList();
-                    var apointoi = from ed in _oilImageEntities.OilEngineImage
-                                   where ed.SerialNo == combatVehicles.SerialNo
-                                   select ed;
-                    List<string> soilnoList = apointoi.Select(ed => ed.Name).ToList();
-                    if (oilImgList.Any())
-                    {
-                        foreach (var data in oilImgList)
-                        {
-                            if (!soilnoList.Contains(data.Name))
+                            if (!sevdnoList.Contains(data.Name))
                             {
                                 //todo：增加
-                                _oilImageEntities.OilEngineImage.Add(data);
+                                _vehiclesImageEntities.VehiclesImage.Add(data);
                             }
                         }
                     }
-                    if (apointoi.Any())
+                    if (apointed.Any())
                     {
-                        foreach (var data in apointoi)
+                        foreach (var data in apointed)
                         {
-                            if (!doilnoList.Contains(data.Name))
+                            if (!devdnoList.Contains(data.Name))
                             {
-                                _oilImageEntities.OilEngineImage.Remove(data);
+                                _vehiclesImageEntities.VehiclesImage.Remove(data);
                             }
                         }
                     }
 
-                    #endregion 油机图片更新
+                    #endregion 车辆图片更新
+
+                    if (combatVehicles.CombineOe)
+                    {
+                        #region 油机更新
+
+                        var pointoe = (from oe in _equipEntities.OilEngine
+                            where oe.OeNo == oilEngine.OeNo
+                            select oe).First();
+                        pointoe.OeModel = oilEngine.OeModel;
+                        pointoe.OutPower = oilEngine.OutPower;
+                        pointoe.TechCondition = oilEngine.TechCondition;
+                        pointoe.WorkHour = oilEngine.WorkHour;
+                        pointoe.OeFactory = oilEngine.OeFactory;
+                        pointoe.OeDate = oilEngine.OeDate;
+                        pointoe.OeOemNo = oilEngine.OeOemNo;
+                        pointoe.MotorModel = oilEngine.MotorModel;
+                        pointoe.MotorPower = oilEngine.MotorPower;
+                        pointoe.MotorFuel = oilEngine.MotorFuel;
+                        pointoe.MotorTankage = oilEngine.MotorTankage;
+                        pointoe.MotorFactory = oilEngine.MotorFactory;
+                        pointoe.MotorDate = oilEngine.MotorDate;
+                        pointoe.MotorOemNo = oilEngine.MotorOemNo;
+                        pointoe.FaultDescri = oilEngine.FaultDescri;
+                        pointoe.Vehicle = oilEngine.Vehicle;
+
+                        #endregion 油机更新
+
+                        #region 油机图片更新
+
+                        List<string> doilnoList = oilImgList.Select(ed => ed.Name).ToList();
+                        var apointoi = from ed in _oilImageEntities.OilEngineImage
+                            where ed.SerialNo == combatVehicles.SerialNo
+                            select ed;
+                        List<string> soilnoList = apointoi.Select(ed => ed.Name).ToList();
+                        if (oilImgList.Any())
+                        {
+                            foreach (var data in oilImgList)
+                            {
+                                if (!soilnoList.Contains(data.Name))
+                                {
+                                    //todo：增加
+                                    _oilImageEntities.OilEngineImage.Add(data);
+                                }
+                            }
+                        }
+                        if (apointoi.Any())
+                        {
+                            foreach (var data in apointoi)
+                            {
+                                if (!doilnoList.Contains(data.Name))
+                                {
+                                    _oilImageEntities.OilEngineImage.Remove(data);
+                                }
+                            }
+                        }
+
+                        #endregion 油机图片更新
+                    }
+                    
                 }
             }
         }
@@ -1044,6 +1033,7 @@ namespace AnonManagementSystem
                         {
                             _equipEntities.OilEngine.Add(_oilEngines);
                             _oilImageEntities.OilEngineImage.AddRange(_oilImgList);
+                            _oilImageEntities.SaveChanges();
                         }
                         _equipEntities.Material.AddRange(_materList);
                         _equipEntities.EventData.AddRange(_eventDataList);
@@ -1086,151 +1076,8 @@ namespace AnonManagementSystem
 
                         #endregion
 
-                        #region 修改车辆信息和油机信息
-
-                        var vhinDb = _equipEntities.CombatVehicles.Where(vh => vh.Equipment == equipfirst.SerialNo);
-                        foreach (var item in vhinDb)
-                        {
-                            var noimg = _comVehList.Where(n => n.SerialNo == item.SerialNo).ToList();
-                            if (noimg.Any())
-                            {
-                                var temp = noimg.First();
-                                item.SerialNo = temp.SerialNo;
-                                //todo:等等
-
-                                if (temp.CombineOe)
-                                {
-
-                                }
-                            }
-                            else
-                            {
-                                _equipEntities.CombatVehicles.Remove(item);
-                                //todo：删除图片、油机
-                                if (item.CombineOe)
-                                {
-
-                                }
-                            }
-                        }
-                        foreach (var item in _comVehList)
-                        {
-                            var eqimg = _equipEntities.CombatVehicles.Where(n => n.SerialNo == item.SerialNo);
-                            if (!eqimg.Any())
-                            {
-                                _equipEntities.CombatVehicles.Add(item);
-                                //todo：增加图片，判断油机 增加油机及图片
-                            }
-                        }
-
-                        #endregion
-
-                        #region 修改活动
-
-                        var eventinDb = _equipEntities.Events.Where(ee => ee.Equipment == equipfirst.SerialNo);
-                        foreach (var item in eventinDb)
-                        {
-                            var noimg = _eventsList.Where(n => n.No == item.No).ToList();
-                            if (noimg.Any())
-                            {
-                                var temp = noimg.First();
-                                item.Name = temp.Name;
-                                item.Address = temp.Address;
-                                item.StartTime = temp.StartTime;
-                                item.EndTime = temp.EndTime;
-                                item.EventType = temp.EventType;
-                                item.SpecificType = temp.SpecificType;
-                                item.Code = temp.Code;
-                                item.HigherUnit = temp.HigherUnit;
-                                item.Executor = temp.Executor;
-                                item.NoInEvents = temp.NoInEvents;
-                                item.PublishUnit = temp.PublishUnit;
-                                item.PublishDate = temp.PublishDate;
-                                item.Publisher = temp.Publisher;
-                                item.According = temp.According;
-                                item.PeopleDescri = temp.PeopleDescri;
-                                item.ProcessDescri = temp.ProcessDescri;
-                                item.HandleStep = temp.HandleStep;
-                                item.Problem = temp.Problem;
-                                item.Remarks = temp.Remarks;
-
-                                //活动材料修改
-                            }
-                            else
-                            {
-                                var ed = _equipEntities.EventData.Where(d => d.EventsNo == item.No);
-                                _equipEntities.EventData.RemoveRange(ed);
-                                var ei = _eventsImageEntities.EventsImage.Where(i => i.SerialNo == item.No);
-                                _eventsImageEntities.EventsImage.RemoveRange(ei);
-                                _equipEntities.Events.Remove(item);
-                            }
-                        }
-                        foreach (var item in _eventsList)
-                        {
-                            var eqimg = _equipEntities.Events.Where(n => n.No == item.No);
-                            if (!eqimg.Any())
-                            {
-                                _equipEntities.Events.Add(item);
-                                var ed = _eventDataList.Where(i => i.EventsNo == item.No);
-                                _equipEntities.EventData.AddRange(ed);
-                                var ei = _eventsImgList.Where(i => i.SerialNo == item.No);
-                                _eventsImageEntities.EventsImage.AddRange(ei);
-                            }
-                        }
-
-                        #endregion
-
-                        #region 修改资料
-
-                        var matinDb = _equipEntities.Material.Where(vh => vh.Equipment == equipfirst.SerialNo);
-                        foreach (var item in matinDb)
-                        {
-                            var noimg = _materList.Where(n => n.No == item.No).ToList();
-                            if (noimg.Any())
-                            {
-                                var temp = noimg.First();
-                                item.Name = temp.Name;
-                                item.PaperSize = temp.PaperSize;
-                                item.Pagination = temp.Pagination;
-                                item.Edition = temp.Edition;
-                                item.Volume = temp.Volume;
-                                item.Date = temp.Date;
-                                item.DocumentLink = temp.DocumentLink;
-                                item.StoreSpot = temp.StoreSpot;
-                                item.Content = temp.Content;
-                                item.Equipment = temp.Equipment;
-                            }
-                            else
-                            {
-                                _equipEntities.Material.Remove(item);
-                            }
-                        }
-                        foreach (var item in _materList)
-                        {
-                            var eqimg = _equipEntities.Material.Where(n => n.No == item.No);
-                            if (!eqimg.Any())
-                            {
-                                _equipEntities.Material.Add(item);
-                            }
-                        }
-
-                        #endregion
-
-                        #region 增加设备图片
-
-                        foreach (var item in _equipImageList)
-                        {
-                            var eqimg = _equipImageEntities.EquipmentImage.Where(img => img.Name == item.Name);
-                            if (!eqimg.Any())
-                            {
-                                _equipImageEntities.EquipmentImage.Add(item);
-                            }
-                        }
-
-                        #endregion
-
-
-                        //todo:未完，修改还需完善，修改中可能有添加，要更新或是增加
+                        _vehiclesImageEntities.SaveChanges();
+                        _oilImageEntities.SaveChanges();
                         _equipImageEntities.SaveChanges();
                         _equipEntities.SaveChanges();
                     }
