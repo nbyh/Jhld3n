@@ -170,9 +170,6 @@ namespace AnonManagementSystem
 
         private void tsbExportExcel_Click(object sender, EventArgs e)
         {
-            Form form = ActiveMdiChild;
-            var mdiFunction = (IMdiFunction)form;
-            mdiFunction?.Export2Excel();
         }
 
         private void tsbDelete_Click(object sender, EventArgs e)
@@ -180,6 +177,23 @@ namespace AnonManagementSystem
             Form form = ActiveMdiChild;
             var mdiFunction = (IMdiFunction)form;
             mdiFunction?.DataDelete();
+        }
+
+        private void 导入数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 单条数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form = ActiveMdiChild;
+            var mdiFunction = (IMdiFunction)form;
+            mdiFunction?.ExportOne2Excel();
+
+        }
+
+        private void 全部数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
         }
     }
 }

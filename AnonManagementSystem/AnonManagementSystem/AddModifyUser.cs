@@ -69,7 +69,7 @@ namespace AnonManagementSystem
                     tbUser.ReadOnly = true;
                     tbUser.Text = _user;
                     tbPwdSure.Text = tbPwd.Text = _pwd;
-                    cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
+                    cmbAuthority.SelectedText = _enableedit ? "可写" : "只读";
                 }
             }
             else
@@ -77,7 +77,7 @@ namespace AnonManagementSystem
                 tbUser.ReadOnly = true;
                 tbUser.Text = _user;
                 tbPwdSure.Text = tbPwd.Text = _pwd;
-                cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
+                cmbAuthority.SelectedText = _enableedit ? "可写" : "只读";
             }
         }
 
@@ -103,7 +103,7 @@ namespace AnonManagementSystem
                 MessageBox.Show(@"请选择权限!");
                 return;
             }
-            bool enableedit = cmbAuthority.SelectedItem.ToString().Equals("可写");
+            bool enableedit = cmbAuthority.SelectedText.ToString().Equals("可写");
             AddOrModifyUser?.Invoke(_add, _rowindex, _id, tbUser.Text, tbPwdSure.Text, enableedit);
             Close();
         }

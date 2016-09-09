@@ -11,7 +11,9 @@ namespace AnonManagementSystem
 
         void DataRefresh();
 
-        void Export2Excel();
+        void ExportOne2Excel();
+
+        void ExportAll2Excel();
     }
 
     public interface IAddModify

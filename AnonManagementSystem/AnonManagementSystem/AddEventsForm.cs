@@ -84,7 +84,7 @@ namespace AnonManagementSystem
                     }
                     _synchContext.Post(a =>
                     {
-                        tbSerialNo.Text = _events.No;
+                        cmbEventNo.Text = _events.No;
                         cmbEventName.Text = _events.Name;
                         cmbAddress.Text = _events.Address;
                         dtpEventDt1.Value = _events.StartTime;
@@ -153,7 +153,7 @@ namespace AnonManagementSystem
                     {
                         Images = imgBytes,
                         Name = imgpath,
-                        SerialNo = tbSerialNo.Text
+                        SerialNo = cmbEventNo.Text
                     };
                     _eventsImgList.Add(cvImag);
                     using (MemoryStream ms = new MemoryStream(imgBytes))
@@ -212,7 +212,7 @@ namespace AnonManagementSystem
                         ID = dgvEvents[1, i].Value.ToString(),
                         Name = dgvEvents[2, i].Value.ToString(),
                         Spot = dgvEvents[3, i].Value.ToString(),
-                        EventsNo = tbSerialNo.Text
+                        EventsNo = cmbEventNo.Text
                     };
                     _eventdataList.Add(ed);
                 }
@@ -220,7 +220,7 @@ namespace AnonManagementSystem
                 {
                     _events = new Events()
                     {
-                        No = tbSerialNo.Text,
+                        No = cmbEventNo.Text,
                         Name = cmbEventName.Text,
                         Address = cmbAddress.Text,
                         StartTime = dtpEventDt1.Value.Date,
@@ -250,7 +250,7 @@ namespace AnonManagementSystem
                             ID = dgvEvents[1, i].Value.ToString(),
                             Name = dgvEvents[2, i].Value.ToString(),
                             Spot = dgvEvents[3, i].Value.ToString(),
-                            EventsNo = tbSerialNo.Text
+                            EventsNo = cmbEventNo.Text
                         };
                         _eventdataList.Add(ed);
                     }
@@ -270,7 +270,7 @@ namespace AnonManagementSystem
                         _eventdataList.Add(eventsdata);
                     }
 
-                    eventfirst.No = tbSerialNo.Text;
+                    eventfirst.No = cmbEventNo.Text;
                     eventfirst.Name = cmbEventName.Text;
                     eventfirst.Address = cmbAddress.Text;
                     eventfirst.StartTime = dtpEventDt1.Value.Date;

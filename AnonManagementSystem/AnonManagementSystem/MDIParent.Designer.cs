@@ -34,11 +34,6 @@
             this.SparePartsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeUserMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -49,6 +44,12 @@
             this.tsbAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.tsbExportExcel = new System.Windows.Forms.ToolStripButton();
+            this.导出数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单条数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.全部数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.数据整理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.数据备份ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导入数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -59,12 +60,12 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EquipMenu,
             this.SparePartsMenu,
+            this.导出数据ToolStripMenuItem,
+            this.数据整理ToolStripMenuItem,
             this.SettingMenu,
             this.ChangeUserMenu,
-            this.windowsMenu,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(884, 25);
             this.menuStrip.TabIndex = 0;
@@ -98,45 +99,6 @@
             this.ChangeUserMenu.Size = new System.Drawing.Size(84, 21);
             this.ChangeUserMenu.Text = "切换用户(&V)";
             this.ChangeUserMenu.Click += new System.EventHandler(this.ChangeUserMenu_Click);
-            // 
-            // windowsMenu
-            // 
-            this.windowsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cascadeToolStripMenuItem,
-            this.tileVerticalToolStripMenuItem,
-            this.tileHorizontalToolStripMenuItem,
-            this.closeAllToolStripMenuItem});
-            this.windowsMenu.Name = "windowsMenu";
-            this.windowsMenu.Size = new System.Drawing.Size(64, 21);
-            this.windowsMenu.Text = "窗口(&W)";
-            // 
-            // cascadeToolStripMenuItem
-            // 
-            this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.cascadeToolStripMenuItem.Text = "层叠(&C)";
-            this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.CascadeToolStripMenuItem_Click);
-            // 
-            // tileVerticalToolStripMenuItem
-            // 
-            this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.tileVerticalToolStripMenuItem.Text = "垂直平铺(&V)";
-            this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.TileVerticalToolStripMenuItem_Click);
-            // 
-            // tileHorizontalToolStripMenuItem
-            // 
-            this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.tileHorizontalToolStripMenuItem.Text = "水平平铺(&H)";
-            this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.TileHorizontalToolStripMenuItem_Click);
-            // 
-            // closeAllToolStripMenuItem
-            // 
-            this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.closeAllToolStripMenuItem.Text = "全部关闭(&L)";
-            this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.CloseAllToolStripMenuItem_Click);
             // 
             // helpMenu
             // 
@@ -216,7 +178,53 @@
             this.tsbExportExcel.Name = "tsbExportExcel";
             this.tsbExportExcel.Size = new System.Drawing.Size(81, 22);
             this.tsbExportExcel.Text = "导出Excel";
+            this.tsbExportExcel.Visible = false;
             this.tsbExportExcel.Click += new System.EventHandler(this.tsbExportExcel_Click);
+            // 
+            // 导出数据ToolStripMenuItem
+            // 
+            this.导出数据ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.单条数据ToolStripMenuItem,
+            this.全部数据ToolStripMenuItem});
+            this.导出数据ToolStripMenuItem.Name = "导出数据ToolStripMenuItem";
+            this.导出数据ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.导出数据ToolStripMenuItem.Text = "数据导出";
+            // 
+            // 单条数据ToolStripMenuItem
+            // 
+            this.单条数据ToolStripMenuItem.Name = "单条数据ToolStripMenuItem";
+            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.单条数据ToolStripMenuItem.Text = "单条导出";
+            this.单条数据ToolStripMenuItem.Click += new System.EventHandler(this.单条数据ToolStripMenuItem_Click);
+            // 
+            // 全部数据ToolStripMenuItem
+            // 
+            this.全部数据ToolStripMenuItem.Name = "全部数据ToolStripMenuItem";
+            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.全部数据ToolStripMenuItem.Text = "全部导出";
+            this.全部数据ToolStripMenuItem.Click += new System.EventHandler(this.全部数据ToolStripMenuItem_Click);
+            // 
+            // 数据整理ToolStripMenuItem
+            // 
+            this.数据整理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.数据备份ToolStripMenuItem,
+            this.导入数据ToolStripMenuItem});
+            this.数据整理ToolStripMenuItem.Name = "数据整理ToolStripMenuItem";
+            this.数据整理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.数据整理ToolStripMenuItem.Text = "数据整理";
+            // 
+            // 数据备份ToolStripMenuItem
+            // 
+            this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
+            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.数据备份ToolStripMenuItem.Text = "数据备份";
+            // 
+            // 导入数据ToolStripMenuItem
+            // 
+            this.导入数据ToolStripMenuItem.Name = "导入数据ToolStripMenuItem";
+            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入数据ToolStripMenuItem.Text = "数据合并";
+            this.导入数据ToolStripMenuItem.Click += new System.EventHandler(this.导入数据ToolStripMenuItem_Click);
             // 
             // MdiParent
             // 
@@ -252,14 +260,9 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tileHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EquipMenu;
         private System.Windows.Forms.ToolStripMenuItem SparePartsMenu;
         private System.Windows.Forms.ToolStripMenuItem SettingMenu;
-        private System.Windows.Forms.ToolStripMenuItem windowsMenu;
-        private System.Windows.Forms.ToolStripMenuItem cascadeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tileVerticalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMenu;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStrip toolStrip;
@@ -268,6 +271,12 @@
         private System.Windows.Forms.ToolStripButton tsbDelete;
         private System.Windows.Forms.ToolStripButton tsbExportExcel;
         private System.Windows.Forms.ToolStripMenuItem ChangeUserMenu;
+        private System.Windows.Forms.ToolStripMenuItem 导出数据ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 单条数据ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 全部数据ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 数据整理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 数据备份ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导入数据ToolStripMenuItem;
     }
 }
 

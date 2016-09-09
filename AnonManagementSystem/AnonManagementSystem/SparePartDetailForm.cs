@@ -51,15 +51,15 @@ namespace AnonManagementSystem
                             where eq.SerialNo == _id
                             select eq;
             var spfirst = appointsp.First();
-            cmbName.SelectedItem = spfirst.Name;
-            cmbModel.SelectedItem = spfirst.Model;
-            cmbStoreSpot.SelectedItem = spfirst.StoreSpot;
+            cmbName.SelectedText = spfirst.Name;
+            cmbModel.SelectedText = spfirst.Model;
+            cmbStoreSpot.SelectedText = spfirst.StoreSpot;
             tbSerialNo.Text = spfirst.SerialNo;
             cmbStatus.Text = spfirst.Status;
             dtpStoreDate.Value = spfirst.StoreDate;
-            cmbUseType.SelectedItem = spfirst.UseType;
+            cmbUseType.SelectedText = spfirst.UseType;
             nUdAmount.Value = int.Parse(spfirst.Amount);
-            cmbFactory.SelectedItem = spfirst.Factory;
+            cmbFactory.SelectedText = spfirst.Factory;
             dtpOemDate.Value = spfirst.ProductionDate;
 
 

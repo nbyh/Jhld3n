@@ -14,25 +14,15 @@ namespace AnonManagementSystem
     public partial class EquipmentDetailForm : Form, IAddModify
     {
         private readonly EquipImageEntities _equipImageEntities = new EquipImageEntities();
-
         private List<EventData> _eventDataList = new List<EventData>();
-
         private EventsImagesEntities _eventsImageEntities = new EventsImagesEntities();
-
         private List<EventsImage> _eventsImgList = new List<EventsImage>();
-
         private OilEngineImagesEntities _oilImageEntities = new OilEngineImagesEntities();
-
         private List<OilEngineImage> _oilImgList = new List<OilEngineImage>();
-
         private SynchronizationContext _synchContext;
-
         private VehiclesImagesEntities _vehiclesImageEntities = new VehiclesImagesEntities();
-
         private List<VehiclesImage> _vehImgList = new List<VehiclesImage>();
-
         private List<CombatVehicles> _comVehList = new List<CombatVehicles>();
-
         private bool _enableedit;
         private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
         private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
@@ -350,8 +340,8 @@ namespace AnonManagementSystem
                     #region 车辆更新
 
                     var pointcv = (from cv in _equipEntities.CombatVehicles
-                        where cv.SerialNo == combatVehicles.SerialNo
-                        select cv).First();
+                                   where cv.SerialNo == combatVehicles.SerialNo
+                                   select cv).First();
                     pointcv.Name = combatVehicles.Name;
                     pointcv.Model = combatVehicles.Model;
                     pointcv.VehiclesNo = combatVehicles.VehiclesNo;
@@ -379,8 +369,8 @@ namespace AnonManagementSystem
 
                     List<string> devdnoList = vehiclesImgList.Select(ed => ed.Name).ToList();
                     var apointed = from ed in _vehiclesImageEntities.VehiclesImage
-                        where ed.SerialNo == combatVehicles.SerialNo
-                        select ed;
+                                   where ed.SerialNo == combatVehicles.SerialNo
+                                   select ed;
                     List<string> sevdnoList = apointed.Select(ed => ed.Name).ToList();
                     if (vehiclesImgList.Any())
                     {
@@ -411,8 +401,8 @@ namespace AnonManagementSystem
                         #region 油机更新
 
                         var pointoe = (from oe in _equipEntities.OilEngine
-                            where oe.OeNo == oilEngine.OeNo
-                            select oe).First();
+                                       where oe.OeNo == oilEngine.OeNo
+                                       select oe).First();
                         pointoe.OeModel = oilEngine.OeModel;
                         pointoe.OutPower = oilEngine.OutPower;
                         pointoe.TechCondition = oilEngine.TechCondition;
@@ -436,8 +426,8 @@ namespace AnonManagementSystem
 
                         List<string> doilnoList = oilImgList.Select(ed => ed.Name).ToList();
                         var apointoi = from ed in _oilImageEntities.OilEngineImage
-                            where ed.SerialNo == combatVehicles.SerialNo
-                            select ed;
+                                       where ed.SerialNo == combatVehicles.SerialNo
+                                       select ed;
                         List<string> soilnoList = apointoi.Select(ed => ed.Name).ToList();
                         if (oilImgList.Any())
                         {
@@ -463,7 +453,7 @@ namespace AnonManagementSystem
 
                         #endregion 油机图片更新
                     }
-                    
+
                 }
             }
         }
@@ -585,12 +575,6 @@ namespace AnonManagementSystem
                    var equip = from eq in _equipEntities.CombatEquipment
                                select eq;
 
-                   if (!Add)
-                   {
-                       LoadEquipData(equip);
-                       CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
-                   }
-
                    #region 下拉列表内容
 
                    List<string> equipNameList =
@@ -640,6 +624,14 @@ namespace AnonManagementSystem
                    }, null);
 
                    #endregion 下拉列表内容
+
+                   if (!Add)
+                   {
+                       LoadEquipData(equip);
+                       CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
+                   }
+
+
 
                }
                catch (Exception exception)
@@ -697,18 +689,18 @@ namespace AnonManagementSystem
             _materBindingList = new BindingList<Material>(_materList);
             _synchContext.Send(a =>
             {
-                cmbName.SelectedItem = equipfirst.Name;
-                cmbModel.SelectedItem = equipfirst.Model;
-                cmbSubDepart.SelectedItem = equipfirst.SubDepartment;
+                cmbName.SelectedText = equipfirst.Name;
+                cmbModel.SelectedText = equipfirst.Model;
+                cmbSubDepart.SelectedText = equipfirst.SubDepartment;
                 tbSerialNo.Text = equipfirst.SerialNo;
                 tbTechRemould.Text = equipfirst.TechRemould;
                 tbOemNo.Text = equipfirst.OemNo;
-                cmbTechnician.SelectedItem = equipfirst.Technician;
-                cmbCharger.SelectedItem = equipfirst.Manager;
-                cmbTechCondition.SelectedItem = equipfirst.TechCondition;
-                cmbUseCondition.SelectedItem = equipfirst.UseCondition;
-                cmbMajorCategory.SelectedItem = equipfirst.MajorCategory;
-                cmbFactory.SelectedItem = equipfirst.Factory;
+                cmbTechnician.SelectedText = equipfirst.Technician;
+                cmbCharger.SelectedText = equipfirst.Manager;
+                cmbTechCondition.SelectedText = equipfirst.TechCondition;
+                cmbUseCondition.SelectedText = equipfirst.UseCondition;
+                cmbMajorCategory.SelectedText = equipfirst.MajorCategory;
+                cmbFactory.SelectedText = equipfirst.Factory;
                 dtpTime.Value = equipfirst.ProductionDate;
                 tbMajorComp.Text = equipfirst.MajorComp;
                 tbMainUsage.Text = equipfirst.MainUsage;

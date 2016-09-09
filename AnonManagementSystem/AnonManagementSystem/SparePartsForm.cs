@@ -88,7 +88,7 @@ namespace AnonManagementSystem
             }
         }
 
-        public void Export2Excel()
+        public void ExportOne2Excel()
         {
             try
             {
@@ -134,6 +134,11 @@ namespace AnonManagementSystem
                 CommonLogHelper.GetInstance("LogError").Error(@"导出备件数据失败", exception);
                 MessageBox.Show(this, @"导出备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void ExportAll2Excel()
+        {
+            throw new NotImplementedException();
         }
 
         public void LoadData()
@@ -271,7 +276,7 @@ namespace AnonManagementSystem
             {
                 if (cmbPageSize.SelectedIndex > -1)
                 {
-                    _pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
+                    _pageSize = int.Parse(cmbPageSize.SelectedText.ToString());
                     DataRefresh(_pageSize, _curPage, _sparePart);
                 }
                 CommonLogHelper.GetInstance("LogInfo").Info(@"切换页数后加载备件数据成功");
