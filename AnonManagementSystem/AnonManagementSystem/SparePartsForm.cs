@@ -114,17 +114,17 @@ namespace AnonManagementSystem
                         var firstsp = (from sp in _sparePartEntities.SpareParts
                                        where sp.SerialNo == excelid
                                        select sp).First();
-                        SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
-                        List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
-                                                          where img.SerialNo == excelid
-                                                          select img).Take(3).ToList();
-                        SpareExcelDataStruct seds = new SpareExcelDataStruct()
+                        //SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
+                        //List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
+                        //                                  where img.SerialNo == excelid
+                        //                                  select img).Take(3).ToList();
+                        SpareOneExcelDataStruct seds = new SpareOneExcelDataStruct()
                         {
                             SparePart = firstsp,
-                            SpImgList = spimgList
+                            //SpImgList = spimgList
                         };
-                        ExportData2Excel.ExportData(fn, seds);
-                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出备件数据成功");
+                        ExportData2Excel.ExportOneData(fn, seds);
+                        CommonLogHelper.GetInstance("LogInfo").Info($"导出备件数据{excelid}成功");
                         MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -138,7 +138,41 @@ namespace AnonManagementSystem
 
         public void ExportAll2Excel()
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+                    if (sfdExcel.ShowDialog() == DialogResult.OK)
+                    {
+                        string fn = sfdExcel.FileName;
+                        if (File.Exists(fn))
+                        {
+                            try
+                            {
+                                File.Delete(fn);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                            }
+                        }
+                        var splist = (from sp in _sparePartEntities.SpareParts
+                                       select sp).ToList();
+
+                        SpareAllExcelDataStruct sads = new SpareAllExcelDataStruct()
+                        {
+                            SparePartList = splist,
+                        };
+                        ExportData2Excel.ExportAllData(fn, sads);
+                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出所有备件数据成功");
+                        MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+            }
+            catch (Exception exception)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"导出备件数据失败", exception);
+                MessageBox.Show(this, @"导出备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void LoadData()

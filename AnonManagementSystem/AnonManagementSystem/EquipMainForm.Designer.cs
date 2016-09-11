@@ -814,7 +814,6 @@
             // 
             this.dgvEquip.AllowUserToAddRows = false;
             this.dgvEquip.AllowUserToDeleteRows = false;
-            this.dgvEquip.AllowUserToResizeColumns = false;
             this.dgvEquip.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvEquip.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;

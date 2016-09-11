@@ -44,6 +44,11 @@ namespace AnonManagementSystem
                 lsvImages.Items.Add(lvi);
             }
             lsvImages.EndUpdate();
+            if (lsvImages.Items.Count > 0)
+            {
+                string picname = lsvImages.Items[0].ImageKey;
+                picBox.Image = _imgDic[picname];
+            }
         }
 
         public void AddImages(string key, Image img)

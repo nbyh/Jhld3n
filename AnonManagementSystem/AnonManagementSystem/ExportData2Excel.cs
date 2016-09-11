@@ -8,7 +8,119 @@ namespace AnonManagementSystem
 {
     public static class ExportData2Excel
     {
-        public static void ExportData(string filepath, EquipExcelDataStruct eeds)
+        public static void ExportAllData(string filepath, EquipAllExcelDataStruct eads)
+        {
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
+            {
+                #region 添加设备信息表
+                ExcelWorksheet worksheeteq = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
+                worksheeteq.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
+                EquipTitleCollection eqtitle = new EquipTitleCollection();
+                for (int i = 0; i < eqtitle.Length; i++)
+                {
+                    worksheeteq.Cells[1, i + 1].Value = eqtitle[i];
+                }
+                for (int i = 0; i < eads.EquipList.Count; i++)
+                {
+                    List<string> eqContentList = DataConvert(eads.EquipList[i]);
+                    for (int j = 0; j < eqContentList.Count; j++)
+                    {
+                        worksheeteq.Cells[i + 2, j + 1].Value = eqContentList[j];
+                    }
+                }
+
+                #endregion
+
+                #region 添加车辆信息表
+
+                ExcelWorksheet worksheetvh = package.Workbook.Worksheets.Add("车辆信息"); //创建workshee
+                worksheetvh.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                VehicleTitleCollection vhtitle = new VehicleTitleCollection();
+                for (int i = 0; i < vhtitle.Length; i++)
+                {
+                    worksheetvh.Cells[1, i + 1].Value = vhtitle[i];
+                }
+                for (int i = 0; i < eads.VhList.Count; i++)
+                {
+                    List<string> vhContentList = DataConvert(eads.VhList[i]);
+                    for (int j = 0; j < vhContentList.Count; j++)
+                    {
+                        worksheetvh.Cells[i + 2, j + 1].Value = vhContentList[j];
+                    }
+                }
+                #endregion
+
+                #region 添加油机信息表
+
+                ExcelWorksheet worksheetoe = package.Workbook.Worksheets.Add("油机信息"); //创建workshee
+                worksheetoe.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                OeTitleCollection oetitle = new OeTitleCollection();
+                for (int i = 0; i < oetitle.Length; i++)
+                {
+                    worksheetoe.Cells[1, i + 1].Value = oetitle[i];
+                }
+                for (int i = 0; i < eads.OeList.Count; i++)
+                {
+                    List<string> oeContentList = DataConvert(eads.OeList[i]);
+                    for (int j = 0; j < oeContentList.Count; j++)
+                    {
+                        worksheetoe.Cells[2, j + 1].Value = oeContentList[j];
+                    }
+                }
+
+                #endregion
+
+                #region 添加活动信息表
+
+                ExcelWorksheet worksheetee = package.Workbook.Worksheets.Add("活动信息"); //创建workshee
+                worksheetee.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
+                EventTitleCollection eetitle = new EventTitleCollection();
+                for (int i = 0; i < eetitle.Length; i++)
+                {
+                    worksheetee.Cells[1, i + 1].Value = eetitle[i];
+                }
+                for (int i = 0; i < eads.Events.Count; i++)
+                {
+                    List<string> eeContentList = DataConvert(eads.Events[i]);
+                    for (int j = 0; j < eeContentList.Count; j++)
+                    {
+                        worksheetee.Cells[i + 2, j + 1].Value = eeContentList[j];
+                    }
+                }
+                #endregion
+
+                package.Save();//保存excel
+            }
+        }
+
+        public static void ExportAllData(string filepath, SpareAllExcelDataStruct sads)
+        {
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("备件信息");//创建worksheet
+                worksheet.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
+                List<string> sptitlesList = new List<string>()
+                    {
+                        "备件编号","备件名称","型号","用于型号","数量","状态","生产厂家","出厂日期","库存位置","入库时间"
+                    };
+                for (int i = 0; i < sptitlesList.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = sptitlesList[i];
+                }
+                for (int i = 0; i < sads.SparePartList.Count; i++)
+                {
+                    List<string> eqContentList = DataConvert(sads.SparePartList[i]);
+                    for (int j = 0; j < eqContentList.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1].Value = eqContentList[j];
+                    }
+                }
+                //todo：填充数据
+                package.Save();//保存excel
+            }
+        }
+
+        public static void ExportOneData(string filepath, EquipOneExcelDataStruct eods)
         {
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
@@ -21,7 +133,7 @@ namespace AnonManagementSystem
                 {
                     worksheeteq.Cells[1, i + 1].Value = eqtitle[i];
                 }
-                List<string> eqContentList = DataConvert(eeds.Equip);
+                List<string> eqContentList = DataConvert(eods.Equip);
                 for (int i = 0; i < eqContentList.Count; i++)
                 {
                     worksheeteq.Cells[2, i + 1].Value = eqContentList[i];
@@ -38,19 +150,19 @@ namespace AnonManagementSystem
                 {
                     worksheetvh.Cells[1, i + 1].Value = vhtitle[i];
                 }
-                for (int i = 0; i < eeds.VhList.Count; i++)
+                for (int i = 0; i < eods.VhList.Count; i++)
                 {
-                    List<string> vhContentList = DataConvert(eeds.VhList[i]);
+                    List<string> vhContentList = DataConvert(eods.VhList[i]);
                     for (int j = 0; j < vhContentList.Count; j++)
                     {
-                        worksheetvh.Cells[i + 1, j + 1].Value = vhContentList[i];
+                        worksheetvh.Cells[i + 2, j + 1].Value = vhContentList[j];
                     }
                 }
                 #endregion
 
                 #region 添加油机信息表
 
-                if (eeds.Oe != null)
+                if (eods.Oe != null)
                 {
                     ExcelWorksheet worksheetoe = package.Workbook.Worksheets.Add("油机信息"); //创建workshee
                     worksheetoe.Cells.Style.ShrinkToFit = true; //单元格自动适应大小
@@ -59,7 +171,7 @@ namespace AnonManagementSystem
                     {
                         worksheetoe.Cells[1, i + 1].Value = oetitle[i];
                     }
-                    List<string> oeContentList = DataConvert(eeds.Oe);
+                    List<string> oeContentList = DataConvert(eods.Oe);
                     for (int i = 0; i < oeContentList.Count; i++)
                     {
                         worksheetoe.Cells[2, i + 1].Value = oeContentList[i];
@@ -76,12 +188,12 @@ namespace AnonManagementSystem
                 {
                     worksheetee.Cells[1, i + 1].Value = eetitle[i];
                 }
-                for (int i = 0; i < eeds.Events.Count; i++)
+                for (int i = 0; i < eods.Events.Count; i++)
                 {
-                    List<string> eeContentList = DataConvert(eeds.Events[i]);
+                    List<string> eeContentList = DataConvert(eods.Events[i]);
                     for (int j = 0; j < eeContentList.Count; j++)
                     {
-                        worksheetee.Cells[i + 1, j + 1].Value = eeContentList[i];
+                        worksheetee.Cells[i + 2, j + 1].Value = eeContentList[j];
                     }
                 }
                 #endregion
@@ -95,21 +207,21 @@ namespace AnonManagementSystem
                 {
                     worksheetmt.Cells[1, i + 1].Value = mttitle[i];
                 }
-                for (int i = 0; i < eeds.MaterialList.Count; i++)
+                for (int i = 0; i < eods.MaterialList.Count; i++)
                 {
-                    List<string> mtContentList = DataConvert(eeds.MaterialList[i]);
+                    List<string> mtContentList = DataConvert(eods.MaterialList[i]);
                     for (int j = 0; j < mtContentList.Count; j++)
                     {
-                        worksheetmt.Cells[i + 1, j + 1].Value = mtContentList[i];
+                        worksheetmt.Cells[i + 1, j + 1].Value = mtContentList[j];
                     }
                 }
                 #endregion
-                //todo：填充数据
+
                 package.Save();//保存excel
             }
         }
 
-        public static void ExportData(string filepath, SpareExcelDataStruct seds)
+        public static void ExportOneData(string filepath, SpareOneExcelDataStruct sods)
         {
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
@@ -123,7 +235,7 @@ namespace AnonManagementSystem
                 {
                     worksheet.Cells[1, i + 1].Value = sptitlesList[i];
                 }
-                List<string> eqContentList = DataConvert(seds.SparePart);
+                List<string> eqContentList = DataConvert(sods.SparePart);
                 for (int i = 0; i < eqContentList.Count; i++)
                 {
                     worksheet.Cells[2, i + 1].Value = eqContentList[i];
@@ -276,9 +388,20 @@ namespace AnonManagementSystem
         }
     }
 
-    public class EquipExcelDataStruct
+    public class EquipAllExcelDataStruct
     {
-        public List<EquipmentImage> EqImg { get; set; }
+        public List<EquipmentImage> EqImgList { get; set; }
+        public List<CombatEquipment> EquipList { get; set; }
+        public Dictionary<string, List<EventData>> EventDic { get; set; }
+        public List<Events> Events { get; set; }
+        public List<Material> MaterialList { get; set; }
+        public List<OilEngine> OeList { get; set; }
+        public List<CombatVehicles> VhList { get; set; }
+    }
+
+    public class EquipOneExcelDataStruct
+    {
+        public List<EquipmentImage> EqImgList { get; set; }
         public CombatEquipment Equip { get; set; }
         public Dictionary<string, List<EventData>> EventDic { get; set; }
         public List<Events> Events { get; set; }
@@ -323,7 +446,13 @@ namespace AnonManagementSystem
         public string this[int i] => _titles[i];
     }
 
-    public class SpareExcelDataStruct
+    public class SpareAllExcelDataStruct
+    {
+        public List<SpareParts> SparePartList { get; set; }
+        public List<SparePartImage> SpImgList { get; set; }
+    }
+
+    public class SpareOneExcelDataStruct
     {
         public SpareParts SparePart { get; set; }
         public List<SparePartImage> SpImgList { get; set; }

@@ -162,11 +162,11 @@ namespace AnonManagementSystem
                         //    eventsd.Add(ee.No, ed);
                         //}
 
-                        EquipImageEntities eqImgEntities = new EquipImageEntities();
-                        List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
-                                                          where img.SerialNo == excelid
-                                                          select img).Take(3).ToList();
-                        EquipExcelDataStruct eeds = new EquipExcelDataStruct()
+                        //EquipImageEntities eqImgEntities = new EquipImageEntities();
+                        //List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
+                        //                                  where img.SerialNo == excelid
+                        //                                  select img).Take(3).ToList();
+                        EquipOneExcelDataStruct eeds = new EquipOneExcelDataStruct()
                         {
                             Equip = firsteq,
                             VhList = vehicles,
@@ -174,9 +174,9 @@ namespace AnonManagementSystem
                             Events = events,
                             //EventDic = eventsd,
                             MaterialList = material,
-                            EqImg = eqimgList
+                            //EqImgList = eqimgList
                         };
-                        ExportData2Excel.ExportData(fn, eeds);
+                        ExportData2Excel.ExportOneData(fn, eeds);
                         CommonLogHelper.GetInstance("LogInfo").Info($"导出设备数据{excelid}成功");
                         MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -191,7 +191,53 @@ namespace AnonManagementSystem
 
         public void ExportAll2Excel()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (sfdExcel.ShowDialog() == DialogResult.OK)
+                {
+                    string fn = sfdExcel.FileName;
+                    if (File.Exists(fn))
+                    {
+                        try
+                        {
+                            File.Delete(fn);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    var eqlist = (from eq in _equipEntities.CombatEquipment
+                                   select eq).ToList();
+                    var vehicles = (from vh in _equipEntities.CombatVehicles
+                                    select vh).ToList();
+
+                    var oe = (from o in _equipEntities.OilEngine
+                                    select o).ToList();
+
+                    var events = (from ev in _equipEntities.Events
+                                  select ev).ToList();
+                    
+                    EquipAllExcelDataStruct eads = new EquipAllExcelDataStruct()
+                    {
+                        EquipList = eqlist,
+                        VhList = vehicles,
+                        OeList = oe,
+                        Events = events,
+                        //EventDic = eventsd,
+                        //MaterialList = material,
+                        //EqImgList = eqimgList
+                    };
+                    ExportData2Excel.ExportAllData(fn, eads);
+                    CommonLogHelper.GetInstance("LogInfo").Info($"导出全部设备数据成功");
+                    MessageBox.Show(this, @"导出设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception exception)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"导出设备数据失败", exception);
+                MessageBox.Show(this, @"导出设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void LoadData()

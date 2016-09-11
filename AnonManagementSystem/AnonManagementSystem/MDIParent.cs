@@ -194,6 +194,9 @@ namespace AnonManagementSystem
 
         private void 全部数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form form = ActiveMdiChild;
+            var mdiFunction = (IMdiFunction)form;
+            mdiFunction?.ExportAll2Excel();
         }
     }
 }

@@ -333,7 +333,6 @@ namespace AnonManagementSystem
                     _oilImgList = oilImgList;
 
                     #endregion
-
                 }
                 else
                 {
@@ -847,6 +846,7 @@ namespace AnonManagementSystem
                     foreach (var equipmentImage in _equipImageList.Where(equipmentImage => equipmentImage.Name == key))
                     {
                         _equipImageList.Remove(equipmentImage);
+                        break;
                     }
                     var eqimg = from img in _equipImageEntities.EquipmentImage
                                 where img.Name == key
@@ -1035,7 +1035,6 @@ namespace AnonManagementSystem
                         _equipEntities.SaveChanges();
 
                         #endregion
-
                     }
                     else
                     {
@@ -1068,10 +1067,25 @@ namespace AnonManagementSystem
 
                         #endregion
 
-                        _vehiclesImageEntities.SaveChanges();
-                        _oilImageEntities.SaveChanges();
-                        _equipImageEntities.SaveChanges();
                         _equipEntities.SaveChanges();
+
+                        _equipEntities.Events.AddRange(_eventsList);
+                        _equipEntities.SaveChanges();
+                        _equipEntities.CombatVehicles.AddRange(_comVehList);
+                        _equipEntities.SaveChanges();
+                        if (_oilEngines != null)
+                        {
+                            _equipEntities.OilEngine.Add(_oilEngines);
+                            _oilImageEntities.OilEngineImage.AddRange(_oilImgList);
+                            _oilImageEntities.SaveChanges();
+                        }
+                        _equipEntities.Material.AddRange(_materList);
+                        _equipEntities.EventData.AddRange(_eventDataList);
+
+                        _vehiclesImageEntities.VehiclesImage.AddRange(_vehImgList);
+                        _eventsImageEntities.EventsImage.AddRange(_eventsImgList);
+                        _equipEntities.SaveChanges();
+
                     }
                     SaveSuccess?.Invoke();
                     CommonLogHelper.GetInstance("LogInfo").Info(@"保存设备数据成功");
