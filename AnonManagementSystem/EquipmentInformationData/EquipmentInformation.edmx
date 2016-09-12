@@ -59,7 +59,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="254" />
           <Property Name="Spot" Type="nvarchar" MaxLength="254" />
           <Property Name="EventsNo" Type="nvarchar" MaxLength="254" />
@@ -224,7 +224,6 @@
         <EntityContainer Name="EquipmentManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CombatEquipment" EntityType="EquipmentManagementModel.CombatEquipment" />
           <EntitySet Name="CombatVehicles" EntityType="EquipmentManagementModel.CombatVehicles" />
-          <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
           <EntitySet Name="Events" EntityType="EquipmentManagementModel.Events" />
           <EntitySet Name="Material" EntityType="EquipmentManagementModel.Material" />
           <EntitySet Name="OilEngine" EntityType="EquipmentManagementModel.OilEngine" />
@@ -244,6 +243,7 @@
             <End Role="CombatVehicles" EntitySet="CombatVehicles" />
             <End Role="OilEngine" EntitySet="OilEngine" />
           </AssociationSet>
+          <EntitySet Name="EventData" EntityType="EquipmentManagementModel.EventData" />
           <AssociationSet Name="FK_EventData_0_0" Association="EquipmentManagementModel.FK_EventData_0_0">
             <End Role="Events" EntitySet="Events" />
             <End Role="EventData" EntitySet="EventData" />
@@ -303,16 +303,6 @@
           <Property Name="Equipment" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CombatEquipment" Relationship="EquipmentManagementModel.FK_CombatVehicles_0_0" FromRole="CombatVehicles" ToRole="CombatEquipment" />
           <NavigationProperty Name="OilEngine" Relationship="EquipmentManagementModel.FK_OilEngine_0_0" FromRole="CombatVehicles" ToRole="OilEngine" />
-        </EntityType>
-        <EntityType Name="EventData">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Spot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="EventsNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="EventData" ToRole="Events" />
         </EntityType>
         <EntityType Name="Events">
           <Key>
@@ -431,6 +421,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EventData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Spot" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="EventsNo" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="EquipmentManagementModel.FK_EventData_0_0" FromRole="EventData" ToRole="Events" />
+        </EntityType>
         <Association Name="FK_EventData_0_0">
           <End Type="EquipmentManagementModel.Events" Role="Events" Multiplicity="0..1" />
           <End Type="EquipmentManagementModel.EventData" Role="EventData" Multiplicity="*" />
@@ -501,16 +501,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EventData">
-            <EntityTypeMapping TypeName="EquipmentManagementModel.EventData">
-              <MappingFragment StoreEntitySet="EventData">
-                <ScalarProperty Name="EventsNo" ColumnName="EventsNo" />
-                <ScalarProperty Name="Spot" ColumnName="Spot" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="EquipmentManagementModel.Events">
               <MappingFragment StoreEntitySet="Events">
@@ -576,6 +566,16 @@
                 <ScalarProperty Name="OutPower" ColumnName="OutPower" />
                 <ScalarProperty Name="OeModel" ColumnName="OeModel" />
                 <ScalarProperty Name="OeNo" ColumnName="OeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventData">
+            <EntityTypeMapping TypeName="EquipmentManagementModel.EventData">
+              <MappingFragment StoreEntitySet="EventData">
+                <ScalarProperty Name="EventsNo" ColumnName="EventsNo" />
+                <ScalarProperty Name="Spot" ColumnName="Spot" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -172,9 +172,9 @@ namespace AnonManagementSystem
                 int rowindex = dgvEvents.CurrentRow.Index;
                 if (MessageBox.Show(@"确定是否删除", @"提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    if (dgvEvents[1, rowindex].Value != null)
+                    if (dgvEvents[2, rowindex].Value != null)
                     {
-                        string id = dgvEvents[1, rowindex].Value.ToString();
+                        string id = dgvEvents[2, rowindex].Value.ToString();
                         foreach (var ed in _eventdataList.Where(d => d.Name == id))
                         {
                             _eventdataList.Remove(ed);
@@ -207,14 +207,17 @@ namespace AnonManagementSystem
             {
                 for (int i = 0; i < dgvEvents.RowCount; i++)
                 {
-                    EventData ed = new EventData()
+                    if (dgvEvents[2, i].Value != null)
                     {
-                        ID = dgvEvents[1, i].Value.ToString(),
-                        Name = dgvEvents[2, i].Value.ToString(),
-                        Spot = dgvEvents[3, i].Value.ToString(),
-                        EventsNo = cmbEventNo.Text
-                    };
-                    _eventdataList.Add(ed);
+                        EventData ed = new EventData()
+                        {
+                            //ID = dgvEvents[1, i].Value.ToString(),
+                            Name = dgvEvents[2, i].Value.ToString(),
+                            Spot = dgvEvents[3, i].Value.ToString(),
+                            EventsNo = cmbEventNo.Text
+                        };
+                        _eventdataList.Add(ed);
+                    }
                 }
                 if (_add)
                 {
@@ -245,14 +248,17 @@ namespace AnonManagementSystem
                     };
                     for (int i = 0; i < dgvEvents.RowCount; i++)
                     {
-                        EventData ed = new EventData()
+                        if (dgvEvents[2, i].Value != null)
                         {
-                            ID = dgvEvents[1, i].Value.ToString(),
-                            Name = dgvEvents[2, i].Value.ToString(),
-                            Spot = dgvEvents[3, i].Value.ToString(),
-                            EventsNo = cmbEventNo.Text
-                        };
-                        _eventdataList.Add(ed);
+                            EventData ed = new EventData()
+                            {
+                                //ID = dgvEvents[1, i].Value.ToString(),
+                                Name = dgvEvents[2, i].Value.ToString(),
+                                Spot = dgvEvents[3, i].Value.ToString(),
+                                EventsNo = cmbEventNo.Text
+                            };
+                            _eventdataList.Add(ed);
+                        }
                     }
 
                     SaveEventsSucess?.Invoke(Add, Index, _events, _eventdataList, _eventsImgList);
@@ -306,6 +312,49 @@ namespace AnonManagementSystem
         private void Num_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = PublicFunction.JudgeKeyPress(e.KeyChar);
+        }
+
+        private void Combox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+            {
+                return;
+            }
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
+        }
+
+        private void cmbEventType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string s = cmbEventType.SelectedText;
+            switch (s)
+            {
+                case "调整类":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "交接活动","接装培训","封存启用","退役报废"
+                    };
+                    break;
+                case "动用类":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "任务","试验改造","借用","大中修"
+                    };
+                    break;
+                case "使用维护":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "维护","点检","性能测试","车辆记录"
+                    };
+                    break;
+                case "测试检修":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "故障确认","故障处理","厂所修理"
+                    };
+                    break;
+            }
         }
     }
 }
