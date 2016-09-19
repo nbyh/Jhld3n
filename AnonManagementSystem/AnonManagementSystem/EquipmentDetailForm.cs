@@ -85,7 +85,7 @@ namespace AnonManagementSystem
 
                 if (Add)
                 {
-                    #region 活动事件更新
+                    #region 活动事件临时数据更新
 
                     var pointevent = _eventsList.First(ev => ev.No == events.No);
                     pointevent.Name = events.Name;
@@ -138,36 +138,9 @@ namespace AnonManagementSystem
 
                     #region 事件数据更新
 
-                    List<string> devdnoList = eventdatalist.Select(ed => ed.ID).ToList();
-                    var apointed = _equipEntities.EventData.Where(ed => ed.EventsNo == events.No);
-                    List<string> sevdnoList = apointed.Select(ed => ed.ID).ToList();
-                    if (eventdatalist.Any())
-                    {
-                        foreach (var data in eventdatalist)
-                        {
-                            if (!sevdnoList.Contains(data.ID))
-                            {
-                                _equipEntities.EventData.Add(data);
-                            }
-                            else
-                            {
-                                var evd = _equipEntities.EventData.First(ed => ed.EventsNo == events.No && ed.ID == data.ID);
-                                evd.Name = data.Name;
-                                evd.Spot = data.Spot;
-                                evd.EventsNo = data.EventsNo;
-                            }
-                        }
-                    }
-                    if (apointed.Any())
-                    {
-                        foreach (var data in apointed)
-                        {
-                            if (!devdnoList.Contains(data.ID))
-                            {
-                                _equipEntities.EventData.Remove(data);
-                            }
-                        }
-                    }
+                    _equipEntities.EventData.RemoveRange(_eventDataList);
+                    _equipEntities.EventData.AddRange(eventdatalist);
+                    _eventDataList = eventdatalist;
 
                     #endregion 事件数据更新
 
@@ -227,7 +200,6 @@ namespace AnonManagementSystem
 
                 if (Add)
                 {
-
                     #region 材料临时数据更新
 
                     var pointmaterial = _materList.First(m => m.No == material.No);

@@ -7,13 +7,20 @@ namespace AnonManagementSystem
 {
     public partial class LoginForm : Form
     {
-        public delegate void LoginOn(bool enableedit);
-
-        public event LoginOn LoginSucess;
+        private readonly SystemManagerEntities _sysManagerEntities = new SystemManagerEntities();
 
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+        public delegate void LoginOn(bool enableedit);
+
+        public event LoginOn LoginSucess;
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
@@ -28,11 +35,8 @@ namespace AnonManagementSystem
             //string conn = "data source=" + AppDomain.CurrentDomain.BaseDirectory + "SystemManager.db";
             //string filename = AppDomain.CurrentDomain.BaseDirectory + "SystemManager.db";filename
 
-            SystemManagerEntities sysManagerEntities = new SystemManagerEntities();
-            var u = from s in sysManagerEntities.UserManage
-                    where s.User == user
-                    select s;
-            if (u.ToList().Count < 0)
+            var u = _sysManagerEntities.UserManage.Where(s => s.User == user);
+            if (!u.Any())
             {
                 MessageBox.Show(@"用户不存在！");
                 return;
@@ -50,7 +54,7 @@ namespace AnonManagementSystem
             //form.ChangeCurrentuser += ShowForm;
             //btnEnter.DialogResult = DialogResult.OK;
             LoginSucess?.Invoke(loginuser.Edit);
-            CommonLogHelper.GetInstance("LogInfo").Info($"用户{loginuser}登陆成功");
+            CommonLogHelper.GetInstance("LogInfo").Info($"用户{loginuser.User}登陆成功");
             this.Close();
         }
 
@@ -58,10 +62,5 @@ namespace AnonManagementSystem
         //{
         //    this.Show();
         //}
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

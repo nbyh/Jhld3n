@@ -14,7 +14,6 @@ namespace AnonManagementSystem
     {
         private readonly EquipmentManagementEntities _eqEntities = new EquipmentManagementEntities();
         private readonly SynchronizationContext _synchContext;
-        private bool _add = false;
         private bool _enableedit = false;
         private Events _events;
         private List<EventData> _eventdataList = new List<EventData>();
@@ -205,6 +204,7 @@ namespace AnonManagementSystem
         {
             try
             {
+                _eventdataList.Clear();
                 for (int i = 0; i < dgvEvents.RowCount; i++)
                 {
                     if (dgvEvents[2, i].Value != null)
@@ -213,13 +213,13 @@ namespace AnonManagementSystem
                         {
                             //ID = dgvEvents[1, i].Value.ToString(),
                             Name = dgvEvents[2, i].Value.ToString(),
-                            Spot = dgvEvents[3, i].Value.ToString(),
+                            //Spot = dgvEvents[3, i].Value.ToString(),
                             EventsNo = cmbEventNo.Text
                         };
                         _eventdataList.Add(ed);
                     }
                 }
-                if (_add)
+                if (Add)
                 {
                     _events = new Events()
                     {
@@ -246,35 +246,13 @@ namespace AnonManagementSystem
                         Remarks = tbRemark.Text,
                         Equipment = _id
                     };
-                    for (int i = 0; i < dgvEvents.RowCount; i++)
-                    {
-                        if (dgvEvents[2, i].Value != null)
-                        {
-                            EventData ed = new EventData()
-                            {
-                                //ID = dgvEvents[1, i].Value.ToString(),
-                                Name = dgvEvents[2, i].Value.ToString(),
-                                Spot = dgvEvents[3, i].Value.ToString(),
-                                EventsNo = cmbEventNo.Text
-                            };
-                            _eventdataList.Add(ed);
-                        }
-                    }
 
                     SaveEventsSucess?.Invoke(Add, Index, _events, _eventdataList, _eventsImgList);
                 }
                 else
                 {
                     var eventfirst = _eqEntities.Events.First(eq => eq.Equipment == _id);
-
-                    for (int i = 0; i < dgvEvents.RowCount; i++)
-                    {
-                        string no = dgvEvents[1, i].Value.ToString();
-                        var eventsdata = _eqEntities.EventData.First(ed => ed.EventsNo == no);
-                        eventsdata.Name = dgvEvents[2, i].Value.ToString();
-                        eventsdata.Spot = dgvEvents[3, i].Value.ToString();
-                        _eventdataList.Add(eventsdata);
-                    }
+                    _eventdataList.Clear();
 
                     eventfirst.No = cmbEventNo.Text;
                     eventfirst.Name = cmbEventName.Text;
