@@ -37,7 +37,7 @@
 	NamespaceName = "EquipmentInformationData";
 
 //	LoadSQLiteMetadata(@"E:\Work\Documents\GitHub\Jhld3n\AnonManagementSystem\Reference", "EquipmentManagement.db");
-	LoadSQLiteMetadata(@"data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\Reference\OilEngineImages.db");
+	LoadSQLiteMetadata(@"data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\Reference\EquipmentManagement.db");
 
 	GenerateModel();
 #>

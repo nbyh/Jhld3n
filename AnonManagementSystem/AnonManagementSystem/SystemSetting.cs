@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using LinqToDB;
 
 namespace AnonManagementSystem
 {
     public partial class SystemSetting : Form
     {
-        private readonly SystemManagerEntities _sysManagerEntities = new SystemManagerEntities();
+        private readonly SystemManagerDB _sysManagerDB = new SystemManagerDB();
         private List<string> _alluser = new List<string>();
         private List<UserManage> _userList = new List<UserManage>();
         //private UserManage um;
@@ -43,7 +44,7 @@ namespace AnonManagementSystem
             }
             else
             {
-                var sms = from u in _sysManagerEntities.UserManage
+                var sms = from u in _sysManagerDB.UserManages
                           where u.ID == id
                           select u;
                 sms.First().User = user;
@@ -65,15 +66,14 @@ namespace AnonManagementSystem
         {
             if (_userList.Count > 0)
             {
-                _sysManagerEntities.UserManage.AddRange(_userList);
+                _sysManagerDB.Insert(_userList);
             }
-            _sysManagerEntities.SaveChanges();
             Close();
         }
 
         private void SystemSetting_Load(object sender, EventArgs e)
         {
-            var sms = (from u in _sysManagerEntities.UserManage
+            var sms = (from u in _sysManagerDB.UserManages
                        select u).Distinct().ToList();
             _alluser = sms.Select(n => n.User).ToList();
             dgvUserManage.RowCount = sms.Count;
@@ -104,10 +104,10 @@ namespace AnonManagementSystem
                     if (dgvUserManage[4, rowindex].Value != null)
                     {
                         int id = int.Parse(dgvUserManage[4, rowindex].Value.ToString());
-                        var sms = from u in _sysManagerEntities.UserManage
+                        var sms = from u in _sysManagerDB.UserManages
                                   where u.ID == id
                                   select u;
-                        _sysManagerEntities.UserManage.Remove(sms.First());
+                        _sysManagerDB.Delete(sms.First());
                     }
                     dgvUserManage.Rows.RemoveAt(rowindex);
                 }

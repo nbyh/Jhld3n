@@ -2,13 +2,12 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
     public partial class LoginForm : Form
     {
-        private readonly SystemManagerEntities _sysManagerEntities = new SystemManagerEntities();
-
         public LoginForm()
         {
             InitializeComponent();
@@ -32,10 +31,9 @@ namespace AnonManagementSystem
                 MessageBox.Show(@"用户名和密码均不能为空！");
                 return;
             }
-            //string conn = "data source=" + AppDomain.CurrentDomain.BaseDirectory + "SystemManager.db";
-            //string filename = AppDomain.CurrentDomain.BaseDirectory + "SystemManager.db";filename
-
-            var u = _sysManagerEntities.UserManage.Where(s => s.User == user).Take(1);
+            string conn = $"data source = {AppDomain.CurrentDomain.BaseDirectory}SystemManager.db;";
+            SystemManagerDB sysManagerDB = new SystemManagerDB(new SQLiteDataProvider(), conn);
+            var u = sysManagerDB.UserManages.Where(s => s.User == user).Take(1);
             if (!u.Any())
             {
                 MessageBox.Show(@"用户不存在！");

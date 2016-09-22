@@ -271,7 +271,7 @@ namespace AnonManagementSystem
             return eqStrList;
         }
 
-        private static List<string> DataConvert(CombatVehicles vh)
+        private static List<string> DataConvert(CombatVehicle vh)
         {
             List<string> eqStrList = new List<string>
             {
@@ -323,7 +323,7 @@ namespace AnonManagementSystem
             return oeStrList;
         }
 
-        private static List<string> DataConvert(Events eve)
+        private static List<string> DataConvert(Event eve)
         {
             List<string> eqEveList = new List<string>
             {
@@ -369,7 +369,7 @@ namespace AnonManagementSystem
             return eqMtList;
         }
 
-        private static List<string> DataConvert(SpareParts sp)
+        private static List<string> DataConvert(SparePart sp)
         {
             List<string> eqSpList = new List<string>
             {
@@ -393,10 +393,10 @@ namespace AnonManagementSystem
         public List<EquipmentImage> EqImgList { get; set; }
         public List<CombatEquipment> EquipList { get; set; }
         public Dictionary<string, List<EventData>> EventDic { get; set; }
-        public List<Events> Events { get; set; }
+        public List<Event> Events { get; set; }
         public List<Material> MaterialList { get; set; }
         public List<OilEngine> OeList { get; set; }
-        public List<CombatVehicles> VhList { get; set; }
+        public List<CombatVehicle> VhList { get; set; }
     }
 
     public class EquipOneExcelDataStruct
@@ -404,10 +404,10 @@ namespace AnonManagementSystem
         public List<EquipmentImage> EqImgList { get; set; }
         public CombatEquipment Equip { get; set; }
         public Dictionary<string, List<EventData>> EventDic { get; set; }
-        public List<Events> Events { get; set; }
+        public List<Event> Events { get; set; }
         public List<Material> MaterialList { get; set; }
         public OilEngine Oe { get; set; }
-        public List<CombatVehicles> VhList { get; set; }
+        public List<CombatVehicle> VhList { get; set; }
     }
 
     public class EquipTitleCollection
@@ -448,13 +448,13 @@ namespace AnonManagementSystem
 
     public class SpareAllExcelDataStruct
     {
-        public List<SpareParts> SparePartList { get; set; }
+        public List<SparePart> SparePartList { get; set; }
         public List<SparePartImage> SpImgList { get; set; }
     }
 
     public class SpareOneExcelDataStruct
     {
-        public SpareParts SparePart { get; set; }
+        public SparePart SparePart { get; set; }
         public List<SparePartImage> SpImgList { get; set; }
     }
 

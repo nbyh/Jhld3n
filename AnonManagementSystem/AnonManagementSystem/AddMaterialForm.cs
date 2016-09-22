@@ -38,7 +38,7 @@ namespace AnonManagementSystem
 
         private Material _material;
 
-        private readonly EquipmentManagementEntities _eqEntities = new EquipmentManagementEntities();
+        private readonly EquipmentManagementDB _eqDB = new EquipmentManagementDB();
         private readonly SynchronizationContext _synchContext;
 
         public AddMaterialForm()
@@ -88,7 +88,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    var qmaterial = from eq in _eqEntities.Material
+                    var qmaterial = from eq in _eqDB.Material
                                    select eq;
                     List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
                     cmbShape.DataSource = sharpList;

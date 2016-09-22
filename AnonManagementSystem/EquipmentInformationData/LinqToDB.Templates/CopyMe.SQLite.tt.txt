@@ -34,10 +34,10 @@
 		5. See more at https://github.com/linq2db/t4models/blob/master/Templates/ReadMe.LinqToDB.md.
 	*/
 
-	NamespaceName = "EquipmentInformationData";
+	NamespaceName = "DataModels";
 
-//	LoadSQLiteMetadata(@"E:\Work\Documents\GitHub\Jhld3n\AnonManagementSystem\Reference", "EquipmentManagement.db");
-	LoadSQLiteMetadata(@"data source=E:\Documents\GitHub\Jhld3n\Jhld3n\AnonManagementSystem\Reference\OilEngineImages.db");
+	LoadSQLiteMetadata(@"C:\Data", "MyDatabase.sqlite");
+//	LoadSQLiteMetadata(string connectionString);
 
 	GenerateModel();
 #>

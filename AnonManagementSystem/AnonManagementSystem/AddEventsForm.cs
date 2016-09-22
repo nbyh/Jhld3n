@@ -12,7 +12,7 @@ namespace AnonManagementSystem
 {
     public partial class AddEventsForm : Form, IAddModify
     {
-        private readonly EquipmentManagementEntities _eqEntities = new EquipmentManagementEntities();
+        private readonly EquipmentManagementDB _eqDB = new EquipmentManagementDB();
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
         private Events _events;
@@ -251,7 +251,7 @@ namespace AnonManagementSystem
                 }
                 else
                 {
-                    var eventfirst = _eqEntities.Events.First(eq => eq.Equipment == _id);
+                    var eventfirst = _eqDB.Events.First(eq => eq.Equipment == _id);
                     _eventdataList.Clear();
 
                     eventfirst.No = cmbEventNo.Text;

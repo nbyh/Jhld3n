@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB;
 
 namespace AnonManagementSystem
 {
@@ -16,11 +17,11 @@ namespace AnonManagementSystem
         public delegate void SaveChangeSuccess();
         public event SaveChangeSuccess SaveSuccess;
         private readonly SynchronizationContext _synchContext;
-        private readonly SparePartImagesEntities _partsImageEntities = new SparePartImagesEntities();
+        private readonly SparePartImagesDB _partsImageDB = new SparePartImagesDB();
         private List<SparePartImage> _spImgList = new List<SparePartImage>();
         private bool _enableedit;
         private string _id;
-        private SparePartManagementEntities _sparePartEntities = new SparePartManagementEntities();
+        private SparePartManagementDB _sparePartDB = new SparePartManagementDB();
         public SparePartDetailForm()
         {
             InitializeComponent();
@@ -45,7 +46,7 @@ namespace AnonManagementSystem
         {
         }
 
-        private void LoadSparePartData(IQueryable<SpareParts> sparePart)
+        private void LoadSparePartData(IQueryable<SparePart> sparePart)
         {
             var appointsp = from eq in sparePart
                             where eq.SerialNo == _id
@@ -63,7 +64,7 @@ namespace AnonManagementSystem
             dtpOemDate.Value = spfirst.ProductionDate;
 
 
-            var imgs = (from img in _partsImageEntities.SparePartImage
+            var imgs = (from img in _partsImageDB.SparePartImages
                         where img.SerialNo == _id
                         select img);
             _spImgList = imgs.ToList();
@@ -92,7 +93,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    var sp = from eq in _sparePartEntities.SpareParts
+                    var sp = from eq in _sparePartDB.SpareParts
                              select eq;
 
                     #region 下拉列表内容
@@ -191,10 +192,10 @@ namespace AnonManagementSystem
                     {
                         _spImgList.Remove(spImg);
                     }
-                    var eqimg = _partsImageEntities.SparePartImage.Where(img => img.Name == key);
+                    var eqimg = _partsImageDB.SparePartImages.Where(img => img.Name == key);
                     if (eqimg.Any())
                     {
-                        _partsImageEntities.SparePartImage.Remove(eqimg.First());
+                        _partsImageDB.Delete(eqimg.First());
                     }
                     CommonLogHelper.GetInstance("LogInfo").Info($"删除图片{key}成功");
                     MessageBox.Show(this, @"删除图片成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -213,8 +214,8 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    _sparePartEntities = new SparePartManagementEntities();
-                    var sp = from eq in _sparePartEntities.SpareParts
+                    _sparePartDB = new SparePartManagementDB();
+                    var sp = from eq in _sparePartDB.SpareParts
                              select eq;
                     LoadSparePartData(sp);
                     CommonLogHelper.GetInstance("LogInfo").Info(@"恢复原始备件数据成功");
@@ -234,7 +235,7 @@ namespace AnonManagementSystem
             {
                 if (Add)
                 {
-                    SpareParts ce = new SpareParts()
+                    SparePart ce = new SparePart()
                     {
                         SerialNo = tbSerialNo.Text,
                         Name = cmbName.Text,
@@ -247,12 +248,12 @@ namespace AnonManagementSystem
                         UseType = cmbUseType.Text,
                         Status = cmbStatus.Text,
                     };
-                    _sparePartEntities.SpareParts.Add(ce);
-                    _partsImageEntities.SparePartImage.AddRange(_spImgList);
+                    _sparePartDB.Insert(ce);
+                    _partsImageDB.Insert(_spImgList);
                 }
                 else
                 {
-                    var spfirst = (from eq in _sparePartEntities.SpareParts
+                    var spfirst = (from eq in _sparePartDB.SpareParts
                                    where eq.SerialNo == _id
                                    select eq).First();
 
@@ -266,7 +267,7 @@ namespace AnonManagementSystem
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
                     spfirst.UseType = cmbUseType.Text;
                     spfirst.Status = cmbStatus.Text;
-                    //var spImginDb = from img in _partsImageEntities.SparePartImage
+                    //var spImginDb = from img in _partsImageDB.SparePartImage
                     //                 where img.SerialNo == spfirst.SerialNo
                     //                 select img;
                     //foreach (var sp in spImginDb)
@@ -276,22 +277,22 @@ namespace AnonManagementSystem
                     //                select n;
                     //    if (!noimg.Any())
                     //    {
-                    //        _partsImageEntities.SparePartImage.Remove(sp);
+                    //        _partsImageDB.SparePartImage.Remove(sp);
                     //    }
                     //}
                     foreach (var sparePartImage in _spImgList)
                     {
-                        var spimg = from img in _partsImageEntities.SparePartImage
+                        var spimg = from img in _partsImageDB.SparePartImages
                                     where img.Name == sparePartImage.Name
                                     select img;
                         if (!spimg.Any())
                         {
-                            _partsImageEntities.SparePartImage.Add(sparePartImage);
+                            _partsImageDB.Insert(sparePartImage);
                         }
                     }
                 }
-                _sparePartEntities.SaveChanges();
-                _partsImageEntities.SaveChanges();
+                //_sparePartDB;
+                //_partsImageDB.SaveChanges();
                 SaveSuccess?.Invoke();
                 CommonLogHelper.GetInstance("LogInfo").Info(@"保存备件数据成功");
                 MessageBox.Show(this, @"保存备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);

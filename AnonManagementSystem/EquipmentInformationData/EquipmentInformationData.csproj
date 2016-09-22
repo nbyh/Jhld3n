@@ -32,12 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="linq2db, Version=1.0.7.4, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.1.0.7.4\lib\net40\linq2db.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,14 +41,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.103.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.103\lib\net40\System.Data.SQLite.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.103.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.103\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.103.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.103\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
@@ -64,310 +52,111 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CombatEquipment.cs">
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CombatVehicles.cs">
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EquipmentImage.cs">
-      <DependentUpon>EquipmentImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EquipmentImages.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentImages.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EquipmentImages.cs">
+    <Compile Include="EquipmentImages.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EquipmentImages.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentImages.Designer.cs">
+    <Compile Include="SparePartManagement1.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentImages.edmx</DependentUpon>
+      <DependentUpon>SparePartManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentInformation.Context.cs">
+    <Compile Include="SystemManager.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentInformation.Context.tt</DependentUpon>
+      <DependentUpon>SystemManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentInformation.cs">
+    <Compile Include="SparePartImages.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
+      <DependentUpon>SparePartImages.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentInformation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EventData.cs">
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Events.cs">
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EventsImage.cs">
-      <DependentUpon>EventsImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EventsImages.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EventsImages.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EventsImages.cs">
+    <Compile Include="EventsImages.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EventsImages.tt</DependentUpon>
     </Compile>
-    <Compile Include="EventsImages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EventsImages.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Material.cs">
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OilEngine.cs">
-      <DependentUpon>EquipmentInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OilEngineImage.cs">
-      <DependentUpon>OilEngineImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OilEngineImages.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OilEngineImages.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OilEngineImages.cs">
+    <Compile Include="OilEngineImages.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OilEngineImages.tt</DependentUpon>
     </Compile>
-    <Compile Include="OilEngineImages.Designer.cs">
+    <Compile Include="EquipmentManagement.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OilEngineImages.edmx</DependentUpon>
+      <DependentUpon>EquipmentManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SparePartImage.cs">
-      <DependentUpon>SparePartsImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SpareParts.cs">
-      <DependentUpon>SparePartsInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SparePartsImages.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SparePartsImages.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SparePartsImages.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SparePartsImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SparePartsImages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SparePartsImages.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="SparePartsInformation.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SparePartsInformation.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SparePartsInformation.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SparePartsInformation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SparePartsInformation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="UserManage.cs">
-      <DependentUpon>UserManagerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserManagerModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserManagerModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserManagerModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserManagerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserManagerModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserManagerModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="VehiclesImage.cs">
-      <DependentUpon>VehiclesImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VehiclesImages.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VehiclesImages.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VehiclesImages.cs">
+    <Compile Include="VehiclesImages.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VehiclesImages.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VehiclesImages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VehiclesImages.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="EquipmentInformation.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EquipmentInformation.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="EquipmentImages.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EquipmentImages.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EquipmentImages.edmx.diagram">
-      <DependentUpon>EquipmentImages.edmx</DependentUpon>
-    </None>
-    <None Include="EquipmentInformation.edmx.diagram">
-      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
-    </None>
-    <EntityDeploy Include="OilEngineImages.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OilEngineImages.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="EventsImages.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EventsImages.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EventsImages.edmx.diagram">
-      <DependentUpon>EventsImages.edmx</DependentUpon>
-    </None>
-    <None Include="OilEngineImages.edmx.diagram">
-      <DependentUpon>OilEngineImages.edmx</DependentUpon>
-    </None>
+    <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
+    <None Include="LinqToDB.Templates\DataModel.ttinclude" />
+    <None Include="LinqToDB.Templates\EditableObject.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Access.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.DB2.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Firebird.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Informix.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.MySql.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.PostgreSQL.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.SqlCe.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.SQLite.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.SQLite.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.SqlServer.SqlTypes.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.SqlServer.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Sybase.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.ttinclude" />
+    <None Include="LinqToDB.Templates\NotifyPropertyChanged.ttinclude" />
+    <None Include="LinqToDB.Templates\PluralizationService.ttinclude" />
+    <None Include="LinqToDB.Templates\ReadMe.LinqToDB.md" />
+    <None Include="LinqToDB.Templates\T4Model.ttinclude" />
+    <None Include="LinqToDB.Templates\Validation.ttinclude" />
     <None Include="packages.config" />
-    <EntityDeploy Include="UserManagerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserManagerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="SparePartsInformation.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SparePartsInformation.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="SparePartsImages.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SparePartsImages.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="SparePartsImages.edmx.diagram">
-      <DependentUpon>SparePartsImages.edmx</DependentUpon>
-    </None>
-    <None Include="SparePartsInformation.edmx.diagram">
-      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
-    </None>
-    <None Include="UserManagerModel.edmx.diagram">
-      <DependentUpon>UserManagerModel.edmx</DependentUpon>
-    </None>
-    <EntityDeploy Include="VehiclesImages.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VehiclesImages.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="VehiclesImages.edmx.diagram">
-      <DependentUpon>VehiclesImages.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EquipmentImages.Context.tt">
+    <Content Include="OilEngineImages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipmentImages.edmx</DependentUpon>
-      <LastGenOutput>EquipmentImages.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EquipmentImages.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipmentImages.edmx</DependentUpon>
-      <LastGenOutput>EquipmentImages.cs</LastGenOutput>
-    </Content>
-    <Content Include="EquipmentInformation.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
-      <LastGenOutput>EquipmentInformation.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EquipmentInformation.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipmentInformation.edmx</DependentUpon>
-      <LastGenOutput>EquipmentInformation.cs</LastGenOutput>
-    </Content>
-    <Content Include="EventsImages.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EventsImages.edmx</DependentUpon>
-      <LastGenOutput>EventsImages.Context.cs</LastGenOutput>
+      <LastGenOutput>OilEngineImages.generated.cs</LastGenOutput>
     </Content>
     <Content Include="EventsImages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EventsImages.edmx</DependentUpon>
-      <LastGenOutput>EventsImages.cs</LastGenOutput>
+      <LastGenOutput>EventsImages.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="OilEngineImages.Context.tt">
+    <Content Include="SparePartImages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OilEngineImages.edmx</DependentUpon>
-      <LastGenOutput>OilEngineImages.Context.cs</LastGenOutput>
+      <LastGenOutput>SparePartImages.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="OilEngineImages.tt">
+    <Content Include="SystemManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OilEngineImages.edmx</DependentUpon>
-      <LastGenOutput>OilEngineImages.cs</LastGenOutput>
-    </Content>
-    <Content Include="SparePartsImages.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SparePartsImages.edmx</DependentUpon>
-      <LastGenOutput>SparePartsImages.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SparePartsImages.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SparePartsImages.edmx</DependentUpon>
-      <LastGenOutput>SparePartsImages.cs</LastGenOutput>
-    </Content>
-    <Content Include="SparePartsInformation.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
-      <LastGenOutput>SparePartsInformation.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SparePartsInformation.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SparePartsInformation.edmx</DependentUpon>
-      <LastGenOutput>SparePartsInformation.cs</LastGenOutput>
-    </Content>
-    <Content Include="UserManagerModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserManagerModel.edmx</DependentUpon>
-      <LastGenOutput>UserManagerModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="UserManagerModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserManagerModel.edmx</DependentUpon>
-      <LastGenOutput>UserManagerModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="VehiclesImages.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VehiclesImages.edmx</DependentUpon>
-      <LastGenOutput>VehiclesImages.Context.cs</LastGenOutput>
+      <LastGenOutput>SystemManager.generated.cs</LastGenOutput>
     </Content>
     <Content Include="VehiclesImages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VehiclesImages.edmx</DependentUpon>
-      <LastGenOutput>VehiclesImages.cs</LastGenOutput>
+      <LastGenOutput>VehiclesImages.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="EquipmentImages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EquipmentImages.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="SparePartManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SparePartManagement1.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="EquipmentManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EquipmentManagement.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="LinqToDB.Templates\CopyMe.SQLite.tt.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

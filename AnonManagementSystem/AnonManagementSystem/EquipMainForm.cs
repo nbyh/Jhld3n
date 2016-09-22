@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB;
 
 namespace AnonManagementSystem
 {
@@ -15,9 +16,9 @@ namespace AnonManagementSystem
     {
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private EquipmentManagementEntities _equipEntities = new EquipmentManagementEntities();
+        private EquipmentManagementDB _equipDB = new EquipmentManagementDB();
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
-        private DbRawSqlQuery<CombatEquipment> _equipDbRaw;
+        private IQueryable<CombatEquipment> _equipDbRaw;
 
         public EquipMainForm()
         {
@@ -52,30 +53,30 @@ namespace AnonManagementSystem
                         int selectRowIndex = dgvEquip.CurrentRow.Index;
                         //dgvEquip.Rows.RemoveAt(selectRowIndex);
                         string id = dgvEquip.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
-                        var vh = from comvh in _equipEntities.CombatVehicles
+                        var vh = from comvh in _equipDB.CombatVehicles
                                  where comvh.Equipment == id
                                  select comvh;
-                        _equipEntities.CombatVehicles.RemoveRange(vh);
-                        _equipEntities.SaveChanges();
-                        var ev = _equipEntities.Events.Where(eve => eve.Equipment == id);
+                        _equipDB.Delete(vh);
+                        //_equipDB.SaveChanges();
+                        var ev = _equipDB.Events.Where(eve => eve.Equipment == id);
                         if (ev.Any())
                         {
                             foreach (var eventse in ev)
                             {
-                                var ed = from evd in _equipEntities.EventData
+                                var ed = from evd in _equipDB.EventData
                                          where evd.EventsNo == eventse.No
                                          select evd;
-                                _equipEntities.EventData.RemoveRange(ed);
-                                _equipEntities.SaveChanges();
+                                _equipDB.EventData.RemoveRange(ed);
+                                _equipDB.SaveChanges();
                             }
                         }
-                        _equipEntities.Events.RemoveRange(ev);
-                        _equipEntities.SaveChanges();
-                        var eq = (from eqt in _equipEntities.CombatEquipment
+                        _equipDB.Events.RemoveRange(ev);
+                        _equipDB.SaveChanges();
+                        var eq = (from eqt in _equipDB.CombatEquipment
                                   where eqt.SerialNo == id
                                   select eqt).First();
-                        _equipEntities.CombatEquipment.Remove(eq);
-                        _equipEntities.SaveChanges();
+                        _equipDB.CombatEquipment.Remove(eq);
+                        _equipDB.SaveChanges();
                         DataRefresh();
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除设备数据{id}成功");
                         MessageBox.Show(this, @"删除设备数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -95,7 +96,7 @@ namespace AnonManagementSystem
            {
                try
                {
-                   _equipEntities = new EquipmentManagementEntities();
+                   _equipDB = new EquipmentManagementDB();
                    LoadData();
                    CommonLogHelper.GetInstance("LogInfo").Info(@"刷新设备数据成功");
                }
@@ -131,10 +132,10 @@ namespace AnonManagementSystem
                             }
                         }
                         string excelid = dgvEquip.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                        var firsteq = (from eq in _equipEntities.CombatEquipment
+                        var firsteq = (from eq in _equipDB.CombatEquipment
                                        where eq.SerialNo == excelid
                                        select eq).First();
-                        var vehicles = (from vh in _equipEntities.CombatVehicles
+                        var vehicles = (from vh in _equipDB.CombatVehicles
                                         where vh.Equipment == excelid
                                         select vh).ToList();
                         var comboevhid = vehicles.FirstOrDefault(a => a.CombineOe);
@@ -142,28 +143,28 @@ namespace AnonManagementSystem
                         OilEngine oe = null;
                         if (comboevhid != null)
                         {
-                            oe = (from o in _equipEntities.OilEngine
+                            oe = (from o in _equipDB.OilEngine
                                   where o.Vehicle == comboevhid.SerialNo
                                   select o).FirstOrDefault();
                         }
 
-                        var events = (from ev in _equipEntities.Events
+                        var events = (from ev in _equipDB.Events
                                       where ev.Equipment == excelid
                                       select ev).ToList();
-                        var material = (from mt in _equipEntities.Material
+                        var material = (from mt in _equipDB.Material
                                         where mt.Equipment == excelid
                                         select mt).ToList();
                         //var eventsd = new Dictionary<string, List<EventData>>();
                         //foreach (var ee in events)
                         //{
-                        //    var ed = (from d in _equipEntities.EventData
+                        //    var ed = (from d in _equipDB.EventData
                         //              where d.EventsNo == ee.No
                         //              select d).ToList();
                         //    eventsd.Add(ee.No, ed);
                         //}
 
-                        //EquipImageEntities eqImgEntities = new EquipImageEntities();
-                        //List<EquipmentImage> eqimgList = (from img in eqImgEntities.EquipmentImage
+                        //EquipImageDB eqImgDB = new EquipImageDB();
+                        //List<EquipmentImage> eqimgList = (from img in eqImgDB.EquipmentImage
                         //                                  where img.SerialNo == excelid
                         //                                  select img).Take(3).ToList();
                         EquipOneExcelDataStruct eeds = new EquipOneExcelDataStruct()
@@ -207,15 +208,15 @@ namespace AnonManagementSystem
                             MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    var eqlist = (from eq in _equipEntities.CombatEquipment
+                    var eqlist = (from eq in _equipDB.CombatEquipment
                                    select eq).ToList();
-                    var vehicles = (from vh in _equipEntities.CombatVehicles
+                    var vehicles = (from vh in _equipDB.CombatVehicles
                                     select vh).ToList();
 
-                    var oe = (from o in _equipEntities.OilEngine
+                    var oe = (from o in _equipDB.OilEngine
                                     select o).ToList();
 
-                    var events = (from ev in _equipEntities.Events
+                    var events = (from ev in _equipDB.Events
                                   select ev).ToList();
                     
                     EquipAllExcelDataStruct eads = new EquipAllExcelDataStruct()
@@ -243,7 +244,7 @@ namespace AnonManagementSystem
         public void LoadData()
         {
             string cmds = "select * from CombatEquipment";
-            _equipDbRaw = _equipEntities.Database.SqlQuery<CombatEquipment>(cmds);
+            _equipDbRaw = _equipDB.Database.SqlQuery<CombatEquipment>(cmds);
             FillSelectionData();
 
             _pageSize = 20;
@@ -263,11 +264,11 @@ namespace AnonManagementSystem
             List<string> equipUseconList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
             List<string> equipFactList = (from s in _equipDbRaw where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
 
-            List<string> eventNameList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-            List<string> eventSpecificList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.SpecificType) select s.SpecificType).Distinct().ToList();
-            List<string> eventAddressList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
-            List<string> eventPublishUnitList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct().ToList();
-            List<string> eventPublisherList = (from s in _equipEntities.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+            List<string> eventNameList = (from s in _equipDB.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            List<string> eventSpecificList = (from s in _equipDB.Events where !string.IsNullOrEmpty(s.SpecificType) select s.SpecificType).Distinct().ToList();
+            List<string> eventAddressList = (from s in _equipDB.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
+            List<string> eventPublishUnitList = (from s in _equipDB.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct().ToList();
+            List<string> eventPublisherList = (from s in _equipDB.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
 
             _synchContext.Post(a =>
             {
@@ -548,7 +549,7 @@ namespace AnonManagementSystem
         private void btnQueryEvent_Click(object sender, EventArgs e)
         {
             dgvEquip.Rows.Clear();
-            var appointee = from ee in _equipEntities.Events
+            var appointee = from ee in _equipDB.Events
                             select ee;
             if (!string.IsNullOrEmpty(cmbEventName.Text))
             {

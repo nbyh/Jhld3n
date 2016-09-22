@@ -1,12 +1,12 @@
 ﻿using EquipmentInformationData;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB;
 
 namespace AnonManagementSystem
 {
@@ -14,9 +14,9 @@ namespace AnonManagementSystem
     {
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private SparePartManagementEntities _sparePartEntities = new SparePartManagementEntities();
+        private SparePartManagementDB _sparePartDB = new SparePartManagementDB();
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
-        private DbRawSqlQuery<SpareParts> _sparePart;
+        private IQueryable<SparePart> _sparePart;
 
         public SparePartsForm()
         {
@@ -57,10 +57,10 @@ namespace AnonManagementSystem
                         int selectRowIndex = dgvSparePart.CurrentRow.Index;
                         dgvSparePart.Rows.RemoveAt(selectRowIndex);
                         string id = dgvSparePart.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
-                        var eq = (from eqt in _sparePartEntities.SpareParts
+                        var eq = (from eqt in _sparePartDB.SpareParts
                                   where eqt.SerialNo == id
                                   select eqt).First();
-                        _sparePartEntities.SpareParts.Remove(eq);
+                        _sparePartDB.Delete(eq);
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除备件{id}成功");
                         MessageBox.Show(this, @"删除备件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -77,7 +77,7 @@ namespace AnonManagementSystem
         {
             try
             {
-                _sparePartEntities = new SparePartManagementEntities();
+                _sparePartDB = new SparePartManagementDB();
                 LoadData();
                 CommonLogHelper.GetInstance("LogInfo").Info(@"刷新备件数据成功");
             }
@@ -111,11 +111,11 @@ namespace AnonManagementSystem
                             }
                         }
                         string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                        var firstsp = (from sp in _sparePartEntities.SpareParts
+                        var firstsp = (from sp in _sparePartDB.SpareParts
                                        where sp.SerialNo == excelid
                                        select sp).First();
-                        //SparePartImagesEntities spImgEntities = new SparePartImagesEntities();
-                        //List<SparePartImage> spimgList = (from img in spImgEntities.SparePartImage
+                        //SparePartImagesDB spImgDB = new SparePartImagesDB();
+                        //List<SparePartImage> spimgList = (from img in spImgDB.SparePartImage
                         //                                  where img.SerialNo == excelid
                         //                                  select img).Take(3).ToList();
                         SpareOneExcelDataStruct seds = new SpareOneExcelDataStruct()
@@ -140,33 +140,33 @@ namespace AnonManagementSystem
         {
             try
             {
-                
-                    if (sfdExcel.ShowDialog() == DialogResult.OK)
-                    {
-                        string fn = sfdExcel.FileName;
-                        if (File.Exists(fn))
-                        {
-                            try
-                            {
-                                File.Delete(fn);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
-                            }
-                        }
-                        var splist = (from sp in _sparePartEntities.SpareParts
-                                       select sp).ToList();
 
-                        SpareAllExcelDataStruct sads = new SpareAllExcelDataStruct()
+                if (sfdExcel.ShowDialog() == DialogResult.OK)
+                {
+                    string fn = sfdExcel.FileName;
+                    if (File.Exists(fn))
+                    {
+                        try
                         {
-                            SparePartList = splist,
-                        };
-                        ExportData2Excel.ExportAllData(fn, sads);
-                        CommonLogHelper.GetInstance("LogInfo").Info(@"导出所有备件数据成功");
-                        MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            File.Delete(fn);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
                     }
+                    var splist = (from sp in _sparePartDB.SpareParts
+                                  select sp).ToList();
+
+                    SpareAllExcelDataStruct sads = new SpareAllExcelDataStruct()
+                    {
+                        SparePartList = splist,
+                    };
+                    ExportData2Excel.ExportAllData(fn, sads);
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"导出所有备件数据成功");
+                    MessageBox.Show(this, @"导出备件数据成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception exception)
             {
@@ -177,8 +177,10 @@ namespace AnonManagementSystem
 
         public void LoadData()
         {
-            string cmds = "select * from SpareParts";
-            _sparePart = _sparePartEntities.Database.SqlQuery<SpareParts>(cmds);
+            //string cmds = "select * from SpareParts";
+            //_sparePart = _sparePartDB.SqlQuery<SpareParts>(cmds);
+            _sparePart = from entity in _sparePartDB.SpareParts
+                             select entity;
 
             List<string> equipNameList = (from s in _sparePart where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             cmbName.DataSource = equipNameList;
@@ -322,7 +324,7 @@ namespace AnonManagementSystem
             }
         }
 
-        private void DataRefresh(int pagesize, int curpage, DbRawSqlQuery<SpareParts> iquery)
+        private void DataRefresh(int pagesize, int curpage, IQueryable<SparePart> iquery)
         {
             int all = iquery.Count();
             _lastPage = (int)Math.Ceiling((double)all / _pageSize);
@@ -361,7 +363,7 @@ namespace AnonManagementSystem
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
             dgvSparePart.Rows.Clear();
-            var appointsp = from ee in _sparePartEntities.SpareParts
+            var appointsp = from ee in _sparePartDB.SpareParts
                             select ee;
             if (!string.IsNullOrEmpty(cmbName.Text))
             {
@@ -446,7 +448,7 @@ namespace AnonManagementSystem
             loadDataThread.Start();
         }
 
-        private IList<SpareParts> QueryByPage(int pageSize, int curPage, DbRawSqlQuery<SpareParts> dbRaw)
+        private IList<SparePart> QueryByPage(int pageSize, int curPage, IQueryable<SparePart> dbRaw)
         {
             return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
         }
