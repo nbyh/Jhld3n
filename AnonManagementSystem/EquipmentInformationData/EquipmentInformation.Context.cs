@@ -19,6 +19,10 @@ namespace EquipmentInformationData
             : base("name=EquipmentManagementEntities")
         {
         }
+
+        public EquipmentManagementEntities(string connstr) : base(connstr)
+        {
+        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

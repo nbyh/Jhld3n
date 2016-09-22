@@ -35,7 +35,7 @@ namespace AnonManagementSystem
             //string conn = "data source=" + AppDomain.CurrentDomain.BaseDirectory + "SystemManager.db";
             //string filename = AppDomain.CurrentDomain.BaseDirectory + "SystemManager.db";filename
 
-            var u = _sysManagerEntities.UserManage.Where(s => s.User == user);
+            var u = _sysManagerEntities.UserManage.Where(s => s.User == user).Take(1);
             if (!u.Any())
             {
                 MessageBox.Show(@"用户不存在！");
@@ -57,10 +57,5 @@ namespace AnonManagementSystem
             CommonLogHelper.GetInstance("LogInfo").Info($"用户{loginuser.User}登陆成功");
             this.Close();
         }
-
-        //private void ShowForm()
-        //{
-        //    this.Show();
-        //}
     }
 }
