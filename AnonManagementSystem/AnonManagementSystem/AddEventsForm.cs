@@ -15,7 +15,7 @@ namespace AnonManagementSystem
         private readonly EquipmentManagementDB _eqDB = new EquipmentManagementDB();
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private Events _events;
+        private Event _events;
         private List<EventData> _eventdataList = new List<EventData>();
         private List<EventsImage> _eventsImgList = new List<EventsImage>();
         private string _id;
@@ -26,7 +26,7 @@ namespace AnonManagementSystem
             _synchContext = SynchronizationContext.Current;
         }
 
-        public delegate void SaveEvents(bool add, int index, Events events, List<EventData> eventDataList, List<EventsImage> eventImgList);
+        public delegate void SaveEvents(bool add, int index, Event events, List<EventData> eventDataList, List<EventsImage> eventImgList);
 
         public event SaveEvents SaveEventsSucess;
 
@@ -56,7 +56,7 @@ namespace AnonManagementSystem
             set { _eventsImgList = value; }
         }
 
-        public Events Eqevents
+        public Event Eqevents
         {
             get { return _events; }
             set { _events = value; }
@@ -221,7 +221,7 @@ namespace AnonManagementSystem
                 }
                 if (Add)
                 {
-                    _events = new Events()
+                    _events = new Event()
                     {
                         No = cmbEventNo.Text,
                         Name = cmbEventName.Text,

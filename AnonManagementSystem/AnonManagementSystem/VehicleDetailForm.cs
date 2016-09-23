@@ -14,13 +14,13 @@ namespace AnonManagementSystem
     {
         private readonly SynchronizationContext _synchContext;
 
-        public delegate void SaveVehicle(bool add, int index, CombatVehicles combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
+        public delegate void SaveVehicle(bool add, int index, CombatVehicle combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
 
         public event SaveVehicle SaveVehicleSucess;
 
         private List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
         private List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
-        private CombatVehicles _comvh;
+        private CombatVehicle _comvh;
         private OilEngine _oe;
         private string _id;
         private bool _enableedit = false;
@@ -57,7 +57,7 @@ namespace AnonManagementSystem
             set { _oilImagesList = value; }
         }
 
-        public CombatVehicles Comvh
+        public CombatVehicle Comvh
         {
             get { return _comvh; }
             set { _comvh = value; }
@@ -73,7 +73,7 @@ namespace AnonManagementSystem
         {
             try
             {
-                _comvh = new CombatVehicles()
+                _comvh = new CombatVehicle()
                 {
                     Name = cmbName.Text,
                     SerialNo = tbSerialNo.Text,
