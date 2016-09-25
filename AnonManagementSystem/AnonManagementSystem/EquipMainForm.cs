@@ -504,11 +504,11 @@ namespace AnonManagementSystem
             }
             if (!string.IsNullOrEmpty(cmbTimeTerm1.Text))
             {
-                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm1.Text, a.ProductionDate, dtpTime1.Value.Date));
+                appointeq = appointeq.Where(a => MainPublicFunction.CompareTime(cmbTimeTerm1.Text, a.ProductionDate, dtpTime1.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbTimeTerm2.Text))
             {
-                appointeq = appointeq.Where(a => PublicFunction.CompareTime(cmbTimeTerm2.Text, a.ProductionDate, dtpTime2.Value.Date));
+                appointeq = appointeq.Where(a => MainPublicFunction.CompareTime(cmbTimeTerm2.Text, a.ProductionDate, dtpTime2.Value.Date));
             }
             if (appointeq.Any())
             {
@@ -566,15 +566,15 @@ namespace AnonManagementSystem
             }
             if (!string.IsNullOrEmpty(cmbPublishDtTerm.Text))
             {
-                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbPublishDtTerm.Text, a.PublishDate, dtpPublish.Value.Date));
+                appointee = appointee.Where(a => MainPublicFunction.CompareTime(cmbPublishDtTerm.Text, a.PublishDate, dtpPublish.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbEventDtTerm1.Text))
             {
-                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm1.Text, a.StartTime, dtpEventDt1.Value.Date));
+                appointee = appointee.Where(a => MainPublicFunction.CompareTime(cmbEventDtTerm1.Text, a.StartTime, dtpEventDt1.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbEventDtTerm2.Text))
             {
-                appointee = appointee.Where(a => PublicFunction.CompareTime(cmbEventDtTerm2.Text, a.EndTime, dtpEventDt2.Value.Date));
+                appointee = appointee.Where(a => MainPublicFunction.CompareTime(cmbEventDtTerm2.Text, a.EndTime, dtpEventDt2.Value.Date));
             }
             if (appointee.Any())
             {

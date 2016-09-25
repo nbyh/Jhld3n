@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
-    public class PublicFunction
+    public class MainPublicFunction
     {
         internal const double MaxFileSize= 1048576;
         internal const double MaxImageHeight = 768;

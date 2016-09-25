@@ -140,7 +140,7 @@ namespace AnonManagementSystem
 
         private void tbDocNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = PublicFunction.JudgeKeyPress(e.KeyChar);
+            e.Handled = MainPublicFunction.JudgeKeyPress(e.KeyChar);
         }
     }
 }

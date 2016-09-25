@@ -690,7 +690,7 @@ namespace AnonManagementSystem
 
         private void SerialNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = PublicFunction.JudgeKeyPress(e.KeyChar);
+            e.Handled = MainPublicFunction.JudgeKeyPress(e.KeyChar);
         }
 
         private void tsbAddEvents_Click(object sender, EventArgs e)
@@ -711,7 +711,7 @@ namespace AnonManagementSystem
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
                 string imgpath = ofdImage.FileName;
-                if (PublicFunction.CheckImgCondition(imgpath))
+                if (MainPublicFunction.CheckImgCondition(imgpath))
                 {
                     FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
                     BinaryReader br = new BinaryReader(fs);

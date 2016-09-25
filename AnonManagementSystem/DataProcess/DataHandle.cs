@@ -5,13 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using EquipmentInformationData;
 using ICSharpCode.SharpZipLib.Zip;
+using LinqToDB;
 
 namespace DataProcess
 {
     public class DataHandle
     {
-        public string dirpath { get; set; }
+        public string Dirpath { get; set; }
         public DataHandle()
         {
             TaskScheduler.UnobservedTaskException += (object sender, UnobservedTaskExceptionEventArgs excArgs) =>
@@ -23,35 +25,55 @@ namespace DataProcess
 
         public void ImportData()
         {
-            if (File.Exists(dirpath+ @"\EquipmentManagement.db"))
+            if (File.Exists(Dirpath + @"\EquipmentManagement.db"))
             {
-                
+                EquipmentManagementDB dbs = new EquipmentManagementDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "EquipmentManagement.db"));
+                EquipmentManagementDB dbd = new EquipmentManagementDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentManagement.db"));
+                dbs.Insert(dbd.CombatEquipments.Select(s => s));
+                dbs.Insert(dbd.CombatVehicles.Select(s => s));
+                dbs.Insert(dbd.OilEngines.Select(s => s));
+                dbs.Insert(dbd.Events.Select(s => s));
+                dbs.Insert(dbd.EventData.Select(s => s));
+                dbs.Insert(dbd.Materials.Select(s => s));
             }
-            if (File.Exists(dirpath + @"\SparePartManagement.db"))
+            if (File.Exists(Dirpath + @"\SparePartManagement.db"))
             {
-
+                SparePartManagementDB dbs = new SparePartManagementDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "SparePartManagement.db"));
+                SparePartManagementDB dbd = new SparePartManagementDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartManagement.db"));
+                dbs.Insert(dbd.SpareParts.Select(s => s));
             }
-            if (File.Exists(dirpath + @"\EquipmentImages.db"))
+            if (File.Exists(Dirpath + @"\EquipmentImages.db"))
             {
-
+                EquipmentImagesDB dbs = new EquipmentImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "EquipmentImages.db"));
+                EquipmentImagesDB dbd = new EquipmentImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentImages.db"));
+                dbs.Insert(dbd.EquipmentImages.Select(s => s));
             }
-            if (File.Exists(dirpath + @"\VehiclesImages.db"))
+            if (File.Exists(Dirpath + @"\VehiclesImages.db"))
             {
-
+                VehiclesImagesDB dbs = new VehiclesImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "VehiclesImages.db"));
+                VehiclesImagesDB dbd = new VehiclesImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "VehiclesImages.db"));
+                dbs.Insert(dbd.VehiclesImages.Select(s => s));
             }
-            if (File.Exists(dirpath + @"\OilEngineImages.db"))
+            if (File.Exists(Dirpath + @"\OilEngineImages.db"))
             {
-
+                OilEngineImagesDB dbs = new OilEngineImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "OilEngineImages.db"));
+                OilEngineImagesDB dbd = new OilEngineImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "OilEngineImages.db"));
+                dbs.Insert(dbd.OilEngineImages.Select(s => s));
             }
-            if (File.Exists(dirpath + @"\EventsImages.db"))
+            if (File.Exists(Dirpath + @"\EventsImages.db"))
             {
-
+                EventsImagesDB dbs = new EventsImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "EventsImages.db"));
+                EventsImagesDB dbd = new EventsImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "EventsImages.db"));
+                dbs.Insert(dbd.EventsImages.Select(s => s));
             }
-            if (File.Exists(dirpath + @"\SparePartImages.db"))
+            if (File.Exists(Dirpath + @"\SparePartImages.db"))
             {
-
+                SparePartImagesDB dbs = new SparePartImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "SparePartImages.db"));
+                SparePartImagesDB dbd = new SparePartImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartImages.db"));
+                dbs.Insert(dbd.SparePartImages.Select(s => s));
             }
         }
+
         //public bool BackupData()
         //{
         //    bool result = false;

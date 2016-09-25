@@ -85,7 +85,7 @@
     <Compile Include="ImageListViewer.Designer.cs">
       <DependentUpon>ImageListViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="PublicFunction.cs" />
+    <Compile Include="MainPublicFunction.cs" />
     <Compile Include="SparePartsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,7 +122,7 @@
     <Compile Include="MDIParent.Designer.cs">
       <DependentUpon>MDIParent.cs</DependentUpon>
     </Compile>
-    <Compile Include="PublicInterface.cs" />
+    <Compile Include="MainPublicInterface.cs" />
     <Compile Include="EquipMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +205,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataProcess\DataProcess.csproj">
+      <Project>{dc6e0fe8-c97c-4d7a-9960-a2ee249f2202}</Project>
+      <Name>DataProcess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EquipmentInformationData\EquipmentInformationData.csproj">
       <Project>{5e4bb155-b8e1-45e8-b803-2ce73d488e52}</Project>
       <Name>EquipmentInformationData</Name>

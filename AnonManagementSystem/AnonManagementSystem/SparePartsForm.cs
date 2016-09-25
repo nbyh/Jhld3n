@@ -388,19 +388,19 @@ namespace AnonManagementSystem
             }
             if (!string.IsNullOrEmpty(cmbStore1.Text))
             {
-                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbStore1.Text, a.StoreDate, dtpStore1.Value.Date));
+                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbStore1.Text, a.StoreDate, dtpStore1.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbStore2.Text))
             {
-                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbStore2.Text, a.StoreDate, dtpStore2.Value.Date));
+                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbStore2.Text, a.StoreDate, dtpStore2.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbProDate1.Text))
             {
-                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate1.Text, a.ProductionDate, dtpProTime1.Value.Date));
+                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbProDate1.Text, a.ProductionDate, dtpProTime1.Value.Date));
             }
             if (!string.IsNullOrEmpty(cmbProDate2.Text))
             {
-                appointsp = appointsp.Where(a => PublicFunction.CompareTime(cmbProDate2.Text, a.ProductionDate, dtpProTime2.Value.Date));
+                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbProDate2.Text, a.ProductionDate, dtpProTime2.Value.Date));
             }
             if (appointsp.Any())
             {

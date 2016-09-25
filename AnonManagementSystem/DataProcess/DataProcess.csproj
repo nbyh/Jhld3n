@@ -34,6 +34,9 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="linq2db">
+      <HintPath>..\packages\linq2db.1.0.7.4\lib\net40\linq2db.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,9 +48,16 @@
   <ItemGroup>
     <Compile Include="DataHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataPublicFunction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EquipmentInformationData\EquipmentInformationData.csproj">
+      <Project>{5e4bb155-b8e1-45e8-b803-2ce73d488e52}</Project>
+      <Name>EquipmentInformationData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
