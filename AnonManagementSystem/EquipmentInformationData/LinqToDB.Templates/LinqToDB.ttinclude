@@ -102,12 +102,12 @@ void GenerateTypesFromMetadata()
 	}
 
 	if (Tables.Count > 0)
-		DataContextObject.Members.Insert(0, defProps);
+		DataContextObject.Members.InsertOrReplace(0, defProps);
 
 	foreach (var schema in schemas.Values)
 	{
 		schema.Type.Members.Add(schema.DataContext);
-		schema.DataContext.Members.Insert(0, schema.Props);
+		schema.DataContext.Members.InsertOrReplace(0, schema.Props);
 
 		schema.DataContext.Members.Add(new Field ("IDataContext", "_dataContext") { AccessModifier = AccessModifier.Private, IsReadonly = true });
 		schema.DataContext.Members.Add(new Method(null, schema.DataContext.Name, new[] { "IDataContext dataContext" }, new[] { "_dataContext = dataContext;" }));

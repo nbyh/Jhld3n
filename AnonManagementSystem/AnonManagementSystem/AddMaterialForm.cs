@@ -88,7 +88,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    var qmaterial = from eq in _eqDB.Material
+                    var qmaterial = from eq in _eqDB.Materials
                                    select eq;
                     List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
                     cmbShape.DataSource = sharpList;

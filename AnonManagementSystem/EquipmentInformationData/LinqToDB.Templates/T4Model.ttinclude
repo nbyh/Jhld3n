@@ -492,7 +492,7 @@ public partial class MemberGroup : MemberBase
 									
 									if (idx >= 0)
 									{
-										attrs.Insert(idx, nm);
+										attrs.InsertOrReplace(idx, nm);
 										break;
 									}
 								}
@@ -1371,7 +1371,7 @@ static void SkipSpacesAndInsert(GeneratedTextTransformation tt, string value)
 	{
 	}
 
-	tt.GenerationEnvironment.Insert(l, value);
+	tt.GenerationEnvironment.InsertOrReplace(l, value);
 }
 
 

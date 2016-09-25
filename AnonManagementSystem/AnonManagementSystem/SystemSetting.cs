@@ -66,7 +66,7 @@ namespace AnonManagementSystem
         {
             if (_userList.Count > 0)
             {
-                _sysManagerDB.Insert(_userList);
+                _sysManagerDB.InsertOrReplace(_userList);
             }
             Close();
         }
@@ -104,10 +104,7 @@ namespace AnonManagementSystem
                     if (dgvUserManage[4, rowindex].Value != null)
                     {
                         int id = int.Parse(dgvUserManage[4, rowindex].Value.ToString());
-                        var sms = from u in _sysManagerDB.UserManages
-                                  where u.ID == id
-                                  select u;
-                        _sysManagerDB.Delete(sms.First());
+                        _sysManagerDB.UserManages.Where(u => u.ID == id).Delete();
                     }
                     dgvUserManage.Rows.RemoveAt(rowindex);
                 }

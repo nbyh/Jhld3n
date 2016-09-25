@@ -57,7 +57,7 @@ void NotifyPropertyChangedImpl()
 			var index = parentMembers.IndexOf(prop);
 
 			parentMembers.RemoveAt(index);
-			parentMembers.Insert  (index, gr);
+			parentMembers.InsertOrReplace  (index, gr);
 		}
 
 		if (prop.IsAuto)
@@ -71,7 +71,7 @@ void NotifyPropertyChangedImpl()
 			if (prop.InitValue != null)
 				field.InitValue = prop.InitValue;
 			
-			gr.Members.Insert(0, field);
+			gr.Members.InsertOrReplace(0, field);
 			
 			prop.Name   = " " + name;
 			prop.Type   = " " + type;
@@ -152,21 +152,21 @@ void NotifyPropertyChangedImpl()
 			var insSpaces = prop.SetBody.Count > 1;
 			var n = 0;
 			
-			prop.SetBody.Insert(n++, "if (" + getValue + " != value)");
-			prop.SetBody.Insert(n++, "{");
+			prop.SetBody.InsertOrReplace(n++, "if (" + getValue + " != value)");
+			prop.SetBody.InsertOrReplace(n++, "{");
 			
 			if (ImplementNotifyPropertyChanging)
 			{
 				foreach (var dp in prop.Dependents)
-					prop.SetBody.Insert(n++, "\tOn" + dp + "Changing();");
-				prop.SetBody.Insert(n++, "");
+					prop.SetBody.InsertOrReplace(n++, "\tOn" + dp + "Changing();");
+				prop.SetBody.InsertOrReplace(n++, "");
 			}
 			
-			prop.SetBody.Insert(n++, "\tBefore" + name + "Changed(value);");
+			prop.SetBody.InsertOrReplace(n++, "\tBefore" + name + "Changed(value);");
 			
 			if (insSpaces)
 			{
-				prop.SetBody.Insert(3, "");
+				prop.SetBody.InsertOrReplace(3, "");
 				prop.SetBody.Add("");
 			}
 			
@@ -178,7 +178,7 @@ void NotifyPropertyChangedImpl()
 			
 			prop.SetBody.Add("}");
 
-			methods.Members.Insert(0, new MemberGroup
+			methods.Members.InsertOrReplace(0, new MemberGroup
 			{
 				IsCompact = true,
 				Members   =

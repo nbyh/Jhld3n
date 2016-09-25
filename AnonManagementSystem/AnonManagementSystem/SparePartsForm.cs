@@ -57,10 +57,7 @@ namespace AnonManagementSystem
                         int selectRowIndex = dgvSparePart.CurrentRow.Index;
                         dgvSparePart.Rows.RemoveAt(selectRowIndex);
                         string id = dgvSparePart.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
-                        var eq = (from eqt in _sparePartDB.SpareParts
-                                  where eqt.SerialNo == id
-                                  select eqt).First();
-                        _sparePartDB.Delete(eq);
+                        _sparePartDB.SpareParts.Where(eqt => eqt.SerialNo == id).Delete();
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除备件{id}成功");
                         MessageBox.Show(this, @"删除备件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -180,7 +177,7 @@ namespace AnonManagementSystem
             //string cmds = "select * from SpareParts";
             //_sparePart = _sparePartDB.SqlQuery<SpareParts>(cmds);
             _sparePart = from entity in _sparePartDB.SpareParts
-                             select entity;
+                         select entity;
 
             List<string> equipNameList = (from s in _sparePart where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             cmbName.DataSource = equipNameList;

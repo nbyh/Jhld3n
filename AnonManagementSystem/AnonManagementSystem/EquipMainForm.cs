@@ -52,28 +52,19 @@ namespace AnonManagementSystem
                         int selectRowIndex = dgvEquip.CurrentRow.Index;
                         //dgvEquip.Rows.RemoveAt(selectRowIndex);
                         string id = dgvEquip.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
-                        var vh = from comvh in _equipDB.CombatVehicles
-                                 where comvh.Equipment == id
-                                 select comvh;
-                        _equipDB.Delete(vh);
+                        _equipDB.CombatVehicles.Where(comvh => comvh.Equipment == id).Delete() ;
                         //_equipDB.SaveChanges();
                         var ev = _equipDB.Events.Where(eve => eve.Equipment == id);
                         if (ev.Any())
                         {
                             foreach (var eventse in ev)
                             {
-                                var ed = from evd in _equipDB.EventData
-                                         where evd.EventsNo == eventse.No
-                                         select evd;
-                                _equipDB.Delete(ed);
+                                _equipDB.EventData.Where(a => a.EventsNo == eventse.No).Delete();
                             }
                         }
-                        _equipDB.Delete(ev);
+                        ev.Delete();
                         //_equipDB.SaveChanges();
-                        var eq = (from eqt in _equipDB.CombatEquipments
-                                  where eqt.SerialNo == id
-                                  select eqt).First();
-                        _equipDB.Delete(eq);
+                        _equipDB.CombatEquipments.Where(eqt => eqt.SerialNo == id).Delete();
                         //_equipDB.SaveChanges();
                         DataRefresh();
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除设备数据{id}成功");
@@ -207,16 +198,16 @@ namespace AnonManagementSystem
                         }
                     }
                     var eqlist = (from eq in _equipDB.CombatEquipments
-                                   select eq).ToList();
+                                  select eq).ToList();
                     var vehicles = (from vh in _equipDB.CombatVehicles
                                     select vh).ToList();
 
                     var oe = (from o in _equipDB.OilEngines
-                                    select o).ToList();
+                              select o).ToList();
 
                     var events = (from ev in _equipDB.Events
                                   select ev).ToList();
-                    
+
                     EquipAllExcelDataStruct eads = new EquipAllExcelDataStruct()
                     {
                         EquipList = eqlist,
@@ -242,7 +233,7 @@ namespace AnonManagementSystem
         public void LoadData()
         {
             _equip = from eq in _equipDB.CombatEquipments
-                          select eq;
+                     select eq;
             FillSelectionData();
 
             _pageSize = 20;

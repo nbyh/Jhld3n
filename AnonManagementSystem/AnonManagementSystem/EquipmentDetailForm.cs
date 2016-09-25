@@ -139,8 +139,7 @@ namespace AnonManagementSystem
 
                     #region 事件数据更新
 
-                    _equipDB.Delete(_eventDataList);
-                    _equipDB.Insert(eventdatalist);
+                    _equipDB.InsertOrReplace(eventdatalist);
                     _eventDataList = eventdatalist;
 
                     #endregion 事件数据更新
@@ -156,7 +155,7 @@ namespace AnonManagementSystem
                         {
                             if (!seinoList.Contains(data.Name))
                             {
-                                _eventsImageDB.Insert(data);
+                                _eventsImageDB.InsertOrReplace(data);
                             }
                         }
                     }
@@ -166,7 +165,7 @@ namespace AnonManagementSystem
                         {
                             if (!deinoList.Contains(data.Name))
                             {
-                                _eventsImageDB.Delete(data);
+                                _eventsImageDB.EventsImages.Where(d => d.Name == data.Name).Delete();
                             }
                         }
                     }
@@ -351,7 +350,7 @@ namespace AnonManagementSystem
                             if (!sevdnoList.Contains(data.Name))
                             {
                                 //todo：增加
-                                _vehiclesImageDB.VehiclesImage.Add(data);
+                                _vehiclesImageDB.InsertOrReplace(data);
                             }
                         }
                     }
@@ -361,7 +360,7 @@ namespace AnonManagementSystem
                         {
                             if (!devdnoList.Contains(data.Name))
                             {
-                                _vehiclesImageDB.VehiclesImage.Remove(data);
+                                _vehiclesImageDB.VehiclesImages.Where(d => d.Name == data.Name).Delete();
                             }
                         }
                     }
@@ -408,7 +407,7 @@ namespace AnonManagementSystem
                                 if (!soilnoList.Contains(data.Name))
                                 {
                                     //todo：增加
-                                    _oilImageDB.OilEngineImage.Add(data);
+                                    _oilImageDB.InsertOrReplace(data);
                                 }
                             }
                         }
@@ -418,7 +417,7 @@ namespace AnonManagementSystem
                             {
                                 if (!doilnoList.Contains(data.Name))
                                 {
-                                    _oilImageDB.OilEngineImage.Remove(data);
+                                    _oilImageDB.OilEngineImages.Where(d => d.Name == data.Name).Delete();
                                 }
                             }
                         }
@@ -786,15 +785,9 @@ namespace AnonManagementSystem
                     _eventsImgList.Remove(eei);
                     return;
                 }
-                var ed = _equipDB.EventData.Where(eqed => eqed.EventsNo == id);
-                _equipDB.Delete(ed);
-                var ee = _equipDB.Events.Where(eqee => eqee.No == id);
-                if (ee.Any())
-                {
-                    _equipDB.Delete(ee.First());
-                }
-                var ei = _eventsImageDB.EventsImages.Where(eqei => eqei.SerialNo == id);
-                _eventsImageDB.Delete(ei);
+                _equipDB.EventData.Where(eqed => eqed.EventsNo == id).Delete();
+                _equipDB.Events.Where(eqee => eqee.No == id).Delete();
+                _eventsImageDB.EventsImages.Where(eqei => eqei.SerialNo == id).Delete();
                 _eveBindingList = new BindingList<Event>(_eventsList);
                 dgvEvents.DataSource = _eveBindingList;
                 CommonLogHelper.GetInstance("LogInfo").Info($"删除事件{id}成功");
@@ -821,14 +814,7 @@ namespace AnonManagementSystem
                         _equipImageList.Remove(equipmentImage);
                         break;
                     }
-                    var eqimg = from img in _equipImageDB.EquipmentImages
-                                where img.Name == key
-                                select img;
-                    if (eqimg.Any())
-                    {
-                        _equipImageDB.EquipmentImages.Remove(eqimg.First());
-                    }
-                    CommonLogHelper.GetInstance("LogInfo").Info($"删除图片{key}成功");
+                    _equipImageDB.EquipmentImages.Where(img => img.Name == key).Delete();
                     MessageBox.Show(this, $"删除图片成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
@@ -855,11 +841,7 @@ namespace AnonManagementSystem
                     _materList.Remove(mm);
                     break;
                 }
-                var mt = _equipDB.Materials.Where(eqm => eqm.No == id);
-                if (mt.Any())
-                {
-                    _equipDB.Material.Remove(mt.First());
-                }
+                _equipDB.Materials.Where(eqm => eqm.No == id).Delete();
                 _materBindingList = new BindingList<Material>(_materList);
                 dgvMaterial.DataSource = _materBindingList;
                 DgvSetup();
@@ -909,17 +891,11 @@ namespace AnonManagementSystem
                 {
                     if (ee.First().CombineOe)
                     {
-                        var oe = _equipDB.OilEngines.Where(eqed => eqed.Vehicle == id);
-                        if (oe.Any())
-                        {
-                            _equipDB.OilEngine.Remove(oe.First());
-                        }
-                        var ed = _oilImageDB.OilEngineImages.Where(eqed => eqed.SerialNo == id);
-                        _oilImageDB.OilEngineImage.RemoveRange(ed);
+                        _equipDB.OilEngines.Where(eqed => eqed.Vehicle == id).Delete();
+                        _oilImageDB.OilEngineImages.Where(eqed => eqed.SerialNo == id).Delete();
                     }
-                    _equipDB.CombatVehicles.Remove(ee.First());
-                    var ei = _vehiclesImageDB.VehiclesImages.Where(eqei => eqei.SerialNo == id);
-                    _vehiclesImageDB.VehiclesImage.RemoveRange(ei);
+                    ee.Delete();
+                    _vehiclesImageDB.VehiclesImages.Where(eqei => eqei.SerialNo == id).Delete();
                 }
                 //dgvCombatVehicles.Rows.RemoveAt(selectRowIndex);
                 _vhBindingList = new BindingList<CombatVehicle>(_comVehList);
@@ -962,7 +938,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    _equipImageDB.EquipmentImages.AddRange(_equipImageList);
+                    _equipImageDB.InsertOrReplace(_equipImageList);
                     if (Add)
                     {
                         #region 添加设备及相关信息
@@ -988,24 +964,24 @@ namespace AnonManagementSystem
                             TechRemould = tbTechRemould.Text,
                             SetupVideo = tbSetupVideo.Text
                         };
-                        _equipDB.CombatEquipment.Add(ce);
-                        _equipDB.SaveChanges();
-                        _equipDB.Events.AddRange(_eventsList);
-                        _equipDB.SaveChanges();
-                        _equipDB.CombatVehicles.AddRange(_comVehList);
-                        _equipDB.SaveChanges();
+                        _equipDB.InsertOrReplace(ce);
+                        //_equipDB.SaveChanges();
+                        _equipDB.InsertOrReplace(_eventsList);
+                        //_equipDB.SaveChanges();
+                        _equipDB.InsertOrReplace(_comVehList);
+                        //_equipDB.SaveChanges();
                         if (_oilEngines != null)
                         {
-                            _equipDB.OilEngine.Add(_oilEngines);
-                            _oilImageDB.OilEngineImage.AddRange(_oilImgList);
-                            _oilImageDB.SaveChanges();
+                            _equipDB.InsertOrReplace(_oilEngines);
+                            _oilImageDB.InsertOrReplace(_oilImgList);
+                            //_oilImageDB.SaveChanges();
                         }
-                        _equipDB.Material.AddRange(_materList);
-                        _equipDB.EventData.AddRange(_eventDataList);
+                        _equipDB.InsertOrReplace(_materList);
+                        _equipDB.InsertOrReplace(_eventDataList);
 
-                        _vehiclesImageDB.VehiclesImage.AddRange(_vehImgList);
-                        _eventsImageDB.EventsImage.AddRange(_eventsImgList);
-                        _equipDB.SaveChanges();
+                        _vehiclesImageDB.InsertOrReplace(_vehImgList);
+                        _eventsImageDB.InsertOrReplace(_eventsImgList);
+                        //_equipDB.SaveChanges();
 
                         #endregion
                     }
@@ -1013,7 +989,7 @@ namespace AnonManagementSystem
                     {
                         #region 修改设备信息
 
-                        var equipfirst = (from eq in _equipDB.CombatEquipment
+                        var equipfirst = (from eq in _equipDB.CombatEquipments
                                           where eq.SerialNo == _id
                                           select eq).First();
 
@@ -1040,24 +1016,24 @@ namespace AnonManagementSystem
 
                         #endregion
 
-                        _equipDB.SaveChanges();
+                        //_equipDB.SaveChanges();
 
-                        _equipDB.Events.AddRange(_eventsList);
-                        _equipDB.SaveChanges();
-                        _equipDB.CombatVehicles.AddRange(_comVehList);
-                        _equipDB.SaveChanges();
+                        _equipDB.InsertOrReplace(_eventsList);
+                        //_equipDB.SaveChanges();
+                        _equipDB.InsertOrReplace(_comVehList);
+                        //_equipDB.SaveChanges();
                         if (_oilEngines != null)
                         {
-                            _equipDB.OilEngine.Add(_oilEngines);
-                            _oilImageDB.OilEngineImage.AddRange(_oilImgList);
-                            _oilImageDB.SaveChanges();
+                            _equipDB.InsertOrReplace(_oilEngines);
+                            _oilImageDB.InsertOrReplace(_oilImgList);
+                            //_oilImageDB.SaveChanges();
                         }
-                        _equipDB.Material.AddRange(_materList);
-                        _equipDB.EventData.AddRange(_eventDataList);
+                        _equipDB.InsertOrReplace(_materList);
+                        _equipDB.InsertOrReplace(_eventDataList);
 
-                        _vehiclesImageDB.VehiclesImage.AddRange(_vehImgList);
-                        _eventsImageDB.EventsImage.AddRange(_eventsImgList);
-                        _equipDB.SaveChanges();
+                        _vehiclesImageDB.InsertOrReplace(_vehImgList);
+                        _eventsImageDB.InsertOrReplace(_eventsImgList);
+                        //_equipDB.SaveChanges();
 
                     }
                     SaveSuccess?.Invoke();

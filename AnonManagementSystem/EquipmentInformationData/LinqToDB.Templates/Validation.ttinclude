@@ -115,24 +115,24 @@ void ValidationImpl()
 			foreach (var p in props)
 			{
 				if (p.SetBody.Count > 0)
-					p.SetBody.Insert(0, "");
+					p.SetBody.InsertOrReplace(0, "");
 
-				p.SetBody.Insert(0, "if (_validationLockCounter == 0)");
-				p.SetBody.Insert(1, "{");
+				p.SetBody.InsertOrReplace(0, "if (_validationLockCounter == 0)");
+				p.SetBody.InsertOrReplace(1, "{");
 
 				if (p.CustomValidation)
 				{
-					p.SetBody.Insert(2, "\tvar validationResult = CustomValidator.Validate" + p.Name.Trim() + "(this, value);");
-					p.SetBody.Insert(3, "\tif (validationResult != ValidationResult.Success)");
-					p.SetBody.Insert(4, "\t\tthrow new ValidationException(validationResult, null, null);");
-					p.SetBody.Insert(5, "}");
+					p.SetBody.InsertOrReplace(2, "\tvar validationResult = CustomValidator.Validate" + p.Name.Trim() + "(this, value);");
+					p.SetBody.InsertOrReplace(3, "\tif (validationResult != ValidationResult.Success)");
+					p.SetBody.InsertOrReplace(4, "\t\tthrow new ValidationException(validationResult, null, null);");
+					p.SetBody.InsertOrReplace(5, "}");
 				}
 				else
 				{
-					p.SetBody.Insert(2, "\tValidator.ValidateProperty(");
-					p.SetBody.Insert(3, "\t\tvalue,");
-					p.SetBody.Insert(4, string.Format("\t\tnew ValidationContext(this, null, null) {{ MemberName = NameOf{0} }});", p.Name.Trim()));
-					p.SetBody.Insert(5, "}");
+					p.SetBody.InsertOrReplace(2, "\tValidator.ValidateProperty(");
+					p.SetBody.InsertOrReplace(3, "\t\tvalue,");
+					p.SetBody.InsertOrReplace(4, string.Format("\t\tnew ValidationContext(this, null, null) {{ MemberName = NameOf{0} }});", p.Name.Trim()));
+					p.SetBody.InsertOrReplace(5, "}");
 				}
 			}
 

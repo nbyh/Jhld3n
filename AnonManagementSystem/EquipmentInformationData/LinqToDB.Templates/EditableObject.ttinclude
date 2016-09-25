@@ -53,7 +53,7 @@ void EditableObjectImpl()
 			var index = parentMembers.IndexOf(prop);
 
 			parentMembers.RemoveAt(index);
-			parentMembers.Insert  (index, gr);
+			parentMembers.InsertOrReplace  (index, gr);
 		}
 
 		var originalField = new Field(type, "_original" + name)
@@ -62,7 +62,7 @@ void EditableObjectImpl()
 			InsertBlankLineAfter = false,
 		};
 
-		gr.Members.Insert(0, originalField);
+		gr.Members.InsertOrReplace(0, originalField);
 
 		var currentField = new Field(type, " _current" + name)
 		{
@@ -73,7 +73,7 @@ void EditableObjectImpl()
 		if (prop.InitValue != null)
 			currentField.InitValue = prop.InitValue;
 
-		gr.Members.Insert(0, currentField);
+		gr.Members.InsertOrReplace(0, currentField);
 
 		prop.Name   = "         " + name;
 		prop.Type   = " " + type;
@@ -111,7 +111,7 @@ void EditableObjectImpl()
 				if (ctor == null)
 				{
 					ctor = new Method(null, cl.Name);
-					cl.Members.Insert(0, ctor);
+					cl.Members.InsertOrReplace(0, ctor);
 				}
 
 				ctor.Body.Add("AcceptChanges();");

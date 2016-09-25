@@ -192,11 +192,7 @@ namespace AnonManagementSystem
                     {
                         _spImgList.Remove(spImg);
                     }
-                    var eqimg = _partsImageDB.SparePartImages.Where(img => img.Name == key);
-                    if (eqimg.Any())
-                    {
-                        _partsImageDB.Delete(eqimg.First());
-                    }
+                    _partsImageDB.SparePartImages.Where(img => img.Name == key).Delete();
                     CommonLogHelper.GetInstance("LogInfo").Info($"删除图片{key}成功");
                     MessageBox.Show(this, @"删除图片成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -248,8 +244,8 @@ namespace AnonManagementSystem
                         UseType = cmbUseType.Text,
                         Status = cmbStatus.Text,
                     };
-                    _sparePartDB.Insert(ce);
-                    _partsImageDB.Insert(_spImgList);
+                    _sparePartDB.InsertOrReplace(ce);
+                    _partsImageDB.InsertOrReplace(_spImgList);
                 }
                 else
                 {
@@ -287,7 +283,7 @@ namespace AnonManagementSystem
                                     select img;
                         if (!spimg.Any())
                         {
-                            _partsImageDB.Insert(sparePartImage);
+                            _partsImageDB.InsertOrReplace(sparePartImage);
                         }
                     }
                 }
