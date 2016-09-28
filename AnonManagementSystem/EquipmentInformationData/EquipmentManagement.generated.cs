@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using LinqToDB;
+using LinqToDB.DataProvider;
 using LinqToDB.Mapping;
 
 namespace EquipmentInformationData
@@ -34,6 +35,12 @@ namespace EquipmentInformationData
 
 		public EquipmentManagementDB(string configuration)
 			: base(configuration)
+		{
+			InitDataContext();
+		}
+
+		public EquipmentManagementDB(IDataProvider dataProvider, string configuration)
+			: base(dataProvider, configuration)
 		{
 			InitDataContext();
 		}

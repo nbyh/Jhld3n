@@ -50,6 +50,7 @@
             this.tsbAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.tsbExportExcel = new System.Windows.Forms.ToolStripButton();
+            this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -98,14 +99,14 @@
             // 单条数据ToolStripMenuItem
             // 
             this.单条数据ToolStripMenuItem.Name = "单条数据ToolStripMenuItem";
-            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.单条数据ToolStripMenuItem.Text = "单条导出";
             this.单条数据ToolStripMenuItem.Click += new System.EventHandler(this.单条数据ToolStripMenuItem_Click);
             // 
             // 全部数据ToolStripMenuItem
             // 
             this.全部数据ToolStripMenuItem.Name = "全部数据ToolStripMenuItem";
-            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.全部数据ToolStripMenuItem.Text = "全部导出";
             this.全部数据ToolStripMenuItem.Click += new System.EventHandler(this.全部数据ToolStripMenuItem_Click);
             // 
@@ -227,6 +228,11 @@
             this.tsbExportExcel.Visible = false;
             this.tsbExportExcel.Click += new System.EventHandler(this.tsbExportExcel_Click);
             // 
+            // fbd
+            // 
+            this.fbd.Description = "请选择要导入数据的目录";
+            this.fbd.ShowNewFolderButton = false;
+            // 
             // MdiParent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -278,6 +284,7 @@
         private System.Windows.Forms.ToolStripMenuItem 数据整理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据备份ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 导入数据ToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog fbd;
     }
 }
 

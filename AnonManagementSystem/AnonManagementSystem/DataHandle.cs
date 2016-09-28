@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 using EquipmentInformationData;
 using ICSharpCode.SharpZipLib.Zip;
 using LinqToDB;
+using LinqToDB.Data;
+using LinqToDB.DataProvider.SQLite;
 
-namespace DataProcess
+namespace AnonManagementSystem
 {
     public class DataHandle
     {
@@ -27,11 +30,14 @@ namespace DataProcess
 
         private static void TasksEnded(Task<bool>[] tasks)
         {
-
+            string[] r = tasks.Select(s => s.Result.ToString()).ToArray();
+            CommonLogHelper.GetInstance("LogInfo").Info($"完成数据导入任务，结果为：{string.Join("，", r)}");
+            MessageBox.Show($"完成数据导入任务！结果为：{string.Join("，", r)}", @"信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ImportData()
         {
+            CommonLogHelper.GetInstance("LogInfo").Info("开始数据导入任务");
             TaskFactory taskFactory = new TaskFactory();
             Task<bool>[] tasks = {
                                 taskFactory.StartNew<bool>(EquipManagemetDbCombine),
@@ -49,9 +55,14 @@ namespace DataProcess
         {
             if (File.Exists(Dirpath + @"\SparePartImages.db"))
             {
-                SparePartImagesDB dbs = new SparePartImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "SparePartImages.db"));
-                SparePartImagesDB dbd = new SparePartImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartImages.db"));
-                dbs.Insert(dbd.SparePartImages.Select(s => s));
+                SparePartImagesDB dbs = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\SparePartImages.db"));
+                SparePartImagesDB dbd = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartImages.db"));
+                dbs.BulkCopy(dbd.SparePartImages.Select(s => s));
+            }
+            else
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\SparePartImages.db不存在");
+                return false;
             }
             return true;
         }
@@ -60,9 +71,14 @@ namespace DataProcess
         {
             if (File.Exists(Dirpath + @"\EventsImages.db"))
             {
-                EventsImagesDB dbs = new EventsImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "EventsImages.db"));
-                EventsImagesDB dbd = new EventsImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "EventsImages.db"));
-                dbs.Insert(dbd.EventsImages.Select(s => s));
+                EventsImagesDB dbs = new EventsImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EventsImages.db"));
+                EventsImagesDB dbd = new EventsImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EventsImages.db"));
+                dbs.BulkCopy(dbd.EventsImages.Select(s => s));
+            }
+            else
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EventsImages.db不存在");
+                return false;
             }
             return true;
         }
@@ -71,9 +87,14 @@ namespace DataProcess
         {
             if (File.Exists(Dirpath + @"\OilEngineImages.db"))
             {
-                OilEngineImagesDB dbs = new OilEngineImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "OilEngineImages.db"));
-                OilEngineImagesDB dbd = new OilEngineImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "OilEngineImages.db"));
-                dbs.Insert(dbd.OilEngineImages.Select(s => s));
+                OilEngineImagesDB dbs = new OilEngineImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\OilEngineImages.db"));
+                OilEngineImagesDB dbd = new OilEngineImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "OilEngineImages.db"));
+                dbs.BulkCopy(dbd.OilEngineImages.Select(s => s));
+            }
+            else
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\OilEngineImages.db不存在");
+                return false;
             }
             return true;
         }
@@ -82,9 +103,14 @@ namespace DataProcess
         {
             if (File.Exists(Dirpath + @"\VehiclesImages.db"))
             {
-                VehiclesImagesDB dbs = new VehiclesImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "VehiclesImages.db"));
-                VehiclesImagesDB dbd = new VehiclesImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "VehiclesImages.db"));
-                dbs.Insert(dbd.VehiclesImages.Select(s => s));
+                VehiclesImagesDB dbs = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\VehiclesImages.db"));
+                VehiclesImagesDB dbd = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "VehiclesImages.db"));
+                dbs.BulkCopy(dbd.VehiclesImages.Select(s => s));
+            }
+            else
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\VehiclesImages.db不存在");
+                return false;
             }
             return true;
         }
@@ -93,9 +119,14 @@ namespace DataProcess
         {
             if (File.Exists(Dirpath + @"\EquipmentImages.db"))
             {
-                EquipmentImagesDB dbs = new EquipmentImagesDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "EquipmentImages.db"));
-                EquipmentImagesDB dbd = new EquipmentImagesDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentImages.db"));
-                dbs.Insert(dbd.EquipmentImages.Select(s => s));
+                EquipmentImagesDB dbs = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EquipmentImages.db"));
+                EquipmentImagesDB dbd = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentImages.db"));
+                dbs.BulkCopy(dbd.EquipmentImages.Select(s => s));
+            }
+            else
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EquipmentImages.db不存在");
+                return false;
             }
             return true;
         }
@@ -104,27 +135,44 @@ namespace DataProcess
         {
             if (File.Exists(Dirpath + @"\SparePartManagement.db"))
             {
-                SparePartManagementDB dbs = new SparePartManagementDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "SparePartManagement.db"));
-                SparePartManagementDB dbd = new SparePartManagementDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartManagement.db"));
-                dbs.Insert(dbd.SpareParts.Select(s => s));
+                SparePartManagementDB dbs = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\SparePartManagement.db"));
+                SparePartManagementDB dbd = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartManagement.db"));
+                dbs.BulkCopy(dbd.SpareParts.Select(s => s));
+            }
+            else
+            {
+                CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\SparePartManagement.db不存在");
+                return false;
             }
             return true;
         }
 
         private bool EquipManagemetDbCombine()
         {
-            if (File.Exists(Dirpath + @"\EquipmentManagement.db"))
+            try
             {
-                EquipmentManagementDB dbs = new EquipmentManagementDB(DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, "EquipmentManagement.db"));
-                EquipmentManagementDB dbd = new EquipmentManagementDB(DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentManagement.db"));
-                dbs.Insert(dbd.CombatEquipments.Select(s => s));
-                dbs.Insert(dbd.CombatVehicles.Select(s => s));
-                dbs.Insert(dbd.OilEngines.Select(s => s));
-                dbs.Insert(dbd.Events.Select(s => s));
-                dbs.Insert(dbd.EventData.Select(s => s));
-                dbs.Insert(dbd.Materials.Select(s => s));
+                if (File.Exists(Dirpath + @"\EquipmentManagement.db"))
+                {
+                    EquipmentManagementDB dbs = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EquipmentManagement.db"));
+                    EquipmentManagementDB dbd = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentManagement.db"));
+                    dbs.BulkCopy(dbd.CombatEquipments.Select(s => s));
+                    dbs.BulkCopy(dbd.CombatVehicles.Select(s => s));
+                    dbs.BulkCopy(dbd.OilEngines.Select(s => s));
+                    dbs.BulkCopy(dbd.Events.Select(s => s));
+                    dbs.BulkCopy(dbd.EventData.Select(s => s));
+                    dbs.BulkCopy(dbd.Materials.Select(s => s));
+                }
+                else
+                {
+                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EquipmentManagement.db不存在");
+                    return false;
+                }
+                return true;
             }
-            return true;
+            catch
+            {
+                throw;
+            }
         }
 
         //public bool BackupData()

@@ -8,48 +8,59 @@ using System;
 using System.Linq;
 
 using LinqToDB;
+using LinqToDB.DataProvider;
 using LinqToDB.Mapping;
 
 namespace EquipmentInformationData
 {
-	/// <summary>
-	/// Database       : VehiclesImages
-	/// Data Source    : VehiclesImages
-	/// Server Version : 3.9.2
-	/// </summary>
-	public partial class VehiclesImagesDB : LinqToDB.Data.DataConnection
-	{
-		public ITable<VehiclesImage> VehiclesImages { get { return this.GetTable<VehiclesImage>(); } }
+    /// <summary>
+    /// Database       : VehiclesImages
+    /// Data Source    : VehiclesImages
+    /// Server Version : 3.9.2
+    /// </summary>
+    public partial class VehiclesImagesDB : LinqToDB.Data.DataConnection
+    {
+        public ITable<VehiclesImage> VehiclesImages { get { return this.GetTable<VehiclesImage>(); } }
 
-		public VehiclesImagesDB()
-		{
-			InitDataContext();
-		}
+        public VehiclesImagesDB()
+        {
+            InitDataContext();
+        }
 
-		public VehiclesImagesDB(string configuration)
-			: base(configuration)
-		{
-			InitDataContext();
-		}
+        public VehiclesImagesDB(string configuration)
+            : base(configuration)
+        {
+            InitDataContext();
+        }
 
-		partial void InitDataContext();
-	}
+        public VehiclesImagesDB(IDataProvider dataProvider, string configuration)
+            : base(dataProvider, configuration)
+        {
+            InitDataContext();
+        }
 
-	[Table("VehiclesImage")]
-	public partial class VehiclesImage
-	{
-		[PrimaryKey, Identity] public long   ID       { get; set; } // integer
-		[Column,     Nullable] public string Name     { get; set; } // nvarchar(254)
-		[Column,     Nullable] public byte[] Images   { get; set; } // image
-		[Column,     Nullable] public string SerialNo { get; set; } // nvarchar(254)
-	}
+        partial void InitDataContext();
+    }
 
-	public static partial class TableExtensions
-	{
-		public static VehiclesImage Find(this ITable<VehiclesImage> table, long ID)
-		{
-			return table.FirstOrDefault(t =>
-				t.ID == ID);
-		}
-	}
+    [Table("VehiclesImage")]
+    public partial class VehiclesImage
+    {
+        [PrimaryKey, Identity]
+        public long ID { get; set; } // integer
+        [Column, Nullable]
+        public string Name { get; set; } // nvarchar(254)
+        [Column, Nullable]
+        public byte[] Images { get; set; } // image
+        [Column, Nullable]
+        public string SerialNo { get; set; } // nvarchar(254)
+    }
+
+    public static partial class TableExtensions
+    {
+        public static VehiclesImage Find(this ITable<VehiclesImage> table, long ID)
+        {
+            return table.FirstOrDefault(t =>
+                t.ID == ID);
+        }
+    }
 }

@@ -38,6 +38,10 @@
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="linq2db, Version=1.0.7.4, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
       <HintPath>..\packages\linq2db.1.0.7.4\lib\net40\linq2db.dll</HintPath>
       <Private>True</Private>
@@ -71,6 +75,7 @@
     <Compile Include="AmsAboutBox.Designer.cs">
       <DependentUpon>AmsAboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataHandle.cs" />
     <Compile Include="ExportData2Excel.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="SparePartDetailForm.cs">
@@ -205,10 +210,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataProcess\DataProcess.csproj">
-      <Project>{dc6e0fe8-c97c-4d7a-9960-a2ee249f2202}</Project>
-      <Name>DataProcess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EquipmentInformationData\EquipmentInformationData.csproj">
       <Project>{5e4bb155-b8e1-45e8-b803-2ce73d488e52}</Project>
       <Name>EquipmentInformationData</Name>

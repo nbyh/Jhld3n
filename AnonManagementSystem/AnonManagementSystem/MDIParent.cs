@@ -181,7 +181,20 @@ namespace AnonManagementSystem
 
         private void 导入数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DataHandle dataProcessHandle = new DataHandle();
+                    dataProcessHandle.Dirpath = fbd.SelectedPath;
+                    dataProcessHandle.ImportData();
+                }
+                catch (Exception exception)
+                {
+                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
+                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void 单条数据ToolStripMenuItem_Click(object sender, EventArgs e)
