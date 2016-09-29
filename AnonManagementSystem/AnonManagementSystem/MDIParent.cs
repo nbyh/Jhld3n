@@ -14,40 +14,12 @@ namespace AnonManagementSystem
         {
             _islogin = true;
             tsbAdd.Enabled = _enableedit = enableedit;
-            MessageBox.Show(@"登陆成功");
+            MessageBox.Show(@"登陆成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private bool _enableedit;
         private bool _islogin;
-
-        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.Cascade);
-        }
-
-        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        //private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    LayoutMdi(MdiLayout.ArrangeIcons);
-        //}
-
-        private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form childForm in MdiChildren)
-            {
-                childForm.Close();
-            }
-        }
-
+        
         private void EquipMenu_Click(object sender, EventArgs e)
         {
             if (_islogin)

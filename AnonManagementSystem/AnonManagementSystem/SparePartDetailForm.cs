@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using LinqToDB;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -17,11 +18,11 @@ namespace AnonManagementSystem
         public delegate void SaveChangeSuccess();
         public event SaveChangeSuccess SaveSuccess;
         private readonly SynchronizationContext _synchContext;
-        private readonly SparePartImagesDB _partsImageDB = new SparePartImagesDB();
+        private readonly SparePartImagesDB _partsImageDb = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartImages.db"));
         private List<SparePartImage> _spImgList = new List<SparePartImage>();
         private bool _enableedit;
         private string _id;
-        private SparePartManagementDB _sparePartDB = new SparePartManagementDB();
+        private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
         public SparePartDetailForm()
         {
             InitializeComponent();
@@ -64,7 +65,7 @@ namespace AnonManagementSystem
             dtpOemDate.Value = spfirst.ProductionDate;
 
 
-            var imgs = (from img in _partsImageDB.SparePartImages
+            var imgs = (from img in _partsImageDb.SparePartImages
                         where img.SerialNo == _id
                         select img);
             _spImgList = imgs.ToList();
@@ -93,7 +94,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    var sp = from eq in _sparePartDB.SpareParts
+                    var sp = from eq in _sparePartDb.SpareParts
                              select eq;
 
                     #region 下拉列表内容
@@ -192,7 +193,7 @@ namespace AnonManagementSystem
                     {
                         _spImgList.Remove(spImg);
                     }
-                    _partsImageDB.SparePartImages.Where(img => img.Name == key).Delete();
+                    _partsImageDb.SparePartImages.Where(img => img.Name == key).Delete();
                     CommonLogHelper.GetInstance("LogInfo").Info($"删除图片{key}成功");
                     MessageBox.Show(this, @"删除图片成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -210,8 +211,8 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    _sparePartDB = new SparePartManagementDB();
-                    var sp = from eq in _sparePartDB.SpareParts
+                    _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
+                    var sp = from eq in _sparePartDb.SpareParts
                              select eq;
                     LoadSparePartData(sp);
                     CommonLogHelper.GetInstance("LogInfo").Info(@"恢复原始备件数据成功");
@@ -244,12 +245,12 @@ namespace AnonManagementSystem
                         UseType = cmbUseType.Text,
                         Status = cmbStatus.Text,
                     };
-                    _sparePartDB.InsertOrReplace(ce);
-                    _partsImageDB.InsertOrReplace(_spImgList);
+                    _sparePartDb.InsertOrReplace(ce);
+                    _partsImageDb.InsertOrReplace(_spImgList);
                 }
                 else
                 {
-                    var spfirst = (from eq in _sparePartDB.SpareParts
+                    var spfirst = (from eq in _sparePartDb.SpareParts
                                    where eq.SerialNo == _id
                                    select eq).First();
 
@@ -278,12 +279,12 @@ namespace AnonManagementSystem
                     //}
                     foreach (var sparePartImage in _spImgList)
                     {
-                        var spimg = from img in _partsImageDB.SparePartImages
+                        var spimg = from img in _partsImageDb.SparePartImages
                                     where img.Name == sparePartImage.Name
                                     select img;
                         if (!spimg.Any())
                         {
-                            _partsImageDB.InsertOrReplace(sparePartImage);
+                            _partsImageDb.InsertOrReplace(sparePartImage);
                         }
                     }
                 }

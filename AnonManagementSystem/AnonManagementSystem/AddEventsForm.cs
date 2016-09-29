@@ -7,12 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
     public partial class AddEventsForm : Form, IAddModify
     {
-        private readonly EquipmentManagementDB _eqDB = new EquipmentManagementDB();
+        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
         private Event _events;
@@ -251,7 +252,7 @@ namespace AnonManagementSystem
                 }
                 else
                 {
-                    var eventfirst = _eqDB.Events.First(eq => eq.Equipment == _id);
+                    var eventfirst = _equipDb.Events.First(eq => eq.Equipment == _id);
                     _eventdataList.Clear();
 
                     eventfirst.No = cmbEventNo.Text;

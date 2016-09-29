@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -38,7 +39,7 @@ namespace AnonManagementSystem
 
         private Material _material;
 
-        private readonly EquipmentManagementDB _eqDB = new EquipmentManagementDB();
+        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
         private readonly SynchronizationContext _synchContext;
 
         public AddMaterialForm()
@@ -88,7 +89,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    var qmaterial = from eq in _eqDB.Materials
+                    var qmaterial = from eq in _equipDb.Materials
                                    select eq;
                     List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
                     cmbShape.DataSource = sharpList;

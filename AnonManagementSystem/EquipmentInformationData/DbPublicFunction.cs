@@ -8,10 +8,14 @@ namespace EquipmentInformationData
 {
     public class DbPublicFunction
     {
+        public static string ReturnDbConnectionString(string dbfile)
+        {
+            return $@"data source={AppDomain.CurrentDomain.BaseDirectory}{dbfile};";
+        }
         public static string ReturnDbConnectionString(string path, string dbfile)
         {
             string dbpath = Path.Combine(path, dbfile);
-            return $"data source={dbpath}";
+            return $"data source={dbpath};";
         }
     }
 }

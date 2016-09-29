@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using LinqToDB;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
     public partial class SystemSetting : Form
     {
-        private readonly SystemManagerDB _sysManagerDB = new SystemManagerDB();
+        private static readonly string Conn = $"data source = {AppDomain.CurrentDomain.BaseDirectory}SystemManager.db;";
+        private readonly SystemManagerDB _sysManagerDb = new SystemManagerDB(new SQLiteDataProvider(), Conn);
         private List<string> _alluser = new List<string>();
-        private List<UserManage> _userList = new List<UserManage>();
+        private readonly List<UserManage> _userList = new List<UserManage>();
         //private UserManage um;
 
         public SystemSetting()
@@ -44,7 +46,7 @@ namespace AnonManagementSystem
             }
             else
             {
-                var sms = from u in _sysManagerDB.UserManages
+                var sms = from u in _sysManagerDb.UserManages
                           where u.ID == id
                           select u;
                 sms.First().User = user;
@@ -66,14 +68,14 @@ namespace AnonManagementSystem
         {
             if (_userList.Count > 0)
             {
-                _sysManagerDB.InsertOrReplace(_userList);
+                _sysManagerDb.InsertOrReplace(_userList);
             }
             Close();
         }
 
         private void SystemSetting_Load(object sender, EventArgs e)
         {
-            var sms = (from u in _sysManagerDB.UserManages
+            var sms = (from u in _sysManagerDb.UserManages
                        select u).Distinct().ToList();
             _alluser = sms.Select(n => n.User).ToList();
             dgvUserManage.RowCount = sms.Count;
@@ -104,7 +106,7 @@ namespace AnonManagementSystem
                     if (dgvUserManage[4, rowindex].Value != null)
                     {
                         int id = int.Parse(dgvUserManage[4, rowindex].Value.ToString());
-                        _sysManagerDB.UserManages.Where(u => u.ID == id).Delete();
+                        _sysManagerDb.UserManages.Where(u => u.ID == id).Delete();
                     }
                     dgvUserManage.Rows.RemoveAt(rowindex);
                 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using LinqToDB;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -14,7 +15,7 @@ namespace AnonManagementSystem
     {
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private SparePartManagementDB _sparePartDB = new SparePartManagementDB();
+        private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
         private IQueryable<SparePart> _sparePart;
 
@@ -57,7 +58,7 @@ namespace AnonManagementSystem
                         int selectRowIndex = dgvSparePart.CurrentRow.Index;
                         dgvSparePart.Rows.RemoveAt(selectRowIndex);
                         string id = dgvSparePart.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
-                        _sparePartDB.SpareParts.Where(eqt => eqt.SerialNo == id).Delete();
+                        _sparePartDb.SpareParts.Where(eqt => eqt.SerialNo == id).Delete();
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除备件{id}成功");
                         MessageBox.Show(this, @"删除备件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -74,7 +75,7 @@ namespace AnonManagementSystem
         {
             try
             {
-                _sparePartDB = new SparePartManagementDB();
+                _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
                 LoadData();
                 CommonLogHelper.GetInstance("LogInfo").Info(@"刷新备件数据成功");
             }
@@ -108,7 +109,7 @@ namespace AnonManagementSystem
                             }
                         }
                         string excelid = dgvSparePart.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                        var firstsp = (from sp in _sparePartDB.SpareParts
+                        var firstsp = (from sp in _sparePartDb.SpareParts
                                        where sp.SerialNo == excelid
                                        select sp).First();
                         //SparePartImagesDB spImgDB = new SparePartImagesDB();
@@ -153,7 +154,7 @@ namespace AnonManagementSystem
                                 MessageBoxIcon.Error);
                         }
                     }
-                    var splist = (from sp in _sparePartDB.SpareParts
+                    var splist = (from sp in _sparePartDb.SpareParts
                                   select sp).ToList();
 
                     SpareAllExcelDataStruct sads = new SpareAllExcelDataStruct()
@@ -176,7 +177,7 @@ namespace AnonManagementSystem
         {
             //string cmds = "select * from SpareParts";
             //_sparePart = _sparePartDB.SqlQuery<SpareParts>(cmds);
-            _sparePart = from entity in _sparePartDB.SpareParts
+            _sparePart = from entity in _sparePartDb.SpareParts
                          select entity;
 
             List<string> equipNameList = (from s in _sparePart where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
@@ -360,7 +361,7 @@ namespace AnonManagementSystem
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
             dgvSparePart.Rows.Clear();
-            var appointsp = from ee in _sparePartDB.SpareParts
+            var appointsp = from ee in _sparePartDb.SpareParts
                             select ee;
             if (!string.IsNullOrEmpty(cmbName.Text))
             {
