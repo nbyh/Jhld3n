@@ -15,7 +15,7 @@ namespace AnonManagementSystem
 {
     public partial class EquipmentDetailForm : Form, IAddModify
     {
-        private readonly EquipmentImagesDB _equipImageDb = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SystemManager.db"));
+        private readonly EquipmentImagesDB _equipImageDb = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentImages.db"));
         private readonly EventsImagesDB _eventsImageDb = new EventsImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EventsImages.db"));
         private readonly OilEngineImagesDB _oilImageDb = new OilEngineImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\OilEngineImages.db"));
         private readonly SynchronizationContext _synchContext;
