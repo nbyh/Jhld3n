@@ -15,14 +15,14 @@ namespace AnonManagementSystem
 {
     public partial class EquipmentDetailForm : Form, IAddModify
     {
-        private readonly EquipmentImagesDB _equipImageDb = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SystemManager.db"));
-        private readonly EventsImagesDB _eventsImageDb = new EventsImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EventsImages.db"));
-        private readonly OilEngineImagesDB _oilImageDb = new OilEngineImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\OilEngineImages.db"));
+        private readonly EquipmentImagesDB _equipImageDb = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SystemManager.db"));
+        private readonly EventsImagesDB _eventsImageDb = new EventsImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EventsImages.db"));
+        private readonly OilEngineImagesDB _oilImageDb = new OilEngineImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\OilEngineImages.db"));
         private readonly SynchronizationContext _synchContext;
-        private readonly VehiclesImagesDB _vehiclesImageDb = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\VehiclesImages.db"));
+        private readonly VehiclesImagesDB _vehiclesImageDb = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\VehiclesImages.db"));
         private List<CombatVehicle> _comVehList = new List<CombatVehicle>();
         private bool _enableedit;
-        private EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
+        private EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
         private List<EquipmentImage> _equipImageList = new List<EquipmentImage>();
         private BindingList<Event> _eveBindingList = new BindingList<Event>();
         private List<EventData> _eventDataList = new List<EventData>();
@@ -918,7 +918,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
+                    _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
                     var equip = from eq in _equipDb.CombatEquipments
                                 select eq;
                     LoadEquipData(equip);

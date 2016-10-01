@@ -63,122 +63,122 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddModifyUser.cs">
+    <Compile Include="ui\AddModifyUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddModifyUser.Designer.cs">
+    <Compile Include="ui\AddModifyUser.Designer.cs">
       <DependentUpon>AddModifyUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="AmsAboutBox.cs">
+    <Compile Include="ui\AmsAboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AmsAboutBox.Designer.cs">
+    <Compile Include="ui\AmsAboutBox.Designer.cs">
       <DependentUpon>AmsAboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataHandle.cs" />
-    <Compile Include="ExportData2Excel.cs" />
-    <Compile Include="LogHelper.cs" />
-    <Compile Include="SparePartDetailForm.cs">
+    <Compile Include="src\DataHandle.cs" />
+    <Compile Include="src\ExportData2Excel.cs" />
+    <Compile Include="src\LogHelper.cs" />
+    <Compile Include="ui\SparePartDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SparePartDetailForm.Designer.cs">
+    <Compile Include="ui\SparePartDetailForm.Designer.cs">
       <DependentUpon>SparePartDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImageListViewer.cs">
+    <Compile Include="ui\ImageListViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ImageListViewer.Designer.cs">
+    <Compile Include="ui\ImageListViewer.Designer.cs">
       <DependentUpon>ImageListViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainPublicFunction.cs" />
-    <Compile Include="SparePartsForm.cs">
+    <Compile Include="src\MainPublicFunction.cs" />
+    <Compile Include="ui\SparePartsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SparePartsForm.Designer.cs">
+    <Compile Include="ui\SparePartsForm.Designer.cs">
       <DependentUpon>SparePartsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentDetailForm.cs">
+    <Compile Include="ui\EquipmentDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EquipmentDetailForm.Designer.cs">
+    <Compile Include="ui\EquipmentDetailForm.Designer.cs">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddEventsForm.cs">
+    <Compile Include="ui\AddEventsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEventsForm.Designer.cs">
+    <Compile Include="ui\AddEventsForm.Designer.cs">
       <DependentUpon>AddEventsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="ui\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="ui\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddMaterialForm.cs">
+    <Compile Include="ui\AddMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddMaterialForm.Designer.cs">
+    <Compile Include="ui\AddMaterialForm.Designer.cs">
       <DependentUpon>AddMaterialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MDIParent.cs">
+    <Compile Include="ui\MDIParent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MDIParent.Designer.cs">
+    <Compile Include="ui\MDIParent.Designer.cs">
       <DependentUpon>MDIParent.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainPublicInterface.cs" />
-    <Compile Include="EquipMainForm.cs">
+    <Compile Include="src\MainPublicInterface.cs" />
+    <Compile Include="ui\EquipMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EquipMainForm.Designer.cs">
+    <Compile Include="ui\EquipMainForm.Designer.cs">
       <DependentUpon>EquipMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemSetting.cs">
+    <Compile Include="ui\SystemSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SystemSetting.Designer.cs">
+    <Compile Include="ui\SystemSetting.Designer.cs">
       <DependentUpon>SystemSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="VehicleDetailForm.cs">
+    <Compile Include="ui\VehicleDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VehicleDetailForm.Designer.cs">
+    <Compile Include="ui\VehicleDetailForm.Designer.cs">
       <DependentUpon>VehicleDetailForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddModifyUser.resx">
+    <EmbeddedResource Include="ui\AddModifyUser.resx">
       <DependentUpon>AddModifyUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AmsAboutBox.resx">
+    <EmbeddedResource Include="ui\AmsAboutBox.resx">
       <DependentUpon>AmsAboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SparePartDetailForm.resx">
+    <EmbeddedResource Include="ui\SparePartDetailForm.resx">
       <DependentUpon>SparePartDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImageListViewer.resx">
+    <EmbeddedResource Include="ui\ImageListViewer.resx">
       <DependentUpon>ImageListViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SparePartsForm.resx">
+    <EmbeddedResource Include="ui\SparePartsForm.resx">
       <DependentUpon>SparePartsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EquipmentDetailForm.resx">
+    <EmbeddedResource Include="ui\EquipmentDetailForm.resx">
       <DependentUpon>EquipmentDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEventsForm.resx">
+    <EmbeddedResource Include="ui\AddEventsForm.resx">
       <DependentUpon>AddEventsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="ui\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddMaterialForm.resx">
+    <EmbeddedResource Include="ui\AddMaterialForm.resx">
       <DependentUpon>AddMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MDIParent.resx">
+    <EmbeddedResource Include="ui\MDIParent.resx">
       <DependentUpon>MDIParent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EquipMainForm.resx">
+    <EmbeddedResource Include="ui\EquipMainForm.resx">
       <DependentUpon>EquipMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -191,10 +191,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SystemSetting.resx">
+    <EmbeddedResource Include="ui\SystemSetting.resx">
       <DependentUpon>SystemSetting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VehicleDetailForm.resx">
+    <EmbeddedResource Include="ui\VehicleDetailForm.resx">
       <DependentUpon>VehicleDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />

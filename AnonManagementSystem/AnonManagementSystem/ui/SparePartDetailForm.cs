@@ -18,11 +18,11 @@ namespace AnonManagementSystem
         public delegate void SaveChangeSuccess();
         public event SaveChangeSuccess SaveSuccess;
         private readonly SynchronizationContext _synchContext;
-        private readonly SparePartImagesDB _partsImageDb = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartImages.db"));
+        private readonly SparePartImagesDB _partsImageDb = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartImages.db"));
         private List<SparePartImage> _spImgList = new List<SparePartImage>();
         private bool _enableedit;
         private string _id;
-        private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
+        private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartManagement.db"));
         public SparePartDetailForm()
         {
             InitializeComponent();
@@ -211,7 +211,7 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
+                    _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartManagement.db"));
                     var sp = from eq in _sparePartDb.SpareParts
                              select eq;
                     LoadSparePartData(sp);

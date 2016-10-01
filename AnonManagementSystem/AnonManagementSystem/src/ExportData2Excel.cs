@@ -1,5 +1,4 @@
-﻿using System;
-using EquipmentInformationData;
+﻿using EquipmentInformationData;
 using OfficeOpenXml;
 using System.Collections.Generic;
 using System.IO;

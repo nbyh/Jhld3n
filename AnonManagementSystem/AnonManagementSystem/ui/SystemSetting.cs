@@ -27,7 +27,7 @@ namespace AnonManagementSystem
 
             if (add)
             {
-                if (id == -1)
+                if (id != -1)
                 {
                     var s = from us in _userList
                             where us.User == user
@@ -91,7 +91,7 @@ namespace AnonManagementSystem
 
         private void tsbAdd_Click(object sender, EventArgs e)
         {
-            AddModifyUser addModifyUser = new AddModifyUser { AlluserList = _alluser };
+            AddModifyUser addModifyUser = new AddModifyUser { AlluserList = _alluser, Add = true };
             addModifyUser.AddOrModifyUser += AddModify;
             addModifyUser.ShowDialog();
         }

@@ -1,7 +1,4 @@
-﻿using EquipmentInformationData;
-using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;

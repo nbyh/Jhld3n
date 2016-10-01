@@ -69,7 +69,7 @@ namespace AnonManagementSystem
                     tbUser.ReadOnly = true;
                     tbUser.Text = _user;
                     tbPwdSure.Text = tbPwd.Text = _pwd;
-                    cmbAuthority.SelectedText = _enableedit ? "可写" : "只读";
+                    cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
                 }
             }
             else
@@ -77,7 +77,7 @@ namespace AnonManagementSystem
                 tbUser.ReadOnly = true;
                 tbUser.Text = _user;
                 tbPwdSure.Text = tbPwd.Text = _pwd;
-                cmbAuthority.SelectedText = _enableedit ? "可写" : "只读";
+                cmbAuthority.SelectedItem = _enableedit ? "可写" : "只读";
             }
         }
 

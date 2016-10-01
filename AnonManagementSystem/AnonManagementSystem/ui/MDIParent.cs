@@ -19,7 +19,12 @@ namespace AnonManagementSystem
 
         private bool _enableedit;
         private bool _islogin;
-        
+
+        private void SetStatus(string info)
+        {
+            toolStripStatusLabel.Text = info;
+        }
+
         private void EquipMenu_Click(object sender, EventArgs e)
         {
             if (_islogin)
@@ -33,6 +38,7 @@ namespace AnonManagementSystem
                     }
                 }
                 EquipMainForm subMainForm = new EquipMainForm { MdiParent = this, Enableedit = _enableedit, Tag = "Equipment" };
+                subMainForm.SetStatusInfo += SetStatus;
                 if (WindowState == FormWindowState.Maximized)
                 {
                     subMainForm.WindowState = FormWindowState.Maximized;
@@ -100,6 +106,7 @@ namespace AnonManagementSystem
                     }
                 }
                 SparePartsForm sparePartsForm = new SparePartsForm { MdiParent = this, Enableedit = _enableedit, Tag = "SpareParts" };
+                sparePartsForm.SetStatusInfo += SetStatus;
                 if (WindowState == FormWindowState.Maximized)
                 {
                     sparePartsForm.WindowState = FormWindowState.Maximized;
@@ -157,18 +164,19 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    DataHandle dataProcessHandle = new DataHandle();
-                    dataProcessHandle.Dirpath = fbd.SelectedPath;
+                    SetStatus("开始合并数据");
+                    DataHandle dataProcessHandle = new DataHandle { Dirpath = fbd.SelectedPath, isManual = true };
                     dataProcessHandle.ImportData();
+                    dataProcessHandle.SetStatusInfo += SetStatus;
                 }
                 catch (Exception exception)
                 {
-                    CommonLogHelper.GetInstance("LogError").Error(@"失败", exception);
-                    MessageBox.Show(this, @"失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CommonLogHelper.GetInstance("LogError").Error(@"数据合并过程出错", exception);
+                    MessageBox.Show(this, @"数据合并过程出错" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-
+        
         private void 单条数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form form = ActiveMdiChild;
@@ -186,7 +194,29 @@ namespace AnonManagementSystem
 
         private void 数据备份ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    SetStatus("开始备份数据");
+                    CommonLogHelper.GetInstance("LogInfo").Info(@"开始数据文件备份");
+                    DataHandle dataProcessHandle = new DataHandle { Dirpath = fbd.SelectedPath, isManual = true };
+                    bool result = dataProcessHandle.BackupData(AppDomain.CurrentDomain.BaseDirectory);
+                    if (result)
+                    {
+                        CommonLogHelper.GetInstance("LogInfo").Info(@"数据文件备份成功");
+                        SetStatus("备份数据完成");
+                        MessageBox.Show(@"数据备份成功", @"信息", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CommonLogHelper.GetInstance("LogError").Error(@"数据文件备份失败", ex);
+                    MessageBox.Show(this, @"数据文件备份失败" + ex.Message, @"错误", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

@@ -122,14 +122,14 @@
             // 数据备份ToolStripMenuItem
             // 
             this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
-            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.数据备份ToolStripMenuItem.Text = "数据备份";
             this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItem_Click);
             // 
             // 导入数据ToolStripMenuItem
             // 
             this.导入数据ToolStripMenuItem.Name = "导入数据ToolStripMenuItem";
-            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.导入数据ToolStripMenuItem.Text = "数据合并";
             this.导入数据ToolStripMenuItem.Click += new System.EventHandler(this.导入数据ToolStripMenuItem_Click);
             // 
@@ -230,7 +230,7 @@
             // 
             // fbd
             // 
-            this.fbd.Description = "请选择要导入数据的目录";
+            this.fbd.Description = "请选择指定目录";
             this.fbd.ShowNewFolderButton = false;
             // 
             // MdiParent

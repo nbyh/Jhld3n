@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace AnonManagementSystem
 {
@@ -14,6 +13,7 @@ namespace AnonManagementSystem
         void ExportOne2Excel();
 
         void ExportAll2Excel();
+        
     }
 
     public interface IAddModify

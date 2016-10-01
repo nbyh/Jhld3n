@@ -39,7 +39,7 @@ namespace AnonManagementSystem
 
         private Material _material;
 
-        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
+        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
         private readonly SynchronizationContext _synchContext;
 
         public AddMaterialForm()

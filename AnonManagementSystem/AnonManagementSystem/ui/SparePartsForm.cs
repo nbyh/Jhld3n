@@ -13,9 +13,11 @@ namespace AnonManagementSystem
 {
     public partial class SparePartsForm : Form, IMdiFunction
     {
+        public delegate void StatusSet(string info);
+        public event StatusSet SetStatusInfo;
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
+        private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartManagement.db"));
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
         private IQueryable<SparePart> _sparePart;
 
@@ -75,7 +77,7 @@ namespace AnonManagementSystem
         {
             try
             {
-                _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\SparePartManagement.db"));
+                _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartManagement.db"));
                 LoadData();
                 CommonLogHelper.GetInstance("LogInfo").Info(@"刷新备件数据成功");
             }
@@ -429,8 +431,10 @@ namespace AnonManagementSystem
             {
                 try
                 {
+                    SetStatusInfo?.Invoke("正在加载数据");
                     LoadData();
                     CommonLogHelper.GetInstance("LogInfo").Info(@"加载备件数据成功");
+                    SetStatusInfo?.Invoke("加载数据成功");
                 }
                 catch (Exception exception)
                 {

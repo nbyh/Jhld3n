@@ -13,9 +13,11 @@ namespace AnonManagementSystem
 {
     public partial class EquipMainForm : Form, IMdiFunction
     {
+        public delegate void StatusSet(string info);
+        public event StatusSet SetStatusInfo;
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
+        private EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
         private int _pageSize = 20, _curPage = 1, _lastPage = 1;
         private IQueryable<CombatEquipment> _equip;
 
@@ -85,7 +87,7 @@ namespace AnonManagementSystem
            {
                try
                {
-                   _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));;
+                   _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));;
                    LoadData();
                    CommonLogHelper.GetInstance("LogInfo").Info(@"刷新设备数据成功");
                }
@@ -599,8 +601,10 @@ namespace AnonManagementSystem
            {
                try
                {
+                   SetStatusInfo?.Invoke("正在加载数据");
                    LoadData();
                    CommonLogHelper.GetInstance("LogInfo").Info(@"加载设备数据成功");
+                   SetStatusInfo?.Invoke("加载数据成功");
                }
                catch (Exception exception)
                {

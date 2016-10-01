@@ -1,7 +1,6 @@
 ﻿using EquipmentInformationData;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace AnonManagementSystem
 {
     public partial class AddEventsForm : Form, IAddModify
     {
-        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDatabase\EquipmentManagement.db"));
+        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
         private Event _events;
