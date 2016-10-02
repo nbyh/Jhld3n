@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ui\StoreSpotBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\StoreSpotBox.Designer.cs">
+      <DependentUpon>StoreSpotBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\AddModifyUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     <Compile Include="ui\VehicleDetailForm.Designer.cs">
       <DependentUpon>VehicleDetailForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ui\StoreSpotBox.resx">
+      <DependentUpon>StoreSpotBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\AddModifyUser.resx">
       <DependentUpon>AddModifyUser.cs</DependentUpon>
     </EmbeddedResource>

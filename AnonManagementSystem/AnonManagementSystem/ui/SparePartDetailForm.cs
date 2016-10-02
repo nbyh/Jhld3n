@@ -55,7 +55,7 @@ namespace AnonManagementSystem
             var spfirst = appointsp.First();
             cmbName.SelectedText = spfirst.Name;
             cmbModel.SelectedText = spfirst.Model;
-            cmbStoreSpot.SelectedText = spfirst.StoreSpot;
+            ssbStoreSpot.Text = spfirst.StoreSpot;
             tbSerialNo.Text = spfirst.SerialNo;
             cmbStatus.Text = spfirst.Status;
             dtpStoreDate.Value = spfirst.StoreDate;
@@ -99,24 +99,28 @@ namespace AnonManagementSystem
 
                     #region 下拉列表内容
 
-                    List<string> spNameList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+                    IEnumerable<string> spNameList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct();
                     cmbName.DataSource = spNameList;
-                    List<string> spModelList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+                    IEnumerable<string> spModelList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct();
                     cmbModel.DataSource = spModelList;
-                    List<string> spFactList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+                    IEnumerable<string> spFactList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct();
                     cmbFactory.DataSource = spFactList;
-                    List<string> spSubdepartList =
-                        (from s in sp where !string.IsNullOrEmpty(s.StoreSpot) select s.StoreSpot).Distinct()
-                            .ToList();
-                    cmbStoreSpot.DataSource = spSubdepartList;
-                    List<string> spTechcanList =
-                        (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct().ToList();
+                    IEnumerable<string> spStoreSpotList =
+                        (from s in sp where !string.IsNullOrEmpty(s.StoreSpot) select s.StoreSpot).Distinct();
+                    IEnumerable<string> spSsSub1 = spStoreSpotList.Select(s => s.Substring(0, 1)).Distinct();
+                    IEnumerable<string> spSsSub2 = spStoreSpotList.Select(s => s.Substring(1, 1)).Distinct();
+                    IEnumerable<string> spSsSub3 = spStoreSpotList.Select(s => s.Substring(2, 1)).Distinct();
+                    ssbStoreSpot.DataSource1 = spSsSub1;
+                    ssbStoreSpot.DataSource2 = spSsSub2;
+                    ssbStoreSpot.DataSource3 = spSsSub3;
+                    IEnumerable<string> spTechcanList =
+                        (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct();
                     cmbUseType.DataSource = spTechcanList;
-                    List<string> spManagerList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct().ToList();
+                    IEnumerable<string> spManagerList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct();
                     cmbStatus.DataSource = spManagerList;
 
                     #endregion 下拉列表内容
@@ -124,11 +128,11 @@ namespace AnonManagementSystem
                     if (Add)
                     {
                         cmbName.SelectedIndex = -1;
-                        cmbStoreSpot.SelectedIndex = -1;
                         cmbModel.SelectedIndex = -1;
                         cmbStatus.SelectedIndex = -1;
                         cmbUseType.SelectedIndex = -1;
                         cmbFactory.SelectedIndex = -1;
+                        ssbStoreSpot.Clear();
                         tsbRestore.Enabled = false;
                     }
                     else
@@ -230,6 +234,12 @@ namespace AnonManagementSystem
         {
             try
             {
+                if (ssbStoreSpot.Text.Length < 3)
+                {
+                    MessageBox.Show(@"库存位置请至少填到层为止", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ssbStoreSpot.Focus();
+                    return;
+                }
                 if (Add)
                 {
                     SparePart ce = new SparePart()
@@ -239,7 +249,7 @@ namespace AnonManagementSystem
                         Model = cmbModel.Text,
                         Factory = cmbFactory.Text,
                         ProductionDate = dtpOemDate.Value.Date,
-                        StoreSpot = cmbStoreSpot.Text,
+                        StoreSpot = ssbStoreSpot.Text,
                         StoreDate = dtpStoreDate.Value.Date,
                         Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture),
                         UseType = cmbUseType.Text,
@@ -259,7 +269,7 @@ namespace AnonManagementSystem
                     spfirst.Model = cmbModel.Text;
                     spfirst.Factory = cmbFactory.Text;
                     spfirst.ProductionDate = dtpOemDate.Value.Date;
-                    spfirst.StoreSpot = cmbStoreSpot.Text;
+                    spfirst.StoreSpot = ssbStoreSpot.Text;
                     spfirst.StoreDate = dtpStoreDate.Value.Date;
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
                     spfirst.UseType = cmbUseType.Text;

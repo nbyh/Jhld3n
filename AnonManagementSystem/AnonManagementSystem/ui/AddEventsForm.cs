@@ -334,5 +334,10 @@ namespace AnonManagementSystem
                     break;
             }
         }
+
+        private void cmbEventNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

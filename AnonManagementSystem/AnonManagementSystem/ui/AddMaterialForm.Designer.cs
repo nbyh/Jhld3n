@@ -151,6 +151,7 @@
             // 
             // tbDocNo
             // 
+            this.tbDocNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbDocNo.Location = new System.Drawing.Point(79, 76);
             this.tbDocNo.Name = "tbDocNo";
             this.tbDocNo.Size = new System.Drawing.Size(141, 21);

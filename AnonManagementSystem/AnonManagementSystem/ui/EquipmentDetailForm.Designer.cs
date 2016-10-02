@@ -254,6 +254,7 @@
             // 
             // tbOemNo
             // 
+            this.tbOemNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbOemNo.Location = new System.Drawing.Point(546, 75);
             this.tbOemNo.Name = "tbOemNo";
             this.tbOemNo.Size = new System.Drawing.Size(146, 21);
@@ -330,6 +331,7 @@
             // 
             // tbSerialNo
             // 
+            this.tbSerialNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbSerialNo.Location = new System.Drawing.Point(130, 22);
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(154, 21);
@@ -339,7 +341,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(69, 25);
+            this.label9.Location = new System.Drawing.Point(69, 26);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 54;
