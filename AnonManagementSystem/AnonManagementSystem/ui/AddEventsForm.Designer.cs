@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEventsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -83,10 +83,6 @@
             this.tsbDeleteEventsData = new System.Windows.Forms.ToolStripButton();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ilvEvents = new AnonManagementSystem.ImageListViewer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
@@ -96,6 +92,10 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -155,6 +155,7 @@
             // 
             this.tbDesci.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbDesci.Location = new System.Drawing.Point(3, 17);
+            this.tbDesci.MaxLength = 50;
             this.tbDesci.Multiline = true;
             this.tbDesci.Name = "tbDesci";
             this.tbDesci.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -188,16 +189,17 @@
             // tbNoInEvents
             // 
             this.tbNoInEvents.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tbNoInEvents.Location = new System.Drawing.Point(560, 77);
+            this.tbNoInEvents.Location = new System.Drawing.Point(558, 77);
+            this.tbNoInEvents.MaxLength = 4;
             this.tbNoInEvents.Name = "tbNoInEvents";
-            this.tbNoInEvents.Size = new System.Drawing.Size(50, 21);
+            this.tbNoInEvents.Size = new System.Drawing.Size(52, 21);
             this.tbNoInEvents.TabIndex = 86;
             this.tbNoInEvents.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(465, 81);
+            this.label4.Location = new System.Drawing.Point(461, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 12);
             this.label4.TabIndex = 85;
@@ -206,18 +208,19 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(290, 81);
+            this.label6.Location = new System.Drawing.Point(294, 81);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 84;
-            this.label6.Text = "本级单位";
+            this.label6.Text = "本级执行人";
             // 
             // cmbExecutor
             // 
             this.cmbExecutor.FormattingEnabled = true;
-            this.cmbExecutor.Location = new System.Drawing.Point(349, 77);
+            this.cmbExecutor.Location = new System.Drawing.Point(367, 77);
+            this.cmbExecutor.MaxLength = 4;
             this.cmbExecutor.Name = "cmbExecutor";
-            this.cmbExecutor.Size = new System.Drawing.Size(110, 20);
+            this.cmbExecutor.Size = new System.Drawing.Size(86, 20);
             this.cmbExecutor.TabIndex = 83;
             // 
             // label7
@@ -237,21 +240,25 @@
             "动用类",
             "使用维护",
             "测试检修"});
-            this.cmbHigherUnit.Location = new System.Drawing.Point(174, 77);
+            this.cmbHigherUnit.Location = new System.Drawing.Point(176, 77);
+            this.cmbHigherUnit.MaxLength = 10;
             this.cmbHigherUnit.Name = "cmbHigherUnit";
             this.cmbHigherUnit.Size = new System.Drawing.Size(110, 20);
             this.cmbHigherUnit.TabIndex = 81;
             // 
             // dtpPulishDt
             // 
+            this.dtpPulishDt.CustomFormat = "yyyy年MM月dd日";
+            this.dtpPulishDt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpPulishDt.Location = new System.Drawing.Point(349, 24);
             this.dtpPulishDt.Name = "dtpPulishDt";
-            this.dtpPulishDt.Size = new System.Drawing.Size(110, 21);
+            this.dtpPulishDt.Size = new System.Drawing.Size(130, 21);
             this.dtpPulishDt.TabIndex = 80;
             // 
             // tbAccording
             // 
             this.tbAccording.Location = new System.Drawing.Point(174, 50);
+            this.tbAccording.MaxLength = 15;
             this.tbAccording.Name = "tbAccording";
             this.tbAccording.Size = new System.Drawing.Size(436, 21);
             this.tbAccording.TabIndex = 57;
@@ -260,6 +267,7 @@
             // 
             this.cmbPulishUnit.FormattingEnabled = true;
             this.cmbPulishUnit.Location = new System.Drawing.Point(174, 24);
+            this.cmbPulishUnit.MaxLength = 5;
             this.cmbPulishUnit.Name = "cmbPulishUnit";
             this.cmbPulishUnit.Size = new System.Drawing.Size(110, 20);
             this.cmbPulishUnit.TabIndex = 65;
@@ -294,7 +302,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(465, 28);
+            this.label19.Location = new System.Drawing.Point(485, 28);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 12);
             this.label19.TabIndex = 71;
@@ -303,30 +311,31 @@
             // cmbPulisher
             // 
             this.cmbPulisher.FormattingEnabled = true;
-            this.cmbPulisher.Location = new System.Drawing.Point(512, 24);
+            this.cmbPulisher.Location = new System.Drawing.Point(532, 24);
+            this.cmbPulisher.MaxLength = 4;
             this.cmbPulisher.Name = "cmbPulisher";
-            this.cmbPulisher.Size = new System.Drawing.Size(98, 20);
+            this.cmbPulisher.Size = new System.Drawing.Size(77, 20);
             this.cmbPulisher.TabIndex = 69;
             // 
             // gbBaseInfo
             // 
             this.gbBaseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbBaseInfo.Controls.Add(this.cmbEventNo);
-            this.gbBaseInfo.Controls.Add(this.label2);
             this.gbBaseInfo.Controls.Add(this.label3);
             this.gbBaseInfo.Controls.Add(this.cmbEventName);
+            this.gbBaseInfo.Controls.Add(this.dtpEventDt1);
+            this.gbBaseInfo.Controls.Add(this.label12);
+            this.gbBaseInfo.Controls.Add(this.label14);
+            this.gbBaseInfo.Controls.Add(this.dtpEventDt2);
+            this.gbBaseInfo.Controls.Add(this.cmbEventNo);
+            this.gbBaseInfo.Controls.Add(this.label2);
             this.gbBaseInfo.Controls.Add(this.cmbAddress);
             this.gbBaseInfo.Controls.Add(this.tbCode);
-            this.gbBaseInfo.Controls.Add(this.label14);
             this.gbBaseInfo.Controls.Add(this.label23);
             this.gbBaseInfo.Controls.Add(this.label1);
             this.gbBaseInfo.Controls.Add(this.cmbSpecificType);
             this.gbBaseInfo.Controls.Add(this.label21);
             this.gbBaseInfo.Controls.Add(this.cmbEventType);
-            this.gbBaseInfo.Controls.Add(this.dtpEventDt2);
-            this.gbBaseInfo.Controls.Add(this.label12);
-            this.gbBaseInfo.Controls.Add(this.dtpEventDt1);
             this.gbBaseInfo.Controls.Add(this.label9);
             this.gbBaseInfo.Location = new System.Drawing.Point(8, 3);
             this.gbBaseInfo.Name = "gbBaseInfo";
@@ -339,6 +348,7 @@
             this.cmbEventNo.FormattingEnabled = true;
             this.cmbEventNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.cmbEventNo.Location = new System.Drawing.Point(174, 24);
+            this.cmbEventNo.MaxLength = 12;
             this.cmbEventNo.Name = "cmbEventNo";
             this.cmbEventNo.Size = new System.Drawing.Size(110, 20);
             this.cmbEventNo.TabIndex = 80;
@@ -347,7 +357,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(314, 55);
+            this.label2.Location = new System.Drawing.Point(485, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 72;
@@ -356,26 +366,28 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(465, 28);
+            this.label3.Location = new System.Drawing.Point(296, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 79;
-            this.label3.Text = "——";
+            this.label3.Text = "—";
             // 
             // cmbEventName
             // 
             this.cmbEventName.FormattingEnabled = true;
-            this.cmbEventName.Location = new System.Drawing.Point(174, 51);
+            this.cmbEventName.Location = new System.Drawing.Point(325, 24);
+            this.cmbEventName.MaxLength = 10;
             this.cmbEventName.Name = "cmbEventName";
-            this.cmbEventName.Size = new System.Drawing.Size(110, 20);
+            this.cmbEventName.Size = new System.Drawing.Size(154, 20);
             this.cmbEventName.TabIndex = 56;
             // 
             // cmbAddress
             // 
             this.cmbAddress.FormattingEnabled = true;
-            this.cmbAddress.Location = new System.Drawing.Point(349, 51);
+            this.cmbAddress.Location = new System.Drawing.Point(520, 24);
+            this.cmbAddress.MaxLength = 5;
             this.cmbAddress.Name = "cmbAddress";
-            this.cmbAddress.Size = new System.Drawing.Size(261, 20);
+            this.cmbAddress.Size = new System.Drawing.Size(86, 20);
             this.cmbAddress.TabIndex = 70;
             // 
             // tbCode
@@ -389,7 +401,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(139, 52);
+            this.label14.Location = new System.Drawing.Point(290, 28);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 12);
             this.label14.TabIndex = 60;
@@ -453,15 +465,17 @@
             // 
             // dtpEventDt2
             // 
-            this.dtpEventDt2.Location = new System.Drawing.Point(500, 24);
+            this.dtpEventDt2.CustomFormat = "yyyy年MM月dd日";
+            this.dtpEventDt2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEventDt2.Location = new System.Drawing.Point(314, 50);
             this.dtpEventDt2.Name = "dtpEventDt2";
-            this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
+            this.dtpEventDt2.Size = new System.Drawing.Size(121, 21);
             this.dtpEventDt2.TabIndex = 61;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(314, 28);
+            this.label12.Location = new System.Drawing.Point(139, 54);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 59;
@@ -469,9 +483,11 @@
             // 
             // dtpEventDt1
             // 
-            this.dtpEventDt1.Location = new System.Drawing.Point(349, 24);
+            this.dtpEventDt1.CustomFormat = "yyyy年MM月dd日";
+            this.dtpEventDt1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEventDt1.Location = new System.Drawing.Point(174, 50);
             this.dtpEventDt1.Name = "dtpEventDt1";
-            this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
+            this.dtpEventDt1.Size = new System.Drawing.Size(121, 21);
             this.dtpEventDt1.TabIndex = 57;
             // 
             // label9
@@ -510,6 +526,7 @@
             // 
             this.tbRemark.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbRemark.Location = new System.Drawing.Point(3, 17);
+            this.tbRemark.MaxLength = 50;
             this.tbRemark.Multiline = true;
             this.tbRemark.Name = "tbRemark";
             this.tbRemark.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -530,6 +547,7 @@
             // 
             this.tbProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbProblems.Location = new System.Drawing.Point(3, 17);
+            this.tbProblems.MaxLength = 100;
             this.tbProblems.Multiline = true;
             this.tbProblems.Name = "tbProblems";
             this.tbProblems.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -550,6 +568,7 @@
             // 
             this.tbHandleStep.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbHandleStep.Location = new System.Drawing.Point(3, 17);
+            this.tbHandleStep.MaxLength = 100;
             this.tbHandleStep.Multiline = true;
             this.tbHandleStep.Name = "tbHandleStep";
             this.tbHandleStep.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -570,6 +589,7 @@
             // 
             this.tbProcessDescri.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbProcessDescri.Location = new System.Drawing.Point(3, 17);
+            this.tbProcessDescri.MaxLength = 200;
             this.tbProcessDescri.Multiline = true;
             this.tbProcessDescri.Name = "tbProcessDescri";
             this.tbProcessDescri.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -630,32 +650,32 @@
             this.dgvEvents.AllowUserToDeleteRows = false;
             this.dgvEvents.AllowUserToResizeColumns = false;
             this.dgvEvents.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEvents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
             this.Column1,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewLinkColumn1});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEvents.Location = new System.Drawing.Point(3, 17);
             this.dgvEvents.MultiSelect = false;
@@ -665,33 +685,6 @@
             this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEvents.Size = new System.Drawing.Size(754, 454);
             this.dgvEvents.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "资料编号";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn6.HeaderText = "活动涉及资料";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewLinkColumn1
-            // 
-            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
-            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
-            this.dataGridViewLinkColumn1.Text = "";
-            this.dataGridViewLinkColumn1.Visible = false;
             // 
             // tabPage2
             // 
@@ -776,6 +769,36 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.FillWeight = 25.38071F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "资料编号";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn6.FillWeight = 174.6193F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "活动涉及资料";
+            this.dataGridViewTextBoxColumn6.MaxInputLength = 100;
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewLinkColumn1
+            // 
+            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
+            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
+            this.dataGridViewLinkColumn1.Text = "";
+            this.dataGridViewLinkColumn1.Visible = false;
             // 
             // AddEventsForm
             // 

@@ -1049,5 +1049,18 @@ namespace AnonManagementSystem
                 }
             }, null);
         }
+
+        private void btnBrowser_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                tbSetupVideo.Text = ofd.FileName;
+            }
+        }
+
+        private void btnDeleteSetuoVideo_Click(object sender, EventArgs e)
+        {
+            tbSetupVideo.Clear();
+        }
     }
 }

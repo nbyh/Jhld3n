@@ -33,7 +33,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tbStoreSpot = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbBrief = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbDocNo = new System.Windows.Forms.TextBox();
@@ -54,29 +53,27 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.ofdMaterial = new System.Windows.Forms.OpenFileDialog();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUdCopybook)).BeginInit();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUdPages)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.tbBrief);
             this.groupBox1.Controls.Add(this.nUdCopybook);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.tbStoreSpot);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.tbDocNo);
-            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cmbShape);
-            this.groupBox1.Controls.Add(this.tbEdition);
             this.groupBox1.Controls.Add(this.dtpDate);
             this.groupBox1.Controls.Add(this.nUdPages);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.tbDocName);
@@ -85,16 +82,31 @@
             this.groupBox1.Controls.Add(this.btnBrowser);
             this.groupBox1.Location = new System.Drawing.Point(13, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(336, 394);
+            this.groupBox1.Size = new System.Drawing.Size(336, 226);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // nUdCopybook
             // 
-            this.nUdCopybook.Location = new System.Drawing.Point(261, 76);
+            this.nUdCopybook.Location = new System.Drawing.Point(284, 76);
+            this.nUdCopybook.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nUdCopybook.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nUdCopybook.Name = "nUdCopybook";
-            this.nUdCopybook.Size = new System.Drawing.Size(55, 21);
+            this.nUdCopybook.Size = new System.Drawing.Size(32, 21);
             this.nUdCopybook.TabIndex = 25;
+            this.nUdCopybook.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label10
             // 
@@ -108,6 +120,7 @@
             // tbStoreSpot
             // 
             this.tbStoreSpot.Location = new System.Drawing.Point(79, 160);
+            this.tbStoreSpot.MaxLength = 5;
             this.tbStoreSpot.Name = "tbStoreSpot";
             this.tbStoreSpot.Size = new System.Drawing.Size(237, 21);
             this.tbStoreSpot.TabIndex = 23;
@@ -115,29 +128,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(226, 80);
+            this.label4.Location = new System.Drawing.Point(249, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 21;
             this.label4.Text = "册数";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tbBrief);
-            this.groupBox2.Location = new System.Drawing.Point(7, 187);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(322, 201);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "内容简介";
-            // 
             // tbBrief
             // 
-            this.tbBrief.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbBrief.Location = new System.Drawing.Point(3, 17);
-            this.tbBrief.Multiline = true;
+            this.tbBrief.Location = new System.Drawing.Point(79, 187);
+            this.tbBrief.MaxLength = 10;
             this.tbBrief.Name = "tbBrief";
-            this.tbBrief.Size = new System.Drawing.Size(316, 181);
+            this.tbBrief.Size = new System.Drawing.Size(237, 21);
             this.tbBrief.TabIndex = 14;
             // 
             // label9
@@ -153,15 +155,16 @@
             // 
             this.tbDocNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbDocNo.Location = new System.Drawing.Point(79, 76);
+            this.tbDocNo.MaxLength = 8;
             this.tbDocNo.Name = "tbDocNo";
-            this.tbDocNo.Size = new System.Drawing.Size(141, 21);
+            this.tbDocNo.Size = new System.Drawing.Size(164, 21);
             this.tbDocNo.TabIndex = 18;
             this.tbDocNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDocNo_KeyPress);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(165, 108);
+            this.label8.Location = new System.Drawing.Point(36, 248);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(0, 12);
             this.label8.TabIndex = 16;
@@ -170,35 +173,54 @@
             // 
             this.cmbShape.FormattingEnabled = true;
             this.cmbShape.Location = new System.Drawing.Point(79, 104);
+            this.cmbShape.MaxLength = 4;
             this.cmbShape.Name = "cmbShape";
-            this.cmbShape.Size = new System.Drawing.Size(55, 20);
+            this.cmbShape.Size = new System.Drawing.Size(51, 20);
             this.cmbShape.TabIndex = 15;
             // 
             // tbEdition
             // 
-            this.tbEdition.Location = new System.Drawing.Point(204, 104);
+            this.tbEdition.Location = new System.Drawing.Point(59, 248);
             this.tbEdition.Name = "tbEdition";
-            this.tbEdition.Size = new System.Drawing.Size(112, 21);
+            this.tbEdition.Size = new System.Drawing.Size(50, 21);
             this.tbEdition.TabIndex = 13;
+            this.tbEdition.Visible = false;
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(204, 133);
+            this.dtpDate.CustomFormat = "yyyy年MM月dd日";
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(79, 133);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(112, 21);
+            this.dtpDate.Size = new System.Drawing.Size(131, 21);
             this.dtpDate.TabIndex = 12;
             // 
             // nUdPages
             // 
-            this.nUdPages.Location = new System.Drawing.Point(79, 133);
+            this.nUdPages.Location = new System.Drawing.Point(171, 104);
+            this.nUdPages.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nUdPages.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nUdPages.Name = "nUdPages";
-            this.nUdPages.Size = new System.Drawing.Size(55, 21);
+            this.nUdPages.Size = new System.Drawing.Size(39, 21);
             this.nUdPages.TabIndex = 11;
+            this.nUdPages.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(44, 136);
+            this.label5.Location = new System.Drawing.Point(136, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 10;
@@ -207,7 +229,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(169, 137);
+            this.label7.Location = new System.Drawing.Point(44, 137);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 8;
@@ -216,11 +238,12 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(169, 108);
+            this.label6.Location = new System.Drawing.Point(24, 252);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 8;
             this.label6.Text = "版本";
+            this.label6.Visible = false;
             // 
             // label3
             // 
@@ -243,6 +266,7 @@
             // tbDocName
             // 
             this.tbDocName.Location = new System.Drawing.Point(79, 49);
+            this.tbDocName.MaxLength = 20;
             this.tbDocName.Name = "tbDocName";
             this.tbDocName.Size = new System.Drawing.Size(237, 21);
             this.tbDocName.TabIndex = 3;
@@ -275,7 +299,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(183, 412);
+            this.btnSave.Location = new System.Drawing.Point(193, 244);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -285,7 +309,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(264, 412);
+            this.btnCancel.Location = new System.Drawing.Point(274, 244);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -297,14 +321,26 @@
             // 
             this.ofdMaterial.Title = "请选择已存好位置的资料";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(44, 191);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "备注";
+            // 
             // AddMaterialForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 444);
+            this.ClientSize = new System.Drawing.Size(361, 278);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tbEdition);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label8);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -318,17 +354,15 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUdCopybook)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUdPages)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tbBrief;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbDocNo;
@@ -353,5 +387,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbStoreSpot;
         private System.Windows.Forms.NumericUpDown nUdCopybook;
+        private System.Windows.Forms.Label label11;
     }
 }

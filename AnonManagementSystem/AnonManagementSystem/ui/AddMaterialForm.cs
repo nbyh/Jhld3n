@@ -58,7 +58,7 @@ namespace AnonManagementSystem
                     Name = tbDocName.Text,
                     PaperSize = cmbShape.Text,
                     Pagination = nUdPages.Value.ToString(),
-                    Edition = tbEdition.Text,
+                    //Edition = tbEdition.Text,
                     Volume = nUdCopybook.Value.ToString(),
                     Date = dtpDate.Value.Date,
                     DocumentLink = tbDocumentLink.Text,
@@ -99,7 +99,7 @@ namespace AnonManagementSystem
                         tbDocName.Text = _material.Name;
                         cmbShape.Text = _material.PaperSize;
                         nUdPages.Value = decimal.Parse(_material.Pagination);
-                        tbEdition.Text = _material.Edition;
+                        //tbEdition.Text = _material.Edition;
                         nUdCopybook.Value = decimal.Parse(_material.Volume);
                         dtpDate.Value = _material.Date;
                         tbDocumentLink.Text = _material.DocumentLink;

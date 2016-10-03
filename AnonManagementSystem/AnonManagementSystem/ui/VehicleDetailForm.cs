@@ -85,7 +85,7 @@ namespace AnonManagementSystem
                     ProductionDate = dtpTime.Value.Date,
                     Mass = tbMass.Text,
                     Tankage = tbTankAge.Text,
-                    OverallSize = tbSize.Text,
+                    OverallSize = masktbSize.Text,
                     FuelType = cmbFuelType.Text,
                     DrivingModel = cmbDriveModel.Text,
                     Mileage = tbMileAge.Text,
@@ -258,7 +258,7 @@ namespace AnonManagementSystem
                            dtpTime.Value = _comvh.ProductionDate;
                            tbMass.Text = _comvh.Mass;
                            tbTankAge.Text = _comvh.Tankage;
-                           tbSize.Text = _comvh.OverallSize;
+                           masktbSize.Text = _comvh.OverallSize;
                            cmbFuelType.Text = _comvh.FuelType;
                            cmbDriveModel.Text = _comvh.DrivingModel;
                            tbMileAge.Text = _comvh.Mileage;

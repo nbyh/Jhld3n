@@ -59,12 +59,11 @@ namespace AnonManagementSystem
             tbSerialNo.Text = spfirst.SerialNo;
             cmbStatus.Text = spfirst.Status;
             dtpStoreDate.Value = spfirst.StoreDate;
-            cmbUseType.SelectedText = spfirst.UseType;
+            tbUseType.Text = spfirst.UseType;
             nUdAmount.Value = int.Parse(spfirst.Amount);
             cmbFactory.SelectedText = spfirst.Factory;
             dtpOemDate.Value = spfirst.ProductionDate;
-
-
+            
             var imgs = (from img in _partsImageDb.SparePartImages
                         where img.SerialNo == _id
                         select img);
@@ -116,9 +115,9 @@ namespace AnonManagementSystem
                     ssbStoreSpot.DataSource1 = spSsSub1;
                     ssbStoreSpot.DataSource2 = spSsSub2;
                     ssbStoreSpot.DataSource3 = spSsSub3;
-                    IEnumerable<string> spTechcanList =
-                        (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct();
-                    cmbUseType.DataSource = spTechcanList;
+                    //IEnumerable<string> spTechcanList =
+                    //    (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct();
+                    //tbUseType.DataSource = spTechcanList;
                     IEnumerable<string> spManagerList =
                         (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct();
                     cmbStatus.DataSource = spManagerList;
@@ -130,7 +129,6 @@ namespace AnonManagementSystem
                         cmbName.SelectedIndex = -1;
                         cmbModel.SelectedIndex = -1;
                         cmbStatus.SelectedIndex = -1;
-                        cmbUseType.SelectedIndex = -1;
                         cmbFactory.SelectedIndex = -1;
                         ssbStoreSpot.Clear();
                         tsbRestore.Enabled = false;
@@ -252,7 +250,7 @@ namespace AnonManagementSystem
                         StoreSpot = ssbStoreSpot.Text,
                         StoreDate = dtpStoreDate.Value.Date,
                         Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture),
-                        UseType = cmbUseType.Text,
+                        UseType = tbUseType.Text,
                         Status = cmbStatus.Text,
                     };
                     _sparePartDb.InsertOrReplace(ce);
@@ -272,7 +270,7 @@ namespace AnonManagementSystem
                     spfirst.StoreSpot = ssbStoreSpot.Text;
                     spfirst.StoreDate = dtpStoreDate.Value.Date;
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
-                    spfirst.UseType = cmbUseType.Text;
+                    spfirst.UseType = tbUseType.Text;
                     spfirst.Status = cmbStatus.Text;
                     //var spImginDb = from img in _partsImageDB.SparePartImage
                     //                 where img.SerialNo == spfirst.SerialNo
@@ -312,7 +310,7 @@ namespace AnonManagementSystem
             }
         }
 
-        private void tbSerialNo_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbNumDig_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = MainPublicFunction.JudgeKeyPress(e.KeyChar);
         }

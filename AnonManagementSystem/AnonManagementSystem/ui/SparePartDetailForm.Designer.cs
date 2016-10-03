@@ -40,7 +40,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.gbBaseInfo = new System.Windows.Forms.GroupBox();
+            this.tbUseType = new System.Windows.Forms.TextBox();
+            this.ssbStoreSpot = new AnonManagementSystem.StoreSpotBox();
             this.nUdAmount = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpStoreDate = new System.Windows.Forms.DateTimePicker();
@@ -48,7 +55,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.cmbUseType = new System.Windows.Forms.ComboBox();
             this.tbSerialNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,24 +66,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtpOemDate = new System.Windows.Forms.DateTimePicker();
             this.cmbModel = new System.Windows.Forms.ComboBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.ssbStoreSpot = new AnonManagementSystem.StoreSpotBox();
-            this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
             this.cmsPicture.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tsDetail.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUdAmount)).BeginInit();
-            this.tabPage6.SuspendLayout();
-            this.toolStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsPicture
@@ -145,241 +145,64 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(784, 536);
+            this.panel2.Size = new System.Drawing.Size(784, 704);
             this.panel2.TabIndex = 2;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(784, 536);
+            this.tabControl1.Size = new System.Drawing.Size(784, 704);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.gbBaseInfo);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(776, 510);
+            this.tabPage1.Size = new System.Drawing.Size(776, 678);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "备件信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // gbBaseInfo
+            // groupBox1
             // 
-            this.gbBaseInfo.Controls.Add(this.ssbStoreSpot);
-            this.gbBaseInfo.Controls.Add(this.nUdAmount);
-            this.gbBaseInfo.Controls.Add(this.label1);
-            this.gbBaseInfo.Controls.Add(this.dtpStoreDate);
-            this.gbBaseInfo.Controls.Add(this.cmbName);
-            this.gbBaseInfo.Controls.Add(this.label3);
-            this.gbBaseInfo.Controls.Add(this.label8);
-            this.gbBaseInfo.Controls.Add(this.label14);
-            this.gbBaseInfo.Controls.Add(this.cmbUseType);
-            this.gbBaseInfo.Controls.Add(this.tbSerialNo);
-            this.gbBaseInfo.Controls.Add(this.label9);
-            this.gbBaseInfo.Controls.Add(this.label2);
-            this.gbBaseInfo.Controls.Add(this.cmbStatus);
-            this.gbBaseInfo.Controls.Add(this.label13);
-            this.gbBaseInfo.Controls.Add(this.cmbFactory);
-            this.gbBaseInfo.Controls.Add(this.label10);
-            this.gbBaseInfo.Controls.Add(this.label5);
-            this.gbBaseInfo.Controls.Add(this.label4);
-            this.gbBaseInfo.Controls.Add(this.dtpOemDate);
-            this.gbBaseInfo.Controls.Add(this.cmbModel);
-            this.gbBaseInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbBaseInfo.Location = new System.Drawing.Point(3, 3);
-            this.gbBaseInfo.Name = "gbBaseInfo";
-            this.gbBaseInfo.Size = new System.Drawing.Size(770, 504);
-            this.gbBaseInfo.TabIndex = 1;
-            this.gbBaseInfo.TabStop = false;
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.ilvEquipment);
+            this.groupBox1.Controls.Add(this.toolStrip4);
+            this.groupBox1.Location = new System.Drawing.Point(3, 169);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(770, 501);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "备件图片";
             // 
-            // nUdAmount
+            // ilvEquipment
             // 
-            this.nUdAmount.Location = new System.Drawing.Point(533, 85);
-            this.nUdAmount.Name = "nUdAmount";
-            this.nUdAmount.Size = new System.Drawing.Size(52, 21);
-            this.nUdAmount.TabIndex = 61;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(363, 141);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 60;
-            this.label1.Text = "入库时间";
-            // 
-            // dtpStoreDate
-            // 
-            this.dtpStoreDate.Location = new System.Drawing.Point(424, 137);
-            this.dtpStoreDate.Name = "dtpStoreDate";
-            this.dtpStoreDate.Size = new System.Drawing.Size(124, 21);
-            this.dtpStoreDate.TabIndex = 59;
-            // 
-            // cmbName
-            // 
-            this.cmbName.FormattingEnabled = true;
-            this.cmbName.Location = new System.Drawing.Point(169, 85);
-            this.cmbName.Name = "cmbName";
-            this.cmbName.Size = new System.Drawing.Size(188, 20);
-            this.cmbName.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(108, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "备件名称";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(108, 141);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 39;
-            this.label8.Text = "库存位置";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(363, 89);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
-            this.label14.TabIndex = 57;
-            this.label14.Text = "用于型号";
-            // 
-            // cmbUseType
-            // 
-            this.cmbUseType.FormattingEnabled = true;
-            this.cmbUseType.Location = new System.Drawing.Point(424, 85);
-            this.cmbUseType.Name = "cmbUseType";
-            this.cmbUseType.Size = new System.Drawing.Size(71, 20);
-            this.cmbUseType.TabIndex = 10;
-            // 
-            // tbSerialNo
-            // 
-            this.tbSerialNo.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tbSerialNo.Location = new System.Drawing.Point(169, 58);
-            this.tbSerialNo.Name = "tbSerialNo";
-            this.tbSerialNo.Size = new System.Drawing.Size(188, 21);
-            this.tbSerialNo.TabIndex = 0;
-            this.tbSerialNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSerialNo_KeyPress);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(108, 61);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 54;
-            this.label9.Text = "备件编号";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(556, 141);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 50;
-            this.label2.Text = "状态";
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(591, 137);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(71, 20);
-            this.cmbStatus.TabIndex = 4;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(501, 89);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 12);
-            this.label13.TabIndex = 48;
-            this.label13.Text = "数量";
-            // 
-            // cmbFactory
-            // 
-            this.cmbFactory.FormattingEnabled = true;
-            this.cmbFactory.Location = new System.Drawing.Point(169, 111);
-            this.cmbFactory.Name = "cmbFactory";
-            this.cmbFactory.Size = new System.Drawing.Size(188, 20);
-            this.cmbFactory.TabIndex = 5;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(108, 115);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 12);
-            this.label10.TabIndex = 43;
-            this.label10.Text = "生产厂家";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(363, 115);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "出厂时间";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(556, 115);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 42;
-            this.label4.Text = "型号";
-            // 
-            // dtpOemDate
-            // 
-            this.dtpOemDate.Location = new System.Drawing.Point(424, 111);
-            this.dtpOemDate.Name = "dtpOemDate";
-            this.dtpOemDate.Size = new System.Drawing.Size(124, 21);
-            this.dtpOemDate.TabIndex = 6;
-            // 
-            // cmbModel
-            // 
-            this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(591, 111);
-            this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(71, 20);
-            this.cmbModel.TabIndex = 3;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.ilvEquipment);
-            this.tabPage6.Controls.Add(this.toolStrip4);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(776, 510);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "装备图片";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.ilvEquipment.DeleteImgKey = null;
+            this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
+            this.ilvEquipment.Location = new System.Drawing.Point(3, 42);
+            this.ilvEquipment.Name = "ilvEquipment";
+            this.ilvEquipment.Size = new System.Drawing.Size(764, 456);
+            this.ilvEquipment.TabIndex = 7;
             // 
             // toolStrip4
             // 
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddImages,
             this.tsbDeleteImage});
-            this.toolStrip4.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip4.Location = new System.Drawing.Point(3, 17);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(770, 25);
-            this.toolStrip4.TabIndex = 5;
+            this.toolStrip4.Size = new System.Drawing.Size(764, 25);
+            this.toolStrip4.TabIndex = 6;
             this.toolStrip4.Text = "toolStrip4";
             // 
             // tsbAddImages
@@ -400,36 +223,236 @@
             this.tsbDeleteImage.Text = "删除";
             this.tsbDeleteImage.Click += new System.EventHandler(this.tsbDeleteImage_Click);
             // 
-            // ofdImage
+            // gbBaseInfo
             // 
-            this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
-            this.ofdImage.Title = "请选择图片";
+            this.gbBaseInfo.Controls.Add(this.tbUseType);
+            this.gbBaseInfo.Controls.Add(this.ssbStoreSpot);
+            this.gbBaseInfo.Controls.Add(this.nUdAmount);
+            this.gbBaseInfo.Controls.Add(this.label1);
+            this.gbBaseInfo.Controls.Add(this.dtpStoreDate);
+            this.gbBaseInfo.Controls.Add(this.cmbName);
+            this.gbBaseInfo.Controls.Add(this.label3);
+            this.gbBaseInfo.Controls.Add(this.label8);
+            this.gbBaseInfo.Controls.Add(this.label14);
+            this.gbBaseInfo.Controls.Add(this.tbSerialNo);
+            this.gbBaseInfo.Controls.Add(this.label9);
+            this.gbBaseInfo.Controls.Add(this.label2);
+            this.gbBaseInfo.Controls.Add(this.cmbStatus);
+            this.gbBaseInfo.Controls.Add(this.label13);
+            this.gbBaseInfo.Controls.Add(this.cmbFactory);
+            this.gbBaseInfo.Controls.Add(this.label10);
+            this.gbBaseInfo.Controls.Add(this.label5);
+            this.gbBaseInfo.Controls.Add(this.label4);
+            this.gbBaseInfo.Controls.Add(this.dtpOemDate);
+            this.gbBaseInfo.Controls.Add(this.cmbModel);
+            this.gbBaseInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbBaseInfo.Location = new System.Drawing.Point(3, 3);
+            this.gbBaseInfo.Name = "gbBaseInfo";
+            this.gbBaseInfo.Size = new System.Drawing.Size(770, 160);
+            this.gbBaseInfo.TabIndex = 1;
+            this.gbBaseInfo.TabStop = false;
+            this.gbBaseInfo.Text = "基本信息";
+            // 
+            // tbUseType
+            // 
+            this.tbUseType.Location = new System.Drawing.Point(216, 125);
+            this.tbUseType.MaxLength = 15;
+            this.tbUseType.Name = "tbUseType";
+            this.tbUseType.Size = new System.Drawing.Size(190, 21);
+            this.tbUseType.TabIndex = 63;
             // 
             // ssbStoreSpot
             // 
             this.ssbStoreSpot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ssbStoreSpot.Location = new System.Drawing.Point(169, 137);
+            this.ssbStoreSpot.Location = new System.Drawing.Point(218, 99);
             this.ssbStoreSpot.MaximumSize = new System.Drawing.Size(188, 20);
             this.ssbStoreSpot.MinimumSize = new System.Drawing.Size(188, 20);
             this.ssbStoreSpot.Name = "ssbStoreSpot";
             this.ssbStoreSpot.Size = new System.Drawing.Size(188, 20);
             this.ssbStoreSpot.TabIndex = 62;
             // 
-            // ilvEquipment
+            // nUdAmount
             // 
-            this.ilvEquipment.DeleteImgKey = null;
-            this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
-            this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
-            this.ilvEquipment.Name = "ilvEquipment";
-            this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
-            this.ilvEquipment.TabIndex = 6;
+            this.nUdAmount.Location = new System.Drawing.Point(568, 20);
+            this.nUdAmount.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nUdAmount.Name = "nUdAmount";
+            this.nUdAmount.Size = new System.Drawing.Size(33, 21);
+            this.nUdAmount.TabIndex = 61;
+            this.nUdAmount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(412, 103);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 60;
+            this.label1.Text = "入库时间";
+            // 
+            // dtpStoreDate
+            // 
+            this.dtpStoreDate.CustomFormat = "yyyy年MM月dd日";
+            this.dtpStoreDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStoreDate.Location = new System.Drawing.Point(471, 99);
+            this.dtpStoreDate.Name = "dtpStoreDate";
+            this.dtpStoreDate.Size = new System.Drawing.Size(130, 21);
+            this.dtpStoreDate.TabIndex = 59;
+            // 
+            // cmbName
+            // 
+            this.cmbName.FormattingEnabled = true;
+            this.cmbName.Location = new System.Drawing.Point(218, 47);
+            this.cmbName.MaxLength = 10;
+            this.cmbName.Name = "cmbName";
+            this.cmbName.Size = new System.Drawing.Size(188, 20);
+            this.cmbName.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(157, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "备件名称";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(157, 103);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 39;
+            this.label8.Text = "库存位置";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(181, 129);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 12);
+            this.label14.TabIndex = 57;
+            this.label14.Text = "备注";
+            // 
+            // tbSerialNo
+            // 
+            this.tbSerialNo.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.tbSerialNo.Location = new System.Drawing.Point(218, 20);
+            this.tbSerialNo.MaxLength = 16;
+            this.tbSerialNo.Name = "tbSerialNo";
+            this.tbSerialNo.Size = new System.Drawing.Size(188, 21);
+            this.tbSerialNo.TabIndex = 0;
+            this.tbSerialNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNumDig_KeyPress);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(157, 23);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 54;
+            this.label9.Text = "备件编号";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(413, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 50;
+            this.label2.Text = "状态";
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(448, 47);
+            this.cmbStatus.MaxLength = 6;
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(153, 20);
+            this.cmbStatus.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(536, 24);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 12);
+            this.label13.TabIndex = 48;
+            this.label13.Text = "数量";
+            // 
+            // cmbFactory
+            // 
+            this.cmbFactory.FormattingEnabled = true;
+            this.cmbFactory.Location = new System.Drawing.Point(218, 73);
+            this.cmbFactory.MaxLength = 20;
+            this.cmbFactory.Name = "cmbFactory";
+            this.cmbFactory.Size = new System.Drawing.Size(188, 20);
+            this.cmbFactory.TabIndex = 5;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(157, 77);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 12);
+            this.label10.TabIndex = 43;
+            this.label10.Text = "生产厂家";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(412, 77);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "出厂时间";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(412, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 42;
+            this.label4.Text = "型号";
+            // 
+            // dtpOemDate
+            // 
+            this.dtpOemDate.CustomFormat = "yyyy年MM月dd日";
+            this.dtpOemDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpOemDate.Location = new System.Drawing.Point(471, 73);
+            this.dtpOemDate.Name = "dtpOemDate";
+            this.dtpOemDate.Size = new System.Drawing.Size(130, 21);
+            this.dtpOemDate.TabIndex = 6;
+            // 
+            // cmbModel
+            // 
+            this.cmbModel.FormattingEnabled = true;
+            this.cmbModel.Location = new System.Drawing.Point(447, 20);
+            this.cmbModel.MaxLength = 10;
+            this.cmbModel.Name = "cmbModel";
+            this.cmbModel.Size = new System.Drawing.Size(85, 20);
+            this.cmbModel.TabIndex = 3;
+            this.cmbModel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNumDig_KeyPress);
+            // 
+            // ofdImage
+            // 
+            this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
+            this.ofdImage.Title = "请选择图片";
             // 
             // SparePartDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(784, 729);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "SparePartDetailForm";
@@ -445,13 +468,13 @@
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
             this.gbBaseInfo.ResumeLayout(false);
             this.gbBaseInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUdAmount)).EndInit();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            this.toolStrip4.ResumeLayout(false);
-            this.toolStrip4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -468,11 +491,6 @@
         private System.Windows.Forms.OpenFileDialog ofdImage;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage6;
-        private ImageListViewer ilvEquipment;
-        private System.Windows.Forms.ToolStrip toolStrip4;
-        private System.Windows.Forms.ToolStripButton tsbAddImages;
-        private System.Windows.Forms.ToolStripButton tsbDeleteImage;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox gbBaseInfo;
         private System.Windows.Forms.NumericUpDown nUdAmount;
@@ -482,7 +500,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cmbUseType;
         private System.Windows.Forms.TextBox tbSerialNo;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;
@@ -495,5 +512,11 @@
         private System.Windows.Forms.DateTimePicker dtpOemDate;
         private System.Windows.Forms.ComboBox cmbModel;
         private StoreSpotBox ssbStoreSpot;
+        private System.Windows.Forms.TextBox tbUseType;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private ImageListViewer ilvEquipment;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton tsbAddImages;
+        private System.Windows.Forms.ToolStripButton tsbDeleteImage;
     }
 }
