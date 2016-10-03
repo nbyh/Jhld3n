@@ -185,7 +185,7 @@
             this.cmbTimeTerm2.Location = new System.Drawing.Point(488, 68);
             this.cmbTimeTerm2.Name = "cmbTimeTerm2";
             this.cmbTimeTerm2.Size = new System.Drawing.Size(33, 22);
-            this.cmbTimeTerm2.TabIndex = 30;
+            this.cmbTimeTerm2.TabIndex = 11;
             this.cmbTimeTerm2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpTime2
@@ -193,7 +193,7 @@
             this.dtpTime2.Location = new System.Drawing.Point(521, 69);
             this.dtpTime2.Name = "dtpTime2";
             this.dtpTime2.Size = new System.Drawing.Size(115, 21);
-            this.dtpTime2.TabIndex = 29;
+            this.dtpTime2.TabIndex = 12;
             // 
             // label15
             // 
@@ -212,7 +212,7 @@
             this.cmbManager.Location = new System.Drawing.Point(549, 13);
             this.cmbManager.Name = "cmbManager";
             this.cmbManager.Size = new System.Drawing.Size(87, 22);
-            this.cmbManager.TabIndex = 27;
+            this.cmbManager.TabIndex = 3;
             this.cmbManager.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label16
@@ -232,7 +232,7 @@
             this.cmbUseCondition.Location = new System.Drawing.Point(269, 41);
             this.cmbUseCondition.Name = "cmbUseCondition";
             this.cmbUseCondition.Size = new System.Drawing.Size(76, 22);
-            this.cmbUseCondition.TabIndex = 25;
+            this.cmbUseCondition.TabIndex = 5;
             this.cmbUseCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label13
@@ -252,7 +252,7 @@
             this.cmbMajorCategory.Location = new System.Drawing.Point(269, 13);
             this.cmbMajorCategory.Name = "cmbMajorCategory";
             this.cmbMajorCategory.Size = new System.Drawing.Size(76, 22);
-            this.cmbMajorCategory.TabIndex = 23;
+            this.cmbMajorCategory.TabIndex = 1;
             this.cmbMajorCategory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label11
@@ -270,7 +270,7 @@
             this.cmbFactory.Location = new System.Drawing.Point(83, 69);
             this.cmbFactory.Name = "cmbFactory";
             this.cmbFactory.Size = new System.Drawing.Size(185, 20);
-            this.cmbFactory.TabIndex = 19;
+            this.cmbFactory.TabIndex = 8;
             this.cmbFactory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label10
@@ -305,7 +305,7 @@
             this.cmbTechnician.Location = new System.Drawing.Point(549, 41);
             this.cmbTechnician.Name = "cmbTechnician";
             this.cmbTechnician.Size = new System.Drawing.Size(87, 22);
-            this.cmbTechnician.TabIndex = 21;
+            this.cmbTechnician.TabIndex = 7;
             this.cmbTechnician.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbTechCondition
@@ -316,7 +316,7 @@
             this.cmbTechCondition.Location = new System.Drawing.Point(410, 41);
             this.cmbTechCondition.Name = "cmbTechCondition";
             this.cmbTechCondition.Size = new System.Drawing.Size(74, 22);
-            this.cmbTechCondition.TabIndex = 14;
+            this.cmbTechCondition.TabIndex = 6;
             this.cmbTechCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnRestInfo
@@ -325,7 +325,7 @@
             this.btnRestInfo.Location = new System.Drawing.Point(708, 34);
             this.btnRestInfo.Name = "btnRestInfo";
             this.btnRestInfo.Size = new System.Drawing.Size(44, 30);
-            this.btnRestInfo.TabIndex = 17;
+            this.btnRestInfo.TabIndex = 14;
             this.btnRestInfo.Text = "重置";
             this.btnRestInfo.UseVisualStyleBackColor = false;
             this.btnRestInfo.Click += new System.EventHandler(this.btnRestInfo_Click);
@@ -381,7 +381,7 @@
             this.cmbTimeTerm1.Location = new System.Drawing.Point(333, 68);
             this.cmbTimeTerm1.Name = "cmbTimeTerm1";
             this.cmbTimeTerm1.Size = new System.Drawing.Size(33, 22);
-            this.cmbTimeTerm1.TabIndex = 11;
+            this.cmbTimeTerm1.TabIndex = 9;
             this.cmbTimeTerm1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpTime1
@@ -399,7 +399,7 @@
             this.cmbModel.Location = new System.Drawing.Point(410, 13);
             this.cmbModel.Name = "cmbModel";
             this.cmbModel.Size = new System.Drawing.Size(74, 22);
-            this.cmbModel.TabIndex = 9;
+            this.cmbModel.TabIndex = 2;
             this.cmbModel.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbSubDepart
@@ -410,7 +410,7 @@
             this.cmbSubDepart.Location = new System.Drawing.Point(83, 41);
             this.cmbSubDepart.Name = "cmbSubDepart";
             this.cmbSubDepart.Size = new System.Drawing.Size(121, 22);
-            this.cmbSubDepart.TabIndex = 8;
+            this.cmbSubDepart.TabIndex = 4;
             this.cmbSubDepart.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbName
@@ -421,7 +421,7 @@
             this.cmbName.Location = new System.Drawing.Point(83, 13);
             this.cmbName.Name = "cmbName";
             this.cmbName.Size = new System.Drawing.Size(121, 22);
-            this.cmbName.TabIndex = 8;
+            this.cmbName.TabIndex = 0;
             this.cmbName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnQueryInfo
@@ -430,7 +430,7 @@
             this.btnQueryInfo.Location = new System.Drawing.Point(658, 34);
             this.btnQueryInfo.Name = "btnQueryInfo";
             this.btnQueryInfo.Size = new System.Drawing.Size(44, 30);
-            this.btnQueryInfo.TabIndex = 7;
+            this.btnQueryInfo.TabIndex = 13;
             this.btnQueryInfo.Text = "筛选";
             this.btnQueryInfo.UseVisualStyleBackColor = false;
             this.btnQueryInfo.Click += new System.EventHandler(this.btnQueryInfo_Click);
@@ -480,7 +480,7 @@
             this.cmbPublishDtTerm.Location = new System.Drawing.Point(446, 66);
             this.cmbPublishDtTerm.Name = "cmbPublishDtTerm";
             this.cmbPublishDtTerm.Size = new System.Drawing.Size(40, 20);
-            this.cmbPublishDtTerm.TabIndex = 52;
+            this.cmbPublishDtTerm.TabIndex = 10;
             this.cmbPublishDtTerm.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpPublish
@@ -488,7 +488,7 @@
             this.dtpPublish.Location = new System.Drawing.Point(486, 66);
             this.dtpPublish.Name = "dtpPublish";
             this.dtpPublish.Size = new System.Drawing.Size(103, 21);
-            this.dtpPublish.TabIndex = 51;
+            this.dtpPublish.TabIndex = 11;
             // 
             // label22
             // 
@@ -514,7 +514,7 @@
             this.cmbPublisher.Location = new System.Drawing.Point(289, 66);
             this.cmbPublisher.Name = "cmbPublisher";
             this.cmbPublisher.Size = new System.Drawing.Size(92, 20);
-            this.cmbPublisher.TabIndex = 42;
+            this.cmbPublisher.TabIndex = 9;
             this.cmbPublisher.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbSpecificType
@@ -523,7 +523,7 @@
             this.cmbSpecificType.Location = new System.Drawing.Point(289, 42);
             this.cmbSpecificType.Name = "cmbSpecificType";
             this.cmbSpecificType.Size = new System.Drawing.Size(92, 20);
-            this.cmbSpecificType.TabIndex = 46;
+            this.cmbSpecificType.TabIndex = 6;
             this.cmbSpecificType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label18
@@ -559,7 +559,7 @@
             this.cmbPublishUnit.Location = new System.Drawing.Point(121, 66);
             this.cmbPublishUnit.Name = "cmbPublishUnit";
             this.cmbPublishUnit.Size = new System.Drawing.Size(103, 20);
-            this.cmbPublishUnit.TabIndex = 38;
+            this.cmbPublishUnit.TabIndex = 8;
             this.cmbPublishUnit.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnRestEvent
@@ -568,7 +568,7 @@
             this.btnRestEvent.Location = new System.Drawing.Point(671, 36);
             this.btnRestEvent.Name = "btnRestEvent";
             this.btnRestEvent.Size = new System.Drawing.Size(44, 30);
-            this.btnRestEvent.TabIndex = 37;
+            this.btnRestEvent.TabIndex = 13;
             this.btnRestEvent.Text = "重置";
             this.btnRestEvent.UseVisualStyleBackColor = false;
             this.btnRestEvent.Click += new System.EventHandler(this.btnRestEvent_Click);
@@ -584,7 +584,7 @@
             this.cmbEventType.Location = new System.Drawing.Point(121, 42);
             this.cmbEventType.Name = "cmbEventType";
             this.cmbEventType.Size = new System.Drawing.Size(103, 20);
-            this.cmbEventType.TabIndex = 44;
+            this.cmbEventType.TabIndex = 5;
             this.cmbEventType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label20
@@ -609,7 +609,7 @@
             this.cmbEventDtTerm2.Location = new System.Drawing.Point(439, 16);
             this.cmbEventDtTerm2.Name = "cmbEventDtTerm2";
             this.cmbEventDtTerm2.Size = new System.Drawing.Size(40, 20);
-            this.cmbEventDtTerm2.TabIndex = 34;
+            this.cmbEventDtTerm2.TabIndex = 3;
             this.cmbEventDtTerm2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpEventDt2
@@ -617,7 +617,7 @@
             this.dtpEventDt2.Location = new System.Drawing.Point(479, 16);
             this.dtpEventDt2.Name = "dtpEventDt2";
             this.dtpEventDt2.Size = new System.Drawing.Size(110, 21);
-            this.dtpEventDt2.TabIndex = 33;
+            this.dtpEventDt2.TabIndex = 4;
             // 
             // label14
             // 
@@ -634,7 +634,7 @@
             this.cmbEventAddress.Location = new System.Drawing.Point(446, 42);
             this.cmbEventAddress.Name = "cmbEventAddress";
             this.cmbEventAddress.Size = new System.Drawing.Size(143, 20);
-            this.cmbEventAddress.TabIndex = 42;
+            this.cmbEventAddress.TabIndex = 7;
             this.cmbEventAddress.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label12
@@ -659,7 +659,7 @@
             this.cmbEventDtTerm1.Location = new System.Drawing.Point(289, 16);
             this.cmbEventDtTerm1.Name = "cmbEventDtTerm1";
             this.cmbEventDtTerm1.Size = new System.Drawing.Size(40, 20);
-            this.cmbEventDtTerm1.TabIndex = 22;
+            this.cmbEventDtTerm1.TabIndex = 1;
             this.cmbEventDtTerm1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // dtpEventDt1
@@ -667,7 +667,7 @@
             this.dtpEventDt1.Location = new System.Drawing.Point(329, 16);
             this.dtpEventDt1.Name = "dtpEventDt1";
             this.dtpEventDt1.Size = new System.Drawing.Size(110, 21);
-            this.dtpEventDt1.TabIndex = 21;
+            this.dtpEventDt1.TabIndex = 2;
             // 
             // cmbEventName
             // 
@@ -675,7 +675,7 @@
             this.cmbEventName.Location = new System.Drawing.Point(121, 16);
             this.cmbEventName.Name = "cmbEventName";
             this.cmbEventName.Size = new System.Drawing.Size(103, 20);
-            this.cmbEventName.TabIndex = 19;
+            this.cmbEventName.TabIndex = 0;
             this.cmbEventName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // btnQueryEvent
@@ -684,7 +684,7 @@
             this.btnQueryEvent.Location = new System.Drawing.Point(621, 36);
             this.btnQueryEvent.Name = "btnQueryEvent";
             this.btnQueryEvent.Size = new System.Drawing.Size(44, 30);
-            this.btnQueryEvent.TabIndex = 17;
+            this.btnQueryEvent.TabIndex = 12;
             this.btnQueryEvent.Text = "筛选";
             this.btnQueryEvent.UseVisualStyleBackColor = false;
             this.btnQueryEvent.Click += new System.EventHandler(this.btnQueryEvent_Click);
@@ -733,7 +733,7 @@
             this.cmbPageSize.Location = new System.Drawing.Point(434, 398);
             this.cmbPageSize.Name = "cmbPageSize";
             this.cmbPageSize.Size = new System.Drawing.Size(46, 22);
-            this.cmbPageSize.TabIndex = 8;
+            this.cmbPageSize.TabIndex = 0;
             this.cmbPageSize.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
             // 
@@ -743,7 +743,7 @@
             this.tbPage.Location = new System.Drawing.Point(686, 399);
             this.tbPage.Name = "tbPage";
             this.tbPage.Size = new System.Drawing.Size(44, 21);
-            this.tbPage.TabIndex = 7;
+            this.tbPage.TabIndex = 5;
             // 
             // btnGo
             // 
@@ -762,7 +762,7 @@
             this.btnLast.Location = new System.Drawing.Point(636, 398);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(44, 23);
-            this.btnLast.TabIndex = 5;
+            this.btnLast.TabIndex = 4;
             this.btnLast.Text = "末页";
             this.btnLast.UseVisualStyleBackColor = false;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
@@ -773,7 +773,7 @@
             this.btnNext.Location = new System.Drawing.Point(586, 398);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(44, 23);
-            this.btnNext.TabIndex = 4;
+            this.btnNext.TabIndex = 3;
             this.btnNext.Text = "下页";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -784,7 +784,7 @@
             this.btnPre.Location = new System.Drawing.Point(536, 398);
             this.btnPre.Name = "btnPre";
             this.btnPre.Size = new System.Drawing.Size(44, 23);
-            this.btnPre.TabIndex = 3;
+            this.btnPre.TabIndex = 2;
             this.btnPre.Text = "上页";
             this.btnPre.UseVisualStyleBackColor = false;
             this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
@@ -795,7 +795,7 @@
             this.btnFront.Location = new System.Drawing.Point(486, 398);
             this.btnFront.Name = "btnFront";
             this.btnFront.Size = new System.Drawing.Size(44, 23);
-            this.btnFront.TabIndex = 2;
+            this.btnFront.TabIndex = 1;
             this.btnFront.Text = "首页";
             this.btnFront.UseVisualStyleBackColor = false;
             this.btnFront.Click += new System.EventHandler(this.btnFront_Click);

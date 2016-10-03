@@ -334,7 +334,7 @@ namespace AnonManagementSystem
 
         private void Num_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = MainPublicFunction.JudgeKeyPress(e.KeyChar);
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
     }
 }

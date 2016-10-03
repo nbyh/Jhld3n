@@ -289,7 +289,7 @@ namespace AnonManagementSystem
 
         private void Num_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = MainPublicFunction.JudgeKeyPress(e.KeyChar);
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
 
         private void Combox_DrawItem(object sender, DrawItemEventArgs e)
@@ -338,6 +338,11 @@ namespace AnonManagementSystem
         private void cmbEventNo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbEventNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
     }
 }

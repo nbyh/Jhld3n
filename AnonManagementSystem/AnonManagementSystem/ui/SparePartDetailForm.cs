@@ -98,28 +98,28 @@ namespace AnonManagementSystem
 
                     #region 下拉列表内容
 
-                    IEnumerable<string> spNameList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct();
+                    List<string> spNameList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
                     cmbName.DataSource = spNameList;
-                    IEnumerable<string> spModelList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct();
+                    List<string> spModelList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
                     cmbModel.DataSource = spModelList;
-                    IEnumerable<string> spFactList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct();
+                    List<string> spFactList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
                     cmbFactory.DataSource = spFactList;
                     IEnumerable<string> spStoreSpotList =
-                        (from s in sp where !string.IsNullOrEmpty(s.StoreSpot) select s.StoreSpot).Distinct();
-                    IEnumerable<string> spSsSub1 = spStoreSpotList.Select(s => s.Substring(0, 1)).Distinct();
-                    IEnumerable<string> spSsSub2 = spStoreSpotList.Select(s => s.Substring(1, 1)).Distinct();
-                    IEnumerable<string> spSsSub3 = spStoreSpotList.Select(s => s.Substring(2, 1)).Distinct();
+                        (from s in sp where !string.IsNullOrEmpty(s.StoreSpot) select s.StoreSpot).Distinct().ToList();
+                    List<string> spSsSub1 = spStoreSpotList.Select(s => s.Substring(0, 1)).Distinct().ToList();
+                    List<string> spSsSub2 = spStoreSpotList.Select(s => s.Substring(1, 1)).Distinct().ToList();
+                    List<string> spSsSub3 = spStoreSpotList.Select(s => s.Substring(2, 1)).Distinct().ToList();
                     ssbStoreSpot.DataSource1 = spSsSub1;
                     ssbStoreSpot.DataSource2 = spSsSub2;
                     ssbStoreSpot.DataSource3 = spSsSub3;
-                    //IEnumerable<string> spTechcanList =
+                    //List<string> spTechcanList =
                     //    (from s in sp where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct();
                     //tbUseType.DataSource = spTechcanList;
-                    IEnumerable<string> spManagerList =
-                        (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct();
+                    List<string> spManagerList =
+                        (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct().ToList();
                     cmbStatus.DataSource = spManagerList;
 
                     #endregion 下拉列表内容
@@ -312,7 +312,7 @@ namespace AnonManagementSystem
 
         private void tbNumDig_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = MainPublicFunction.JudgeKeyPress(e.KeyChar);
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
     }
 }
