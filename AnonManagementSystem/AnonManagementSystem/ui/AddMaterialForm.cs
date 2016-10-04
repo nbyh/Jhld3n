@@ -24,7 +24,7 @@ namespace AnonManagementSystem
             set { _id = value; }
         }
 
-        public bool Add{ get; set; }
+        public bool Add { get; set; }
 
         public bool Enableedit
         {
@@ -80,6 +80,7 @@ namespace AnonManagementSystem
 
         private void AddMaterialForm_Load(object sender, EventArgs e)
         {
+            tbDocNo.Enabled = Add;
             cmbShape.SelectedIndex = -1;
         }
 
@@ -90,7 +91,7 @@ namespace AnonManagementSystem
                 try
                 {
                     var qmaterial = from eq in _equipDb.Materials
-                                   select eq;
+                                    select eq;
                     List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
                     cmbShape.DataSource = sharpList;
                     if (!Add)

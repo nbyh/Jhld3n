@@ -534,6 +534,7 @@ namespace AnonManagementSystem
         }
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
+            tbSerialNo.Enabled = Add;
             tsbRestore.Visible = !Add;
             tsDetail.Enabled = gbBaseInfo.Enabled = _enableedit;
         }

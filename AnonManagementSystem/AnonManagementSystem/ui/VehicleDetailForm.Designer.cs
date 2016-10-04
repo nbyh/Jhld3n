@@ -306,7 +306,6 @@
             this.tbVehiclesNo.Name = "tbVehiclesNo";
             this.tbVehiclesNo.Size = new System.Drawing.Size(83, 21);
             this.tbVehiclesNo.TabIndex = 2;
-            this.tbVehiclesNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_KeyPress);
             // 
             // label1
             // 

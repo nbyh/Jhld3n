@@ -441,7 +441,6 @@
             this.cmbModel.Name = "cmbModel";
             this.cmbModel.Size = new System.Drawing.Size(85, 20);
             this.cmbModel.TabIndex = 2;
-            this.cmbModel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNumDig_KeyPress);
             // 
             // ofdImage
             // 

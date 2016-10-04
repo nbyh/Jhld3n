@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB;
 using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
@@ -64,6 +65,7 @@ namespace AnonManagementSystem
 
         private void AddEventsForm_Load(object sender, EventArgs e)
         {
+            cmbEventNo.Enabled = Add;
         }
 
         private void AddEventsForm_Shown(object sender, EventArgs e)
@@ -337,7 +339,27 @@ namespace AnonManagementSystem
 
         private void cmbEventNo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string eveid = cmbEventNo.Text;
+            var eve = _equipDb.Events.First(s => s.No == eveid);
+            _synchContext.Post(a =>
+            {
+                cmbEventNo.Text = eve.No;
+                cmbEventName.Text = eve.Name;
+                cmbAddress.Text = eve.Address;
+                dtpEventDt1.Value = eve.StartTime;
+                dtpEventDt2.Value = eve.EndTime;
+                cmbEventType.Text = eve.EventType;
+                cmbSpecificType.Text = eve.SpecificType;
 
+                cmbHigherUnit.Text = eve.HigherUnit;
+                cmbExecutor.Text = eve.Executor;
+                tbNoInEvents.Text = eve.NoInEvents;
+                cmbPulishUnit.Text = eve.PublishUnit;
+                dtpPulishDt.Value = eve.PublishDate;
+                cmbPulisher.Text = eve.Publisher;
+                tbAccording.Text = eve.According;
+
+            }, null);
         }
 
         private void cmbEventNo_KeyPress(object sender, KeyPressEventArgs e)

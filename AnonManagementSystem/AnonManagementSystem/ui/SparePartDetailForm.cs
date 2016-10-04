@@ -83,6 +83,7 @@ namespace AnonManagementSystem
 
         private void SparePartDetailForm_Load(object sender, EventArgs e)
         {
+            tbSerialNo.Enabled = Add;
             tsbRestore.Visible = !Add;
             tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
         }
@@ -156,6 +157,7 @@ namespace AnonManagementSystem
                 }
             }, null);
         }
+
         private void tsbAddImages_Click(object sender, EventArgs e)
         {
             if (ofdImage.ShowDialog() == DialogResult.OK)
