@@ -339,10 +339,11 @@ namespace AnonManagementSystem
 
         private void cmbEventNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string eveid = cmbEventNo.Text;
-            var eve = _equipDb.Events.First(s => s.No == eveid);
-            _synchContext.Post(a =>
+            try
             {
+                string eveid = cmbEventNo.Text;
+                var eve = _equipDb.Events.First(s => s.No == eveid);
+                if (eve == null) return;
                 cmbEventNo.Text = eve.No;
                 cmbEventName.Text = eve.Name;
                 cmbAddress.Text = eve.Address;
@@ -358,8 +359,11 @@ namespace AnonManagementSystem
                 dtpPulishDt.Value = eve.PublishDate;
                 cmbPulisher.Text = eve.Publisher;
                 tbAccording.Text = eve.According;
-
-            }, null);
+            }
+            catch (Exception exception)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"选择特定事件过程出错", exception);
+            }
         }
 
         private void cmbEventNo_KeyPress(object sender, KeyPressEventArgs e)
