@@ -532,6 +532,7 @@ namespace AnonManagementSystem
                 dgvMaterial[8, i].Value = "详细信息";
             }
         }
+
         private void EquipmentDetailForm_Load(object sender, EventArgs e)
         {
             tbSerialNo.Enabled = Add;
@@ -940,7 +941,10 @@ namespace AnonManagementSystem
             {
                 try
                 {
-                    _equipImageDb.InsertOrReplace(_equipImageList);
+                    if (_equipImageList.Any())
+                    {
+                        _equipImageDb.InsertOrReplace(_equipImageList);
+                    }
                     if (Add)
                     {
                         #region 添加设备及相关信息
@@ -967,23 +971,6 @@ namespace AnonManagementSystem
                             SetupVideo = tbSetupVideo.Text
                         };
                         _equipDb.InsertOrReplace(ce);
-                        //_equipDB.SaveChanges();
-                        _equipDb.InsertOrReplace(_eventsList);
-                        //_equipDB.SaveChanges();
-                        _equipDb.InsertOrReplace(_comVehList);
-                        //_equipDB.SaveChanges();
-                        if (_oilEngines != null)
-                        {
-                            _equipDb.InsertOrReplace(_oilEngines);
-                            _oilImageDb.InsertOrReplace(_oilImgList);
-                            //_oilImageDB.SaveChanges();
-                        }
-                        _equipDb.InsertOrReplace(_materList);
-                        _equipDb.InsertOrReplace(_eventDataList);
-
-                        _vehiclesImageDb.InsertOrReplace(_vehImgList);
-                        _eventsImageDb.InsertOrReplace(_eventsImgList);
-                        //_equipDB.SaveChanges();
 
                         #endregion
                     }
@@ -1016,27 +1003,40 @@ namespace AnonManagementSystem
                         equipfirst.UseMethod = tbUseMethod.Text;
                         equipfirst.PerformIndex = tbPerformIndex.Text;
 
+                        _equipDb.InsertOrReplace(equipfirst);
                         #endregion
-
-                        //_equipDB.SaveChanges();
-
+                    }
+                    if (_eventsList.Any())
+                    {
                         _equipDb.InsertOrReplace(_eventsList);
-                        //_equipDB.SaveChanges();
+                    }
+                    if (_comVehList.Any())
+                    {
                         _equipDb.InsertOrReplace(_comVehList);
-                        //_equipDB.SaveChanges();
-                        if (_oilEngines != null)
+                    }
+                    if (_oilEngines != null)
+                    {
+                        _equipDb.InsertOrReplace(_oilEngines);
+                        if (_oilImgList.Any())
                         {
-                            _equipDb.InsertOrReplace(_oilEngines);
                             _oilImageDb.InsertOrReplace(_oilImgList);
-                            //_oilImageDB.SaveChanges();
                         }
+                    }
+                    if (_materList.Any())
+                    {
                         _equipDb.InsertOrReplace(_materList);
+                    }
+                    if (_eventDataList.Any())
+                    {
                         _equipDb.InsertOrReplace(_eventDataList);
-
+                    }
+                    if (_vehImgList.Any())
+                    {
                         _vehiclesImageDb.InsertOrReplace(_vehImgList);
+                    }
+                    if (_eventsImgList.Any())
+                    {
                         _eventsImageDb.InsertOrReplace(_eventsImgList);
-                        //_equipDB.SaveChanges();
-
                     }
                     SaveSuccess?.Invoke();
                     CommonLogHelper.GetInstance("LogInfo").Info(@"保存设备数据成功");

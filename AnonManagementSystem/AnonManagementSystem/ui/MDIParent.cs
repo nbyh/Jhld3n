@@ -10,6 +10,14 @@ namespace AnonManagementSystem
             InitializeComponent();
         }
 
+        private void VisibleToolStrip()
+        {
+            if (MdiChildren.Length == 0)
+            {
+                toolStrip.Visible = false;
+            }
+        }
+
         private void LoginOnSucess(bool enableedit)
         {
             _islogin = true;
@@ -37,19 +45,22 @@ namespace AnonManagementSystem
                         return;
                     }
                 }
-                EquipMainForm subMainForm = new EquipMainForm { MdiParent = this, Enableedit = _enableedit, Tag = "Equipment" };
-                subMainForm.SetStatusInfo += SetStatus;
+                toolStrip.Visible = true;
+                EquipMainForm equipMainForm = new EquipMainForm { MdiParent = this, Enableedit = _enableedit, Tag = "Equipment" };
+                equipMainForm.SetStatusInfo += SetStatus;
+                equipMainForm.SetToolStripVisible += VisibleToolStrip;
                 if (WindowState == FormWindowState.Maximized)
                 {
-                    subMainForm.WindowState = FormWindowState.Maximized;
+                    equipMainForm.WindowState = FormWindowState.Maximized;
                 }
-                subMainForm.Show();
+                equipMainForm.Show();
             }
             else
             {
                 LoginForm loginForm = new LoginForm();
                 loginForm.ShowDialog();
                 _islogin = loginForm.DialogResult == DialogResult.OK;
+                EquipMenu_Click(sender, e);
             }
         }
 
@@ -105,8 +116,10 @@ namespace AnonManagementSystem
                         return;
                     }
                 }
+                toolStrip.Visible = true;
                 SparePartsForm sparePartsForm = new SparePartsForm { MdiParent = this, Enableedit = _enableedit, Tag = "SpareParts" };
                 sparePartsForm.SetStatusInfo += SetStatus;
+                sparePartsForm.SetToolStripVisible += VisibleToolStrip;
                 if (WindowState == FormWindowState.Maximized)
                 {
                     sparePartsForm.WindowState = FormWindowState.Maximized;
@@ -118,6 +131,7 @@ namespace AnonManagementSystem
                 LoginForm loginForm = new LoginForm();
                 loginForm.ShowDialog();
                 _islogin = loginForm.DialogResult == DialogResult.OK;
+                SparePartsMenu_Click(sender, e);
             }
         }
 
@@ -176,7 +190,7 @@ namespace AnonManagementSystem
                 }
             }
         }
-        
+
         private void 单条数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form form = ActiveMdiChild;

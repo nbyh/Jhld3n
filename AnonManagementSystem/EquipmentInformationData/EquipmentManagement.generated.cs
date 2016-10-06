@@ -77,19 +77,19 @@ namespace EquipmentInformationData
 		/// FK_Events_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="SerialNo", OtherKey="Equipment", CanBeNull=true, IsBackReference=true)]
-		public IEnumerable<Event> Events00 { get; set; }
+		public IQueryable<Event> Events00 { get; set; }
 
 		/// <summary>
 		/// FK_Material_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="SerialNo", OtherKey="Equipment", CanBeNull=true, IsBackReference=true)]
-		public IEnumerable<Material> Material00 { get; set; }
+		public IQueryable<Material> Material00 { get; set; }
 
 		/// <summary>
 		/// FK_CombatVehicles_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="SerialNo", OtherKey="Equipment", CanBeNull=true, IsBackReference=true)]
-		public IEnumerable<CombatVehicle> CombatVehicles00 { get; set; }
+		public IQueryable<CombatVehicle> CombatVehicles00 { get; set; }
 
 		#endregion
 	}
@@ -131,7 +131,7 @@ namespace EquipmentInformationData
 		/// FK_OilEngine_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="SerialNo", OtherKey="Vehicle", CanBeNull=true, IsBackReference=true)]
-		public IEnumerable<OilEngine> OilEngine00 { get; set; }
+		public IQueryable<OilEngine> OilEngine00 { get; set; }
 
 		#endregion
 	}
@@ -173,7 +173,7 @@ namespace EquipmentInformationData
 		/// FK_EventData_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="No", OtherKey="EventsNo", CanBeNull=true, IsBackReference=true)]
-		public IEnumerable<EventData> EventData00 { get; set; }
+		public IQueryable<EventData> EventData00 { get; set; }
 
 		#endregion
 	}

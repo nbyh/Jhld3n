@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
 {
     public class MainPublicFunction
     {
-        internal const double MaxFileSize= 1048576;
+        internal const double MaxFileSize = 1048576;
         internal const double MaxImageHeight = 768;
         internal const double MaxImageWidth = 1024;
 
@@ -21,27 +22,6 @@ namespace AnonManagementSystem
         public static bool CheckImageSize(Image img)
         {
             return img.Width <= MaxImageWidth && img.Height <= MaxImageHeight;
-        }
-
-        public static bool CompareTime(string express, DateTime dt1, DateTime dt2)
-        {
-            switch (express)
-            {
-                case ">":
-                    return dt1 > dt2;
-
-                case "<":
-                    return dt1 < dt2;
-
-                case "≥":
-                    return dt1 >= dt2;
-
-                case "≤":
-                    return dt1 <= dt2;
-
-                default:
-                    return dt1 == dt2;
-            }
         }
 
         public static bool CheckImgCondition(string imgpath)

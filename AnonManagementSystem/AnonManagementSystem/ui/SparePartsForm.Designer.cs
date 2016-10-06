@@ -69,6 +69,7 @@
             this.btnFront = new System.Windows.Forms.Button();
             this.lbPageInfo = new System.Windows.Forms.Label();
             this.dgvSparePart = new System.Windows.Forms.DataGridView();
+            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +82,6 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -575,6 +575,13 @@
             this.dgvSparePart.TabIndex = 0;
             this.dgvSparePart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSparePart_CellContentClick);
             // 
+            // sfdExcel
+            // 
+            this.sfdExcel.DefaultExt = "xlsx";
+            this.sfdExcel.Filter = "Excel文件|*.xlsx";
+            this.sfdExcel.InitialDirectory = "Desktop";
+            this.sfdExcel.Title = "请选择文件保存位置";
+            // 
             // Column1
             // 
             this.Column1.HeaderText = "序号";
@@ -608,6 +615,7 @@
             // 
             // Column6
             // 
+            this.Column6.DataPropertyName = "Amount";
             this.Column6.HeaderText = "数量";
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
@@ -615,19 +623,23 @@
             // 
             // Column11
             // 
+            this.Column11.DataPropertyName = "Status";
             this.Column11.HeaderText = "状态";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
+            this.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column9
             // 
+            this.Column9.DataPropertyName = "Factory";
             this.Column9.HeaderText = "生产厂家";
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
+            this.Column9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column4
             // 
-            this.Column4.DataPropertyName = "EnableTime";
+            this.Column4.DataPropertyName = "ProductionDate";
             this.Column4.HeaderText = "出厂时间";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -635,7 +647,7 @@
             // 
             // Column7
             // 
-            this.Column7.DataPropertyName = "OemNo";
+            this.Column7.DataPropertyName = "StoreSpot";
             this.Column7.HeaderText = "库存位置";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
@@ -643,7 +655,7 @@
             // 
             // Column5
             // 
-            this.Column5.DataPropertyName = "ServiceLife";
+            this.Column5.DataPropertyName = "StoreDate";
             this.Column5.HeaderText = "入库时间";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
@@ -651,9 +663,11 @@
             // 
             // Column12
             // 
-            this.Column12.HeaderText = "用于类型";
+            this.Column12.DataPropertyName = "UseType";
+            this.Column12.HeaderText = "备注";
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
+            this.Column12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // MoreInfo
             // 
@@ -661,13 +675,6 @@
             this.MoreInfo.Name = "MoreInfo";
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
-            // 
-            // sfdExcel
-            // 
-            this.sfdExcel.DefaultExt = "xlsx";
-            this.sfdExcel.Filter = "Excel文件|*.xlsx";
-            this.sfdExcel.InitialDirectory = "Desktop";
-            this.sfdExcel.Title = "请选择文件保存位置";
             // 
             // SparePartsForm
             // 
@@ -679,6 +686,7 @@
             this.Name = "SparePartsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "备件管理";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SparePartsForm_FormClosed);
             this.Load += new System.EventHandler(this.SparePartsForm_Load);
             this.Shown += new System.EventHandler(this.SparePartsForm_Shown);
             this.panel1.ResumeLayout(false);
@@ -731,6 +739,7 @@
         private System.Windows.Forms.DateTimePicker dtpProTime2;
         private System.Windows.Forms.ComboBox cmbStore2;
         private System.Windows.Forms.DateTimePicker dtpStore2;
+        private System.Windows.Forms.SaveFileDialog sfdExcel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
@@ -743,7 +752,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewLinkColumn MoreInfo;
-        private System.Windows.Forms.SaveFileDialog sfdExcel;
     }
 }
 

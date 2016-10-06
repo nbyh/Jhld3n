@@ -24,7 +24,7 @@ string   DatabaseName             = null;
 string   DataContextName          = null;
 string   BaseDataContextClass     = null;
 string   BaseEntityClass          = null;
-string   OneToManyAssociationType = "IEnumerable<{0}>";
+string   OneToManyAssociationType = "IQueryable<{0}>";
 
 bool     GenerateDatabaseName     = false;
 bool     GenerateConstructors     = true;
@@ -242,7 +242,7 @@ void LoadServerMetadata(DataConnection dataConnection)
 	}
 }
 
-Dictionary<string,TR> ToDictionary<T,TR>(IEnumerable<T> source, Func<T,string> keyGetter, Func<T,TR> objGetter, Func<TR,int,string> getKeyName)
+Dictionary<string,TR> ToDictionary<T,TR>(IQueryable<T> source, Func<T,string> keyGetter, Func<T,TR> objGetter, Func<TR,int,string> getKeyName)
 {
 	var dic     = new Dictionary<string,TR>();
 	var current = 1;

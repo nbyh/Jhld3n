@@ -534,7 +534,7 @@ void GenerateTypesFromMetadata()
 			else
 			{
 				p.IsStatic = true;
-				p.Type     = p.ResultTable == null ? "int" : "IEnumerable<" + p.ResultTable.TypeName + ">";
+				p.Type     = p.ResultTable == null ? "int" : "IQueryable<" + p.ResultTable.TypeName + ">";
 				p.Parameters.Add("this DataConnection dataConnection");
 			}
 

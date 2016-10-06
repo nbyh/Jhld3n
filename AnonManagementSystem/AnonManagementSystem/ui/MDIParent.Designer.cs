@@ -93,20 +93,20 @@
             this.单条数据ToolStripMenuItem,
             this.全部数据ToolStripMenuItem});
             this.导出数据ToolStripMenuItem.Name = "导出数据ToolStripMenuItem";
-            this.导出数据ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.导出数据ToolStripMenuItem.Text = "数据导出";
+            this.导出数据ToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.导出数据ToolStripMenuItem.Text = "数据导出(&D)";
             // 
             // 单条数据ToolStripMenuItem
             // 
             this.单条数据ToolStripMenuItem.Name = "单条数据ToolStripMenuItem";
-            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.单条数据ToolStripMenuItem.Text = "单条导出";
             this.单条数据ToolStripMenuItem.Click += new System.EventHandler(this.单条数据ToolStripMenuItem_Click);
             // 
             // 全部数据ToolStripMenuItem
             // 
             this.全部数据ToolStripMenuItem.Name = "全部数据ToolStripMenuItem";
-            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.全部数据ToolStripMenuItem.Text = "全部导出";
             this.全部数据ToolStripMenuItem.Click += new System.EventHandler(this.全部数据ToolStripMenuItem_Click);
             // 
@@ -116,20 +116,20 @@
             this.数据备份ToolStripMenuItem,
             this.导入数据ToolStripMenuItem});
             this.数据整理ToolStripMenuItem.Name = "数据整理ToolStripMenuItem";
-            this.数据整理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.数据整理ToolStripMenuItem.Text = "数据整理";
+            this.数据整理ToolStripMenuItem.Size = new System.Drawing.Size(88, 21);
+            this.数据整理ToolStripMenuItem.Text = "数据整理(&M)";
             // 
             // 数据备份ToolStripMenuItem
             // 
             this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
-            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.数据备份ToolStripMenuItem.Text = "数据备份";
             this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItem_Click);
             // 
             // 导入数据ToolStripMenuItem
             // 
             this.导入数据ToolStripMenuItem.Name = "导入数据ToolStripMenuItem";
-            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.导入数据ToolStripMenuItem.Text = "数据合并";
             this.导入数据ToolStripMenuItem.Click += new System.EventHandler(this.导入数据ToolStripMenuItem_Click);
             // 
@@ -190,6 +190,7 @@
             this.toolStrip.Size = new System.Drawing.Size(884, 25);
             this.toolStrip.TabIndex = 13;
             this.toolStrip.Text = "toolStrip1";
+            this.toolStrip.Visible = false;
             // 
             // tsbRefresh
             // 

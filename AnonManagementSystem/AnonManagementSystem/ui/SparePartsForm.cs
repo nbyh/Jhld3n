@@ -13,8 +13,11 @@ namespace AnonManagementSystem
 {
     public partial class SparePartsForm : Form, IMdiFunction
     {
+        public delegate void VisibleTools();
+        public event VisibleTools SetToolStripVisible;
         public delegate void StatusSet(string info);
         public event StatusSet SetStatusInfo;
+
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
         private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartManagement.db"));
@@ -58,9 +61,9 @@ namespace AnonManagementSystem
                     try
                     {
                         int selectRowIndex = dgvSparePart.CurrentRow.Index;
-                        dgvSparePart.Rows.RemoveAt(selectRowIndex);
                         string id = dgvSparePart.Rows[selectRowIndex].Cells["SerialNo"].Value.ToString();
                         _sparePartDb.SpareParts.Where(eqt => eqt.SerialNo == id).Delete();
+                        DataRefresh();
                         CommonLogHelper.GetInstance("LogInfo").Info($"删除备件{id}成功");
                         MessageBox.Show(this, @"删除备件成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -177,11 +180,18 @@ namespace AnonManagementSystem
 
         public void LoadData()
         {
-            //string cmds = "select * from SpareParts";
-            //_sparePart = _sparePartDB.SqlQuery<SpareParts>(cmds);
             _sparePart = from entity in _sparePartDb.SpareParts
                          select entity;
 
+            FillSelectionData();
+
+            _pageSize = 20;
+            _curPage = 1;
+            DataRefresh(_pageSize, _curPage, _sparePart);
+        }
+
+        private void FillSelectionData()
+        {
             List<string> equipNameList = (from s in _sparePart where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
             cmbName.DataSource = equipNameList;
             List<string> equipModelList = (from s in _sparePart where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
@@ -194,10 +204,15 @@ namespace AnonManagementSystem
             cmbSpot.DataSource = equipSubdepartList;
             List<string> equipMajcatList = (from s in _sparePart where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct().ToList();
             cmbUseType.DataSource = equipMajcatList;
-
-            _pageSize = 20;
-            _curPage = 1;
-            DataRefresh(_pageSize, _curPage, _sparePart);
+            _synchContext.Post(a =>
+            {
+                cmbName.SelectedIndex = -1;
+                cmbModel.SelectedIndex = -1;
+                cmbUseCondition.SelectedIndex = -1;
+                cmbFactory.SelectedIndex = -1;
+                cmbSpot.SelectedIndex = -1;
+                cmbUseType.SelectedIndex = -1;
+            }, null);
         }
 
         private void btnFront_Click(object sender, EventArgs e)
@@ -312,7 +327,7 @@ namespace AnonManagementSystem
             {
                 if (cmbPageSize.SelectedIndex > -1)
                 {
-                    _pageSize = int.Parse(cmbPageSize.SelectedText.ToString());
+                    _pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
                     DataRefresh(_pageSize, _curPage, _sparePart);
                 }
                 CommonLogHelper.GetInstance("LogInfo").Info(@"切换页数后加载备件数据成功");
@@ -333,12 +348,17 @@ namespace AnonManagementSystem
             {
                 lbPageInfo.Text = $"总共{all}条记录，当前第{curpage}页，每页{pagesize}条，共{_lastPage}页";
                 dgvSparePart.DataSource = equippage.ToList();
-                for (int i = 0; i < dgvSparePart.RowCount; i++)
-                {
-                    dgvSparePart[0, i].Value = i + 1;
-                    dgvSparePart.Rows[i].Cells["MoreInfo"].Value = "详细信息";
-                }
+                AddOrderNum();
             }, null);
+        }
+
+        private void AddOrderNum()
+        {
+            for (int i = 0; i < dgvSparePart.RowCount; i++)
+            {
+                dgvSparePart[0, i].Value = i + 1;
+                dgvSparePart.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+            }
         }
 
         private void dgvSparePart_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -362,56 +382,66 @@ namespace AnonManagementSystem
 
         private void btnQueryInfo_Click(object sender, EventArgs e)
         {
-            dgvSparePart.Rows.Clear();
-            var appointsp = from ee in _sparePartDb.SpareParts
-                            select ee;
-            if (!string.IsNullOrEmpty(cmbName.Text))
+            try
             {
-                appointsp = appointsp.Where(a => a.Name == cmbName.Text);
+                dgvSparePart.DataSource = null;
+                dgvSparePart.Rows.Clear();
+                var appointsp = _sparePartDb.SpareParts.Select(ee => ee).AsEnumerable();
+                if (!string.IsNullOrEmpty(cmbName.Text))
+                {
+                    appointsp = appointsp.Where(a => a.Name == cmbName.Text);
+                }
+                if (!string.IsNullOrEmpty(cmbUseType.Text))
+                {
+                    appointsp = appointsp.Where(a => a.UseType == cmbUseType.Text);
+                }
+                if (!string.IsNullOrEmpty(cmbModel.Text))
+                {
+                    appointsp = appointsp.Where(a => a.Model == cmbModel.Text);
+                }
+                if (!string.IsNullOrEmpty(cmbUseCondition.Text))
+                {
+                    appointsp = appointsp.Where(a => a.Status == cmbUseCondition.Text);
+                }
+                if (!string.IsNullOrEmpty(cmbSpot.Text))
+                {
+                    appointsp = appointsp.Where(a => a.StoreSpot == cmbSpot.Text);
+                }
+                if (!string.IsNullOrEmpty(cmbFactory.Text))
+                {
+                    appointsp = appointsp.Where(a => a.Factory == cmbFactory.Text);
+                }
+                if (!string.IsNullOrEmpty(cmbProDate1.Text))
+                {
+                    appointsp = DbPublicFunction.CompareTimeResult(appointsp, "ProductionDate", cmbProDate1.Text, dtpProTime1.Value.Date);
+                }
+                if (!string.IsNullOrEmpty(cmbProDate2.Text))
+                {
+                    appointsp = DbPublicFunction.CompareTimeResult(appointsp, "ProductionDate", cmbProDate2.Text, dtpProTime2.Value.Date);
+                }
+                if (!string.IsNullOrEmpty(cmbStore1.Text))
+                {
+                    appointsp = DbPublicFunction.CompareTimeResult(appointsp, "StoreDate", cmbStore1.Text, dtpStore1.Value.Date);
+                }
+                if (!string.IsNullOrEmpty(cmbStore2.Text))
+                {
+                    appointsp = DbPublicFunction.CompareTimeResult(appointsp, "StoreDate", cmbStore2.Text, dtpStore2.Value.Date);
+                }
+                if (appointsp.Any())
+                {
+                    dgvSparePart.DataSource = appointsp.ToList();
+                    AddOrderNum();
+                }
+                else
+                {
+                    MessageBox.Show(this, @"没有筛选到相关条件的备件信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                CommonLogHelper.GetInstance("LogInfo").Info(@"根据备件条件筛选匹配备件成功");
             }
-            if (!string.IsNullOrEmpty(cmbUseType.Text))
+            catch (Exception exception)
             {
-                appointsp = appointsp.Where(a => a.UseType == cmbUseType.Text);
-            }
-            if (!string.IsNullOrEmpty(cmbModel.Text))
-            {
-                appointsp = appointsp.Where(a => a.Model == cmbModel.Text);
-            }
-            if (!string.IsNullOrEmpty(cmbUseCondition.Text))
-            {
-                appointsp = appointsp.Where(a => a.Status == cmbUseCondition.Text);
-            }
-            if (!string.IsNullOrEmpty(cmbSpot.Text))
-            {
-                appointsp = appointsp.Where(a => a.StoreSpot == cmbSpot.Text);
-            }
-            if (!string.IsNullOrEmpty(cmbFactory.Text))
-            {
-                appointsp = appointsp.Where(a => a.Factory == cmbFactory.Text);
-            }
-            if (!string.IsNullOrEmpty(cmbStore1.Text))
-            {
-                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbStore1.Text, a.StoreDate, dtpStore1.Value.Date));
-            }
-            if (!string.IsNullOrEmpty(cmbStore2.Text))
-            {
-                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbStore2.Text, a.StoreDate, dtpStore2.Value.Date));
-            }
-            if (!string.IsNullOrEmpty(cmbProDate1.Text))
-            {
-                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbProDate1.Text, a.ProductionDate, dtpProTime1.Value.Date));
-            }
-            if (!string.IsNullOrEmpty(cmbProDate2.Text))
-            {
-                appointsp = appointsp.Where(a => MainPublicFunction.CompareTime(cmbProDate2.Text, a.ProductionDate, dtpProTime2.Value.Date));
-            }
-            if (appointsp.Any())
-            {
-                dgvSparePart.DataSource = appointsp;
-            }
-            else
-            {
-                MessageBox.Show(this, @"没有筛选到相关条件的备件信息，请修改筛选条件", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonLogHelper.GetInstance("LogError").Error(@"根据备件条件筛选匹配备件失败", exception);
+                MessageBox.Show(this, @"根据备件条件筛选匹配备件失败,请将截图和日志发给程序猿排查问题" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -423,6 +453,11 @@ namespace AnonManagementSystem
             cmbFactory.SelectedIndex = -1;
             cmbSpot.SelectedIndex = -1;
             cmbUseType.SelectedIndex = -1;
+        }
+
+        private void SparePartsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetToolStripVisible?.Invoke();
         }
 
         private void SparePartsForm_Shown(object sender, EventArgs e)

@@ -42,28 +42,24 @@ namespace AnonManagementSystem
         }
 
         public int Index { get; set; }
-
-        private void cmsPicture_Opening(object sender, CancelEventArgs e)
-        {
-        }
-
+        
         private void LoadSparePartData(IQueryable<SparePart> sparePart)
         {
             var appointsp = from eq in sparePart
                             where eq.SerialNo == _id
                             select eq;
             var spfirst = appointsp.First();
-            cmbName.SelectedText = spfirst.Name;
-            cmbModel.SelectedText = spfirst.Model;
+            cmbName.SelectedItem = spfirst.Name;
+            cmbModel.SelectedItem = spfirst.Model;
             ssbStoreSpot.Text = spfirst.StoreSpot;
             tbSerialNo.Text = spfirst.SerialNo;
             cmbStatus.Text = spfirst.Status;
             dtpStoreDate.Value = spfirst.StoreDate;
             tbUseType.Text = spfirst.UseType;
             nUdAmount.Value = int.Parse(spfirst.Amount);
-            cmbFactory.SelectedText = spfirst.Factory;
+            cmbFactory.SelectedItem = spfirst.Factory;
             dtpOemDate.Value = spfirst.ProductionDate;
-            
+
             var imgs = (from img in _partsImageDb.SparePartImages
                         where img.SerialNo == _id
                         select img);
@@ -85,7 +81,6 @@ namespace AnonManagementSystem
         {
             tbSerialNo.Enabled = Add;
             tsbRestore.Visible = !Add;
-            tsDetail.Enabled = gbBaseInfo.Enabled = 更新图片ToolStripMenuItem.Enabled = _enableedit;
         }
 
         private void SparePartDetailForm_Shown(object sender, EventArgs e)
@@ -256,7 +251,10 @@ namespace AnonManagementSystem
                         Status = cmbStatus.Text,
                     };
                     _sparePartDb.InsertOrReplace(ce);
-                    _partsImageDb.InsertOrReplace(_spImgList);
+                    if (_spImgList.Any())
+                    {
+                        _partsImageDb.InsertOrReplace(_spImgList);
+                    }
                 }
                 else
                 {
@@ -287,6 +285,7 @@ namespace AnonManagementSystem
                     //        _partsImageDB.SparePartImage.Remove(sp);
                     //    }
                     //}
+                    _sparePartDb.InsertOrReplace(spfirst);
                     foreach (var sparePartImage in _spImgList)
                     {
                         var spimg = from img in _partsImageDb.SparePartImages

@@ -17,5 +17,56 @@ namespace EquipmentInformationData
             string dbpath = Path.Combine(path, dbfile);
             return $"data source={dbpath};";
         }
+
+        public static IEnumerable<CombatEquipment> CompareTimeResult(IEnumerable<CombatEquipment> q, string proName, string express, DateTime dt)
+        {
+            switch (express)
+            {
+                case ">":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) > dt);
+                case "<":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) < dt);
+                case "≥":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) >= dt);
+                case "≤":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) <= dt);
+                default:
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) == dt);
+            }
+        }
+
+        public static IEnumerable<Event> CompareTimeResult(IEnumerable<Event> q, string proName, string express, DateTime dt)
+        {
+            switch (express)
+            {
+                case ">":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) > dt);
+                case "<":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) < dt);
+                case "≥":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) >= dt);
+                case "≤":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) <= dt);
+                default:
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) == dt);
+            }
+        }
+
+        public static IEnumerable<SparePart> CompareTimeResult(IEnumerable<SparePart> q, string proName, string express, DateTime dt)
+        {
+            switch (express)
+            {
+                case ">":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) > dt);
+                case "<":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) < dt);
+                case "≥":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) >= dt);
+                case "≤":
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) <= dt);
+                default:
+                    return q.Where(s => (DateTime)(s.GetType().GetProperty(proName).GetValue(s, null)) == dt);
+            }
+        }
     }
 }

@@ -44,17 +44,17 @@ namespace AnonManagementSystem
             }
         }
 
-        public IEnumerable<string> DataSource1
+        public List<string> DataSource1
         {
             set { cmb1.DataSource = value; }
         }
 
-        public IEnumerable<string> DataSource2
+        public List<string> DataSource2
         {
             set { cmb2.DataSource = value; }
         }
 
-        public IEnumerable<string> DataSource3
+        public List<string> DataSource3
         {
             set { cmb3.DataSource = value; }
         }

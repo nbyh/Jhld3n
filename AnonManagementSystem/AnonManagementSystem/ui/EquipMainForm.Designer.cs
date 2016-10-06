@@ -980,6 +980,7 @@
             this.Name = "EquipMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "装备管理";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EquipMainForm_FormClosed);
             this.Load += new System.EventHandler(this.EquipMainForm_Load);
             this.Shown += new System.EventHandler(this.EquipMainForm_Shown);
             this.panel1.ResumeLayout(false);

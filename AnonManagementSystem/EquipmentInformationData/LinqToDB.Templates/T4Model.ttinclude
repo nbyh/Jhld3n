@@ -65,7 +65,7 @@ void RenderUsings(List<string> usings)
 public interface ITree
 {
 	ITree              Parent { get; set; }
-	IEnumerable<ITree> GetNodes();
+	IQueryable<ITree> GetNodes();
 	void               SetTree();
 }
 
@@ -96,7 +96,7 @@ public partial class ModelSource : ITree
 	}
 
 	public ITree              Parent     { get; set; }
-	public IEnumerable<ITree> GetNodes() { return Namespaces; }
+	public IQueryable<ITree> GetNodes() { return Namespaces; }
 
 	public void SetTree()
 	{
@@ -140,7 +140,7 @@ public partial class Namespace : ITree
 	}
 
 	public ITree              Parent     { get; set; }
-	public IEnumerable<ITree> GetNodes() { return Types; }
+	public IQueryable<ITree> GetNodes() { return Types; }
 
 	public void SetTree()
 	{
@@ -176,7 +176,7 @@ public abstract partial class TypeBase : IClassMember
 	public abstract void Render(GeneratedTextTransformation tt);
 
 	public          ITree              Parent { get; set; }
-	public abstract IEnumerable<ITree> GetNodes();
+	public abstract IQueryable<ITree> GetNodes();
 	public abstract void               SetTree ();
 }
 
@@ -317,7 +317,7 @@ public partial class Class : TypeBase
 		WriteEndClass(tt);
 	}
 
-	public override IEnumerable<ITree> GetNodes()
+	public override IQueryable<ITree> GetNodes()
 	{
 		return Members;
 	}
@@ -356,7 +356,7 @@ public abstract partial class MemberBase : IClassMember
 	public abstract void Render         (GeneratedTextTransformation tt, bool isCompact);
 
 	public         ITree              Parent     { get; set; }
-	public virtual IEnumerable<ITree> GetNodes() { return Enumerable.Empty<ITree>(); }
+	public virtual IQueryable<ITree> GetNodes() { return Enumerable.Empty<ITree>(); }
 	public virtual void               SetTree () {}
 }
 
@@ -720,7 +720,7 @@ public partial class MemberGroup : MemberBase
 		}
 	}
 
-	public override IEnumerable<ITree> GetNodes() { return Members; }
+	public override IQueryable<ITree> GetNodes() { return Members; }
 
 	public override void SetTree()
 	{
@@ -1002,7 +1002,7 @@ public partial class Property : MemberBase
 	{
 	}
 
-	public Property(string type, string name, IEnumerable<string> getBody = null, IEnumerable<string> setBody = null)
+	public Property(string type, string name, IQueryable<string> getBody = null, IQueryable<string> setBody = null)
 	{
 		Type = type;
 		Name = name;
@@ -1063,7 +1063,7 @@ public partial class Property : MemberBase
 		WriteProperty(tt, this, isCompact);
 	}
 	
-	public Property InitBody(IEnumerable<string> getBody = null, IEnumerable<string> setBody = null)
+	public Property InitBody(IQueryable<string> getBody = null, IQueryable<string> setBody = null)
 	{
 		IsAuto = getBody == null && setBody == null;
 
@@ -1216,7 +1216,7 @@ public partial class Method : MemberBase
 	{
 	}
 
-	public Method(string type, string name, IEnumerable<string> parameters = null, IEnumerable<string> body = null)
+	public Method(string type, string name, IQueryable<string> parameters = null, IQueryable<string> body = null)
 	{
 		Type = type;
 		Name = name;
@@ -1336,7 +1336,7 @@ void RemoveSpace()
 		GenerationEnvironment.Length--;
 }
 
-public static IEnumerable<ITree> GetTreeNodes(ITree parent)
+public static IQueryable<ITree> GetTreeNodes(ITree parent)
 {
 	foreach (var node in parent.GetNodes())
 	{

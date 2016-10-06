@@ -14,7 +14,7 @@ BaseEntityClass          = null;               // Base Entity class name. If nul
 DatabaseName             = null;               // Table database name - [Table(Database="DatabaseName")].
 GenerateDatabaseName     = false;              // Always generate table database name, even though DatabaseName is null.
 IncludeDefaultSchema     = true;               // Default schema name is generated - [Table(Database="Northwind", Schema="dbo", Name="Customers")]
-OneToManyAssociationType = "IEnumerable<{0}>"; // One To Many association type. Change it to "List<{0}>" if needed.
+OneToManyAssociationType = "IQueryable<{0}>"; // One To Many association type. Change it to "List<{0}>" if needed.
 GenerateAssociations     = true;               // Enforce generating associations.
 GenerateBackReferences   = true;               // Enforce generating backreference associations.
 
