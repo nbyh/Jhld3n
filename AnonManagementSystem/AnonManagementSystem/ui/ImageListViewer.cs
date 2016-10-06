@@ -9,6 +9,8 @@ namespace AnonManagementSystem
 {
     public partial class ImageListViewer : UserControl
     {
+        private Dictionary<string, Image> _imgDic = new Dictionary<string, Image>();
+
         public ImageListViewer()
         {
             InitializeComponent();
@@ -16,39 +18,10 @@ namespace AnonManagementSystem
 
         public string DeleteImgKey { get; set; }
 
-        private Dictionary<string, Image> _imgDic = new Dictionary<string, Image>();
-
         public Dictionary<string, Image> ImgDictionary
         {
             get { return _imgDic; }
             set { _imgDic = value; }
-        }
-
-        public void ShowImages()
-        {
-            foreach (var imgdic in _imgDic)
-            {
-                imgList.Images.Add(imgdic.Key, imgdic.Value);
-            }
-            lsvImages.Items.Clear();
-            lsvImages.LargeImageList = imgList;
-            lsvImages.BeginUpdate();
-            for (int i = 0; i < imgList.Images.Count; i++)
-            {
-                FileInfo fi = new FileInfo(imgList.Images.Keys[i]);
-                ListViewItem lvi = new ListViewItem
-                {
-                    ImageKey = imgList.Images.Keys[i],
-                    Text = fi.Name
-                };
-                lsvImages.Items.Add(lvi);
-            }
-            lsvImages.EndUpdate();
-            if (lsvImages.Items.Count > 0)
-            {
-                string picname = lsvImages.Items[0].ImageKey;
-                picBox.Image = _imgDic[picname];
-            }
         }
 
         public void AddImages(string key, Image img)
@@ -94,21 +67,6 @@ namespace AnonManagementSystem
             }
         }
 
-        private void lsvImages_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (lsvImages.SelectedItems.Count == 0)
-                    return;
-                string picname = lsvImages.SelectedItems[0].ImageKey;
-                picBox.Image = _imgDic[picname];
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show($"图片显示失败！{exception.Message}", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         public void SaveImages()
         {
             try
@@ -126,6 +84,48 @@ namespace AnonManagementSystem
             catch (Exception exception)
             {
                 MessageBox.Show($"图片保存失败！{exception.Message}", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ShowImages()
+        {
+            foreach (var imgdic in _imgDic)
+            {
+                imgList.Images.Add(imgdic.Key, imgdic.Value);
+            }
+            lsvImages.Items.Clear();
+            lsvImages.LargeImageList = imgList;
+            lsvImages.BeginUpdate();
+            for (int i = 0; i < imgList.Images.Count; i++)
+            {
+                FileInfo fi = new FileInfo(imgList.Images.Keys[i]);
+                ListViewItem lvi = new ListViewItem
+                {
+                    ImageKey = imgList.Images.Keys[i],
+                    Text = fi.Name
+                };
+                lsvImages.Items.Add(lvi);
+            }
+            lsvImages.EndUpdate();
+            if (lsvImages.Items.Count > 0)
+            {
+                string picname = lsvImages.Items[0].ImageKey;
+                picBox.Image = _imgDic[picname];
+            }
+        }
+
+        private void lsvImages_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lsvImages.SelectedItems.Count == 0)
+                    return;
+                string picname = lsvImages.SelectedItems[0].ImageKey;
+                picBox.Image = _imgDic[picname];
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"图片显示失败！{exception.Message}", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

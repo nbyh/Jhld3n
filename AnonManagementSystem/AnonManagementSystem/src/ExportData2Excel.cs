@@ -12,6 +12,7 @@ namespace AnonManagementSystem
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
                 #region 添加设备信息表
+
                 ExcelWorksheet worksheeteq = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
                 worksheeteq.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
                 EquipTitleCollection eqtitle = new EquipTitleCollection();
@@ -28,7 +29,7 @@ namespace AnonManagementSystem
                     }
                 }
 
-                #endregion
+                #endregion 添加设备信息表
 
                 #region 添加车辆信息表
 
@@ -47,7 +48,8 @@ namespace AnonManagementSystem
                         worksheetvh.Cells[i + 2, j + 1].Value = vhContentList[j];
                     }
                 }
-                #endregion
+
+                #endregion 添加车辆信息表
 
                 #region 添加油机信息表
 
@@ -67,7 +69,7 @@ namespace AnonManagementSystem
                     }
                 }
 
-                #endregion
+                #endregion 添加油机信息表
 
                 #region 添加活动信息表
 
@@ -86,7 +88,8 @@ namespace AnonManagementSystem
                         worksheetee.Cells[i + 2, j + 1].Value = eeContentList[j];
                     }
                 }
-                #endregion
+
+                #endregion 添加活动信息表
 
                 package.Save();//保存excel
             }
@@ -123,8 +126,8 @@ namespace AnonManagementSystem
         {
             using (ExcelPackage package = new ExcelPackage(new FileInfo(filepath)))
             {
-
                 #region 添加设备信息表
+
                 ExcelWorksheet worksheeteq = package.Workbook.Worksheets.Add("设备信息");//创建worksheet
                 worksheeteq.Cells.Style.ShrinkToFit = true;//单元格自动适应大小
                 EquipTitleCollection eqtitle = new EquipTitleCollection();
@@ -138,7 +141,7 @@ namespace AnonManagementSystem
                     worksheeteq.Cells[2, i + 1].Value = eqContentList[i];
                 }
 
-                #endregion
+                #endregion 添加设备信息表
 
                 #region 添加车辆信息表
 
@@ -157,7 +160,8 @@ namespace AnonManagementSystem
                         worksheetvh.Cells[i + 2, j + 1].Value = vhContentList[j];
                     }
                 }
-                #endregion
+
+                #endregion 添加车辆信息表
 
                 #region 添加油机信息表
 
@@ -176,7 +180,8 @@ namespace AnonManagementSystem
                         worksheetoe.Cells[2, i + 1].Value = oeContentList[i];
                     }
                 }
-                #endregion
+
+                #endregion 添加油机信息表
 
                 #region 添加活动信息表
 
@@ -195,7 +200,8 @@ namespace AnonManagementSystem
                         worksheetee.Cells[i + 2, j + 1].Value = eeContentList[j];
                     }
                 }
-                #endregion
+
+                #endregion 添加活动信息表
 
                 #region 添加材料信息表
 
@@ -214,7 +220,8 @@ namespace AnonManagementSystem
                         worksheetmt.Cells[i + 1, j + 1].Value = mtContentList[j];
                     }
                 }
-                #endregion
+
+                #endregion 添加材料信息表
 
                 package.Save();//保存excel
             }

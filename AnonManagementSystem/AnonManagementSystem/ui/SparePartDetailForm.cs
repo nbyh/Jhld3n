@@ -1,33 +1,40 @@
 ﻿using EquipmentInformationData;
+using LinqToDB;
+using LinqToDB.DataProvider.SQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using LinqToDB;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
     public partial class SparePartDetailForm : Form, IAddModify
     {
-        public delegate void SaveChangeSuccess();
-        public event SaveChangeSuccess SaveSuccess;
-        private readonly SynchronizationContext _synchContext;
         private readonly SparePartImagesDB _partsImageDb = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartImages.db"));
-        private List<SparePartImage> _spImgList = new List<SparePartImage>();
+
+        private readonly SynchronizationContext _synchContext;
+
         private bool _enableedit;
+
         private string _id;
+
         private SparePartManagementDB _sparePartDb = new SparePartManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\SparePartManagement.db"));
+
+        private List<SparePartImage> _spImgList = new List<SparePartImage>();
+
         public SparePartDetailForm()
         {
             InitializeComponent();
             _synchContext = SynchronizationContext.Current;
         }
+
+        public delegate void SaveChangeSuccess();
+
+        public event SaveChangeSuccess SaveSuccess;
 
         public bool Add { get; set; }
 
@@ -42,7 +49,7 @@ namespace AnonManagementSystem
         }
 
         public int Index { get; set; }
-        
+
         private void LoadSparePartData(IQueryable<SparePart> sparePart)
         {
             var appointsp = from eq in sparePart
@@ -153,6 +160,11 @@ namespace AnonManagementSystem
             }, null);
         }
 
+        private void tbNumDig_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
+        }
+
         private void tsbAddImages_Click(object sender, EventArgs e)
         {
             if (ofdImage.ShowDialog() == DialogResult.OK)
@@ -253,7 +265,10 @@ namespace AnonManagementSystem
                     _sparePartDb.InsertOrReplace(ce);
                     if (_spImgList.Any())
                     {
-                        _partsImageDb.InsertOrReplace(_spImgList);
+                        foreach (var sparePartImage in _spImgList)
+                        {
+                            _partsImageDb.Insert(sparePartImage);
+                        }
                     }
                 }
                 else
@@ -293,7 +308,7 @@ namespace AnonManagementSystem
                                     select img;
                         if (!spimg.Any())
                         {
-                            _partsImageDb.InsertOrReplace(sparePartImage);
+                            _partsImageDb.Insert(sparePartImage);
                         }
                     }
                 }
@@ -309,11 +324,6 @@ namespace AnonManagementSystem
                 CommonLogHelper.GetInstance("LogError").Error(@"保存备件数据失败", exception);
                 MessageBox.Show(this, @"保存备件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void tbNumDig_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
 
         private void tsbSaveImage_Click(object sender, EventArgs e)

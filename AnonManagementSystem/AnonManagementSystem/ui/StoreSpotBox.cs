@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AnonManagementSystem
@@ -15,7 +10,24 @@ namespace AnonManagementSystem
         {
             InitializeComponent();
         }
+
         /** Set or Get the string that represents the value in the box */
+
+        public List<string> DataSource1
+        {
+            set { cmb1.DataSource = value; }
+        }
+
+        public List<string> DataSource2
+        {
+            set { cmb2.DataSource = value; }
+        }
+
+        public List<string> DataSource3
+        {
+            set { cmb3.DataSource = value; }
+        }
+
         /// <summary>
         /// </summary>
         /// <returns>与该控件关联的文本。</returns>
@@ -42,21 +54,6 @@ namespace AnonManagementSystem
                     tb4.Text = "";
                 }
             }
-        }
-
-        public List<string> DataSource1
-        {
-            set { cmb1.DataSource = value; }
-        }
-
-        public List<string> DataSource2
-        {
-            set { cmb2.DataSource = value; }
-        }
-
-        public List<string> DataSource3
-        {
-            set { cmb3.DataSource = value; }
         }
 
         public void Clear()

@@ -14,16 +14,17 @@ namespace AnonManagementSystem
     {
         private readonly SynchronizationContext _synchContext;
 
-        public delegate void SaveVehicle(bool add, int index, CombatVehicle combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
+        private CombatVehicle _comvh;
 
-        public event SaveVehicle SaveVehicleSucess;
+        private bool _enableedit = false;
+
+        private string _id;
+
+        private OilEngine _oe;
+
+        private List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
 
         private List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
-        private List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
-        private CombatVehicle _comvh;
-        private OilEngine _oe;
-        private string _id;
-        private bool _enableedit = false;
 
         public VehicleDetailForm()
         {
@@ -31,24 +32,34 @@ namespace AnonManagementSystem
             _synchContext = SynchronizationContext.Current;
         }
 
-        public int Index { get; set; }
+        public delegate void SaveVehicle(bool add, int index, CombatVehicle combatVehicle, List<VehiclesImage> viList, OilEngine oilEngine, List<OilEngineImage> oiList);
 
-        public string Id
-        {
-            set { _id = value; }
-        }
+        public event SaveVehicle SaveVehicleSucess;
 
         public bool Add { get; set; }
+
+        public CombatVehicle Comvh
+        {
+            get { return _comvh; }
+            set { _comvh = value; }
+        }
 
         public bool Enableedit
         {
             set { _enableedit = value; }
         }
 
-        public List<VehiclesImage> VehiclesImagesList
+        public string Id
         {
-            get { return _vehiclesImagesList; }
-            set { _vehiclesImagesList = value; }
+            set { _id = value; }
+        }
+
+        public int Index { get; set; }
+
+        public OilEngine Oe
+        {
+            get { return _oe; }
+            set { _oe = value; }
         }
 
         public List<OilEngineImage> OilImagesList
@@ -57,16 +68,103 @@ namespace AnonManagementSystem
             set { _oilImagesList = value; }
         }
 
-        public CombatVehicle Comvh
+        public List<VehiclesImage> VehiclesImagesList
         {
-            get { return _comvh; }
-            set { _comvh = value; }
+            get { return _vehiclesImagesList; }
+            set { _vehiclesImagesList = value; }
         }
 
-        public OilEngine Oe
+        private void chkCombineOe_CheckedChanged(object sender, EventArgs e)
         {
-            get { return _oe; }
-            set { _oe = value; }
+            tabOilEngine.Parent = chkCombineOe.Checked ? tabCtrlVehicle : null;
+        }
+
+        private void Num_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
+        }
+
+        private void tsbAddImages_Click(object sender, EventArgs e)
+        {
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                string imgpath = ofdImage.FileName;
+                if (MainPublicFunction.CheckImgCondition(imgpath))
+                {
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
+                    VehiclesImage cvImag = new VehiclesImage
+                    {
+                        Images = imgBytes,
+                        Name = imgpath,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _vehiclesImagesList.Add(cvImag);
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvVehicle.AddImages(cvImag.Name, img);
+                    }
+                }
+            }
+        }
+
+        private void tsbAddOeImages_Click(object sender, EventArgs e)
+        {
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                string imgpath = ofdImage.FileName;
+                if (MainPublicFunction.CheckImgCondition(imgpath))
+                {
+                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
+                    fs.Close();
+                    OilEngineImage oiImg = new OilEngineImage
+                    {
+                        Images = imgBytes,
+                        SerialNo = tbSerialNo.Text
+                    };
+                    _oilImagesList.Add(oiImg);
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image img = Image.FromStream(ms);
+                        ilvOe.AddImages(oiImg.Name, img);
+                    }
+                }
+            }
+        }
+
+        private void tsbDeleteImages_Click(object sender, EventArgs e)
+        {
+            ilvVehicle.DeleteImages();
+            if (!string.IsNullOrEmpty(ilvVehicle.DeleteImgKey))
+            {
+                string key = ilvVehicle.DeleteImgKey;
+                foreach (var ei in _vehiclesImagesList.Where(d => d.Name == key))
+                {
+                    _vehiclesImagesList.Remove(ei);
+                    MessageBox.Show(this, @"图片删除成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+        }
+
+        private void tsbDeleteOeImages_Click(object sender, EventArgs e)
+        {
+            ilvOe.DeleteImages();
+            if (!string.IsNullOrEmpty(ilvOe.DeleteImgKey))
+            {
+                string key = ilvOe.DeleteImgKey;
+                foreach (var ei in _oilImagesList.Where(d => d.Name == key))
+                {
+                    _oilImagesList.Remove(ei);
+                    MessageBox.Show(this, @"图片删除成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
@@ -119,7 +217,7 @@ namespace AnonManagementSystem
                         FaultDescri = tbOeFailDetail.Text,
                         Vehicle = tbVehiclesNo.Text
                     };
-                    SaveVehicleSucess?.Invoke(Add, Index, _comvh, _vehiclesImagesList,_oe, _oilImagesList);
+                    SaveVehicleSucess?.Invoke(Add, Index, _comvh, _vehiclesImagesList, _oe, _oilImagesList);
                 }
                 else
                 {
@@ -136,98 +234,20 @@ namespace AnonManagementSystem
             }
         }
 
-        private void chkCombineOe_CheckedChanged(object sender, EventArgs e)
+        private void tsbSaveImage_Click(object sender, EventArgs e)
         {
-            tabOilEngine.Parent = chkCombineOe.Checked ? tabCtrlVehicle : null;
+            ilvOe.SaveImages();
+        }
+
+        private void tsbSaveImageVh_Click(object sender, EventArgs e)
+        {
+            ilvVehicle.SaveImages();
         }
 
         private void VehicleDetailForm_Load(object sender, EventArgs e)
         {
             tbSerialNo.Enabled = Add;
             tabOilEngine.Parent = null;
-        }
-
-        private void tsbAddOeImages_Click(object sender, EventArgs e)
-        {
-            if (ofdImage.ShowDialog() == DialogResult.OK)
-            {
-                string imgpath = ofdImage.FileName;
-                if (MainPublicFunction.CheckImgCondition(imgpath))
-                {
-                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
-                    fs.Close();
-                    OilEngineImage oiImg = new OilEngineImage
-                    {
-                        Images = imgBytes,
-                        SerialNo = tbSerialNo.Text
-                    };
-                    _oilImagesList.Add(oiImg);
-                    using (MemoryStream ms = new MemoryStream(imgBytes))
-                    {
-                        Image img = Image.FromStream(ms);
-                        ilvOe.AddImages(oiImg.Name, img);
-                    }
-                }
-            }
-        }
-
-        private void tsbAddImages_Click(object sender, EventArgs e)
-        {
-            if (ofdImage.ShowDialog() == DialogResult.OK)
-            {
-                string imgpath = ofdImage.FileName;
-                if (MainPublicFunction.CheckImgCondition(imgpath))
-                {
-                    FileStream fs = new FileStream(imgpath, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    byte[] imgBytes = br.ReadBytes((int)fs.Length);
-                    fs.Close();
-                    VehiclesImage cvImag = new VehiclesImage
-                    {
-                        Images = imgBytes,
-                        Name = imgpath,
-                        SerialNo = tbSerialNo.Text
-                    };
-                    _vehiclesImagesList.Add(cvImag);
-                    using (MemoryStream ms = new MemoryStream(imgBytes))
-                    {
-                        Image img = Image.FromStream(ms);
-                        ilvVehicle.AddImages(cvImag.Name, img);
-                    }
-                }
-            }
-        }
-
-        private void tsbDeleteOeImages_Click(object sender, EventArgs e)
-        {
-            ilvOe.DeleteImages();
-            if (!string.IsNullOrEmpty(ilvOe.DeleteImgKey))
-            {
-                string key = ilvOe.DeleteImgKey;
-                foreach (var ei in _oilImagesList.Where(d => d.Name == key))
-                {
-                    _oilImagesList.Remove(ei);
-                    MessageBox.Show(this, @"图片删除成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-            }
-        }
-
-        private void tsbDeleteImages_Click(object sender, EventArgs e)
-        {
-            ilvVehicle.DeleteImages();
-            if (!string.IsNullOrEmpty(ilvVehicle.DeleteImgKey))
-            {
-                string key = ilvVehicle.DeleteImgKey;
-                foreach (var ei in _vehiclesImagesList.Where(d => d.Name == key))
-                {
-                    _vehiclesImagesList.Remove(ei);
-                    MessageBox.Show(this, @"图片删除成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-            }
         }
 
         private void VehicleDetailForm_Shown(object sender, EventArgs e)
@@ -274,7 +294,6 @@ namespace AnonManagementSystem
                        }, null);
                        if (_comvh.CombineOe)
                        {
-
                            Dictionary<string, Image> oeimgdic = new Dictionary<string, Image>();
                            foreach (var equipmentImage in _oilImagesList)
                            {
@@ -331,21 +350,6 @@ namespace AnonManagementSystem
            })
             { IsBackground = true };
             loadVhDataThread.Start();
-        }
-
-        private void Num_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
-        }
-
-        private void tsbSaveImage_Click(object sender, EventArgs e)
-        {
-            ilvOe.SaveImages();
-        }
-
-        private void tsbSaveImageVh_Click(object sender, EventArgs e)
-        {
-            ilvVehicle.SaveImages();
         }
     }
 }

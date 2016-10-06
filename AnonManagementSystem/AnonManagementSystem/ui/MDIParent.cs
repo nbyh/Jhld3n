@@ -12,7 +12,7 @@ namespace AnonManagementSystem
 
         private void VisibleToolStrip()
         {
-            if (MdiChildren.Length == 0)
+            if (MdiChildren.Length == 1)
             {
                 toolStrip.Visible = false;
             }
@@ -196,7 +196,6 @@ namespace AnonManagementSystem
             Form form = ActiveMdiChild;
             var mdiFunction = (IMdiFunction)form;
             mdiFunction?.ExportOne2Excel();
-
         }
 
         private void 全部数据ToolStripMenuItem_Click(object sender, EventArgs e)

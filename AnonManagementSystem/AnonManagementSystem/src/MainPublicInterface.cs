@@ -2,6 +2,14 @@
 
 namespace AnonManagementSystem
 {
+    public interface IAddModify
+    {
+        bool Add { get; set; }
+        bool Enableedit { set; }
+        string Id { set; }
+        int Index { get; set; }
+    }
+
     public interface IMdiFunction
     {
         void DataAdd();
@@ -10,26 +18,17 @@ namespace AnonManagementSystem
 
         void DataRefresh();
 
-        void ExportOne2Excel();
-
         void ExportAll2Excel();
-        
-    }
 
-    public interface IAddModify
-    {
-        bool Enableedit { set; }
-        int Index { get; set; }
-        string Id { set; }
-        bool Add { get; set; }
+        void ExportOne2Excel();
     }
 
     public interface IShowImageList
     {
-        void ShowImages();
-
         void AddImages(string key, Image img);
 
         void DeleteImages();
+
+        void ShowImages();
     }
 }

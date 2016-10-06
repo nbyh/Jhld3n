@@ -1,10 +1,10 @@
 ﻿using EquipmentInformationData;
+using LinqToDB;
+using LinqToDB.DataProvider.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using LinqToDB;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -12,8 +12,8 @@ namespace AnonManagementSystem
     {
         private static readonly string Conn = $"data source = {AppDomain.CurrentDomain.BaseDirectory}SystemManager.db;";
         private readonly SystemManagerDB _sysManagerDb = new SystemManagerDB(new SQLiteDataProvider(), Conn);
-        private List<string> _alluser = new List<string>();
         private readonly List<UserManage> _userList = new List<UserManage>();
+        private List<string> _alluser = new List<string>();
         //private UserManage um;
 
         public SystemSetting()

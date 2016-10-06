@@ -1,4 +1,5 @@
 ﻿using EquipmentInformationData;
+using LinqToDB.DataProvider.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,8 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using LinqToDB;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -16,8 +15,8 @@ namespace AnonManagementSystem
         private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
         private readonly SynchronizationContext _synchContext;
         private bool _enableedit = false;
-        private Event _events;
         private List<EventData> _eventdataList = new List<EventData>();
+        private Event _events;
         private List<EventsImage> _eventsImgList = new List<EventsImage>();
         private string _id;
 
@@ -38,12 +37,11 @@ namespace AnonManagementSystem
             set { _enableedit = value; }
         }
 
-        public string Id
+        public Event Eqevents
         {
-            set { _id = value; }
+            get { return _events; }
+            set { _events = value; }
         }
-
-        public int Index { get; set; }
 
         public List<EventData> EventdataList
         {
@@ -57,11 +55,12 @@ namespace AnonManagementSystem
             set { _eventsImgList = value; }
         }
 
-        public Event Eqevents
+        public string Id
         {
-            get { return _events; }
-            set { _events = value; }
+            set { _id = value; }
         }
+
+        public int Index { get; set; }
 
         private void AddEventsForm_Load(object sender, EventArgs e)
         {
@@ -110,7 +109,6 @@ namespace AnonManagementSystem
 
                         ilvEvents.ImgDictionary = imgdic;
                         ilvEvents.ShowImages();
-
                     }, null);
                     CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
                 }
@@ -130,6 +128,91 @@ namespace AnonManagementSystem
                         MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void cmbEventNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
+        }
+
+        private void cmbEventNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string eveid = cmbEventNo.Text;
+                var eve = _equipDb.Events.First(s => s.No == eveid);
+                if (eve == null) return;
+                cmbEventNo.Text = eve.No;
+                cmbEventName.Text = eve.Name;
+                cmbAddress.Text = eve.Address;
+                dtpEventDt1.Value = eve.StartTime;
+                dtpEventDt2.Value = eve.EndTime;
+                cmbEventType.Text = eve.EventType;
+                cmbSpecificType.Text = eve.SpecificType;
+
+                cmbHigherUnit.Text = eve.HigherUnit;
+                cmbExecutor.Text = eve.Executor;
+                tbNoInEvents.Text = eve.NoInEvents;
+                cmbPulishUnit.Text = eve.PublishUnit;
+                dtpPulishDt.Value = eve.PublishDate;
+                cmbPulisher.Text = eve.Publisher;
+                tbAccording.Text = eve.According;
+            }
+            catch (Exception exception)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"选择特定事件过程出错", exception);
+            }
+        }
+
+        private void cmbEventType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string s = cmbEventType.SelectedText;
+            switch (s)
+            {
+                case "调整类":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "交接活动","接装培训","封存启用","退役报废"
+                    };
+                    break;
+
+                case "动用类":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "任务","试验改造","借用","大中修"
+                    };
+                    break;
+
+                case "使用维护":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "维护","点检","性能测试","车辆记录"
+                    };
+                    break;
+
+                case "测试检修":
+                    cmbSpecificType.DataSource = new List<string>()
+                    {
+                        "故障确认","故障处理","厂所修理"
+                    };
+                    break;
+            }
+        }
+
+        private void Combox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+            {
+                return;
+            }
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
+        }
+
+        private void Num_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
 
         private void tsbAddEventsData_Click(object sender, EventArgs e)
@@ -287,88 +370,6 @@ namespace AnonManagementSystem
                 MessageBox.Show(this, @"活动事件保存失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 CommonLogHelper.GetInstance("LogError").Error(@"活动事件保存失败", exception);
             }
-        }
-
-        private void Num_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
-        }
-
-        private void Combox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0)
-            {
-                return;
-            }
-            e.DrawBackground();
-            e.DrawFocusRectangle();
-            e.Graphics.DrawString(((ComboBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 3);
-        }
-
-        private void cmbEventType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string s = cmbEventType.SelectedText;
-            switch (s)
-            {
-                case "调整类":
-                    cmbSpecificType.DataSource = new List<string>()
-                    {
-                        "交接活动","接装培训","封存启用","退役报废"
-                    };
-                    break;
-                case "动用类":
-                    cmbSpecificType.DataSource = new List<string>()
-                    {
-                        "任务","试验改造","借用","大中修"
-                    };
-                    break;
-                case "使用维护":
-                    cmbSpecificType.DataSource = new List<string>()
-                    {
-                        "维护","点检","性能测试","车辆记录"
-                    };
-                    break;
-                case "测试检修":
-                    cmbSpecificType.DataSource = new List<string>()
-                    {
-                        "故障确认","故障处理","厂所修理"
-                    };
-                    break;
-            }
-        }
-
-        private void cmbEventNo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string eveid = cmbEventNo.Text;
-                var eve = _equipDb.Events.First(s => s.No == eveid);
-                if (eve == null) return;
-                cmbEventNo.Text = eve.No;
-                cmbEventName.Text = eve.Name;
-                cmbAddress.Text = eve.Address;
-                dtpEventDt1.Value = eve.StartTime;
-                dtpEventDt2.Value = eve.EndTime;
-                cmbEventType.Text = eve.EventType;
-                cmbSpecificType.Text = eve.SpecificType;
-
-                cmbHigherUnit.Text = eve.HigherUnit;
-                cmbExecutor.Text = eve.Executor;
-                tbNoInEvents.Text = eve.NoInEvents;
-                cmbPulishUnit.Text = eve.PublishUnit;
-                dtpPulishDt.Value = eve.PublishDate;
-                cmbPulisher.Text = eve.Publisher;
-                tbAccording.Text = eve.According;
-            }
-            catch (Exception exception)
-            {
-                CommonLogHelper.GetInstance("LogError").Error(@"选择特定事件过程出错", exception);
-            }
-        }
-
-        private void cmbEventNo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
 
         private void tsbSaveImage_Click(object sender, EventArgs e)

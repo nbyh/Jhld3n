@@ -8,6 +8,20 @@ namespace AnonManagementSystem
 {
     internal static class Program
     {
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            Exception ex = e.Exception;
+            CommonLogHelper.GetInstance("LogFatal").Fatal($"\t线程致命错误{ex}");
+            MessageBox.Show(ex.ToString());
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = (Exception)e.ExceptionObject;
+            CommonLogHelper.GetInstance("LogFatal").Fatal($"\t未知致命错误{ex}");
+            MessageBox.Show(ex.ToString());
+        }
+
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -34,20 +48,6 @@ namespace AnonManagementSystem
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MdiParent());
             }
-        }
-
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Exception ex = (Exception)e.ExceptionObject;
-            CommonLogHelper.GetInstance("LogFatal").Fatal($"\t未知致命错误{ex}");
-            MessageBox.Show(ex.ToString());
-        }
-
-        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
-        {
-            Exception ex = e.Exception;
-            CommonLogHelper.GetInstance("LogFatal").Fatal($"\t线程致命错误{ex}");
-            MessageBox.Show(ex.ToString());
         }
     }
 }

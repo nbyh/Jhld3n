@@ -1,23 +1,18 @@
-﻿using System;
+﻿using EquipmentInformationData;
+using ICSharpCode.SharpZipLib.Zip;
+using LinqToDB.Data;
+using LinqToDB.DataProvider.SQLite;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EquipmentInformationData;
-using ICSharpCode.SharpZipLib.Zip;
-using LinqToDB.Data;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
     public class DataHandle
     {
-        public delegate void StatusSet(string info);
-        public event StatusSet SetStatusInfo;
-        public bool isManual { get; set; }
-        public string Dirpath { get; set; }
-
         public DataHandle()
         {
             TaskScheduler.UnobservedTaskException += (sender, excArgs) =>
@@ -27,16 +22,25 @@ namespace AnonManagementSystem
             };
         }
 
-        private void TasksEnded(Task<bool>[] tasks)
+        public delegate void StatusSet(string info);
+
+        public event StatusSet SetStatusInfo;
+
+        public string Dirpath { get; set; }
+        public bool isManual { get; set; }
+
+        public bool BackupData(string sourcepath)
         {
-            string[] r = tasks.Select(s => s.Result.ToString()).ToArray();
-            CommonLogHelper.GetInstance("LogInfo").Info($"完成合并数据任务，结果为：{string.Join("，", r)}");
-            SetStatusInfo?.Invoke("合并数据完成");
-            if (isManual)
+            bool result = false;
+            string backupZip = Dirpath.TrimEnd('\\') + @"\ZBDataBase" + DateTime.Now.ToString("yyyyMMdd") + ".zip";
+            Task ziptask = new Task(() =>
             {
-                MessageBox.Show($"完成合并数据任务！结果为：{string.Join("，", r)}", @"信息", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
+                DirectoryFileZip dirfileZip = new DirectoryFileZip(new[] { "ZBDataBase" });
+                result = dirfileZip.ZipFileDirectory(sourcepath, backupZip, string.Empty);
+            }, TaskCreationOptions.AttachedToParent);
+            ziptask.Start();
+            ziptask.Wait();
+            return result;
         }
 
         public void ImportData()
@@ -55,26 +59,55 @@ namespace AnonManagementSystem
             taskFactory.ContinueWhenAll(tasks, TasksEnded, CancellationToken.None);
         }
 
-        private bool SparePartImageDbCombine()
+        private bool EquipImagesDbCombine()
         {
             try
             {
-                if (File.Exists(Dirpath + @"\SparePartImages.db"))
+                if (File.Exists(Dirpath + @"\EquipmentImages.db"))
                 {
-                    SparePartImagesDB dbs = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\SparePartImages.db"));
-                    SparePartImagesDB dbd = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartImages.db"));
-                    dbs.BulkCopy(dbd.SparePartImages.Select(s => s));
+                    EquipmentImagesDB dbs = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EquipmentImages.db"));
+                    EquipmentImagesDB dbd = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentImages.db"));
+                    dbs.BulkCopy(dbd.EquipmentImages.Select(s => s));
                 }
                 else
                 {
-                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\SparePartImages.db不存在");
+                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EquipmentImages.db不存在");
                     return false;
                 }
                 return true;
             }
             catch (Exception e)
             {
-                CommonLogHelper.GetInstance("LogError").Error(@"合并SparePartImages失败", e);
+                CommonLogHelper.GetInstance("LogError").Error(@"合并EquipmentImages失败", e);
+                return false;
+            }
+        }
+
+        private bool EquipManagemetDbCombine()
+        {
+            try
+            {
+                if (File.Exists(Dirpath + @"\EquipmentManagement.db"))
+                {
+                    EquipmentManagementDB dbs = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EquipmentManagement.db"));
+                    EquipmentManagementDB dbd = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentManagement.db"));
+                    dbs.BulkCopy(dbd.CombatEquipments.Select(s => s));
+                    dbs.BulkCopy(dbd.CombatVehicles.Select(s => s));
+                    dbs.BulkCopy(dbd.OilEngines.Select(s => s));
+                    dbs.BulkCopy(dbd.Events.Select(s => s));
+                    dbs.BulkCopy(dbd.EventData.Select(s => s));
+                    dbs.BulkCopy(dbd.Materials.Select(s => s));
+                }
+                else
+                {
+                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EquipmentManagement.db不存在");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"合并EquipmentManagement失败", e);
                 return false;
             }
         }
@@ -127,55 +160,6 @@ namespace AnonManagementSystem
             }
         }
 
-        private bool VehiclesImagesDbCombine()
-        {
-            try
-            {
-                if (File.Exists(Dirpath + @"\VehiclesImages.db"))
-                {
-                    VehiclesImagesDB dbs = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\VehiclesImages.db"));
-                    VehiclesImagesDB dbd = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "VehiclesImages.db"));
-                    dbs.BulkCopy(dbd.VehiclesImages.Select(s => s));
-                }
-                else
-                {
-                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\VehiclesImages.db不存在");
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                CommonLogHelper.GetInstance("LogError").Error(@"合并VehiclesImages失败", e);
-                return false;
-            }
-        }
-
-        private bool EquipImagesDbCombine()
-        {
-            try
-            {
-                if (File.Exists(Dirpath + @"\EquipmentImages.db"))
-                {
-                    EquipmentImagesDB dbs = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EquipmentImages.db"));
-                    EquipmentImagesDB dbd = new EquipmentImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentImages.db"));
-                    dbs.BulkCopy(dbd.EquipmentImages.Select(s => s));
-                }
-                else
-                {
-                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EquipmentImages.db不存在");
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                CommonLogHelper.GetInstance("LogError").Error(@"合并EquipmentImages失败", e);
-                return false;
-
-            }
-        }
-
         private bool SparePartDbCombine()
         {
             try
@@ -200,47 +184,64 @@ namespace AnonManagementSystem
             }
         }
 
-        private bool EquipManagemetDbCombine()
+        private bool SparePartImageDbCombine()
         {
             try
             {
-                if (File.Exists(Dirpath + @"\EquipmentManagement.db"))
+                if (File.Exists(Dirpath + @"\SparePartImages.db"))
                 {
-                    EquipmentManagementDB dbs = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\EquipmentManagement.db"));
-                    EquipmentManagementDB dbd = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "EquipmentManagement.db"));
-                    dbs.BulkCopy(dbd.CombatEquipments.Select(s => s));
-                    dbs.BulkCopy(dbd.CombatVehicles.Select(s => s));
-                    dbs.BulkCopy(dbd.OilEngines.Select(s => s));
-                    dbs.BulkCopy(dbd.Events.Select(s => s));
-                    dbs.BulkCopy(dbd.EventData.Select(s => s));
-                    dbs.BulkCopy(dbd.Materials.Select(s => s));
+                    SparePartImagesDB dbs = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\SparePartImages.db"));
+                    SparePartImagesDB dbd = new SparePartImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "SparePartImages.db"));
+                    dbs.BulkCopy(dbd.SparePartImages.Select(s => s));
                 }
                 else
                 {
-                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\EquipmentManagement.db不存在");
+                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\SparePartImages.db不存在");
                     return false;
                 }
                 return true;
             }
             catch (Exception e)
             {
-                CommonLogHelper.GetInstance("LogError").Error(@"合并EquipmentManagement失败", e);
+                CommonLogHelper.GetInstance("LogError").Error(@"合并SparePartImages失败", e);
                 return false;
             }
         }
 
-        public bool BackupData(string sourcepath)
+        private void TasksEnded(Task<bool>[] tasks)
         {
-            bool result = false;
-            string backupZip = Dirpath.TrimEnd('\\') + @"\ZBDataBase" + DateTime.Now.ToString("yyyyMMdd") + ".zip";
-            Task ziptask = new Task(() =>
+            string[] r = tasks.Select(s => s.Result.ToString()).ToArray();
+            CommonLogHelper.GetInstance("LogInfo").Info($"完成合并数据任务，结果为：{string.Join("，", r)}");
+            SetStatusInfo?.Invoke("合并数据完成");
+            if (isManual)
             {
-                DirectoryFileZip dirfileZip = new DirectoryFileZip(new[] { "ZBDataBase" });
-                result = dirfileZip.ZipFileDirectory(sourcepath, backupZip, string.Empty);
-            }, TaskCreationOptions.AttachedToParent);
-            ziptask.Start();
-            ziptask.Wait();
-            return result;
+                MessageBox.Show($"完成合并数据任务！结果为：{string.Join("，", r)}", @"信息", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private bool VehiclesImagesDbCombine()
+        {
+            try
+            {
+                if (File.Exists(Dirpath + @"\VehiclesImages.db"))
+                {
+                    VehiclesImagesDB dbs = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(AppDomain.CurrentDomain.BaseDirectory, @"ZBDataBase\VehiclesImages.db"));
+                    VehiclesImagesDB dbd = new VehiclesImagesDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(Dirpath, "VehiclesImages.db"));
+                    dbs.BulkCopy(dbd.VehiclesImages.Select(s => s));
+                }
+                else
+                {
+                    CommonLogHelper.GetInstance("LogInfo").Info("文件" + Dirpath + @"\VehiclesImages.db不存在");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                CommonLogHelper.GetInstance("LogError").Error(@"合并VehiclesImages失败", e);
+                return false;
+            }
         }
     }
 
@@ -265,110 +266,6 @@ namespace AnonManagementSystem
         public DirectoryFileZip(string[] subdirs)
         {
             _subdirs = subdirs;
-        }
-
-        /// <summary>
-        /// 压缩多层目录
-        /// </summary>
-        /// <param name="strDirectory">The directory.</param>
-        /// <param name="zipedFile">The ziped file.</param>
-        /// <param name="parentPath">The parent path.</param>
-        /// <returns></returns>
-        public bool ZipFileDirectory(string strDirectory, string zipedFile, string parentPath)
-        {
-            using (FileStream zipFile = File.Create(zipedFile))
-            {
-                using (ZipOutputStream s = new ZipOutputStream(zipFile))
-                {
-                    ZipCompress(strDirectory, s, parentPath);
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 递归遍历目录
-        /// </summary>
-        /// <param name="strDirectory">The directory.</param>
-        /// <param name="s">The ZipOutputStream Object.</param>
-        /// <param name="parentPath">The parent path.</param>
-        private void ZipCompress(string strDirectory, ZipOutputStream s, string parentPath)
-        {
-            if (strDirectory[strDirectory.Length - 1] != Path.DirectorySeparatorChar)
-            {
-                strDirectory += Path.DirectorySeparatorChar;
-            }
-            string[] filenames = Directory.GetFileSystemEntries(strDirectory);
-
-            foreach (string file in filenames) //遍历所有的文件和目录
-            {
-                if (Directory.Exists(file)) //先当作目录处理如果存在这个目录就递归Copy该目录下面的文件
-                {
-                    string pPath = parentPath;
-                    DirectoryInfo subdirinfo = new DirectoryInfo(file);
-                    if (_subdirs.Length == 0)
-                    {
-                        pPath += subdirinfo.Name;
-                        pPath += "\\";
-                        ZipCompress(file, s, pPath);
-                    }
-                    else
-                    {
-                        bool zipfilemark = false;
-                        foreach (string sub in _subdirs)
-                        {
-                            if (subdirinfo.FullName.Contains(sub))
-                            {
-                                zipfilemark = true;
-                                pPath += subdirinfo.Name;
-                                pPath += "\\";
-                            }
-                        }
-                        if (zipfilemark)
-                        {
-                            ZipCompress(file, s, pPath);
-                        }
-                    }
-                }
-                else //否则直接压缩文件
-                {
-                    FileInfo fileinfo = new FileInfo(file);
-                    bool zipfilemark = false;
-                    if (_subdirs.Length > 0)
-                    {
-                        foreach (string sub in _subdirs)
-                        {
-                            if (fileinfo.FullName.Contains(sub))
-                            {
-                                zipfilemark = true;
-                            }
-                        }
-                    }
-                    if (zipfilemark || _subdirs.Length == 0)
-                    {
-                        using (FileStream streamToZip = new FileStream(file, FileMode.Open, FileAccess.Read))
-                        {
-                            string fileName = parentPath + fileinfo.Name;
-                            ZipEntry entry = new ZipEntry(fileName) { DateTime = fileinfo.LastWriteTime };
-                            byte[] buffer = new byte[4096];
-                            //Crc32 crc = new Crc32();
-                            //crc.Reset();
-                            //crc.Update(buffer);
-                            //entry.Crc = crc.Value;
-                            s.SetLevel(5);
-                            s.PutNextEntry(entry);
-                            int sizeRead;
-                            do
-                            {
-                                sizeRead = streamToZip.Read(buffer, 0, buffer.Length);
-                                s.Write(buffer, 0, sizeRead);
-                            }
-                            while (sizeRead > 0);
-                            streamToZip.Close();
-                        }
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -545,6 +442,25 @@ namespace AnonManagementSystem
         }
 
         /// <summary>
+        /// 压缩多层目录
+        /// </summary>
+        /// <param name="strDirectory">The directory.</param>
+        /// <param name="zipedFile">The ziped file.</param>
+        /// <param name="parentPath">The parent path.</param>
+        /// <returns></returns>
+        public bool ZipFileDirectory(string strDirectory, string zipedFile, string parentPath)
+        {
+            using (FileStream zipFile = File.Create(zipedFile))
+            {
+                using (ZipOutputStream s = new ZipOutputStream(zipFile))
+                {
+                    ZipCompress(strDirectory, s, parentPath);
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 压缩单个文件
         /// </summary>
         /// <param name="fileToZip">要压缩的文件</param>
@@ -626,6 +542,91 @@ namespace AnonManagementSystem
                         zipStream.Write(buffer, 0, buffer.Length);
                         zipStream.Finish();
                         zipStream.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 递归遍历目录
+        /// </summary>
+        /// <param name="strDirectory">The directory.</param>
+        /// <param name="s">The ZipOutputStream Object.</param>
+        /// <param name="parentPath">The parent path.</param>
+        private void ZipCompress(string strDirectory, ZipOutputStream s, string parentPath)
+        {
+            if (strDirectory[strDirectory.Length - 1] != Path.DirectorySeparatorChar)
+            {
+                strDirectory += Path.DirectorySeparatorChar;
+            }
+            string[] filenames = Directory.GetFileSystemEntries(strDirectory);
+
+            foreach (string file in filenames) //遍历所有的文件和目录
+            {
+                if (Directory.Exists(file)) //先当作目录处理如果存在这个目录就递归Copy该目录下面的文件
+                {
+                    string pPath = parentPath;
+                    DirectoryInfo subdirinfo = new DirectoryInfo(file);
+                    if (_subdirs.Length == 0)
+                    {
+                        pPath += subdirinfo.Name;
+                        pPath += "\\";
+                        ZipCompress(file, s, pPath);
+                    }
+                    else
+                    {
+                        bool zipfilemark = false;
+                        foreach (string sub in _subdirs)
+                        {
+                            if (subdirinfo.FullName.Contains(sub))
+                            {
+                                zipfilemark = true;
+                                pPath += subdirinfo.Name;
+                                pPath += "\\";
+                            }
+                        }
+                        if (zipfilemark)
+                        {
+                            ZipCompress(file, s, pPath);
+                        }
+                    }
+                }
+                else //否则直接压缩文件
+                {
+                    FileInfo fileinfo = new FileInfo(file);
+                    bool zipfilemark = false;
+                    if (_subdirs.Length > 0)
+                    {
+                        foreach (string sub in _subdirs)
+                        {
+                            if (fileinfo.FullName.Contains(sub))
+                            {
+                                zipfilemark = true;
+                            }
+                        }
+                    }
+                    if (zipfilemark || _subdirs.Length == 0)
+                    {
+                        using (FileStream streamToZip = new FileStream(file, FileMode.Open, FileAccess.Read))
+                        {
+                            string fileName = parentPath + fileinfo.Name;
+                            ZipEntry entry = new ZipEntry(fileName) { DateTime = fileinfo.LastWriteTime };
+                            byte[] buffer = new byte[4096];
+                            //Crc32 crc = new Crc32();
+                            //crc.Reset();
+                            //crc.Update(buffer);
+                            //entry.Crc = crc.Value;
+                            s.SetLevel(5);
+                            s.PutNextEntry(entry);
+                            int sizeRead;
+                            do
+                            {
+                                sizeRead = streamToZip.Read(buffer, 0, buffer.Length);
+                                s.Write(buffer, 0, sizeRead);
+                            }
+                            while (sizeRead > 0);
+                            streamToZip.Close();
+                        }
                     }
                 }
             }

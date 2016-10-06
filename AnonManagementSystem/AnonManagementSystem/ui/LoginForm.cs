@@ -1,8 +1,8 @@
 ﻿using EquipmentInformationData;
+using LinqToDB.DataProvider.SQLite;
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -36,7 +36,7 @@ namespace AnonManagementSystem
             var u = sysManagerDb.UserManages.Where(s => s.User == user).Take(1);
             if (!u.Any())
             {
-                MessageBox.Show(@"用户不存在！",@"警告",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(@"用户不存在！", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             UserManage loginuser = u.First();

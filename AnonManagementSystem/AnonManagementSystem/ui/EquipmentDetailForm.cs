@@ -1,4 +1,6 @@
 ﻿using EquipmentInformationData;
+using LinqToDB;
+using LinqToDB.DataProvider.SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using LinqToDB;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -111,7 +111,7 @@ namespace AnonManagementSystem
                     _eventDataList = eventdatalist;
                     _eventsImgList = eventimglist;
 
-                    #endregion 活动事件更新
+                    #endregion 活动事件临时数据更新
                 }
                 else
                 {
@@ -216,7 +216,7 @@ namespace AnonManagementSystem
                     pointmaterial.Content = material.Content;
                     pointmaterial.Equipment = material.Equipment;
 
-                    #endregion 材料数据更新
+                    #endregion 材料临时数据更新
                 }
                 else
                 {
@@ -237,7 +237,6 @@ namespace AnonManagementSystem
 
                     #endregion 材料数据更新
                 }
-
             }
         }
 
@@ -305,7 +304,7 @@ namespace AnonManagementSystem
                     _oilEngines = oilEngine;
                     _oilImgList = oilImgList;
 
-                    #endregion
+                    #endregion 车辆信息更新
                 }
                 else
                 {
@@ -425,9 +424,21 @@ namespace AnonManagementSystem
 
                         #endregion 油机图片更新
                     }
-
                 }
             }
+        }
+
+        private void btnBrowser_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                tbSetupVideo.Text = ofd.FileName;
+            }
+        }
+
+        private void btnDeleteSetuoVideo_Click(object sender, EventArgs e)
+        {
+            tbSetupVideo.Clear();
         }
 
         private void dgvCombatVehicles_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -604,9 +615,6 @@ namespace AnonManagementSystem
                        LoadEquipData(equip);
                        CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
                    }
-
-
-
                }
                catch (Exception exception)
                {
@@ -972,7 +980,7 @@ namespace AnonManagementSystem
                         };
                         _equipDb.InsertOrReplace(ce);
 
-                        #endregion
+                        #endregion 添加设备及相关信息
                     }
                     else
                     {
@@ -1004,7 +1012,8 @@ namespace AnonManagementSystem
                         equipfirst.PerformIndex = tbPerformIndex.Text;
 
                         _equipDb.InsertOrReplace(equipfirst);
-                        #endregion
+
+                        #endregion 修改设备信息
                     }
                     if (_eventsList.Any())
                     {
@@ -1049,19 +1058,6 @@ namespace AnonManagementSystem
                     MessageBox.Show(this, @"保存设备数据失败" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }, null);
-        }
-
-        private void btnBrowser_Click(object sender, EventArgs e)
-        {
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                tbSetupVideo.Text = ofd.FileName;
-            }
-        }
-
-        private void btnDeleteSetuoVideo_Click(object sender, EventArgs e)
-        {
-            tbSetupVideo.Clear();
         }
 
         private void tsbSaveImage_Click(object sender, EventArgs e)

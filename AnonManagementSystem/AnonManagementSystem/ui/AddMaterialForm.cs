@@ -1,28 +1,34 @@
 ﻿using EquipmentInformationData;
+using LinqToDB.DataProvider.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
     public partial class AddMaterialForm : Form, IAddModify
     {
-        public delegate void SaveMaterial(bool add, int index, Material material);
+        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
 
-        public event SaveMaterial SaveMaterialSucess;
+        private readonly SynchronizationContext _synchContext;
 
         private bool _enableedit = false;
 
         private string _id;
-        public int Index { get; set; }
 
-        public string Id
+        private Material _material;
+
+        public AddMaterialForm()
         {
-            set { _id = value; }
+            InitializeComponent();
+            _synchContext = SynchronizationContext.Current;
         }
+
+        public delegate void SaveMaterial(bool add, int index, Material material);
+
+        public event SaveMaterial SaveMaterialSucess;
 
         public bool Add { get; set; }
 
@@ -31,51 +37,17 @@ namespace AnonManagementSystem
             set { _enableedit = value; }
         }
 
+        public string Id
+        {
+            set { _id = value; }
+        }
+
+        public int Index { get; set; }
+
         public Material Material1
         {
             get { return _material; }
             set { _material = value; }
-        }
-
-        private Material _material;
-
-        private readonly EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
-        private readonly SynchronizationContext _synchContext;
-
-        public AddMaterialForm()
-        {
-            InitializeComponent();
-            _synchContext = SynchronizationContext.Current;
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _material = new Material()
-                {
-                    No = tbDocNo.Text,
-                    Name = tbDocName.Text,
-                    PaperSize = cmbShape.Text,
-                    Pagination = nUdPages.Value.ToString(),
-                    //Edition = tbEdition.Text,
-                    Volume = nUdCopybook.Value.ToString(),
-                    Date = dtpDate.Value.Date,
-                    DocumentLink = tbDocumentLink.Text,
-                    StoreSpot = tbStoreSpot.Text,
-                    Content = tbBrief.Text,
-                    Equipment = _id
-                };
-                SaveMaterialSucess?.Invoke(Add, Index, _material);
-                CommonLogHelper.GetInstance("LogInfo").Info(@"随机材料保存成功");
-                MessageBox.Show(this, @"随机材料保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(this, @"随机材料保存成功" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLogHelper.GetInstance("LogError").Error(@"随机材料保存成功", exception);
-            }
         }
 
         private void AddMaterialForm_Load(object sender, EventArgs e)
@@ -138,6 +110,36 @@ namespace AnonManagementSystem
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _material = new Material()
+                {
+                    No = tbDocNo.Text,
+                    Name = tbDocName.Text,
+                    PaperSize = cmbShape.Text,
+                    Pagination = nUdPages.Value.ToString(),
+                    //Edition = tbEdition.Text,
+                    Volume = nUdCopybook.Value.ToString(),
+                    Date = dtpDate.Value.Date,
+                    DocumentLink = tbDocumentLink.Text,
+                    StoreSpot = tbStoreSpot.Text,
+                    Content = tbBrief.Text,
+                    Equipment = _id
+                };
+                SaveMaterialSucess?.Invoke(Add, Index, _material);
+                CommonLogHelper.GetInstance("LogInfo").Info(@"随机材料保存成功");
+                MessageBox.Show(this, @"随机材料保存成功", @"提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(this, @"随机材料保存成功" + exception.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLogHelper.GetInstance("LogError").Error(@"随机材料保存成功", exception);
+            }
         }
 
         private void tbDocNo_KeyPress(object sender, KeyPressEventArgs e)

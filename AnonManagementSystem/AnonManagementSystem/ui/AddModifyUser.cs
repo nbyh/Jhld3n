@@ -55,6 +55,7 @@ namespace AnonManagementSystem
         {
             set { _rowindex = value; }
         }
+
         public string User
         {
             set { _user = value; }
