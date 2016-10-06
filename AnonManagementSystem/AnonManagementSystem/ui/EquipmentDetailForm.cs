@@ -1063,5 +1063,10 @@ namespace AnonManagementSystem
         {
             tbSetupVideo.Clear();
         }
+
+        private void tsbSaveImage_Click(object sender, EventArgs e)
+        {
+            ilvEquipment.SaveImages();
+        }
     }
 }

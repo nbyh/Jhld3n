@@ -90,7 +90,6 @@
             this.cvTechCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VehcileMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.tsbAddVehicle = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteVehicle = new System.Windows.Forms.ToolStripButton();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -104,10 +103,6 @@
             this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
-            this.tsbAddEvents = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteEvents = new System.Windows.Forms.ToolStripButton();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDeleteSetuoVideo = new System.Windows.Forms.Button();
@@ -126,13 +121,14 @@
             this.DocumentLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.MaterialMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.tsbAddMaterial = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteMaterial = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImage = new System.Windows.Forms.ToolStripButton();
+            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
@@ -140,7 +136,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
-            this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
+            this.tsbAddEvents = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteEvents = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -157,7 +155,6 @@
             this.tabPage4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
-            this.toolStrip3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox20.SuspendLayout();
@@ -168,6 +165,7 @@
             this.panel1.SuspendLayout();
             this.tsDetail.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -730,7 +728,6 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton5,
             this.tsbAddVehicle,
             this.tsbDeleteVehicle});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
@@ -738,14 +735,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(770, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Image = global::AnonManagementSystem.Properties.Resources.file_search;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton5.Text = "刷新";
             // 
             // tsbAddVehicle
             // 
@@ -897,44 +886,6 @@
             this.EventMoreInfo.Name = "EventMoreInfo";
             this.EventMoreInfo.ReadOnly = true;
             this.EventMoreInfo.Text = "详细信息";
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton18,
-            this.tsbAddEvents,
-            this.tsbDeleteEvents});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(770, 25);
-            this.toolStrip3.TabIndex = 0;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripButton18
-            // 
-            this.toolStripButton18.Image = global::AnonManagementSystem.Properties.Resources.file_search;
-            this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton18.Name = "toolStripButton18";
-            this.toolStripButton18.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton18.Text = "刷新";
-            // 
-            // tsbAddEvents
-            // 
-            this.tsbAddEvents.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.tsbAddEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddEvents.Name = "tsbAddEvents";
-            this.tsbAddEvents.Size = new System.Drawing.Size(52, 22);
-            this.tsbAddEvents.Text = "添加";
-            this.tsbAddEvents.Click += new System.EventHandler(this.tsbAddEvents_Click);
-            // 
-            // tsbDeleteEvents
-            // 
-            this.tsbDeleteEvents.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
-            this.tsbDeleteEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDeleteEvents.Name = "tsbDeleteEvents";
-            this.tsbDeleteEvents.Size = new System.Drawing.Size(52, 22);
-            this.tsbDeleteEvents.Text = "删除";
-            this.tsbDeleteEvents.Click += new System.EventHandler(this.tsbDeleteEvents_Click);
             // 
             // tabPage5
             // 
@@ -1135,7 +1086,6 @@
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton19,
             this.tsbAddMaterial,
             this.tsbDeleteMaterial});
             this.toolStrip2.Location = new System.Drawing.Point(3, 3);
@@ -1143,14 +1093,6 @@
             this.toolStrip2.Size = new System.Drawing.Size(770, 25);
             this.toolStrip2.TabIndex = 5;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton19
-            // 
-            this.toolStripButton19.Image = global::AnonManagementSystem.Properties.Resources.file_search;
-            this.toolStripButton19.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton19.Name = "toolStripButton19";
-            this.toolStripButton19.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton19.Text = "刷新";
             // 
             // tsbAddMaterial
             // 
@@ -1182,11 +1124,22 @@
             this.tabPage6.Text = "装备图片";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // ilvEquipment
+            // 
+            this.ilvEquipment.DeleteImgKey = null;
+            this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
+            this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
+            this.ilvEquipment.Name = "ilvEquipment";
+            this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
+            this.ilvEquipment.TabIndex = 6;
+            // 
             // toolStrip4
             // 
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddImages,
-            this.tsbDeleteImage});
+            this.tsbDeleteImage,
+            this.tsbSaveImage});
             this.toolStrip4.Location = new System.Drawing.Point(3, 3);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Size = new System.Drawing.Size(770, 25);
@@ -1210,6 +1163,15 @@
             this.tsbDeleteImage.Size = new System.Drawing.Size(52, 22);
             this.tsbDeleteImage.Text = "删除";
             this.tsbDeleteImage.Click += new System.EventHandler(this.tsbDeleteImage_Click);
+            // 
+            // tsbSaveImage
+            // 
+            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImage.Name = "tsbSaveImage";
+            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImage.Text = "保存";
+            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
             // 
             // panel1
             // 
@@ -1267,15 +1229,34 @@
             // 
             this.ofd.Title = "选择文件";
             // 
-            // ilvEquipment
+            // tsbAddEvents
             // 
-            this.ilvEquipment.DeleteImgKey = null;
-            this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
-            this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
-            this.ilvEquipment.Name = "ilvEquipment";
-            this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
-            this.ilvEquipment.TabIndex = 6;
+            this.tsbAddEvents.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddEvents.Name = "tsbAddEvents";
+            this.tsbAddEvents.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddEvents.Text = "添加";
+            this.tsbAddEvents.Click += new System.EventHandler(this.tsbAddEvents_Click);
+            // 
+            // tsbDeleteEvents
+            // 
+            this.tsbDeleteEvents.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
+            this.tsbDeleteEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteEvents.Name = "tsbDeleteEvents";
+            this.tsbDeleteEvents.Size = new System.Drawing.Size(52, 22);
+            this.tsbDeleteEvents.Text = "删除";
+            this.tsbDeleteEvents.Click += new System.EventHandler(this.tsbDeleteEvents_Click);
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbAddEvents,
+            this.tsbDeleteEvents});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(770, 25);
+            this.toolStrip3.TabIndex = 0;
+            this.toolStrip3.Text = "toolStrip3";
             // 
             // EquipmentDetailForm
             // 
@@ -1316,8 +1297,6 @@
             this.tabPage4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1335,6 +1314,8 @@
             this.tsDetail.ResumeLayout(false);
             this.tsDetail.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1405,13 +1386,7 @@
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton tsbAddImages;
         private System.Windows.Forms.ToolStripButton tsbDeleteImage;
-        private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripButton tsbAddEvents;
-        private System.Windows.Forms.ToolStripButton tsbDeleteEvents;
-        private System.Windows.Forms.ToolStripButton toolStripButton18;
-        private System.Windows.Forms.ToolStripButton toolStripButton19;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton tsbAddVehicle;
         private System.Windows.Forms.ToolStripButton tsbDeleteVehicle;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -1444,5 +1419,9 @@
         private ImageListViewer ilvEquipment;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.Button btnDeleteSetuoVideo;
+        private System.Windows.Forms.ToolStripButton tsbSaveImage;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton tsbAddEvents;
+        private System.Windows.Forms.ToolStripButton tsbDeleteEvents;
     }
 }

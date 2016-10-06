@@ -68,6 +68,7 @@
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.cmsPicture.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tsDetail.SuspendLayout();
@@ -198,7 +199,8 @@
             // 
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddImages,
-            this.tsbDeleteImage});
+            this.tsbDeleteImage,
+            this.tsbSaveImage});
             this.toolStrip4.Location = new System.Drawing.Point(3, 17);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Size = new System.Drawing.Size(764, 25);
@@ -447,6 +449,15 @@
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
             // 
+            // tsbSaveImage
+            // 
+            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImage.Name = "tsbSaveImage";
+            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImage.Text = "保存";
+            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
+            // 
             // SparePartDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -519,5 +530,6 @@
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton tsbAddImages;
         private System.Windows.Forms.ToolStripButton tsbDeleteImage;
+        private System.Windows.Forms.ToolStripButton tsbSaveImage;
     }
 }

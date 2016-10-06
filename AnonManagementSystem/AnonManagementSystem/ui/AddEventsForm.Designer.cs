@@ -96,6 +96,7 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -743,7 +744,8 @@
             // 
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddImg,
-            this.tsbDeleteImg});
+            this.tsbDeleteImg,
+            this.tsbSaveImage});
             this.toolStrip5.Location = new System.Drawing.Point(3, 3);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.Size = new System.Drawing.Size(770, 25);
@@ -800,6 +802,15 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
+            // 
+            // tsbSaveImage
+            // 
+            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImage.Name = "tsbSaveImage";
+            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImage.Text = "保存";
+            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
             // 
             // AddEventsForm
             // 
@@ -915,5 +926,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
+        private System.Windows.Forms.ToolStripButton tsbSaveImage;
     }
 }

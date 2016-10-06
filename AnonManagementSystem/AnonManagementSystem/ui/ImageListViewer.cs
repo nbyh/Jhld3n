@@ -109,26 +109,24 @@ namespace AnonManagementSystem
             }
         }
 
-        private void 图片另存为ToolStripMenuItem_Click(object sender, EventArgs e)
+        public void SaveImages()
         {
             try
             {
-                if (sfdImg.ShowDialog() == DialogResult.OK)
+                if (picBox.Image != null)
                 {
-                    Bitmap bmp = new Bitmap(picBox.Image);
-                    bmp.Save(sfdImg.FileName, ImageFormat.Jpeg);
-                    bmp.Dispose();
+                    if (sfdImg.ShowDialog() == DialogResult.OK)
+                    {
+                        Bitmap bmp = new Bitmap(picBox.Image);
+                        bmp.Save(sfdImg.FileName, ImageFormat.Jpeg);
+                        bmp.Dispose();
+                    }
                 }
             }
             catch (Exception exception)
             {
                 MessageBox.Show($"图片保存失败！{exception.Message}", @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void cmsSaveImg_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            图片另存为ToolStripMenuItem.Enabled = (picBox.Image != null);
         }
     }
 }

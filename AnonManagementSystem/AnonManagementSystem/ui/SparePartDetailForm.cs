@@ -316,5 +316,10 @@ namespace AnonManagementSystem
         {
             e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
+
+        private void tsbSaveImage_Click(object sender, EventArgs e)
+        {
+            ilvEquipment.SaveImages();
+        }
     }
 }

@@ -126,6 +126,8 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
+            this.tsbSaveImageVh = new System.Windows.Forms.ToolStripButton();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -977,7 +979,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddOeImages,
-            this.tsbDeleteOeImages});
+            this.tsbDeleteOeImages,
+            this.tsbSaveImage});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(762, 25);
@@ -1027,7 +1030,8 @@
             // 
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddImages,
-            this.tsbDeleteImages});
+            this.tsbDeleteImages,
+            this.tsbSaveImageVh});
             this.toolStrip5.Location = new System.Drawing.Point(0, 0);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.Size = new System.Drawing.Size(776, 25);
@@ -1104,6 +1108,24 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
+            // 
+            // tsbSaveImage
+            // 
+            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImage.Name = "tsbSaveImage";
+            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImage.Text = "保存";
+            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
+            // 
+            // tsbSaveImageVh
+            // 
+            this.tsbSaveImageVh.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImageVh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImageVh.Name = "tsbSaveImageVh";
+            this.tsbSaveImageVh.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImageVh.Text = "保存";
+            this.tsbSaveImageVh.Click += new System.EventHandler(this.tsbSaveImageVh_Click);
             // 
             // VehicleDetailForm
             // 
@@ -1249,5 +1271,7 @@
         private ImageListViewer ilvOe;
         private ImageListViewer ilvVehicle;
         private System.Windows.Forms.MaskedTextBox masktbSize;
+        private System.Windows.Forms.ToolStripButton tsbSaveImage;
+        private System.Windows.Forms.ToolStripButton tsbSaveImageVh;
     }
 }
