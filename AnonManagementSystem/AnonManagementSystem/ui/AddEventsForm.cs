@@ -69,65 +69,112 @@ namespace AnonManagementSystem
 
         private void AddEventsForm_Shown(object sender, EventArgs e)
         {
-            try
+            Thread initThread = new Thread((ThreadStart) delegate
             {
-                if (!Add)
+                try
                 {
-                    Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
-                    foreach (var equipmentImage in _eventsImgList)
-                    {
-                        using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
-                        {
-                            Image img = Image.FromStream(ms);
-                            imgdic.Add(equipmentImage.Name, img);
-                        }
-                    }
+                    #region 下拉列表内容
+
+                    List<string> eveNameList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+                    List<string> eveNoList =
+                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.No) select s.No).Distinct()
+                             .ToList();
+                    List<string> eveAddressList =
+                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
+                    List<string> eveHunitList =
+                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.HigherUnit) select s.HigherUnit).Distinct()
+                             .ToList();
+                    List<string> eveExtList =
+                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Executor) select s.Executor).Distinct().ToList();
+                    List<string> evePubUnitList =
+                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct()
+                             .ToList();
+                    List<string> evePublisherList =
+                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+
                     _synchContext.Post(a =>
                     {
-                        cmbEventNo.Text = _events.No;
-                        cmbEventName.Text = _events.Name;
-                        cmbAddress.Text = _events.Address;
-                        dtpEventDt1.Value = _events.StartTime;
-                        dtpEventDt2.Value = _events.EndTime;
-                        cmbEventType.Text = _events.EventType;
-                        cmbSpecificType.Text = _events.SpecificType;
-                        tbCode.Text = _events.Code;
-                        cmbHigherUnit.Text = _events.HigherUnit;
-                        cmbExecutor.Text = _events.Executor;
-                        tbNoInEvents.Text = _events.NoInEvents;
-                        cmbPulishUnit.Text = _events.PublishUnit;
-                        dtpPulishDt.Value = _events.PublishDate;
-                        cmbPulisher.Text = _events.Publisher;
-                        tbAccording.Text = _events.According;
-                        tbDesci.Text = _events.PeopleDescri;
-                        tbProcessDescri.Text = _events.ProcessDescri;
-                        tbHandleStep.Text = _events.HandleStep;
-                        tbProblems.Text = _events.Problem;
-                        tbRemark.Text = _events.Remarks;
+                        cmbEventNo.DataSource = eveNoList;
+                        cmbEventName.DataSource = eveNameList;
+                        cmbAddress.DataSource = eveAddressList;
+                        cmbHigherUnit.DataSource = eveHunitList;
+                        cmbExecutor.DataSource = eveExtList;
+                        cmbPulishUnit.DataSource = evePubUnitList;
+                        cmbPulisher.DataSource = evePublisherList;    
 
-                        dgvEvents.DataSource = _eventdataList;
+                        cmbEventNo.SelectedIndex = -1;
+                        cmbEventName.SelectedIndex = -1;
+                        cmbAddress.SelectedIndex = -1;
+                        cmbHigherUnit.SelectedIndex = -1;
+                        cmbExecutor.SelectedIndex = -1;
+                        cmbPulishUnit.SelectedIndex = -1;
+                        cmbPulisher.SelectedIndex = -1;
 
-                        ilvEvents.ImgDictionary = imgdic;
-                        ilvEvents.ShowImages();
+                        tsbRestore.Enabled = !Add;
                     }, null);
-                    CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
+
+                    #endregion 下拉列表内容
+
+                    if (!Add)
+                    {
+                        Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
+                        foreach (var equipmentImage in _eventsImgList)
+                        {
+                            using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                            {
+                                Image img = Image.FromStream(ms);
+                                imgdic.Add(equipmentImage.Name, img);
+                            }
+                        }
+                        _synchContext.Post(a =>
+                        {
+                            cmbEventNo.SelectedItem = _events.No;
+                            cmbEventName.SelectedItem = _events.Name;
+                            cmbAddress.SelectedItem = _events.Address;
+                            dtpEventDt1.Value = _events.StartTime;
+                            dtpEventDt2.Value = _events.EndTime;
+                            cmbEventType.SelectedItem = _events.EventType;
+                            cmbSpecificType.SelectedItem = _events.SpecificType;
+                            tbCode.Text = _events.Code;
+                            cmbHigherUnit.SelectedItem = _events.HigherUnit;
+                            cmbExecutor.SelectedItem = _events.Executor;
+                            tbNoInEvents.Text = _events.NoInEvents;
+                            cmbPulishUnit.SelectedItem = _events.PublishUnit;
+                            dtpPulishDt.Value = _events.PublishDate;
+                            cmbPulisher.SelectedItem = _events.Publisher;
+                            tbAccording.Text = _events.According;
+                            tbDesci.Text = _events.PeopleDescri;
+                            tbProcessDescri.Text = _events.ProcessDescri;
+                            tbHandleStep.Text = _events.HandleStep;
+                            tbProblems.Text = _events.Problem;
+                            tbRemark.Text = _events.Remarks;
+
+                            dgvEvents.DataSource = _eventdataList;
+
+                            ilvEvents.ImgDictionary = imgdic;
+                            ilvEvents.ShowImages();
+                        }, null);
+                        CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
+                    }
                 }
-            }
-            catch (Exception exception)
-            {
-                if (Add)
+                catch (Exception exception)
                 {
-                    CommonLogHelper.GetInstance("LogError").Error(@"打开添加事件数据失败", exception);
-                    MessageBox.Show(this, @"打开添加事件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    if (Add)
+                    {
+                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加事件数据失败", exception);
+                        MessageBox.Show(this, @"打开添加事件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        CommonLogHelper.GetInstance("LogError").Error($"加载事件数据{_id}失败", exception);
+                        MessageBox.Show(this, $"加载事件数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    CommonLogHelper.GetInstance("LogError").Error($"加载事件数据{_id}失败", exception);
-                    MessageBox.Show(this, $"加载事件数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            }
+            }) {IsBackground = true};
+            initThread.Start();
         }
 
         private void cmbEventNo_KeyPress(object sender, KeyPressEventArgs e)
@@ -166,7 +213,7 @@ namespace AnonManagementSystem
 
         private void cmbEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string s = cmbEventType.SelectedText;
+            string s = cmbEventType.SelectedItem.ToString();
             switch (s)
             {
                 case "调整类":
@@ -197,6 +244,7 @@ namespace AnonManagementSystem
                     };
                     break;
             }
+            cmbSpecificType.SelectedIndex = -1;
         }
 
         private void Combox_DrawItem(object sender, DrawItemEventArgs e)
@@ -336,7 +384,7 @@ namespace AnonManagementSystem
                 }
                 else
                 {
-                    var eventfirst = _equipDb.Events.First(eq => eq.Equipment == _id);
+                    var eventfirst = _equipDb.Events.First(eq => eq.No == _id);
                     _eventdataList.Clear();
 
                     eventfirst.No = cmbEventNo.Text;

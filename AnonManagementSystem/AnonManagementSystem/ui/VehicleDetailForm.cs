@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using LinqToDB.DataProvider.SQLite;
 
 namespace AnonManagementSystem
 {
@@ -25,6 +26,8 @@ namespace AnonManagementSystem
         private List<OilEngineImage> _oilImagesList = new List<OilEngineImage>();
 
         private List<VehiclesImage> _vehiclesImagesList = new List<VehiclesImage>();
+
+        private EquipmentManagementDB _equipDb = new EquipmentManagementDB(new SQLiteDataProvider(), DbPublicFunction.ReturnDbConnectionString(@"\ZBDataBase\EquipmentManagement.db"));
 
         public VehicleDetailForm()
         {
@@ -256,6 +259,86 @@ namespace AnonManagementSystem
            {
                try
                {
+                   #region 下拉列表内容
+
+                   List<string> eveNameList =
+                       (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+                   List<string> eveNoList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.No) select s.No).Distinct()
+                            .ToList();
+                   List<string> eveAddressList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
+                   List<string> eveHunitList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.HigherUnit) select s.HigherUnit).Distinct()
+                            .ToList();
+                   List<string> eveExtList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Executor) select s.Executor).Distinct().ToList();
+                   List<string> evePubUnitList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct()
+                            .ToList();
+                   List<string> evePublisherList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+                   List<string> eveNameList =
+                       (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+                   List<string> eveNoList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.No) select s.No).Distinct()
+                            .ToList();
+                   List<string> eveAddressList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
+                   List<string> eveHunitList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.HigherUnit) select s.HigherUnit).Distinct()
+                            .ToList();
+                   List<string> eveExtList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Executor) select s.Executor).Distinct().ToList();
+                   List<string> evePubUnitList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct()
+                            .ToList();
+                   List<string> evePublisherList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+                   List<string> evePublisherList =
+                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+
+                   _synchContext.Post(a =>
+                   {
+                       cmbName.Text =                    ;
+                       cmbVehiclesModel.Text =           ;
+                       cmbAutoModel.Text =               ;
+                       cmbTechCondition.Text =           ;
+                       cmbFactory.Text =                 ;
+                       cmbFuelType.Text =                ;
+                       cmbDriveModel.Text =              ;
+                       cmbCharger.Text =                 ;
+                       cmbSpot.Text =                    ;
+                                                         
+                       cmbOeModel.Text =                 ;
+                       cmbTechCondition.Text =           ;
+                       cmbOeFactory.Text =               ;
+                       cmbMotorModel.Text =              ;
+                       cmbMotorFuelType.Text =           ;
+                       cmbMotorFactory.Text =            ;
+
+                       cmbName.SelectedIndex = -1;
+                       cmbVehiclesModel.SelectedIndex = -1;
+                       cmbAutoModel.SelectedIndex = -1;
+                       cmbTechCondition.SelectedIndex = -1;
+                       cmbFactory.SelectedIndex = -1;
+                       cmbFuelType.SelectedIndex = -1;
+                       cmbDriveModel.SelectedIndex = -1;
+                       cmbCharger.SelectedIndex = -1;
+                       cmbSpot.SelectedIndex = -1;
+
+                       cmbOeModel.SelectedIndex = -1;
+                       cmbTechCondition.SelectedIndex = -1;
+                       cmbOeFactory.SelectedIndex = -1;
+                       cmbMotorModel.SelectedIndex = -1;
+                       cmbMotorFuelType.SelectedIndex = -1;
+                       cmbMotorFactory.SelectedIndex = -1;
+
+                       tsbRestore.Enabled = !Add;
+                   }, null);
+
+                   #endregion 下拉列表内容
+
                    if (!Add)
                    {
                        Dictionary<string, Image> vhimgdic = new Dictionary<string, Image>();

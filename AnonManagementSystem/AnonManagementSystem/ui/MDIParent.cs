@@ -58,9 +58,12 @@ namespace AnonManagementSystem
             else
             {
                 LoginForm loginForm = new LoginForm();
+                loginForm.LoginSucess += LoginOnSucess;
                 loginForm.ShowDialog();
-                _islogin = loginForm.DialogResult == DialogResult.OK;
-                EquipMenu_Click(sender, e);
+                if (loginForm.DialogResult == DialogResult.OK)
+                {
+                    EquipMenu_Click(sender, e);
+                }
             }
         }
 
@@ -129,9 +132,12 @@ namespace AnonManagementSystem
             else
             {
                 LoginForm loginForm = new LoginForm();
+                loginForm.LoginSucess += LoginOnSucess;
                 loginForm.ShowDialog();
-                _islogin = loginForm.DialogResult == DialogResult.OK;
-                SparePartsMenu_Click(sender, e);
+                if (loginForm.DialogResult == DialogResult.OK)
+                {
+                    SparePartsMenu_Click(sender, e);
+                }
             }
         }
 

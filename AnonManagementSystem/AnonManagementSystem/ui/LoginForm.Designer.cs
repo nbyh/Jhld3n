@@ -72,6 +72,7 @@
             // 
             // btnEnter
             // 
+            this.btnEnter.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnEnter.Location = new System.Drawing.Point(87, 86);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(75, 23);
@@ -82,7 +83,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.No;
             this.btnCancel.Location = new System.Drawing.Point(168, 86);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);

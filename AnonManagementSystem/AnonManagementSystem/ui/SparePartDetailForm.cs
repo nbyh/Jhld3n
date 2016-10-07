@@ -124,20 +124,17 @@ namespace AnonManagementSystem
                     List<string> spManagerList =
                         (from s in sp where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct().ToList();
                     cmbStatus.DataSource = spManagerList;
+                    cmbName.SelectedIndex = -1;
+                    cmbModel.SelectedIndex = -1;
+                    cmbStatus.SelectedIndex = -1;
+                    cmbFactory.SelectedIndex = -1;
+                    ssbStoreSpot.Clear();
+                    tsbRestore.Enabled = false;
 
                     #endregion 下拉列表内容
 
-                    if (Add)
-                    {
-                        cmbName.SelectedIndex = -1;
-                        cmbModel.SelectedIndex = -1;
-                        cmbStatus.SelectedIndex = -1;
-                        cmbFactory.SelectedIndex = -1;
-                        ssbStoreSpot.Clear();
-                        tsbRestore.Enabled = false;
-                    }
-                    else
-                    {
+                    if (!Add)
+                    { 
                         LoadSparePartData(sp);
                     }
                     CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
@@ -267,7 +264,7 @@ namespace AnonManagementSystem
                     {
                         foreach (var sparePartImage in _spImgList)
                         {
-                            _partsImageDb.Insert(sparePartImage);
+                            _partsImageDb.InsertOrReplace(sparePartImage);
                         }
                     }
                 }
@@ -308,7 +305,7 @@ namespace AnonManagementSystem
                                     select img;
                         if (!spimg.Any())
                         {
-                            _partsImageDb.Insert(sparePartImage);
+                            _partsImageDb.InsertOrReplace(sparePartImage);
                         }
                     }
                 }

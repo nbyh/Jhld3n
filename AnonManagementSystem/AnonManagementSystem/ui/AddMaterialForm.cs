@@ -58,19 +58,18 @@ namespace AnonManagementSystem
 
         private void AddMaterialForm_Shown(object sender, EventArgs e)
         {
-            _synchContext.Post(a =>
+            try
             {
-                try
+                var qmaterial = _equipDb.Materials.Select(eq => eq);
+                List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
+                _synchContext.Post(a =>
                 {
-                    var qmaterial = from eq in _equipDb.Materials
-                                    select eq;
-                    List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
                     cmbShape.DataSource = sharpList;
                     if (!Add)
                     {
                         tbDocNo.Text = _material.No.ToString();
                         tbDocName.Text = _material.Name;
-                        cmbShape.Text = _material.PaperSize;
+                        cmbShape.SelectedText = _material.PaperSize;
                         nUdPages.Value = decimal.Parse(_material.Pagination);
                         //tbEdition.Text = _material.Edition;
                         nUdCopybook.Value = decimal.Parse(_material.Volume);
@@ -78,25 +77,25 @@ namespace AnonManagementSystem
                         tbDocumentLink.Text = _material.DocumentLink;
                         tbStoreSpot.Text = _material.StoreSpot;
                         tbBrief.Text = _material.Content;
-                        CommonLogHelper.GetInstance("LogInfo").Info($"加载随机材料{_id}成功");
                     }
-                }
-                catch (Exception exception)
+                }, null);
+                CommonLogHelper.GetInstance("LogInfo").Info($"加载随机材料{_id}成功");
+            }
+            catch (Exception exception)
+            {
+                if (Add)
                 {
-                    if (Add)
-                    {
-                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加随机材料失败", exception);
-                        MessageBox.Show(this, @"打开添加随机材料失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        CommonLogHelper.GetInstance("LogError").Error($"加载随机材料{_id}失败", exception);
-                        MessageBox.Show(this, $"加载随机材料{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
+                    CommonLogHelper.GetInstance("LogError").Error(@"打开添加随机材料失败", exception);
+                    MessageBox.Show(this, @"打开添加随机材料失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
                 }
-            }, null);
+                else
+                {
+                    CommonLogHelper.GetInstance("LogError").Error($"加载随机材料{_id}失败", exception);
+                    MessageBox.Show(this, $"加载随机材料{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnBrowser_Click(object sender, EventArgs e)

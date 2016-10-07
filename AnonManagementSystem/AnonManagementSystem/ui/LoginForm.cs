@@ -50,7 +50,6 @@ namespace AnonManagementSystem
             //    Enableedit = loginuser.Edit
             //};
             //form.ChangeCurrentuser += ShowForm;
-            //btnEnter.DialogResult = DialogResult.OK;
             LoginSucess?.Invoke(loginuser.Edit);
             CommonLogHelper.GetInstance("LogInfo").Info($"用户{loginuser.User}登陆成功");
             this.Close();

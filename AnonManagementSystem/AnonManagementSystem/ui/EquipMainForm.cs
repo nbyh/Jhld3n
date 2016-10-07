@@ -129,16 +129,12 @@ namespace AnonManagementSystem
                             MessageBox.Show(this, @"文件被占用无法删除！" + ex.Message, @"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    var eqlist = (from eq in _equipDb.CombatEquipments
-                                  select eq).ToList();
-                    var vehicles = (from vh in _equipDb.CombatVehicles
-                                    select vh).ToList();
+                    var eqlist = (_equipDb.CombatEquipments.Select(eq => eq)).ToList();
+                    var vehicles = (_equipDb.CombatVehicles.Select(vh => vh)).ToList();
 
-                    var oe = (from o in _equipDb.OilEngines
-                              select o).ToList();
+                    var oe = (_equipDb.OilEngines.Select(o => o)).ToList();
 
-                    var events = (from ev in _equipDb.Events
-                                  select ev).ToList();
+                    var events = (_equipDb.Events.Select(ev => ev)).ToList();
 
                     EquipAllExcelDataStruct eads = new EquipAllExcelDataStruct()
                     {
@@ -184,28 +180,18 @@ namespace AnonManagementSystem
                             }
                         }
                         string excelid = dgvEquip.Rows[r.Value].Cells["SerialNo"].Value.ToString();
-                        var firsteq = (from eq in _equipDb.CombatEquipments
-                                       where eq.SerialNo == excelid
-                                       select eq).First();
-                        var vehicles = (from vh in _equipDb.CombatVehicles
-                                        where vh.Equipment == excelid
-                                        select vh).ToList();
+                        var firsteq = (_equipDb.CombatEquipments.Where(eq => eq.SerialNo == excelid)).First();
+                        var vehicles = (_equipDb.CombatVehicles.Where(vh => vh.Equipment == excelid)).ToList();
                         var comboevhid = vehicles.FirstOrDefault(a => a.CombineOe);
 
                         OilEngine oe = null;
                         if (comboevhid != null)
                         {
-                            oe = (from o in _equipDb.OilEngines
-                                  where o.Vehicle == comboevhid.SerialNo
-                                  select o).FirstOrDefault();
+                            oe = (_equipDb.OilEngines.Where(o => o.Vehicle == comboevhid.SerialNo)).FirstOrDefault();
                         }
 
-                        var events = (from ev in _equipDb.Events
-                                      where ev.Equipment == excelid
-                                      select ev).ToList();
-                        var material = (from mt in _equipDb.Materials
-                                        where mt.Equipment == excelid
-                                        select mt).ToList();
+                        var events = (_equipDb.Events.Where(ev => ev.Equipment == excelid)).ToList();
+                        var material = (_equipDb.Materials.Where(mt => mt.Equipment == excelid)).ToList();
                         //var eventsd = new Dictionary<string, List<EventData>>();
                         //foreach (var ee in events)
                         //{
@@ -244,8 +230,7 @@ namespace AnonManagementSystem
 
         public void LoadData()
         {
-            _equip = from eq in _equipDb.CombatEquipments
-                     select eq;
+            _equip = _equipDb.CombatEquipments.Select(eq => eq);
             FillSelectionData();
 
             _pageSize = 20;
@@ -426,8 +411,7 @@ namespace AnonManagementSystem
             {
                 dgvEquip.DataSource = null;
                 dgvEquip.Rows.Clear();
-                var appointeq = from equipment in _equip
-                                select equipment;
+                var appointeq = _equip.Select(equipment => equipment);
                 if (!string.IsNullOrEmpty(cmbName.Text))
                 {
                     appointeq = appointeq.Where(a => a.Name == cmbName.Text);
@@ -602,21 +586,30 @@ namespace AnonManagementSystem
 
         private void FillSelectionData()
         {
-            List<string> equipNameList = (from s in _equip where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-            List<string> equipSubdepartList = (from s in _equip where !string.IsNullOrEmpty(s.SubDepartment) select s.SubDepartment).Distinct().ToList();
-            List<string> equipMajcatList = (from s in _equip where !string.IsNullOrEmpty(s.MajorCategory) select s.MajorCategory).Distinct().ToList();
-            List<string> equipModelList = (from s in _equip where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
-            List<string> equipTechcanList = (from s in _equip where !string.IsNullOrEmpty(s.Technician) select s.Technician).Distinct().ToList();
-            List<string> equipManagerList = (from s in _equip where !string.IsNullOrEmpty(s.Manager) select s.Manager).Distinct().ToList();
-            List<string> equipTechconList = (from s in _equip where !string.IsNullOrEmpty(s.TechCondition) select s.TechCondition).Distinct().ToList();
-            List<string> equipUseconList = (from s in _equip where !string.IsNullOrEmpty(s.UseCondition) select s.UseCondition).Distinct().ToList();
-            List<string> equipFactList = (from s in _equip where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            List<string> equipNameList = (_equip.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name)).Distinct().ToList();
+            List<string> equipSubdepartList = (_equip.Where(s => !string.IsNullOrEmpty(s.SubDepartment))
+                .Select(s => s.SubDepartment)).Distinct().ToList();
+            List<string> equipMajcatList = (_equip.Where(s => !string.IsNullOrEmpty(s.MajorCategory))
+                .Select(s => s.MajorCategory)).Distinct().ToList();
+            List<string> equipModelList = (_equip.Where(s => !string.IsNullOrEmpty(s.Model)).Select(s => s.Model)).Distinct().ToList();
+            List<string> equipTechcanList = (_equip.Where(s => !string.IsNullOrEmpty(s.Technician))
+                .Select(s => s.Technician)).Distinct().ToList();
+            List<string> equipManagerList = (_equip.Where(s => !string.IsNullOrEmpty(s.Manager)).Select(s => s.Manager)).Distinct().ToList();
+            List<string> equipTechconList = (_equip.Where(s => !string.IsNullOrEmpty(s.TechCondition))
+                .Select(s => s.TechCondition)).Distinct().ToList();
+            List<string> equipUseconList = (_equip.Where(s => !string.IsNullOrEmpty(s.UseCondition))
+                .Select(s => s.UseCondition)).Distinct().ToList();
+            List<string> equipFactList = (_equip.Where(s => !string.IsNullOrEmpty(s.Factory)).Select(s => s.Factory)).Distinct().ToList();
 
-            List<string> eventNameList = (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-            List<string> eventSpecificList = (from s in _equipDb.Events where !string.IsNullOrEmpty(s.SpecificType) select s.SpecificType).Distinct().ToList();
-            List<string> eventAddressList = (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
-            List<string> eventPublishUnitList = (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct().ToList();
-            List<string> eventPublisherList = (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+            List<string> eventNameList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name)).Distinct().ToList();
+            List<string> eventSpecificList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.SpecificType))
+                .Select(s => s.SpecificType)).Distinct().ToList();
+            List<string> eventAddressList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Address))
+                .Select(s => s.Address)).Distinct().ToList();
+            List<string> eventPublishUnitList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.PublishUnit))
+                .Select(s => s.PublishUnit)).Distinct().ToList();
+            List<string> eventPublisherList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Publisher))
+                .Select(s => s.Publisher)).Distinct().ToList();
 
             _synchContext.Post(a =>
             {
