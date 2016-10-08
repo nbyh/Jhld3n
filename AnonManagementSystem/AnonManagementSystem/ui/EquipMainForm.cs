@@ -237,16 +237,7 @@ namespace AnonManagementSystem
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, _equip);
         }
-
-        private void AddOrderNum()
-        {
-            for (int i = 0; i < dgvEquip.RowCount; i++)
-            {
-                dgvEquip[0, i].Value = i + 1;
-                dgvEquip.Rows[i].Cells["MoreInfo"].Value = "详细信息";
-            }
-        }
-
+        
         private void btnFront_Click(object sender, EventArgs e)
         {
             _curPage = 1;
@@ -390,7 +381,6 @@ namespace AnonManagementSystem
                     string eeid = appointee.First().Equipment;
                     var appointeq = _equipDb.CombatEquipments.Where(equipment => equipment.SerialNo == eeid);
                     dgvEquip.DataSource = appointeq.ToList();
-                    AddOrderNum();
                 }
                 else
                 {
@@ -459,7 +449,6 @@ namespace AnonManagementSystem
                 if (appointeq.Any())
                 {
                     dgvEquip.DataSource = appointeq.ToList();
-                    AddOrderNum();
                 }
                 else
                 {
@@ -531,7 +520,6 @@ namespace AnonManagementSystem
             {
                 lbPageInfo.Text = $"总共{all}条记录，当前第{curpage}页，每页{pagesize}条，共{_lastPage}页";
                 dgvEquip.DataSource = equippage;
-                AddOrderNum();
             }, null);
         }
 
@@ -645,6 +633,15 @@ namespace AnonManagementSystem
                 cmbPublishUnit.SelectedIndex = -1;
                 cmbPublisher.SelectedIndex = -1;
             }, null);
+        }
+
+        private void dgvEquip_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            for (int i = 0; i < dgvEquip.RowCount; i++)
+            {
+                dgvEquip[0, i].Value = i + 1;
+                dgvEquip.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+            }
         }
 
         private IList<CombatEquipment> QueryByPage(int pageSize, int curPage, IEnumerable<CombatEquipment> dbRaw)

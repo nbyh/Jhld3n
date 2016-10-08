@@ -65,6 +65,7 @@ namespace AnonManagementSystem
         private void AddEventsForm_Load(object sender, EventArgs e)
         {
             cmbEventNo.Enabled = Add;
+            tsbAddEventsData.Visible = !Add;
         }
 
         private void AddEventsForm_Shown(object sender, EventArgs e)
@@ -254,13 +255,6 @@ namespace AnonManagementSystem
             e.Handled = MainPublicFunction.JudgeNumCharKeys(e.KeyChar);
         }
 
-        private void tsbAddEventsData_Click(object sender, EventArgs e)
-        {
-            int x = dgvEvents.RowCount;
-            dgvEvents.Rows.Add(1);
-            dgvEvents[0, x].Value = x + 1;
-        }
-
         private void tsbAddImg_Click(object sender, EventArgs e)
         {
             if (ofdImage.ShowDialog() == DialogResult.OK)
@@ -331,7 +325,7 @@ namespace AnonManagementSystem
                 _eventdataList.Clear();
                 for (int i = 0; i < dgvEvents.RowCount; i++)
                 {
-                    if (dgvEvents[2, i].Value != null)
+                    if (dgvEvents[2, i].Value != null && dgvEvents[2, i].Value.ToString() != string.Empty)
                     {
                         EventData ed = new EventData()
                         {
@@ -414,6 +408,22 @@ namespace AnonManagementSystem
         private void tsbSaveImage_Click(object sender, EventArgs e)
         {
             ilvEvents.SaveImages();
+        }
+
+        private void dgvEvents_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            for (int i = 0; i < dgvEvents.RowCount; i++)
+            {
+                dgvEvents[0, i].Value = i + 1;
+            }
+        }
+
+        private void tsbAddEventsData_Click(object sender, EventArgs e)
+        {
+            dgvEvents.DataSource = null;
+            dgvEvents.Rows.Add(1);
+            int rc = dgvEvents.RowCount;
+            dgvEvents[0, rc - 1].Value = rc - 1;
         }
     }
 }

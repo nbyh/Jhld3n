@@ -79,7 +79,6 @@
             this.tbProcessDescri = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.tsbAddEventsData = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteEventsData = new System.Windows.Forms.ToolStripButton();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
@@ -92,11 +91,12 @@
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImg = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImg = new System.Windows.Forms.ToolStripButton();
+            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.tsDetail = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddEventsData = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -620,15 +620,6 @@
             this.toolStrip2.TabIndex = 5;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // tsbAddEventsData
-            // 
-            this.tsbAddEventsData.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
-            this.tsbAddEventsData.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddEventsData.Name = "tsbAddEventsData";
-            this.tsbAddEventsData.Size = new System.Drawing.Size(52, 22);
-            this.tsbAddEventsData.Text = "添加";
-            this.tsbAddEventsData.Click += new System.EventHandler(this.tsbAddEventsData_Click);
-            // 
             // tsbDeleteEventsData
             // 
             this.tsbDeleteEventsData.Image = global::AnonManagementSystem.Properties.Resources.file_delete1;
@@ -654,6 +645,7 @@
             this.dgvEvents.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEvents.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEvents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -687,6 +679,7 @@
             this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEvents.Size = new System.Drawing.Size(754, 454);
             this.dgvEvents.TabIndex = 1;
+            this.dgvEvents.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvEvents_RowPostPaint);
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -770,6 +763,15 @@
             this.tsbDeleteImg.Text = "删除";
             this.tsbDeleteImg.Click += new System.EventHandler(this.tsbDeleteImg_Click);
             // 
+            // tsbSaveImage
+            // 
+            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImage.Name = "tsbSaveImage";
+            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImage.Text = "保存";
+            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
+            // 
             // tsDetail
             // 
             this.tsDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -803,14 +805,14 @@
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
             // 
-            // tsbSaveImage
+            // tsbAddEventsData
             // 
-            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSaveImage.Name = "tsbSaveImage";
-            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
-            this.tsbSaveImage.Text = "保存";
-            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
+            this.tsbAddEventsData.Image = global::AnonManagementSystem.Properties.Resources.file_add1;
+            this.tsbAddEventsData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddEventsData.Name = "tsbAddEventsData";
+            this.tsbAddEventsData.Size = new System.Drawing.Size(52, 22);
+            this.tsbAddEventsData.Text = "添加";
+            this.tsbAddEventsData.Click += new System.EventHandler(this.tsbAddEventsData_Click);
             // 
             // AddEventsForm
             // 
@@ -905,7 +907,6 @@
         private System.Windows.Forms.GroupBox groupBox22;
         private System.Windows.Forms.TextBox tbAccording;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.ToolStripButton tsbAddEventsData;
         private System.Windows.Forms.ToolStripButton tsbDeleteEventsData;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tbRemark;
@@ -927,5 +928,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
         private System.Windows.Forms.ToolStripButton tsbSaveImage;
+        private System.Windows.Forms.ToolStripButton tsbAddEventsData;
     }
 }

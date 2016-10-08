@@ -190,15 +190,6 @@ namespace AnonManagementSystem
             DataRefresh(_pageSize, _curPage, _sparePart);
         }
 
-        private void AddOrderNum()
-        {
-            for (int i = 0; i < dgvSparePart.RowCount; i++)
-            {
-                dgvSparePart[0, i].Value = i + 1;
-                dgvSparePart.Rows[i].Cells["MoreInfo"].Value = "详细信息";
-            }
-        }
-
         private void btnFront_Click(object sender, EventArgs e)
         {
             _curPage = 1;
@@ -344,7 +335,6 @@ namespace AnonManagementSystem
                 if (appointsp.Any())
                 {
                     dgvSparePart.DataSource = appointsp.ToList();
-                    AddOrderNum();
                 }
                 else
                 {
@@ -407,7 +397,6 @@ namespace AnonManagementSystem
             {
                 lbPageInfo.Text = $"总共{all}条记录，当前第{curpage}页，每页{pagesize}条，共{_lastPage}页";
                 dgvSparePart.DataSource = equippage.ToList();
-                AddOrderNum();
             }, null);
         }
 
@@ -465,6 +454,15 @@ namespace AnonManagementSystem
         private void SparePartsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetToolStripVisible?.Invoke();
+        }
+
+        private void dgvSparePart_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            for (int i = 0; i < dgvSparePart.RowCount; i++)
+            {
+                dgvSparePart[0, i].Value = i + 1;
+                dgvSparePart.Rows[i].Cells["MoreInfo"].Value = "详细信息";
+            }
         }
 
         private void SparePartsForm_Load(object sender, EventArgs e)

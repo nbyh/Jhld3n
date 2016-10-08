@@ -868,6 +868,7 @@
             this.dgvEquip.Size = new System.Drawing.Size(776, 387);
             this.dgvEquip.TabIndex = 0;
             this.dgvEquip.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEquip_CellContentClick);
+            this.dgvEquip.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvEquip_RowPostPaint);
             // 
             // Column1
             // 
