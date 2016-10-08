@@ -61,7 +61,8 @@ namespace AnonManagementSystem
             try
             {
                 var qmaterial = _equipDb.Materials.Select(eq => eq);
-                List<string> sharpList = (from s in qmaterial where !string.IsNullOrEmpty(s.PaperSize) select s.PaperSize).Distinct().ToList();
+                List<string> sharpList = (qmaterial.Where(s => !string.IsNullOrEmpty(s.PaperSize))
+                    .Select(s => s.PaperSize)).Distinct().ToList();
                 _synchContext.Post(a =>
                 {
                     cmbShape.DataSource = sharpList;

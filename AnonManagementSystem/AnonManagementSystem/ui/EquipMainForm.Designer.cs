@@ -190,15 +190,17 @@
             // 
             // dtpTime2
             // 
+            this.dtpTime2.CustomFormat = "yyyy年MM月dd日";
+            this.dtpTime2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTime2.Location = new System.Drawing.Point(521, 69);
             this.dtpTime2.Name = "dtpTime2";
-            this.dtpTime2.Size = new System.Drawing.Size(115, 21);
+            this.dtpTime2.Size = new System.Drawing.Size(122, 21);
             this.dtpTime2.TabIndex = 12;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(351, 46);
+            this.label15.Location = new System.Drawing.Point(358, 46);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 12);
             this.label15.TabIndex = 28;
@@ -209,7 +211,7 @@
             this.cmbManager.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbManager.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbManager.FormattingEnabled = true;
-            this.cmbManager.Location = new System.Drawing.Point(549, 13);
+            this.cmbManager.Location = new System.Drawing.Point(556, 13);
             this.cmbManager.Name = "cmbManager";
             this.cmbManager.Size = new System.Drawing.Size(87, 22);
             this.cmbManager.TabIndex = 3;
@@ -218,7 +220,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(502, 46);
+            this.label16.Location = new System.Drawing.Point(509, 46);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(41, 12);
             this.label16.TabIndex = 26;
@@ -231,7 +233,7 @@
             this.cmbUseCondition.FormattingEnabled = true;
             this.cmbUseCondition.Location = new System.Drawing.Point(269, 41);
             this.cmbUseCondition.Name = "cmbUseCondition";
-            this.cmbUseCondition.Size = new System.Drawing.Size(76, 22);
+            this.cmbUseCondition.Size = new System.Drawing.Size(83, 22);
             this.cmbUseCondition.TabIndex = 5;
             this.cmbUseCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -251,7 +253,7 @@
             this.cmbMajorCategory.FormattingEnabled = true;
             this.cmbMajorCategory.Location = new System.Drawing.Point(269, 13);
             this.cmbMajorCategory.Name = "cmbMajorCategory";
-            this.cmbMajorCategory.Size = new System.Drawing.Size(76, 22);
+            this.cmbMajorCategory.Size = new System.Drawing.Size(83, 22);
             this.cmbMajorCategory.TabIndex = 1;
             this.cmbMajorCategory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -285,7 +287,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(502, 18);
+            this.label7.Location = new System.Drawing.Point(509, 18);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 16;
@@ -302,7 +304,7 @@
             "<",
             "≥",
             "≤"});
-            this.cmbTechnician.Location = new System.Drawing.Point(549, 41);
+            this.cmbTechnician.Location = new System.Drawing.Point(556, 41);
             this.cmbTechnician.Name = "cmbTechnician";
             this.cmbTechnician.Size = new System.Drawing.Size(87, 22);
             this.cmbTechnician.TabIndex = 7;
@@ -313,9 +315,9 @@
             this.cmbTechCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbTechCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTechCondition.FormattingEnabled = true;
-            this.cmbTechCondition.Location = new System.Drawing.Point(410, 41);
+            this.cmbTechCondition.Location = new System.Drawing.Point(417, 41);
             this.cmbTechCondition.Name = "cmbTechCondition";
-            this.cmbTechCondition.Size = new System.Drawing.Size(74, 22);
+            this.cmbTechCondition.Size = new System.Drawing.Size(86, 22);
             this.cmbTechCondition.TabIndex = 6;
             this.cmbTechCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -351,7 +353,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(375, 18);
+            this.label4.Location = new System.Drawing.Point(382, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 16;
@@ -386,9 +388,11 @@
             // 
             // dtpTime1
             // 
+            this.dtpTime1.CustomFormat = "yyyy年MM月dd日";
+            this.dtpTime1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTime1.Location = new System.Drawing.Point(366, 69);
             this.dtpTime1.Name = "dtpTime1";
-            this.dtpTime1.Size = new System.Drawing.Size(115, 21);
+            this.dtpTime1.Size = new System.Drawing.Size(122, 21);
             this.dtpTime1.TabIndex = 10;
             // 
             // cmbModel
@@ -396,9 +400,9 @@
             this.cmbModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(410, 13);
+            this.cmbModel.Location = new System.Drawing.Point(417, 13);
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(74, 22);
+            this.cmbModel.Size = new System.Drawing.Size(86, 22);
             this.cmbModel.TabIndex = 2;
             this.cmbModel.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 

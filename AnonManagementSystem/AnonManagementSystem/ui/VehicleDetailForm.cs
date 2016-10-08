@@ -261,61 +261,40 @@ namespace AnonManagementSystem
                {
                    #region 下拉列表内容
 
-                   List<string> eveNameList =
-                       (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-                   List<string> eveNoList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.No) select s.No).Distinct()
-                            .ToList();
-                   List<string> eveAddressList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
-                   List<string> eveHunitList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.HigherUnit) select s.HigherUnit).Distinct()
-                            .ToList();
-                   List<string> eveExtList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Executor) select s.Executor).Distinct().ToList();
-                   List<string> evePubUnitList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct()
-                            .ToList();
-                   List<string> evePublisherList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
-                   List<string> eveNameList =
-                       (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-                   List<string> eveNoList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.No) select s.No).Distinct()
-                            .ToList();
-                   List<string> eveAddressList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
-                   List<string> eveHunitList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.HigherUnit) select s.HigherUnit).Distinct()
-                            .ToList();
-                   List<string> eveExtList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Executor) select s.Executor).Distinct().ToList();
-                   List<string> evePubUnitList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct()
-                            .ToList();
-                   List<string> evePublisherList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
-                   List<string> evePublisherList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+                   List<string> vhNameList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name)).Distinct().ToList();
+                   List<string> vhModelList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.Model)).Select(s => s.Model)).Distinct().ToList();
+                   List<string> vhMotorModelList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.MotorModel)).Select(s => s.MotorModel)).Distinct().ToList();
+                   List<string> vhTechConList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.TechCondition)).Select(s => s.TechCondition)).Distinct().ToList();
+                   List<string> vhFactoryList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.Factory)).Select(s => s.Factory)).Distinct().ToList();
+                   List<string> vhFuelTypeList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.FuelType)).Select(s => s.FuelType)).Distinct().ToList();
+                   List<string> vhDrivingModelList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.DrivingModel)).Select(s => s.DrivingModel)).Distinct().ToList();
+                   List<string> vhChargersList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.VehicleChargers)).Select(s => s.VehicleChargers)).Distinct().ToList();
+                   List<string> vhSpotNoList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.VehicleSpotNo)).Select(s => s.VehicleSpotNo)).Distinct().ToList();
+                   List<string> oeModelList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.OeModel)).Select(s => s.OeModel)).Distinct().ToList();
+                   List<string> oeTechConList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.TechCondition)).Select(s => s.TechCondition)).Distinct().ToList();
+                   List<string> oeOeFactoryList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.OeFactory)).Select(s => s.OeFactory)).Distinct().ToList();
+                   List<string> oeMotorModelList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorModel)).Select(s => s.MotorModel)).Distinct().ToList();
+                   List<string> oeMotorFuelList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFuel)).Select(s => s.MotorFuel)).Distinct().ToList();
+                   List<string> oeMotorFactoryList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFactory)).Select(s => s.MotorFactory)).Distinct().ToList();
 
                    _synchContext.Post(a =>
                    {
-                       cmbName.Text =                    ;
-                       cmbVehiclesModel.Text =           ;
-                       cmbAutoModel.Text =               ;
-                       cmbTechCondition.Text =           ;
-                       cmbFactory.Text =                 ;
-                       cmbFuelType.Text =                ;
-                       cmbDriveModel.Text =              ;
-                       cmbCharger.Text =                 ;
-                       cmbSpot.Text =                    ;
+                       cmbName.DataSource = vhNameList;
+                       cmbVehiclesModel.DataSource = vhModelList;
+                       cmbAutoModel.DataSource = vhMotorModelList;
+                       cmbTechCondition.DataSource = vhTechConList;
+                       cmbFactory.DataSource = vhFactoryList;
+                       cmbFuelType.DataSource = vhFuelTypeList;
+                       cmbDriveModel.DataSource = vhDrivingModelList;
+                       cmbCharger.DataSource = vhChargersList;
+                       cmbSpot.DataSource = vhSpotNoList;
                                                          
-                       cmbOeModel.Text =                 ;
-                       cmbTechCondition.Text =           ;
-                       cmbOeFactory.Text =               ;
-                       cmbMotorModel.Text =              ;
-                       cmbMotorFuelType.Text =           ;
-                       cmbMotorFactory.Text =            ;
+                       cmbOeModel.DataSource = oeModelList;
+                       cmbTechCondition.DataSource = oeTechConList;
+                       cmbOeFactory.DataSource = oeOeFactoryList;
+                       cmbMotorModel.DataSource = oeMotorModelList;
+                       cmbMotorFuelType.DataSource = oeMotorFuelList;
+                       cmbMotorFactory.DataSource = oeMotorFactoryList;
 
                        cmbName.SelectedIndex = -1;
                        cmbVehiclesModel.SelectedIndex = -1;

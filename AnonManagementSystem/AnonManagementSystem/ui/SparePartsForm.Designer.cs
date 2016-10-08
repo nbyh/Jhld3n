@@ -69,7 +69,6 @@
             this.btnFront = new System.Windows.Forms.Button();
             this.lbPageInfo = new System.Windows.Forms.Label();
             this.dgvSparePart = new System.Windows.Forms.DataGridView();
-            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +81,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.sfdExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -161,9 +161,11 @@
             // 
             // dtpProTime2
             // 
+            this.dtpProTime2.CustomFormat = "yyyy年MM月dd日";
+            this.dtpProTime2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpProTime2.Location = new System.Drawing.Point(498, 69);
             this.dtpProTime2.Name = "dtpProTime2";
-            this.dtpProTime2.Size = new System.Drawing.Size(115, 21);
+            this.dtpProTime2.Size = new System.Drawing.Size(121, 21);
             this.dtpProTime2.TabIndex = 13;
             // 
             // cmbStore2
@@ -185,9 +187,11 @@
             // 
             // dtpStore2
             // 
+            this.dtpStore2.CustomFormat = "yyyy年MM月dd日";
+            this.dtpStore2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStore2.Location = new System.Drawing.Point(498, 42);
             this.dtpStore2.Name = "dtpStore2";
-            this.dtpStore2.Size = new System.Drawing.Size(115, 21);
+            this.dtpStore2.Size = new System.Drawing.Size(121, 21);
             this.dtpStore2.TabIndex = 8;
             // 
             // label6
@@ -218,15 +222,17 @@
             // 
             // dtpStore1
             // 
+            this.dtpStore1.CustomFormat = "yyyy年MM月dd日";
+            this.dtpStore1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStore1.Location = new System.Drawing.Point(339, 42);
             this.dtpStore1.Name = "dtpStore1";
-            this.dtpStore1.Size = new System.Drawing.Size(115, 21);
+            this.dtpStore1.Size = new System.Drawing.Size(121, 21);
             this.dtpStore1.TabIndex = 6;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(506, 18);
+            this.label16.Location = new System.Drawing.Point(403, 18);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(29, 12);
             this.label16.TabIndex = 26;
@@ -237,20 +243,21 @@
             this.cmbUseCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbUseCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUseCondition.FormattingEnabled = true;
-            this.cmbUseCondition.Location = new System.Drawing.Point(543, 13);
+            this.cmbUseCondition.Location = new System.Drawing.Point(438, 13);
             this.cmbUseCondition.Name = "cmbUseCondition";
-            this.cmbUseCondition.Size = new System.Drawing.Size(70, 22);
+            this.cmbUseCondition.Size = new System.Drawing.Size(89, 22);
             this.cmbUseCondition.TabIndex = 3;
             this.cmbUseCondition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(249, 18);
+            this.label11.Location = new System.Drawing.Point(632, 11);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 22;
             this.label11.Text = "用于类型";
+            this.label11.Visible = false;
             // 
             // cmbFactory
             // 
@@ -290,10 +297,11 @@
             "<",
             "≥",
             "≤"});
-            this.cmbUseType.Location = new System.Drawing.Point(310, 13);
+            this.cmbUseType.Location = new System.Drawing.Point(693, 6);
             this.cmbUseType.Name = "cmbUseType";
             this.cmbUseType.Size = new System.Drawing.Size(75, 22);
             this.cmbUseType.TabIndex = 1;
+            this.cmbUseType.Visible = false;
             this.cmbUseType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
             // cmbSpot
@@ -330,7 +338,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(393, 18);
+            this.label4.Location = new System.Drawing.Point(271, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 16;
@@ -364,9 +372,11 @@
             // 
             // dtpProTime1
             // 
+            this.dtpProTime1.CustomFormat = "yyyy年MM月dd日";
+            this.dtpProTime1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpProTime1.Location = new System.Drawing.Point(339, 69);
             this.dtpProTime1.Name = "dtpProTime1";
-            this.dtpProTime1.Size = new System.Drawing.Size(115, 21);
+            this.dtpProTime1.Size = new System.Drawing.Size(121, 21);
             this.dtpProTime1.TabIndex = 11;
             // 
             // cmbModel
@@ -374,9 +384,9 @@
             this.cmbModel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(430, 13);
+            this.cmbModel.Location = new System.Drawing.Point(308, 13);
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(68, 22);
+            this.cmbModel.Size = new System.Drawing.Size(89, 22);
             this.cmbModel.TabIndex = 2;
             this.cmbModel.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             // 
@@ -575,13 +585,6 @@
             this.dgvSparePart.TabIndex = 0;
             this.dgvSparePart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSparePart_CellContentClick);
             // 
-            // sfdExcel
-            // 
-            this.sfdExcel.DefaultExt = "xlsx";
-            this.sfdExcel.Filter = "Excel文件|*.xlsx";
-            this.sfdExcel.InitialDirectory = "Desktop";
-            this.sfdExcel.Title = "请选择文件保存位置";
-            // 
             // Column1
             // 
             this.Column1.HeaderText = "序号";
@@ -675,6 +678,13 @@
             this.MoreInfo.Name = "MoreInfo";
             this.MoreInfo.ReadOnly = true;
             this.MoreInfo.Text = "详细信息";
+            // 
+            // sfdExcel
+            // 
+            this.sfdExcel.DefaultExt = "xlsx";
+            this.sfdExcel.Filter = "Excel文件|*.xlsx";
+            this.sfdExcel.InitialDirectory = "Desktop";
+            this.sfdExcel.Title = "请选择文件保存位置";
             // 
             // SparePartsForm
             // 

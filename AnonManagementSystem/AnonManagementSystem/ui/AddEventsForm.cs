@@ -69,111 +69,102 @@ namespace AnonManagementSystem
 
         private void AddEventsForm_Shown(object sender, EventArgs e)
         {
-            Thread initThread = new Thread((ThreadStart) delegate
-            {
-                try
-                {
-                    #region 下拉列表内容
+            Thread initThread = new Thread((ThreadStart)delegate
+           {
+               try
+               {
+                   #region 下拉列表内容
 
-                    List<string> eveNameList =
-                        (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
-                    List<string> eveNoList =
-                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.No) select s.No).Distinct()
-                             .ToList();
-                    List<string> eveAddressList =
-                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Address) select s.Address).Distinct().ToList();
-                    List<string> eveHunitList =
-                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.HigherUnit) select s.HigherUnit).Distinct()
-                             .ToList();
-                    List<string> eveExtList =
-                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Executor) select s.Executor).Distinct().ToList();
-                    List<string> evePubUnitList =
-                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.PublishUnit) select s.PublishUnit).Distinct()
-                             .ToList();
-                    List<string> evePublisherList =
-                         (from s in _equipDb.Events where !string.IsNullOrEmpty(s.Publisher) select s.Publisher).Distinct().ToList();
+                   List<string> eveNameList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name)).Distinct().ToList();
+                   List<string> eveNoList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.No)).Select(s => s.No)).Distinct().ToList();
+                   List<string> eveAddressList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Address)).Select(s => s.Address)).Distinct().ToList();
+                   List<string> eveHunitList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.HigherUnit)).Select(s => s.HigherUnit)).Distinct().ToList();
+                   List<string> eveExtList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Executor)).Select(s => s.Executor)).Distinct().ToList();
+                   List<string> evePubUnitList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.PublishUnit)).Select(s => s.PublishUnit)).Distinct().ToList();
+                   List<string> evePublisherList = (_equipDb.Events.Where(s => !string.IsNullOrEmpty(s.Publisher)).Select(s => s.Publisher)).Distinct().ToList();
 
-                    _synchContext.Post(a =>
-                    {
-                        cmbEventNo.DataSource = eveNoList;
-                        cmbEventName.DataSource = eveNameList;
-                        cmbAddress.DataSource = eveAddressList;
-                        cmbHigherUnit.DataSource = eveHunitList;
-                        cmbExecutor.DataSource = eveExtList;
-                        cmbPulishUnit.DataSource = evePubUnitList;
-                        cmbPulisher.DataSource = evePublisherList;    
+                   _synchContext.Post(a =>
+                   {
+                       cmbEventNo.DataSource = eveNoList;
+                       cmbEventName.DataSource = eveNameList;
+                       cmbAddress.DataSource = eveAddressList;
+                       cmbHigherUnit.DataSource = eveHunitList;
+                       cmbExecutor.DataSource = eveExtList;
+                       cmbPulishUnit.DataSource = evePubUnitList;
+                       cmbPulisher.DataSource = evePublisherList;
 
-                        cmbEventNo.SelectedIndex = -1;
-                        cmbEventName.SelectedIndex = -1;
-                        cmbAddress.SelectedIndex = -1;
-                        cmbHigherUnit.SelectedIndex = -1;
-                        cmbExecutor.SelectedIndex = -1;
-                        cmbPulishUnit.SelectedIndex = -1;
-                        cmbPulisher.SelectedIndex = -1;
+                       cmbEventNo.SelectedIndex = -1;
+                       cmbEventName.SelectedIndex = -1;
+                       cmbAddress.SelectedIndex = -1;
+                       cmbHigherUnit.SelectedIndex = -1;
+                       cmbExecutor.SelectedIndex = -1;
+                       cmbPulishUnit.SelectedIndex = -1;
+                       cmbPulisher.SelectedIndex = -1;
 
-                        tsbRestore.Enabled = !Add;
-                    }, null);
+                       tsbRestore.Enabled = !Add;
+                   }, null);
 
-                    #endregion 下拉列表内容
+                   #endregion 下拉列表内容
 
-                    if (!Add)
-                    {
-                        Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
-                        foreach (var equipmentImage in _eventsImgList)
-                        {
-                            using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
-                            {
-                                Image img = Image.FromStream(ms);
-                                imgdic.Add(equipmentImage.Name, img);
-                            }
-                        }
-                        _synchContext.Post(a =>
-                        {
-                            cmbEventNo.SelectedItem = _events.No;
-                            cmbEventName.SelectedItem = _events.Name;
-                            cmbAddress.SelectedItem = _events.Address;
-                            dtpEventDt1.Value = _events.StartTime;
-                            dtpEventDt2.Value = _events.EndTime;
-                            cmbEventType.SelectedItem = _events.EventType;
-                            cmbSpecificType.SelectedItem = _events.SpecificType;
-                            tbCode.Text = _events.Code;
-                            cmbHigherUnit.SelectedItem = _events.HigherUnit;
-                            cmbExecutor.SelectedItem = _events.Executor;
-                            tbNoInEvents.Text = _events.NoInEvents;
-                            cmbPulishUnit.SelectedItem = _events.PublishUnit;
-                            dtpPulishDt.Value = _events.PublishDate;
-                            cmbPulisher.SelectedItem = _events.Publisher;
-                            tbAccording.Text = _events.According;
-                            tbDesci.Text = _events.PeopleDescri;
-                            tbProcessDescri.Text = _events.ProcessDescri;
-                            tbHandleStep.Text = _events.HandleStep;
-                            tbProblems.Text = _events.Problem;
-                            tbRemark.Text = _events.Remarks;
+                   if (!Add)
+                   {
+                       Dictionary<string, Image> imgdic = new Dictionary<string, Image>();
+                       foreach (var equipmentImage in _eventsImgList)
+                       {
+                           using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                           {
+                               Image img = Image.FromStream(ms);
+                               imgdic.Add(equipmentImage.Name, img);
+                           }
+                       }
+                       _synchContext.Post(a =>
+                       {
+                           cmbEventNo.SelectedItem = _events.No;
+                           cmbEventName.SelectedItem = _events.Name;
+                           cmbAddress.SelectedItem = _events.Address;
+                           dtpEventDt1.Value = _events.StartTime;
+                           dtpEventDt2.Value = _events.EndTime;
+                           cmbEventType.SelectedItem = _events.EventType;
+                           cmbSpecificType.SelectedItem = _events.SpecificType;
+                           tbCode.Text = _events.Code;
+                           cmbHigherUnit.SelectedItem = _events.HigherUnit;
+                           cmbExecutor.SelectedItem = _events.Executor;
+                           tbNoInEvents.Text = _events.NoInEvents;
+                           cmbPulishUnit.SelectedItem = _events.PublishUnit;
+                           dtpPulishDt.Value = _events.PublishDate;
+                           cmbPulisher.SelectedItem = _events.Publisher;
+                           tbAccording.Text = _events.According;
+                           tbDesci.Text = _events.PeopleDescri;
+                           tbProcessDescri.Text = _events.ProcessDescri;
+                           tbHandleStep.Text = _events.HandleStep;
+                           tbProblems.Text = _events.Problem;
+                           tbRemark.Text = _events.Remarks;
 
-                            dgvEvents.DataSource = _eventdataList;
+                           dgvEvents.DataSource = _eventdataList;
 
-                            ilvEvents.ImgDictionary = imgdic;
-                            ilvEvents.ShowImages();
-                        }, null);
-                        CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
-                    }
-                }
-                catch (Exception exception)
-                {
-                    if (Add)
-                    {
-                        CommonLogHelper.GetInstance("LogError").Error(@"打开添加事件数据失败", exception);
-                        MessageBox.Show(this, @"打开添加事件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        CommonLogHelper.GetInstance("LogError").Error($"加载事件数据{_id}失败", exception);
-                        MessageBox.Show(this, $"加载事件数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                }
-            }) {IsBackground = true};
+                           ilvEvents.ImgDictionary = imgdic;
+                           ilvEvents.ShowImages();
+                       }, null);
+                       CommonLogHelper.GetInstance("LogInfo").Info($"加载事件数据{_id}成功");
+                   }
+               }
+               catch (Exception exception)
+               {
+                   if (Add)
+                   {
+                       CommonLogHelper.GetInstance("LogError").Error(@"打开添加事件数据失败", exception);
+                       MessageBox.Show(this, @"打开添加事件数据失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                           MessageBoxIcon.Error);
+                   }
+                   else
+                   {
+                       CommonLogHelper.GetInstance("LogError").Error($"加载事件数据{_id}失败", exception);
+                       MessageBox.Show(this, $"加载事件数据{_id}失败" + exception.Message, @"错误", MessageBoxButtons.OK,
+                           MessageBoxIcon.Error);
+                   }
+               }
+           })
+            { IsBackground = true };
             initThread.Start();
         }
 
