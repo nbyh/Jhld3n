@@ -417,17 +417,19 @@ namespace AnonManagementSystem
 
         private void FillSelectionData()
         {
-            List<string> equipNameList = (from s in _sparePart where !string.IsNullOrEmpty(s.Name) select s.Name).Distinct().ToList();
+            List<string> equipNameList = (_sparePart.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name)).Distinct().ToList();
             cmbName.DataSource = equipNameList;
-            List<string> equipModelList = (from s in _sparePart where !string.IsNullOrEmpty(s.Model) select s.Model).Distinct().ToList();
+            List<string> equipModelList = (_sparePart.Where(s => !string.IsNullOrEmpty(s.Model)).Select(s => s.Model)).Distinct().ToList();
             cmbModel.DataSource = equipModelList;
-            List<string> equipUseconList = (from s in _sparePart where !string.IsNullOrEmpty(s.Status) select s.Status).Distinct().ToList();
+            List<string> equipUseconList = (_sparePart.Where(s => !string.IsNullOrEmpty(s.Status)).Select(s => s.Status)).Distinct().ToList();
             cmbUseCondition.DataSource = equipUseconList;
-            List<string> equipFactList = (from s in _sparePart where !string.IsNullOrEmpty(s.Factory) select s.Factory).Distinct().ToList();
+            List<string> equipFactList = (_sparePart.Where(s => !string.IsNullOrEmpty(s.Factory)).Select(s => s.Factory)).Distinct().ToList();
             cmbFactory.DataSource = equipFactList;
-            List<string> equipSubdepartList = (from s in _sparePart where !string.IsNullOrEmpty(s.StoreSpot) select s.StoreSpot).Distinct().ToList();
+            List<string> equipSubdepartList = (_sparePart.Where(s => !string.IsNullOrEmpty(s.StoreSpot))
+                .Select(s => s.StoreSpot)).Distinct().ToList();
             cmbSpot.DataSource = equipSubdepartList;
-            List<string> equipMajcatList = (from s in _sparePart where !string.IsNullOrEmpty(s.UseType) select s.UseType).Distinct().ToList();
+            List<string> equipMajcatList = (_sparePart.Where(s => !string.IsNullOrEmpty(s.UseType))
+                .Select(s => s.UseType)).Distinct().ToList();
             cmbUseType.DataSource = equipMajcatList;
             _synchContext.Post(a =>
             {

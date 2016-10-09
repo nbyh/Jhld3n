@@ -259,12 +259,12 @@ namespace AnonManagementSystem
                         UseType = tbUseType.Text,
                         Status = cmbStatus.Text,
                     };
-                    _sparePartDb.InsertOrReplace(ce);
+                    _sparePartDb.Insert(ce);
                     if (_spImgList.Any())
                     {
                         foreach (var sparePartImage in _spImgList)
                         {
-                            _partsImageDb.InsertOrReplace(sparePartImage);
+                            _partsImageDb.Insert(sparePartImage);
                         }
                     }
                 }
@@ -297,7 +297,7 @@ namespace AnonManagementSystem
                     //        _partsImageDB.SparePartImage.Remove(sp);
                     //    }
                     //}
-                    _sparePartDb.InsertOrReplace(spfirst);
+                    _sparePartDb.Update(spfirst);
                     foreach (var sparePartImage in _spImgList)
                     {
                         var spimg = from img in _partsImageDb.SparePartImages
