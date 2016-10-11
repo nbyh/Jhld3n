@@ -104,7 +104,7 @@ namespace AnonManagementSystem
                 MessageBox.Show(@"请选择权限!");
                 return;
             }
-            bool enableedit = cmbAuthority.SelectedText.ToString().Equals("可写");
+            bool enableedit = cmbAuthority.SelectedItem.ToString().Equals("可写");
             AddOrModifyUser?.Invoke(_add, _rowindex, _id, tbUser.Text, tbPwdSure.Text, enableedit);
             Close();
         }

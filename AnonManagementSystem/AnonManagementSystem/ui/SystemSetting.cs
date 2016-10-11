@@ -49,9 +49,11 @@ namespace AnonManagementSystem
                 var sms = from u in _sysManagerDb.UserManages
                           where u.ID == id
                           select u;
-                sms.First().User = user;
-                sms.First().Password = pwd;
-                sms.First().Edit = enableedit;
+                var smstemp = sms.First();
+                smstemp.User = user;
+                smstemp.Password = pwd;
+                smstemp.Edit = enableedit;
+                _userList.Add(smstemp);
 
                 dgvUserManage[1, rowindex].Value = user;
                 dgvUserManage[2, rowindex].Value = enableedit ? "可写" : "只读";
@@ -66,27 +68,25 @@ namespace AnonManagementSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (_userList.Count > 0)
+            foreach (var user in _userList)
             {
-                _sysManagerDb.InsertOrReplace(_userList);
+                var sms = from u in _sysManagerDb.UserManages
+                          where u.User == user.User
+                          select u;
+                if (sms.Any())
+                {
+                    _sysManagerDb.Update(user);
+                }
+                else
+                {
+                    _sysManagerDb.Insert(user);
+                }
             }
             Close();
         }
 
         private void SystemSetting_Load(object sender, EventArgs e)
         {
-            var sms = (from u in _sysManagerDb.UserManages
-                       select u).Distinct().ToList();
-            _alluser = sms.Select(n => n.User).ToList();
-            dgvUserManage.RowCount = sms.Count;
-            for (int i = 0; i < sms.Count; i++)
-            {
-                dgvUserManage[0, i].Value = i + 1;
-                dgvUserManage[1, i].Value = sms[i].User;
-                dgvUserManage[2, i].Value = sms[i].Edit ? "可写" : "只读";
-                dgvUserManage[3, i].Value = sms[i].Password;
-                dgvUserManage[4, i].Value = sms[i].ID;
-            }
         }
 
         private void tsbAdd_Click(object sender, EventArgs e)
@@ -138,6 +138,22 @@ namespace AnonManagementSystem
                 }
                 addModifyUser.AddOrModifyUser += AddModify;
                 addModifyUser.ShowDialog();
+            }
+        }
+
+        private void SystemSetting_Shown(object sender, EventArgs e)
+        {
+            var sms = (from u in _sysManagerDb.UserManages
+                       select u).Distinct().ToList();
+            _alluser = sms.Select(n => n.User).ToList();
+            dgvUserManage.RowCount = sms.Count;
+            for (int i = 0; i < sms.Count; i++)
+            {
+                dgvUserManage[0, i].Value = i + 1;
+                dgvUserManage[1, i].Value = sms[i].User;
+                dgvUserManage[2, i].Value = sms[i].Edit ? "可写" : "只读";
+                dgvUserManage[3, i].Value = sms[i].Password;
+                dgvUserManage[4, i].Value = sms[i].ID;
             }
         }
     }
