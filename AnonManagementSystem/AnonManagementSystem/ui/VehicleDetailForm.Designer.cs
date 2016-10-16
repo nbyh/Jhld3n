@@ -114,11 +114,13 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.ilvVehicle = new AnonManagementSystem.ImageListViewer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
+            this.tsbSaveImageVh = new System.Windows.Forms.ToolStripButton();
             this.cmsPicture = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.更新图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,8 +128,6 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
-            this.tsbSaveImageVh = new System.Windows.Forms.ToolStripButton();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -1005,6 +1005,15 @@
             this.tsbDeleteOeImages.Text = "删除";
             this.tsbDeleteOeImages.Click += new System.EventHandler(this.tsbDeleteOeImages_Click);
             // 
+            // tsbSaveImage
+            // 
+            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImage.Name = "tsbSaveImage";
+            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImage.Text = "保存";
+            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
+            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.ilvVehicle);
@@ -1055,6 +1064,15 @@
             this.tsbDeleteImages.Size = new System.Drawing.Size(52, 22);
             this.tsbDeleteImages.Text = "删除";
             this.tsbDeleteImages.Click += new System.EventHandler(this.tsbDeleteImages_Click);
+            // 
+            // tsbSaveImageVh
+            // 
+            this.tsbSaveImageVh.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
+            this.tsbSaveImageVh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSaveImageVh.Name = "tsbSaveImageVh";
+            this.tsbSaveImageVh.Size = new System.Drawing.Size(52, 22);
+            this.tsbSaveImageVh.Text = "保存";
+            this.tsbSaveImageVh.Click += new System.EventHandler(this.tsbSaveImageVh_Click);
             // 
             // cmsPicture
             // 
@@ -1109,24 +1127,6 @@
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
             // 
-            // tsbSaveImage
-            // 
-            this.tsbSaveImage.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.tsbSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSaveImage.Name = "tsbSaveImage";
-            this.tsbSaveImage.Size = new System.Drawing.Size(52, 22);
-            this.tsbSaveImage.Text = "保存";
-            this.tsbSaveImage.Click += new System.EventHandler(this.tsbSaveImage_Click);
-            // 
-            // tsbSaveImageVh
-            // 
-            this.tsbSaveImageVh.Image = global::AnonManagementSystem.Properties.Resources.diskette1;
-            this.tsbSaveImageVh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSaveImageVh.Name = "tsbSaveImageVh";
-            this.tsbSaveImageVh.Size = new System.Drawing.Size(52, 22);
-            this.tsbSaveImageVh.Text = "保存";
-            this.tsbSaveImageVh.Click += new System.EventHandler(this.tsbSaveImageVh_Click);
-            // 
             // VehicleDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1137,7 +1137,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "VehicleDetailForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "车辆详细信息";
             this.Load += new System.EventHandler(this.VehicleDetailForm_Load);
             this.Shown += new System.EventHandler(this.VehicleDetailForm_Shown);

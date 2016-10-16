@@ -456,10 +456,12 @@ namespace AnonManagementSystem
                 string id = dgvVeh.Rows[e.RowIndex].Cells["SerialNo"].Value.ToString();
                 OilEngine oe = null;
                 List<OilEngineImage> oeImgList = new List<OilEngineImage>();
-                CombatVehicle vh = Add ? _comVehList.First(mm => mm.SerialNo == id) : _equipDb.CombatVehicles.First(mm => mm.SerialNo == id);
+                var vehicle = _equipDb.CombatVehicles.Where(mm => mm.SerialNo == id);
+                var vh = vehicle.Any() ? vehicle.First() : _comVehList.First(mm => mm.SerialNo == id);
                 if (vh.CombineOe)
                 {
-                    oe = Add ? _oilEngines : _equipDb.OilEngines.First(mm => mm.Vehicle == id);
+                    var oilEngines = _equipDb.OilEngines.Where(mm => mm.Vehicle == id);
+                    oe = oilEngines.Any() ? oilEngines.First() : _oilEngines;
                     oeImgList = Add ? _oilImgList.Where(mm => mm.SerialNo == id).ToList() : _oilImageDb.OilEngineImages.Where(mm => mm.SerialNo == id).ToList();
                 }
                 List<VehiclesImage> vilist = Add ? _vehImgList.Where(mm => mm.SerialNo == id).ToList() : _vehiclesImageDb.VehiclesImages.Where(mm => mm.SerialNo == id).ToList();
@@ -484,7 +486,9 @@ namespace AnonManagementSystem
             if (e.ColumnIndex >= 0 && dgvEvents.Columns[e.ColumnIndex].Name.Equals("EventMoreInfo"))
             {
                 string id = dgvEvents.Rows[e.RowIndex].Cells["No"].Value.ToString();
-                Event ee = Add ? _eventsList.First(mm => mm.No == id) : _equipDb.Events.First(mm => mm.No == id);
+                var events = _equipDb.Events.Where(mm => mm.No == id);
+                var ee = events.Any() ? events.First() : _eventsList.First(mm => mm.No == id);
+
                 List<EventData> edlist = Add ? _eventDataList.Where(mm => mm.EventsNo == id).ToList() : _equipDb.EventData.Where(mm => mm.EventsNo == id).ToList();
                 List<EventsImage> eilist = Add ? _eventsImgList.Where(mm => mm.SerialNo == id).ToList() : _eventsImageDb.EventsImages.Where(mm => mm.SerialNo == id).ToList();
                 AddEventsForm eventDetailForm = new AddEventsForm()
@@ -507,7 +511,8 @@ namespace AnonManagementSystem
             if (e.ColumnIndex >= 0 && dgvMaterial.Columns[e.ColumnIndex].Name.Equals("MaterialMoreInfo"))
             {
                 string id = dgvMaterial.Rows[e.RowIndex].Cells["MaterialNo"].Value.ToString();
-                Material m = Add ? _materList.First(mm => mm.No == id) : _equipDb.Materials.First(mm => mm.No == id);
+                var material = _equipDb.Materials.Where(mm => mm.No == id);
+                var m = material.Any() ? material.First() : _materList.First(mm => mm.No == id);
                 AddMaterialForm materialDetailForm = new AddMaterialForm()
                 {
                     Enableedit = _enableedit,

@@ -347,7 +347,7 @@
             this.Name = "AddMaterialForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "添加随机资料";
             this.Load += new System.EventHandler(this.AddMaterialForm_Load);
             this.Shown += new System.EventHandler(this.AddMaterialForm_Shown);

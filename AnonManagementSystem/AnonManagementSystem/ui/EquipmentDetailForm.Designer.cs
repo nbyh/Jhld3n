@@ -114,15 +114,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.dgvMaterial = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaterialName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaterialEdition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaterialPagination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaginationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaginationSpot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DocumentLink = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.MaterialMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsbAddMaterial = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteMaterial = new System.Windows.Forms.ToolStripButton();
@@ -139,6 +130,15 @@
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaterialName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaterialEdition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaterialPagination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaginationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaginationSpot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DocumentLink = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.MaterialMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -1042,75 +1042,6 @@
             this.dgvMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterial_CellContentClick);
             this.dgvMaterial.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterial_RowPostPaint);
             // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // MaterialNo
-            // 
-            this.MaterialNo.DataPropertyName = "No";
-            this.MaterialNo.HeaderText = "编号";
-            this.MaterialNo.Name = "MaterialNo";
-            this.MaterialNo.ReadOnly = true;
-            this.MaterialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // MaterialName
-            // 
-            this.MaterialName.DataPropertyName = "Name";
-            this.MaterialName.HeaderText = "名称";
-            this.MaterialName.Name = "MaterialName";
-            this.MaterialName.ReadOnly = true;
-            this.MaterialName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // MaterialEdition
-            // 
-            this.MaterialEdition.DataPropertyName = "Edition";
-            this.MaterialEdition.HeaderText = "版本";
-            this.MaterialEdition.Name = "MaterialEdition";
-            this.MaterialEdition.ReadOnly = true;
-            this.MaterialEdition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // MaterialPagination
-            // 
-            this.MaterialPagination.DataPropertyName = "Pagination";
-            this.MaterialPagination.HeaderText = "页数";
-            this.MaterialPagination.Name = "MaterialPagination";
-            this.MaterialPagination.ReadOnly = true;
-            this.MaterialPagination.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PaginationDate
-            // 
-            this.PaginationDate.DataPropertyName = "Date";
-            this.PaginationDate.HeaderText = "时间";
-            this.PaginationDate.Name = "PaginationDate";
-            this.PaginationDate.ReadOnly = true;
-            this.PaginationDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PaginationSpot
-            // 
-            this.PaginationSpot.DataPropertyName = "StoreSpot";
-            this.PaginationSpot.HeaderText = "存放位置";
-            this.PaginationSpot.Name = "PaginationSpot";
-            this.PaginationSpot.ReadOnly = true;
-            this.PaginationSpot.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // DocumentLink
-            // 
-            this.DocumentLink.DataPropertyName = "DocumentLink";
-            this.DocumentLink.HeaderText = "存档链接";
-            this.DocumentLink.Name = "DocumentLink";
-            this.DocumentLink.ReadOnly = true;
-            this.DocumentLink.Text = "";
-            // 
-            // MaterialMoreInfo
-            // 
-            this.MaterialMoreInfo.HeaderText = "详细信息";
-            this.MaterialMoreInfo.Name = "MaterialMoreInfo";
-            this.MaterialMoreInfo.ReadOnly = true;
-            // 
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1257,6 +1188,75 @@
             this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
             this.ilvEquipment.TabIndex = 6;
             // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // MaterialNo
+            // 
+            this.MaterialNo.DataPropertyName = "No";
+            this.MaterialNo.HeaderText = "编号";
+            this.MaterialNo.Name = "MaterialNo";
+            this.MaterialNo.ReadOnly = true;
+            this.MaterialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // MaterialName
+            // 
+            this.MaterialName.DataPropertyName = "Name";
+            this.MaterialName.HeaderText = "名称";
+            this.MaterialName.Name = "MaterialName";
+            this.MaterialName.ReadOnly = true;
+            this.MaterialName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // MaterialEdition
+            // 
+            this.MaterialEdition.DataPropertyName = "Volume";
+            this.MaterialEdition.HeaderText = "册数";
+            this.MaterialEdition.Name = "MaterialEdition";
+            this.MaterialEdition.ReadOnly = true;
+            this.MaterialEdition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // MaterialPagination
+            // 
+            this.MaterialPagination.DataPropertyName = "Pagination";
+            this.MaterialPagination.HeaderText = "页数";
+            this.MaterialPagination.Name = "MaterialPagination";
+            this.MaterialPagination.ReadOnly = true;
+            this.MaterialPagination.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PaginationDate
+            // 
+            this.PaginationDate.DataPropertyName = "Date";
+            this.PaginationDate.HeaderText = "时间";
+            this.PaginationDate.Name = "PaginationDate";
+            this.PaginationDate.ReadOnly = true;
+            this.PaginationDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PaginationSpot
+            // 
+            this.PaginationSpot.DataPropertyName = "StoreSpot";
+            this.PaginationSpot.HeaderText = "存放位置";
+            this.PaginationSpot.Name = "PaginationSpot";
+            this.PaginationSpot.ReadOnly = true;
+            this.PaginationSpot.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // DocumentLink
+            // 
+            this.DocumentLink.DataPropertyName = "DocumentLink";
+            this.DocumentLink.HeaderText = "存档链接";
+            this.DocumentLink.Name = "DocumentLink";
+            this.DocumentLink.ReadOnly = true;
+            this.DocumentLink.Text = "";
+            // 
+            // MaterialMoreInfo
+            // 
+            this.MaterialMoreInfo.HeaderText = "详细信息";
+            this.MaterialMoreInfo.Name = "MaterialMoreInfo";
+            this.MaterialMoreInfo.ReadOnly = true;
+            // 
             // EquipmentDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1387,15 +1387,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAddVehicle;
         private System.Windows.Forms.ToolStripButton tsbDeleteVehicle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialEdition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialPagination;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaginationDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaginationSpot;
-        private System.Windows.Forms.DataGridViewLinkColumn DocumentLink;
-        private System.Windows.Forms.DataGridViewLinkColumn MaterialMoreInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn No;
         private System.Windows.Forms.DataGridViewTextBoxColumn EventName;
@@ -1422,5 +1413,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewLinkColumn VehicleMoreInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialEdition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaterialPagination;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaginationDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaginationSpot;
+        private System.Windows.Forms.DataGridViewLinkColumn DocumentLink;
+        private System.Windows.Forms.DataGridViewLinkColumn MaterialMoreInfo;
     }
 }
