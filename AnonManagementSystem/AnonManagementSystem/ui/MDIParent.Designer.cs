@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MdiParent));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.EquipMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SparePartsMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,14 +100,14 @@
             // 单条数据ToolStripMenuItem
             // 
             this.单条数据ToolStripMenuItem.Name = "单条数据ToolStripMenuItem";
-            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.单条数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.单条数据ToolStripMenuItem.Text = "单条导出";
             this.单条数据ToolStripMenuItem.Click += new System.EventHandler(this.单条数据ToolStripMenuItem_Click);
             // 
             // 全部数据ToolStripMenuItem
             // 
             this.全部数据ToolStripMenuItem.Name = "全部数据ToolStripMenuItem";
-            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.全部数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.全部数据ToolStripMenuItem.Text = "全部导出";
             this.全部数据ToolStripMenuItem.Click += new System.EventHandler(this.全部数据ToolStripMenuItem_Click);
             // 
@@ -122,14 +123,14 @@
             // 数据备份ToolStripMenuItem
             // 
             this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
-            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.数据备份ToolStripMenuItem.Text = "数据备份";
             this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItem_Click);
             // 
             // 导入数据ToolStripMenuItem
             // 
             this.导入数据ToolStripMenuItem.Name = "导入数据ToolStripMenuItem";
-            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.导入数据ToolStripMenuItem.Text = "数据合并";
             this.导入数据ToolStripMenuItem.Click += new System.EventHandler(this.导入数据ToolStripMenuItem_Click);
             // 
@@ -158,7 +159,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "关于(&A)";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -244,6 +245,7 @@
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MdiParent";
