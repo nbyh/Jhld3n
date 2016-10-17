@@ -73,8 +73,8 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tbVehiclesDescri = new System.Windows.Forms.TextBox();
             this.tabOilEngine = new System.Windows.Forms.TabPage();
-            this.pbOeImageTop = new System.Windows.Forms.TabControl();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.tabOeImageTop = new System.Windows.Forms.TabControl();
+            this.tpOilMoreInfo = new System.Windows.Forms.TabPage();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.tbOeFailDetail = new System.Windows.Forms.TextBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
@@ -133,8 +133,8 @@
             this.gbBaseInfo.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tabOilEngine.SuspendLayout();
-            this.pbOeImageTop.SuspendLayout();
-            this.tabPage12.SuspendLayout();
+            this.tabOeImageTop.SuspendLayout();
+            this.tpOilMoreInfo.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.groupBox12.SuspendLayout();
@@ -572,7 +572,7 @@
             // 
             // tabOilEngine
             // 
-            this.tabOilEngine.Controls.Add(this.pbOeImageTop);
+            this.tabOilEngine.Controls.Add(this.tabOeImageTop);
             this.tabOilEngine.Location = new System.Drawing.Point(4, 22);
             this.tabOilEngine.Name = "tabOilEngine";
             this.tabOilEngine.Padding = new System.Windows.Forms.Padding(3);
@@ -581,29 +581,29 @@
             this.tabOilEngine.Text = "油机信息";
             this.tabOilEngine.UseVisualStyleBackColor = true;
             // 
-            // pbOeImageTop
+            // tabOeImageTop
             // 
-            this.pbOeImageTop.Controls.Add(this.tabPage12);
-            this.pbOeImageTop.Controls.Add(this.tabPage16);
-            this.pbOeImageTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbOeImageTop.Location = new System.Drawing.Point(3, 3);
-            this.pbOeImageTop.Name = "pbOeImageTop";
-            this.pbOeImageTop.SelectedIndex = 0;
-            this.pbOeImageTop.Size = new System.Drawing.Size(770, 504);
-            this.pbOeImageTop.TabIndex = 7;
+            this.tabOeImageTop.Controls.Add(this.tpOilMoreInfo);
+            this.tabOeImageTop.Controls.Add(this.tabPage16);
+            this.tabOeImageTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabOeImageTop.Location = new System.Drawing.Point(3, 3);
+            this.tabOeImageTop.Name = "tabOeImageTop";
+            this.tabOeImageTop.SelectedIndex = 0;
+            this.tabOeImageTop.Size = new System.Drawing.Size(770, 504);
+            this.tabOeImageTop.TabIndex = 7;
             // 
-            // tabPage12
+            // tpOilMoreInfo
             // 
-            this.tabPage12.Controls.Add(this.groupBox21);
-            this.tabPage12.Controls.Add(this.groupBox14);
-            this.tabPage12.Controls.Add(this.groupBox12);
-            this.tabPage12.Location = new System.Drawing.Point(4, 22);
-            this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(762, 478);
-            this.tabPage12.TabIndex = 0;
-            this.tabPage12.Text = "详细信息";
-            this.tabPage12.UseVisualStyleBackColor = true;
+            this.tpOilMoreInfo.Controls.Add(this.groupBox21);
+            this.tpOilMoreInfo.Controls.Add(this.groupBox14);
+            this.tpOilMoreInfo.Controls.Add(this.groupBox12);
+            this.tpOilMoreInfo.Location = new System.Drawing.Point(4, 22);
+            this.tpOilMoreInfo.Name = "tpOilMoreInfo";
+            this.tpOilMoreInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOilMoreInfo.Size = new System.Drawing.Size(762, 478);
+            this.tpOilMoreInfo.TabIndex = 0;
+            this.tpOilMoreInfo.Text = "详细信息";
+            this.tpOilMoreInfo.UseVisualStyleBackColor = true;
             // 
             // groupBox21
             // 
@@ -743,6 +743,8 @@
             // 
             // dtpMotorTime
             // 
+            this.dtpMotorTime.CustomFormat = "yyyy年MM月dd日";
+            this.dtpMotorTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMotorTime.Location = new System.Drawing.Point(291, 49);
             this.dtpMotorTime.Name = "dtpMotorTime";
             this.dtpMotorTime.Size = new System.Drawing.Size(126, 21);
@@ -1148,8 +1150,8 @@
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.tabOilEngine.ResumeLayout(false);
-            this.pbOeImageTop.ResumeLayout(false);
-            this.tabPage12.ResumeLayout(false);
+            this.tabOeImageTop.ResumeLayout(false);
+            this.tpOilMoreInfo.ResumeLayout(false);
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             this.groupBox14.ResumeLayout(false);
@@ -1223,8 +1225,8 @@
         private System.Windows.Forms.ToolStripMenuItem 更新图片ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 图片另存为ToolStripMenuItem;
         private System.Windows.Forms.TabPage tabOilEngine;
-        private System.Windows.Forms.TabControl pbOeImageTop;
-        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.TabControl tabOeImageTop;
+        private System.Windows.Forms.TabPage tpOilMoreInfo;
         private System.Windows.Forms.GroupBox groupBox21;
         private System.Windows.Forms.TextBox tbOeFailDetail;
         private System.Windows.Forms.GroupBox groupBox14;

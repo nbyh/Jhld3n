@@ -205,7 +205,7 @@ namespace AnonManagementSystem
                         OeNo = tbOilEngineNo.Text,
                         OeModel = cmbOeModel.Text,
                         OutPower = tbOePower.Text,
-                        TechCondition = cmbTechCondition.Text,
+                        TechCondition = cmbMotorTechCon.Text,
                         WorkHour = nudWorkHour.Value.ToString(CultureInfo.InvariantCulture),
                         OeFactory = cmbOeFactory.Text,
                         OeDate = dtpOeTime.Value.Date,
@@ -218,7 +218,7 @@ namespace AnonManagementSystem
                         MotorDate = dtpMotorTime.Value.Date,
                         MotorOemNo = tbMotorOemNo.Text,
                         FaultDescri = tbOeFailDetail.Text,
-                        Vehicle = tbVehiclesNo.Text
+                        Vehicle = tbSerialNo.Text
                     };
                     SaveVehicleSucess?.Invoke(Add, Index, _comvh, _vehiclesImagesList, _oe, _oilImagesList);
                 }
@@ -266,18 +266,19 @@ namespace AnonManagementSystem
                    List<string> vhMotorModelList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.MotorModel)).Select(s => s.MotorModel)).Distinct().ToList();
                    List<string> vhTechConList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.TechCondition)).Select(s => s.TechCondition)).Distinct().ToList();
                    List<string> vhFactoryList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.Factory)).Select(s => s.Factory)).Distinct().ToList();
-                   List<string> vhFuelTypeList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.FuelType)).Select(s => s.FuelType)).Distinct().ToList();
-                   List<string> vhDrivingModelList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.DrivingModel)).Select(s => s.DrivingModel)).Distinct().ToList();
-                   List<string> vhChargersList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.VehicleChargers)).Select(s => s.VehicleChargers)).Distinct().ToList();
-                   List<string> vhSpotNoList =(_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.VehicleSpotNo)).Select(s => s.VehicleSpotNo)).Distinct().ToList();
-                   List<string> oeModelList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.OeModel)).Select(s => s.OeModel)).Distinct().ToList();
-                   List<string> oeTechConList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.TechCondition)).Select(s => s.TechCondition)).Distinct().ToList();
-                   List<string> oeOeFactoryList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.OeFactory)).Select(s => s.OeFactory)).Distinct().ToList();
-                   List<string> oeMotorModelList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorModel)).Select(s => s.MotorModel)).Distinct().ToList();
-                   List<string> oeMotorFuelList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFuel)).Select(s => s.MotorFuel)).Distinct().ToList();
-                   List<string> oeMotorFactoryList =(_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFactory)).Select(s => s.MotorFactory)).Distinct().ToList();
+                   List<string> vhFuelTypeList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.FuelType)).Select(s => s.FuelType)).Distinct().ToList();
+                   List<string> vhDrivingModelList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.DrivingModel)).Select(s => s.DrivingModel)).Distinct().ToList();
+                   List<string> vhChargersList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.VehicleChargers)).Select(s => s.VehicleChargers)).Distinct().ToList();
+                   List<string> vhSpotNoList = (_equipDb.CombatVehicles.Where(s => !string.IsNullOrEmpty(s.VehicleSpotNo)).Select(s => s.VehicleSpotNo)).Distinct().ToList();
 
-                   _synchContext.Post(a =>
+                   List<string> oeModelList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.OeModel)).Select(s => s.OeModel)).Distinct().ToList();
+                   List<string> oeTechConList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.TechCondition)).Select(s => s.TechCondition)).Distinct().ToList();
+                   List<string> oeOeFactoryList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.OeFactory)).Select(s => s.OeFactory)).Distinct().ToList();
+                   List<string> oeMotorModelList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorModel)).Select(s => s.MotorModel)).Distinct().ToList();
+                   List<string> oeMotorFuelList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFuel)).Select(s => s.MotorFuel)).Distinct().ToList();
+                   List<string> oeMotorFactoryList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFactory)).Select(s => s.MotorFactory)).Distinct().ToList();
+
+                   _synchContext.Send(a =>
                    {
                        cmbName.DataSource = vhNameList;
                        cmbVehiclesModel.DataSource = vhModelList;
@@ -288,13 +289,6 @@ namespace AnonManagementSystem
                        cmbDriveModel.DataSource = vhDrivingModelList;
                        cmbCharger.DataSource = vhChargersList;
                        cmbSpot.DataSource = vhSpotNoList;
-                                                         
-                       cmbOeModel.DataSource = oeModelList;
-                       cmbTechCondition.DataSource = oeTechConList;
-                       cmbOeFactory.DataSource = oeOeFactoryList;
-                       cmbMotorModel.DataSource = oeMotorModelList;
-                       cmbMotorFuelType.DataSource = oeMotorFuelList;
-                       cmbMotorFactory.DataSource = oeMotorFactoryList;
 
                        cmbName.SelectedIndex = -1;
                        cmbVehiclesModel.SelectedIndex = -1;
@@ -306,14 +300,22 @@ namespace AnonManagementSystem
                        cmbCharger.SelectedIndex = -1;
                        cmbSpot.SelectedIndex = -1;
 
+                       cmbOeModel.DataSource = oeModelList;
+                       cmbMotorTechCon.DataSource = oeTechConList;
+                       cmbOeFactory.DataSource = oeOeFactoryList;
+                       cmbMotorModel.DataSource = oeMotorModelList;
+                       cmbMotorFuelType.DataSource = oeMotorFuelList;
+                       cmbMotorFactory.DataSource = oeMotorFactoryList;
+
                        cmbOeModel.SelectedIndex = -1;
-                       cmbTechCondition.SelectedIndex = -1;
+                       cmbMotorTechCon.SelectedIndex = -1;
                        cmbOeFactory.SelectedIndex = -1;
                        cmbMotorModel.SelectedIndex = -1;
                        cmbMotorFuelType.SelectedIndex = -1;
                        cmbMotorFactory.SelectedIndex = -1;
 
                        tsbRestore.Enabled = !Add;
+
                    }, null);
 
                    #endregion 下拉列表内容
@@ -329,7 +331,7 @@ namespace AnonManagementSystem
                                vhimgdic.Add(equipmentImage.Name, img);
                            }
                        }
-                       _synchContext.Post(a =>
+                       _synchContext.Send(a =>
                        {
                            cmbName.Text = _comvh.Name;
                            tbSerialNo.Text = _comvh.SerialNo;
@@ -365,12 +367,12 @@ namespace AnonManagementSystem
                                    oeimgdic.Add(equipmentImage.Name, img);
                                }
                            }
-                           _synchContext.Post(a =>
+                           _synchContext.Send(a =>
                            {
                                tbOilEngineNo.Text = _oe.OeNo;
                                cmbOeModel.Text = _oe.OeModel;
                                tbOePower.Text = _oe.OutPower;
-                               cmbTechCondition.Text = _oe.TechCondition;
+                               cmbMotorTechCon.Text = _oe.TechCondition;
                                nudWorkHour.Value = int.Parse(_oe.WorkHour);
                                cmbOeFactory.Text = _oe.OeFactory;
                                dtpOeTime.Value = _oe.OeDate;
@@ -413,5 +415,21 @@ namespace AnonManagementSystem
             { IsBackground = true };
             loadVhDataThread.Start();
         }
+
+        private void tabCtrlVehicle_Selected(object sender, TabControlEventArgs e)
+        {
+            _synchContext.Post(a =>
+            {
+
+            }, null);
+
+            if (tabCtrlVehicle.SelectedTab == tabOilEngine)
+            {
+                if (!Add)
+                {
+                }
+            }
+        }
+
     }
 }

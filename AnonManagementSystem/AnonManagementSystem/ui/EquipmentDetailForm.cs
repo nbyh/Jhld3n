@@ -56,6 +56,7 @@ namespace AnonManagementSystem
         public string Id
         {
             set { _id = value; }
+            get { return _id; }
         }
 
         public int Index { get; set; }
@@ -141,11 +142,12 @@ namespace AnonManagementSystem
 
                     #region 事件数据更新
 
+                    _eventDataList = eventdatalist;
+                    _equipDb.EventData.Where(eqed => eqed.EventsNo == events.No).Delete();
                     foreach (var eve in eventdatalist)
                     {
-                        _equipDb.InsertOrReplace(eve);
+                        _equipDb.Insert(eve);
                     }
-                    _eventDataList = eventdatalist;
 
                     #endregion 事件数据更新
 
@@ -377,9 +379,15 @@ namespace AnonManagementSystem
                     {
                         #region 油机更新
 
-                        var pointoe = (from oe in _equipDb.OilEngines
-                                       where oe.OeNo == oilEngine.OeNo
-                                       select oe).First();
+                        var pointoet = (from oe in _equipDb.OilEngines
+                                        where oe.OeNo == oilEngine.OeNo
+                                        select oe);
+                        OilEngine pointoe = new OilEngine();
+                        if (pointoet.Any())
+                        {
+                            pointoe = pointoet.First();
+                        }
+                        pointoe.OeNo = oilEngine.OeNo;
                         pointoe.OeModel = oilEngine.OeModel;
                         pointoe.OutPower = oilEngine.OutPower;
                         pointoe.TechCondition = oilEngine.TechCondition;
@@ -396,7 +404,7 @@ namespace AnonManagementSystem
                         pointoe.MotorOemNo = oilEngine.MotorOemNo;
                         pointoe.FaultDescri = oilEngine.FaultDescri;
                         pointoe.Vehicle = oilEngine.Vehicle;
-
+                        _oilEngines = pointoe;
                         _equipDb.InsertOrReplace(pointoe);
 
                         #endregion 油机更新
@@ -470,7 +478,7 @@ namespace AnonManagementSystem
                     Enableedit = _enableedit,
                     Index = e.RowIndex,
                     Add = false,
-                    Id = id,
+                    Id = Id,
                     Comvh = vh,
                     VehiclesImagesList = vilist,
                     Oe = oe,
@@ -496,7 +504,7 @@ namespace AnonManagementSystem
                     Enableedit = _enableedit,
                     Index = e.RowIndex,
                     Add = false,
-                    Id = id,
+                    Id = Id,
                     Eqevents = ee,
                     EventdataList = edlist,
                     EventsImgList = eilist
@@ -518,7 +526,7 @@ namespace AnonManagementSystem
                     Enableedit = _enableedit,
                     Index = e.RowIndex,
                     Add = false,
-                    Id = id,
+                    Id = Id,
                     Material1 = m
                 };
                 materialDetailForm.SaveMaterialSucess += AddModifyMaterialSucess;

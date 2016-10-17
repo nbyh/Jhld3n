@@ -370,7 +370,6 @@ namespace AnonManagementSystem
                 else
                 {
                     var eventfirst = _equipDb.Events.First(eq => eq.No == _id);
-                    _eventdataList.Clear();
 
                     eventfirst.No = cmbEventNo.Text;
                     eventfirst.Name = cmbEventName.Text;
@@ -420,7 +419,7 @@ namespace AnonManagementSystem
 
         private void tsbAddEventsData_Click(object sender, EventArgs e)
         {
-            dgvEvents.DataSource = null;
+            //dgvEvents.DataSource = null;
             dgvEvents.Rows.Add(1);
             int rc = dgvEvents.RowCount;
             dgvEvents[0, rc - 1].Value = rc - 1;
