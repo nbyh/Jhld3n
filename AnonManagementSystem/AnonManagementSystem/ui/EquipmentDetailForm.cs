@@ -1041,38 +1041,38 @@ namespace AnonManagementSystem
                             _equipImageDb.InsertOrReplace(equipimg);
                         }
 
-                        foreach (var eves in _eventsList)
-                        {
-                            _equipDb.InsertOrReplace(eves);
-                        }
-                        foreach (var veh in _comVehList)
-                        {
-                            _equipDb.InsertOrReplace(veh);
-                        }
-                        if (_oilEngines != null)
-                        {
-                            _equipDb.InsertOrReplace(_oilEngines);
-                            foreach (var oilimg in _oilImgList)
-                            {
-                                _oilImageDb.InsertOrReplace(oilimg);
-                            }
-                        }
-                        foreach (var mat in _materList)
-                        {
-                            _equipDb.InsertOrReplace(mat);
-                        }
-                        foreach (var evedata in _eventDataList)
-                        {
-                            _equipDb.Update(evedata);
-                        }
-                        foreach (var vhImg in _vehImgList)
-                        {
-                            _vehiclesImageDb.InsertOrReplace(vhImg);
-                        }
-                        foreach (var eveImg in _eventsImgList)
-                        {
-                            _eventsImageDb.InsertOrReplace(eveImg);
-                        }
+                        //foreach (var eves in _eventsList)
+                        //{
+                        //    _equipDb.InsertOrReplace(eves);
+                        //}
+                        //foreach (var veh in _comVehList)
+                        //{
+                        //    _equipDb.InsertOrReplace(veh);
+                        //}
+                        //if (_oilEngines != null)
+                        //{
+                        //    _equipDb.InsertOrReplace(_oilEngines);
+                        //    foreach (var oilimg in _oilImgList)
+                        //    {
+                        //        _oilImageDb.InsertOrReplace(oilimg);
+                        //    }
+                        //}
+                        //foreach (var mat in _materList)
+                        //{
+                        //    _equipDb.InsertOrReplace(mat);
+                        //}
+                        //foreach (var evedata in _eventDataList)
+                        //{
+                        //    _equipDb.Update(evedata);
+                        //}
+                        //foreach (var vhImg in _vehImgList)
+                        //{
+                        //    _vehiclesImageDb.InsertOrReplace(vhImg);
+                        //}
+                        //foreach (var eveImg in _eventsImgList)
+                        //{
+                        //    _eventsImageDb.InsertOrReplace(eveImg);
+                        //}
 
                         #endregion 修改设备信息
                     }

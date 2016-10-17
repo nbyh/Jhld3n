@@ -110,13 +110,11 @@
             this.dtpOeTime = new System.Windows.Forms.DateTimePicker();
             this.cmbOeModel = new System.Windows.Forms.ComboBox();
             this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.ilvOe = new AnonManagementSystem.ImageListViewer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.ilvVehicle = new AnonManagementSystem.ImageListViewer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
@@ -128,6 +126,8 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.ilvOe = new AnonManagementSystem.ImageListViewer();
+            this.ilvVehicle = new AnonManagementSystem.ImageListViewer();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -551,6 +551,9 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.Controls.Add(this.tbVehiclesDescri);
             this.groupBox8.Location = new System.Drawing.Point(8, 205);
             this.groupBox8.Name = "groupBox8";
@@ -607,10 +610,13 @@
             // 
             // groupBox21
             // 
+            this.groupBox21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox21.Controls.Add(this.tbOeFailDetail);
-            this.groupBox21.Location = new System.Drawing.Point(6, 224);
+            this.groupBox21.Location = new System.Drawing.Point(6, 205);
             this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(760, 254);
+            this.groupBox21.Size = new System.Drawing.Size(750, 270);
             this.groupBox21.TabIndex = 2;
             this.groupBox21.TabStop = false;
             this.groupBox21.Text = "故障描述";
@@ -623,7 +629,7 @@
             this.tbOeFailDetail.Multiline = true;
             this.tbOeFailDetail.Name = "tbOeFailDetail";
             this.tbOeFailDetail.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOeFailDetail.Size = new System.Drawing.Size(754, 234);
+            this.tbOeFailDetail.Size = new System.Drawing.Size(744, 250);
             this.tbOeFailDetail.TabIndex = 0;
             // 
             // groupBox14
@@ -967,16 +973,6 @@
             this.tabPage16.Text = "油机图片";
             this.tabPage16.UseVisualStyleBackColor = true;
             // 
-            // ilvOe
-            // 
-            this.ilvOe.DeleteImgKey = null;
-            this.ilvOe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvOe.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvOe.ImgDictionary")));
-            this.ilvOe.Location = new System.Drawing.Point(0, 25);
-            this.ilvOe.Name = "ilvOe";
-            this.ilvOe.Size = new System.Drawing.Size(762, 453);
-            this.ilvOe.TabIndex = 10;
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1026,16 +1022,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "车辆图片";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // ilvVehicle
-            // 
-            this.ilvVehicle.DeleteImgKey = null;
-            this.ilvVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvVehicle.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvVehicle.ImgDictionary")));
-            this.ilvVehicle.Location = new System.Drawing.Point(0, 25);
-            this.ilvVehicle.Name = "ilvVehicle";
-            this.ilvVehicle.Size = new System.Drawing.Size(776, 485);
-            this.ilvVehicle.TabIndex = 9;
             // 
             // toolStrip5
             // 
@@ -1128,6 +1114,26 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
+            // 
+            // ilvOe
+            // 
+            this.ilvOe.DeleteImgKey = null;
+            this.ilvOe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvOe.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvOe.ImgDictionary")));
+            this.ilvOe.Location = new System.Drawing.Point(0, 25);
+            this.ilvOe.Name = "ilvOe";
+            this.ilvOe.Size = new System.Drawing.Size(762, 453);
+            this.ilvOe.TabIndex = 10;
+            // 
+            // ilvVehicle
+            // 
+            this.ilvVehicle.DeleteImgKey = null;
+            this.ilvVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvVehicle.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvVehicle.ImgDictionary")));
+            this.ilvVehicle.Location = new System.Drawing.Point(0, 25);
+            this.ilvVehicle.Name = "ilvVehicle";
+            this.ilvVehicle.Size = new System.Drawing.Size(776, 485);
+            this.ilvVehicle.TabIndex = 9;
             // 
             // VehicleDetailForm
             // 

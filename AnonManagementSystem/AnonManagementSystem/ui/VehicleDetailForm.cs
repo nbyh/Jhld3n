@@ -80,6 +80,12 @@ namespace AnonManagementSystem
         private void chkCombineOe_CheckedChanged(object sender, EventArgs e)
         {
             tabOilEngine.Parent = chkCombineOe.Checked ? tabCtrlVehicle : null;
+            cmbOeModel.SelectedIndex = -1;
+            cmbMotorTechCon.SelectedIndex = -1;
+            cmbOeFactory.SelectedIndex = -1;
+            cmbMotorModel.SelectedIndex = -1;
+            cmbMotorFuelType.SelectedIndex = -1;
+            cmbMotorFactory.SelectedIndex = -1;
         }
 
         private void Num_KeyPress(object sender, KeyPressEventArgs e)
@@ -250,7 +256,7 @@ namespace AnonManagementSystem
         private void VehicleDetailForm_Load(object sender, EventArgs e)
         {
             tbSerialNo.Enabled = Add;
-            tabOilEngine.Parent = null;
+            //tabOilEngine.Parent = null;
         }
 
         private void VehicleDetailForm_Shown(object sender, EventArgs e)
@@ -278,7 +284,7 @@ namespace AnonManagementSystem
                    List<string> oeMotorFuelList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFuel)).Select(s => s.MotorFuel)).Distinct().ToList();
                    List<string> oeMotorFactoryList = (_equipDb.OilEngines.Where(s => !string.IsNullOrEmpty(s.MotorFactory)).Select(s => s.MotorFactory)).Distinct().ToList();
 
-                   _synchContext.Send(a =>
+                   _synchContext.Post(a =>
                    {
                        cmbName.DataSource = vhNameList;
                        cmbVehiclesModel.DataSource = vhModelList;
@@ -331,7 +337,7 @@ namespace AnonManagementSystem
                                vhimgdic.Add(equipmentImage.Name, img);
                            }
                        }
-                       _synchContext.Send(a =>
+                       _synchContext.Post(a =>
                        {
                            cmbName.Text = _comvh.Name;
                            tbSerialNo.Text = _comvh.SerialNo;
@@ -355,20 +361,17 @@ namespace AnonManagementSystem
                            chkCombineOe.Checked = _comvh.CombineOe;
                            ilvVehicle.ImgDictionary = vhimgdic;
                            ilvVehicle.ShowImages();
-                       }, null);
-                       if (_comvh.CombineOe)
-                       {
-                           Dictionary<string, Image> oeimgdic = new Dictionary<string, Image>();
-                           foreach (var equipmentImage in _oilImagesList)
+                           if (_comvh.CombineOe)
                            {
-                               using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                               Dictionary<string, Image> oeimgdic = new Dictionary<string, Image>();
+                               foreach (var equipmentImage in _oilImagesList)
                                {
-                                   Image img = Image.FromStream(ms);
-                                   oeimgdic.Add(equipmentImage.Name, img);
+                                   using (MemoryStream ms = new MemoryStream(equipmentImage.Images))
+                                   {
+                                       Image img = Image.FromStream(ms);
+                                       oeimgdic.Add(equipmentImage.Name, img);
+                                   }
                                }
-                           }
-                           _synchContext.Send(a =>
-                           {
                                tbOilEngineNo.Text = _oe.OeNo;
                                cmbOeModel.Text = _oe.OeModel;
                                tbOePower.Text = _oe.OutPower;
@@ -388,8 +391,19 @@ namespace AnonManagementSystem
                                tbVehiclesNo.Text = _oe.Vehicle;
                                ilvOe.ImgDictionary = oeimgdic;
                                ilvOe.ShowImages();
-                           }, null);
-                       }
+                           }
+                           else
+                           {
+                               tabOilEngine.Parent = null;
+                           }
+                       }, null);
+                   }
+                   else
+                   {
+                       _synchContext.Post(a =>
+                       {
+                           tabOilEngine.Parent = null;
+                       }, null);
                    }
                    CommonLogHelper.GetInstance("LogInfo").Info($"加载车辆数据{_id}成功");
                }
@@ -415,21 +429,5 @@ namespace AnonManagementSystem
             { IsBackground = true };
             loadVhDataThread.Start();
         }
-
-        private void tabCtrlVehicle_Selected(object sender, TabControlEventArgs e)
-        {
-            _synchContext.Post(a =>
-            {
-
-            }, null);
-
-            if (tabCtrlVehicle.SelectedTab == tabOilEngine)
-            {
-                if (!Add)
-                {
-                }
-            }
-        }
-
     }
 }

@@ -141,7 +141,15 @@ namespace AnonManagementSystem
                            tbProblems.Text = _events.Problem;
                            tbRemark.Text = _events.Remarks;
 
-                           dgvEvents.DataSource = _eventdataList;
+                           if (_eventdataList.Count > 0)
+                           {
+                               dgvEvents.RowCount = _eventdataList.Count;
+
+                               for (int i = 0; i < _eventdataList.Count; i++)
+                               {
+                                   dgvEvents[1, i].Value = _eventdataList[i].Name;
+                               }
+                           }
 
                            ilvEvents.ImgDictionary = imgdic;
                            ilvEvents.ShowImages();
@@ -289,9 +297,9 @@ namespace AnonManagementSystem
                 int rowindex = dgvEvents.CurrentRow.Index;
                 if (MessageBox.Show(@"确定是否删除", @"提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    if (dgvEvents[2, rowindex].Value != null)
+                    if (dgvEvents[1, rowindex].Value != null)
                     {
-                        string id = dgvEvents[2, rowindex].Value.ToString();
+                        string id = dgvEvents[1, rowindex].Value.ToString();
                         foreach (var ed in _eventdataList.Where(d => d.Name == id))
                         {
                             _eventdataList.Remove(ed);
@@ -325,12 +333,12 @@ namespace AnonManagementSystem
                 _eventdataList.Clear();
                 for (int i = 0; i < dgvEvents.RowCount; i++)
                 {
-                    if (dgvEvents[2, i].Value != null && dgvEvents[2, i].Value.ToString() != string.Empty)
+                    if (dgvEvents[1, i].Value != null && dgvEvents[1, i].Value.ToString() != string.Empty)
                     {
                         EventData ed = new EventData()
                         {
-                            //ID = dgvEvents[1, i].Value.ToString(),
-                            Name = dgvEvents[2, i].Value.ToString(),
+                            //ID = dgvEvents[2, i].Value.ToString(),
+                            Name = dgvEvents[1, i].Value.ToString(),
                             //Spot = dgvEvents[3, i].Value.ToString(),
                             EventsNo = cmbEventNo.Text
                         };
@@ -369,7 +377,7 @@ namespace AnonManagementSystem
                 }
                 else
                 {
-                    var eventfirst = _equipDb.Events.First(eq => eq.No == _id);
+                    var eventfirst = _equipDb.Events.First(eq => eq.Equipment == _id);
 
                     eventfirst.No = cmbEventNo.Text;
                     eventfirst.Name = cmbEventName.Text;
@@ -419,10 +427,7 @@ namespace AnonManagementSystem
 
         private void tsbAddEventsData_Click(object sender, EventArgs e)
         {
-            //dgvEvents.DataSource = null;
-            dgvEvents.Rows.Add(1);
-            int rc = dgvEvents.RowCount;
-            dgvEvents[0, rc - 1].Value = rc - 1;
+            dgvEvents.Rows.Add();
         }
     }
 }
