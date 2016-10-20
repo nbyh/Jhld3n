@@ -237,7 +237,7 @@ namespace AnonManagementSystem
             _curPage = 1;
             DataRefresh(_pageSize, _curPage, _equip);
         }
-        
+
         private void btnFront_Click(object sender, EventArgs e)
         {
             _curPage = 1;
