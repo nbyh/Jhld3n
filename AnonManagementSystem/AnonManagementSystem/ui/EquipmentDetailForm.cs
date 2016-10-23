@@ -162,7 +162,7 @@ namespace AnonManagementSystem
                         {
                             if (!seinoList.Contains(data.Name))
                             {
-                                _eventsImageDb.InsertOrReplace(data);
+                                _eventsImageDb.Insert(data);
                             }
                         }
                     }
@@ -358,7 +358,7 @@ namespace AnonManagementSystem
                             if (!sevdnoList.Contains(data.Name))
                             {
                                 //todo：增加
-                                _vehiclesImageDb.InsertOrReplace(data);
+                                _vehiclesImageDb.Insert(data);
                             }
                         }
                     }
@@ -423,7 +423,7 @@ namespace AnonManagementSystem
                                 if (!soilnoList.Contains(data.Name))
                                 {
                                     //todo：增加
-                                    _oilImageDb.InsertOrReplace(data);
+                                    _oilImageDb.Insert(data);
                                 }
                             }
                         }
@@ -836,7 +836,7 @@ namespace AnonManagementSystem
             try
             {
                 int selectRowIndex = dgvMaterial.CurrentRow.Index;
-                string id = dgvMaterial.Rows[selectRowIndex].Cells["No"].Value.ToString();
+                string id = dgvMaterial.Rows[selectRowIndex].Cells["MaterialNo"].Value.ToString();
                 //dgvMaterial.Rows.RemoveAt(selectRowIndex);
 
                 foreach (var mm in _materList.Where(mm => mm.No == id))
@@ -1021,11 +1021,8 @@ namespace AnonManagementSystem
                         equipfirst.UseCondition = cmbUseCondition.Text;
                         equipfirst.MajorCategory = cmbMajorCategory.Text;
                         equipfirst.Factory = cmbFactory.Text;
-                        equipfirst.OemNo = tbOemNo.Text;
                         equipfirst.ProductionDate = dtpTime.Value.Date;
-                        equipfirst.Model = cmbModel.Text;
                         equipfirst.Name = cmbName.Text;
-                        equipfirst.SubDepartment = cmbSubDepart.Text;
                         equipfirst.Model = cmbModel.Text;
                         equipfirst.SerialNo = tbSerialNo.Text;
                         equipfirst.TechRemould = tbTechRemould.Text;
@@ -1033,12 +1030,13 @@ namespace AnonManagementSystem
                         equipfirst.MainUsage = tbMainUsage.Text;
                         equipfirst.UseMethod = tbUseMethod.Text;
                         equipfirst.PerformIndex = tbPerformIndex.Text;
+                        equipfirst.SetupVideo = tbSetupVideo.Text;
 
                         _equipDb.Update(equipfirst);
 
                         foreach (var equipimg in _equipImageList)
                         {
-                            _equipImageDb.InsertOrReplace(equipimg);
+                            _equipImageDb.Insert(equipimg);
                         }
 
                         //foreach (var eves in _eventsList)
