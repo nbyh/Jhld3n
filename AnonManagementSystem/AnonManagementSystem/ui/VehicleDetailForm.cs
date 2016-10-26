@@ -180,6 +180,11 @@ namespace AnonManagementSystem
         {
             try
             {
+                if (string.IsNullOrEmpty(cmbName.Text) || string.IsNullOrEmpty(tbSerialNo.Text))
+                {
+                    MessageBox.Show(this, @"车辆编号和名称均不能为空", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 _comvh = new CombatVehicle()
                 {
                     Name = cmbName.Text,
@@ -206,6 +211,11 @@ namespace AnonManagementSystem
                 };
                 if (chkCombineOe.Checked)
                 {
+                    if (string.IsNullOrEmpty(tbOilEngineNo.Text))
+                    {
+                        MessageBox.Show(this, @"油机编号不能为空", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     _oe = new OilEngine()
                     {
                         OeNo = tbOilEngineNo.Text,

@@ -83,6 +83,10 @@
             this.tsbDeleteEventsData = new System.Windows.Forms.ToolStripButton();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ilvEvents = new AnonManagementSystem.ImageListViewer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
@@ -93,10 +97,6 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -403,7 +403,7 @@
             this.cmbEventNo.FormattingEnabled = true;
             this.cmbEventNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.cmbEventNo.Location = new System.Drawing.Point(174, 24);
-            this.cmbEventNo.MaxLength = 12;
+            this.cmbEventNo.MaxLength = 14;
             this.cmbEventNo.Name = "cmbEventNo";
             this.cmbEventNo.Size = new System.Drawing.Size(110, 20);
             this.cmbEventNo.TabIndex = 0;
@@ -690,6 +690,36 @@
             this.dgvEvents.TabIndex = 1;
             this.dgvEvents.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvEvents_RowPostPaint);
             // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.FillWeight = 25.38071F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn6.FillWeight = 174.6193F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "活动涉及资料";
+            this.dataGridViewTextBoxColumn6.MaxInputLength = 100;
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "资料编号";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
+            // 
+            // dataGridViewLinkColumn1
+            // 
+            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
+            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
+            this.dataGridViewLinkColumn1.Text = "";
+            this.dataGridViewLinkColumn1.Visible = false;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.ilvEvents);
@@ -783,36 +813,6 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.FillWeight = 25.38071F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "序号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn6.FillWeight = 174.6193F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "活动涉及资料";
-            this.dataGridViewTextBoxColumn6.MaxInputLength = 100;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "资料编号";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // dataGridViewLinkColumn1
-            // 
-            this.dataGridViewLinkColumn1.HeaderText = "存放位置";
-            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
-            this.dataGridViewLinkColumn1.Text = "";
-            this.dataGridViewLinkColumn1.Visible = false;
             // 
             // AddEventsForm
             // 

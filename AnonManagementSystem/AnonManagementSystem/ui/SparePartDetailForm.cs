@@ -134,7 +134,7 @@ namespace AnonManagementSystem
                     #endregion 下拉列表内容
 
                     if (!Add)
-                    { 
+                    {
                         LoadSparePartData(sp);
                     }
                     CommonLogHelper.GetInstance("LogInfo").Info($"加载设备数据{_id}成功");
@@ -238,6 +238,11 @@ namespace AnonManagementSystem
         {
             try
             {
+                if (string.IsNullOrEmpty(tbSerialNo.Text) || string.IsNullOrEmpty(cmbName.Text))
+                {
+                    MessageBox.Show(this, @"备件编号和名称均不能为空", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (ssbStoreSpot.Text.Length < 3)
                 {
                     MessageBox.Show(@"库存位置请至少填到层为止", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -260,13 +265,6 @@ namespace AnonManagementSystem
                         Status = cmbStatus.Text,
                     };
                     _sparePartDb.Insert(ce);
-                    if (_spImgList.Any())
-                    {
-                        foreach (var sparePartImage in _spImgList)
-                        {
-                            _partsImageDb.Insert(sparePartImage);
-                        }
-                    }
                 }
                 else
                 {
@@ -284,29 +282,21 @@ namespace AnonManagementSystem
                     spfirst.Amount = nUdAmount.Value.ToString(CultureInfo.InvariantCulture);
                     spfirst.UseType = tbUseType.Text;
                     spfirst.Status = cmbStatus.Text;
-                    //var spImginDb = from img in _partsImageDB.SparePartImage
-                    //                 where img.SerialNo == spfirst.SerialNo
-                    //                 select img;
-                    //foreach (var sp in spImginDb)
-                    //{
-                    //    var noimg = from n in _spImgList
-                    //                where n.Name == sp.Name
-                    //                select n;
-                    //    if (!noimg.Any())
-                    //    {
-                    //        _partsImageDB.SparePartImage.Remove(sp);
-                    //    }
-                    //}
+
                     _sparePartDb.Update(spfirst);
-                    foreach (var sparePartImage in _spImgList)
+                }
+                foreach (var sparePartImage in _spImgList)
+                {
+                    var spimg = from img in _partsImageDb.SparePartImages
+                                where img.Images == sparePartImage.Images
+                                select img;
+                    if (spimg.Any())
                     {
-                        var spimg = from img in _partsImageDb.SparePartImages
-                                    where img.Name == sparePartImage.Name
-                                    select img;
-                        if (!spimg.Any())
-                        {
-                            _partsImageDb.Insert(sparePartImage);
-                        }
+                        _sparePartDb.Update(sparePartImage);
+                    }
+                    else
+                    {
+                        _partsImageDb.Insert(sparePartImage);
                     }
                 }
                 //_sparePartDB;

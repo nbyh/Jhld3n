@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EquipmentDetailForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -79,6 +79,16 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dgvVeh = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvFactory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvProductionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvMotorModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvTechCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VehicleMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAddVehicle = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteVehicle = new System.Windows.Forms.ToolStripButton();
@@ -117,7 +127,6 @@
             this.tsbAddMaterial = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteMaterial = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImage = new System.Windows.Forms.ToolStripButton();
@@ -129,16 +138,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvFactory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvProductionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvMotorModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvTechCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VehicleMoreInfo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ilvEquipment = new AnonManagementSystem.ImageListViewer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -223,8 +223,9 @@
             // 
             this.gbBaseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbBaseInfo.Controls.Add(this.cmbFactory);
             this.gbBaseInfo.Controls.Add(this.tbOemNo);
+            this.gbBaseInfo.Controls.Add(this.label6);
+            this.gbBaseInfo.Controls.Add(this.cmbFactory);
             this.gbBaseInfo.Controls.Add(this.cmbTechnician);
             this.gbBaseInfo.Controls.Add(this.cmbName);
             this.gbBaseInfo.Controls.Add(this.label3);
@@ -242,7 +243,6 @@
             this.gbBaseInfo.Controls.Add(this.label13);
             this.gbBaseInfo.Controls.Add(this.cmbMajorCategory);
             this.gbBaseInfo.Controls.Add(this.label10);
-            this.gbBaseInfo.Controls.Add(this.label6);
             this.gbBaseInfo.Controls.Add(this.label5);
             this.gbBaseInfo.Controls.Add(this.label4);
             this.gbBaseInfo.Controls.Add(this.dtpTime);
@@ -259,17 +259,17 @@
             this.cmbFactory.Location = new System.Drawing.Point(116, 75);
             this.cmbFactory.MaxLength = 20;
             this.cmbFactory.Name = "cmbFactory";
-            this.cmbFactory.Size = new System.Drawing.Size(263, 20);
+            this.cmbFactory.Size = new System.Drawing.Size(154, 20);
             this.cmbFactory.TabIndex = 5;
             // 
             // tbOemNo
             // 
             this.tbOemNo.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tbOemNo.Location = new System.Drawing.Point(635, 75);
-            this.tbOemNo.MaxLength = 10;
+            this.tbOemNo.Location = new System.Drawing.Point(339, 75);
+            this.tbOemNo.MaxLength = 20;
             this.tbOemNo.Name = "tbOemNo";
-            this.tbOemNo.Size = new System.Drawing.Size(71, 21);
-            this.tbOemNo.TabIndex = 7;
+            this.tbOemNo.Size = new System.Drawing.Size(154, 21);
+            this.tbOemNo.TabIndex = 6;
             this.tbOemNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SerialNo_KeyPress);
             // 
             // cmbTechnician
@@ -429,7 +429,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(576, 79);
+            this.label6.Location = new System.Drawing.Point(280, 79);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 40;
@@ -438,7 +438,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(385, 79);
+            this.label5.Location = new System.Drawing.Point(499, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 41;
@@ -457,10 +457,10 @@
             // 
             this.dtpTime.CustomFormat = "yyyy年MM月dd日";
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTime.Location = new System.Drawing.Point(444, 75);
+            this.dtpTime.Location = new System.Drawing.Point(558, 75);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.Size = new System.Drawing.Size(124, 21);
-            this.dtpTime.TabIndex = 6;
+            this.dtpTime.TabIndex = 7;
             // 
             // cmbModel
             // 
@@ -495,13 +495,13 @@
             this.groupBox11.Size = new System.Drawing.Size(760, 120);
             this.groupBox11.TabIndex = 2;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "运用方法";
+            this.groupBox11.Text = "人员、场地及配置";
             // 
             // tbUseMethod
             // 
             this.tbUseMethod.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbUseMethod.Location = new System.Drawing.Point(3, 17);
-            this.tbUseMethod.MaxLength = 50;
+            this.tbUseMethod.MaxLength = 150;
             this.tbUseMethod.Multiline = true;
             this.tbUseMethod.Name = "tbUseMethod";
             this.tbUseMethod.Size = new System.Drawing.Size(754, 100);
@@ -546,7 +546,7 @@
             // 
             this.tbMainUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbMainUsage.Location = new System.Drawing.Point(3, 17);
-            this.tbMainUsage.MaxLength = 200;
+            this.tbMainUsage.MaxLength = 100;
             this.tbMainUsage.Multiline = true;
             this.tbMainUsage.Name = "tbMainUsage";
             this.tbMainUsage.Size = new System.Drawing.Size(754, 100);
@@ -601,19 +601,19 @@
             this.dgvVeh.AllowUserToAddRows = false;
             this.dgvVeh.AllowUserToDeleteRows = false;
             this.dgvVeh.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvVeh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvVeh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvVeh.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvVeh.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVeh.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVeh.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVeh.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvVeh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVeh.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -626,14 +626,14 @@
             this.cvMotorModel,
             this.cvTechCondition,
             this.VehicleMoreInfo});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVeh.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVeh.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvVeh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVeh.Location = new System.Drawing.Point(3, 17);
             this.dgvVeh.MultiSelect = false;
@@ -646,6 +646,84 @@
             this.dgvVeh.TabIndex = 1;
             this.dgvVeh.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVeh_CellContentClick);
             this.dgvVeh.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvVeh_RowPostPaint);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "序号";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvName
+            // 
+            this.cvName.DataPropertyName = "Name";
+            this.cvName.HeaderText = "名称";
+            this.cvName.Name = "cvName";
+            this.cvName.ReadOnly = true;
+            this.cvName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SerialNo
+            // 
+            this.SerialNo.DataPropertyName = "SerialNo";
+            this.SerialNo.HeaderText = "编号";
+            this.SerialNo.Name = "SerialNo";
+            this.SerialNo.ReadOnly = true;
+            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvNo
+            // 
+            this.cvNo.DataPropertyName = "VehiclesNo";
+            this.cvNo.HeaderText = "车牌号";
+            this.cvNo.Name = "cvNo";
+            this.cvNo.ReadOnly = true;
+            this.cvNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvModel
+            // 
+            this.cvModel.DataPropertyName = "Model";
+            this.cvModel.HeaderText = "型号";
+            this.cvModel.Name = "cvModel";
+            this.cvModel.ReadOnly = true;
+            this.cvModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvFactory
+            // 
+            this.cvFactory.DataPropertyName = "Factory";
+            this.cvFactory.HeaderText = "生产厂家";
+            this.cvFactory.Name = "cvFactory";
+            this.cvFactory.ReadOnly = true;
+            this.cvFactory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvProductionDate
+            // 
+            this.cvProductionDate.DataPropertyName = "ProductionDate";
+            this.cvProductionDate.HeaderText = "出厂时间";
+            this.cvProductionDate.Name = "cvProductionDate";
+            this.cvProductionDate.ReadOnly = true;
+            this.cvProductionDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvMotorModel
+            // 
+            this.cvMotorModel.DataPropertyName = "MotorModel";
+            this.cvMotorModel.HeaderText = "发动机型号";
+            this.cvMotorModel.Name = "cvMotorModel";
+            this.cvMotorModel.ReadOnly = true;
+            this.cvMotorModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cvTechCondition
+            // 
+            this.cvTechCondition.DataPropertyName = "TechCondition";
+            this.cvTechCondition.HeaderText = "技术状态";
+            this.cvTechCondition.Name = "cvTechCondition";
+            this.cvTechCondition.ReadOnly = true;
+            this.cvTechCondition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // VehicleMoreInfo
+            // 
+            this.VehicleMoreInfo.HeaderText = "详细信息";
+            this.VehicleMoreInfo.Name = "VehicleMoreInfo";
+            this.VehicleMoreInfo.ReadOnly = true;
+            this.VehicleMoreInfo.Text = "详细信息";
             // 
             // toolStrip1
             // 
@@ -704,19 +782,19 @@
             this.dgvEvents.AllowUserToDeleteRows = false;
             this.dgvEvents.AllowUserToResizeColumns = false;
             this.dgvEvents.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvEvents.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEvents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn12,
@@ -727,14 +805,14 @@
             this.StartTime,
             this.EndTime,
             this.EventMoreInfo});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEvents.Location = new System.Drawing.Point(3, 17);
             this.dgvEvents.MultiSelect = false;
@@ -922,19 +1000,19 @@
             this.dgvMaterial.AllowUserToDeleteRows = false;
             this.dgvMaterial.AllowUserToResizeColumns = false;
             this.dgvMaterial.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvMaterial.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvMaterial.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvMaterial.AutoGenerateColumns = global::AnonManagementSystem.Properties.Settings.Default.AutoColumns;
             this.dgvMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMaterial.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMaterial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMaterial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
@@ -946,14 +1024,14 @@
             this.PaginationSpot,
             this.DocumentLink,
             this.MaterialMoreInfo});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMaterial.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMaterial.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvMaterial.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMaterial.Location = new System.Drawing.Point(3, 17);
             this.dgvMaterial.MultiSelect = false;
@@ -1077,16 +1155,6 @@
             this.tabPage6.Text = "装备图片";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // ilvEquipment
-            // 
-            this.ilvEquipment.DeleteImgKey = null;
-            this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
-            this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
-            this.ilvEquipment.Name = "ilvEquipment";
-            this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
-            this.ilvEquipment.TabIndex = 6;
-            // 
             // toolStrip4
             // 
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1182,83 +1250,15 @@
             // 
             this.ofd.Title = "选择文件";
             // 
-            // Column1
+            // ilvEquipment
             // 
-            this.Column1.HeaderText = "序号";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvName
-            // 
-            this.cvName.DataPropertyName = "Name";
-            this.cvName.HeaderText = "名称";
-            this.cvName.Name = "cvName";
-            this.cvName.ReadOnly = true;
-            this.cvName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // SerialNo
-            // 
-            this.SerialNo.DataPropertyName = "SerialNo";
-            this.SerialNo.HeaderText = "编号";
-            this.SerialNo.Name = "SerialNo";
-            this.SerialNo.ReadOnly = true;
-            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvNo
-            // 
-            this.cvNo.DataPropertyName = "VehiclesNo";
-            this.cvNo.HeaderText = "车牌号";
-            this.cvNo.Name = "cvNo";
-            this.cvNo.ReadOnly = true;
-            this.cvNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvModel
-            // 
-            this.cvModel.DataPropertyName = "Model";
-            this.cvModel.HeaderText = "型号";
-            this.cvModel.Name = "cvModel";
-            this.cvModel.ReadOnly = true;
-            this.cvModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvFactory
-            // 
-            this.cvFactory.DataPropertyName = "Factory";
-            this.cvFactory.HeaderText = "生产厂家";
-            this.cvFactory.Name = "cvFactory";
-            this.cvFactory.ReadOnly = true;
-            this.cvFactory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvProductionDate
-            // 
-            this.cvProductionDate.DataPropertyName = "ProductionDate";
-            this.cvProductionDate.HeaderText = "出厂时间";
-            this.cvProductionDate.Name = "cvProductionDate";
-            this.cvProductionDate.ReadOnly = true;
-            this.cvProductionDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvMotorModel
-            // 
-            this.cvMotorModel.DataPropertyName = "MotorModel";
-            this.cvMotorModel.HeaderText = "发动机型号";
-            this.cvMotorModel.Name = "cvMotorModel";
-            this.cvMotorModel.ReadOnly = true;
-            this.cvMotorModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cvTechCondition
-            // 
-            this.cvTechCondition.DataPropertyName = "TechCondition";
-            this.cvTechCondition.HeaderText = "技术状态";
-            this.cvTechCondition.Name = "cvTechCondition";
-            this.cvTechCondition.ReadOnly = true;
-            this.cvTechCondition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // VehicleMoreInfo
-            // 
-            this.VehicleMoreInfo.HeaderText = "详细信息";
-            this.VehicleMoreInfo.Name = "VehicleMoreInfo";
-            this.VehicleMoreInfo.ReadOnly = true;
-            this.VehicleMoreInfo.Text = "详细信息";
+            this.ilvEquipment.DeleteImgKey = null;
+            this.ilvEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvEquipment.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvEquipment.ImgDictionary")));
+            this.ilvEquipment.Location = new System.Drawing.Point(3, 28);
+            this.ilvEquipment.Name = "ilvEquipment";
+            this.ilvEquipment.Size = new System.Drawing.Size(770, 479);
+            this.ilvEquipment.TabIndex = 6;
             // 
             // EquipmentDetailForm
             // 

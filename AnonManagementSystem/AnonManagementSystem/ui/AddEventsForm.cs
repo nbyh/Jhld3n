@@ -330,6 +330,11 @@ namespace AnonManagementSystem
         {
             try
             {
+                if (string.IsNullOrEmpty(cmbEventNo.Text) || string.IsNullOrEmpty(cmbEventName.Text))
+                {
+                    MessageBox.Show(this, @"活动编号和名称均不能为空", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 _eventdataList.Clear();
                 for (int i = 0; i < dgvEvents.RowCount; i++)
                 {

@@ -26,6 +26,11 @@ namespace AnonManagementSystem
 
         public void AddImages(string key, Image img)
         {
+            if (_imgDic.ContainsKey(key))
+            {
+                MessageBox.Show(@"已经包含相同名称的图片，请选择不同名称的图片！", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             FileInfo fi = new FileInfo(key);
             imgList.Images.Add(key, img);
             _imgDic.Add(key, img);

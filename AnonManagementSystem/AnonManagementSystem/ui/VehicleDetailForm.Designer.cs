@@ -110,11 +110,13 @@
             this.dtpOeTime = new System.Windows.Forms.DateTimePicker();
             this.cmbOeModel = new System.Windows.Forms.ComboBox();
             this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.ilvOe = new AnonManagementSystem.ImageListViewer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAddOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteOeImages = new System.Windows.Forms.ToolStripButton();
             this.tsbSaveImage = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.ilvVehicle = new AnonManagementSystem.ImageListViewer();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.tsbAddImages = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteImages = new System.Windows.Forms.ToolStripButton();
@@ -126,8 +128,6 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbRestore = new System.Windows.Forms.ToolStripButton();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.ilvOe = new AnonManagementSystem.ImageListViewer();
-            this.ilvVehicle = new AnonManagementSystem.ImageListViewer();
             this.tabCtrlVehicle.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbBaseInfo.SuspendLayout();
@@ -526,7 +526,7 @@
             // 
             this.cmbAutoModel.FormattingEnabled = true;
             this.cmbAutoModel.Location = new System.Drawing.Point(379, 49);
-            this.cmbAutoModel.MaxLength = 10;
+            this.cmbAutoModel.MaxLength = 20;
             this.cmbAutoModel.Name = "cmbAutoModel";
             this.cmbAutoModel.Size = new System.Drawing.Size(148, 20);
             this.cmbAutoModel.TabIndex = 4;
@@ -535,7 +535,7 @@
             // 
             this.cmbVehiclesModel.FormattingEnabled = true;
             this.cmbVehiclesModel.Location = new System.Drawing.Point(379, 20);
-            this.cmbVehiclesModel.MaxLength = 10;
+            this.cmbVehiclesModel.MaxLength = 20;
             this.cmbVehiclesModel.Name = "cmbVehiclesModel";
             this.cmbVehiclesModel.Size = new System.Drawing.Size(148, 20);
             this.cmbVehiclesModel.TabIndex = 1;
@@ -660,7 +660,7 @@
             // tbMotorTankage
             // 
             this.tbMotorTankage.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tbMotorTankage.Location = new System.Drawing.Point(482, 21);
+            this.tbMotorTankage.Location = new System.Drawing.Point(536, 21);
             this.tbMotorTankage.MaxLength = 3;
             this.tbMotorTankage.Name = "tbMotorTankage";
             this.tbMotorTankage.Size = new System.Drawing.Size(58, 21);
@@ -672,13 +672,13 @@
             this.cmbMotorModel.Location = new System.Drawing.Point(75, 21);
             this.cmbMotorModel.MaxLength = 10;
             this.cmbMotorModel.Name = "cmbMotorModel";
-            this.cmbMotorModel.Size = new System.Drawing.Size(88, 20);
+            this.cmbMotorModel.Size = new System.Drawing.Size(142, 20);
             this.cmbMotorModel.TabIndex = 0;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(421, 25);
+            this.label45.Location = new System.Drawing.Point(475, 25);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(53, 12);
             this.label45.TabIndex = 85;
@@ -696,7 +696,7 @@
             // tbMotorPower
             // 
             this.tbMotorPower.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tbMotorPower.Location = new System.Drawing.Point(230, 21);
+            this.tbMotorPower.Location = new System.Drawing.Point(284, 21);
             this.tbMotorPower.MaxLength = 3;
             this.tbMotorPower.Name = "tbMotorPower";
             this.tbMotorPower.Size = new System.Drawing.Size(49, 21);
@@ -705,7 +705,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(169, 25);
+            this.label44.Location = new System.Drawing.Point(223, 25);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(53, 12);
             this.label44.TabIndex = 83;
@@ -714,7 +714,7 @@
             // cmbMotorFuelType
             // 
             this.cmbMotorFuelType.FormattingEnabled = true;
-            this.cmbMotorFuelType.Location = new System.Drawing.Point(346, 21);
+            this.cmbMotorFuelType.Location = new System.Drawing.Point(400, 21);
             this.cmbMotorFuelType.MaxLength = 2;
             this.cmbMotorFuelType.Name = "cmbMotorFuelType";
             this.cmbMotorFuelType.Size = new System.Drawing.Size(71, 20);
@@ -724,15 +724,15 @@
             // 
             this.tbMotorOemNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbMotorOemNo.Location = new System.Drawing.Point(482, 49);
-            this.tbMotorOemNo.MaxLength = 10;
+            this.tbMotorOemNo.MaxLength = 20;
             this.tbMotorOemNo.Name = "tbMotorOemNo";
-            this.tbMotorOemNo.Size = new System.Drawing.Size(103, 21);
+            this.tbMotorOemNo.Size = new System.Drawing.Size(142, 21);
             this.tbMotorOemNo.TabIndex = 6;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(285, 25);
+            this.label29.Location = new System.Drawing.Point(339, 25);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(53, 12);
             this.label29.TabIndex = 75;
@@ -760,7 +760,7 @@
             // 
             this.cmbMotorFactory.FormattingEnabled = true;
             this.cmbMotorFactory.Location = new System.Drawing.Point(75, 49);
-            this.cmbMotorFactory.MaxLength = 10;
+            this.cmbMotorFactory.MaxLength = 20;
             this.cmbMotorFactory.Name = "cmbMotorFactory";
             this.cmbMotorFactory.Size = new System.Drawing.Size(151, 20);
             this.cmbMotorFactory.TabIndex = 4;
@@ -813,16 +813,16 @@
             // cmbMotorTechCon
             // 
             this.cmbMotorTechCon.FormattingEnabled = true;
-            this.cmbMotorTechCon.Location = new System.Drawing.Point(605, 22);
+            this.cmbMotorTechCon.Location = new System.Drawing.Point(540, 22);
             this.cmbMotorTechCon.MaxLength = 6;
             this.cmbMotorTechCon.Name = "cmbMotorTechCon";
-            this.cmbMotorTechCon.Size = new System.Drawing.Size(90, 20);
+            this.cmbMotorTechCon.Size = new System.Drawing.Size(84, 20);
             this.cmbMotorTechCon.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(544, 26);
+            this.label2.Location = new System.Drawing.Point(479, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 62;
@@ -832,9 +832,9 @@
             // 
             this.tbOeOemNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbOeOemNo.Location = new System.Drawing.Point(482, 49);
-            this.tbOeOemNo.MaxLength = 10;
+            this.tbOeOemNo.MaxLength = 20;
             this.tbOeOemNo.Name = "tbOeOemNo";
-            this.tbOeOemNo.Size = new System.Drawing.Size(103, 21);
+            this.tbOeOemNo.Size = new System.Drawing.Size(142, 21);
             this.tbOeOemNo.TabIndex = 7;
             // 
             // label33
@@ -868,7 +868,7 @@
             // tbOePower
             // 
             this.tbOePower.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tbOePower.Location = new System.Drawing.Point(380, 22);
+            this.tbOePower.Location = new System.Drawing.Point(430, 22);
             this.tbOePower.MaxLength = 3;
             this.tbOePower.Name = "tbOePower";
             this.tbOePower.Size = new System.Drawing.Size(43, 21);
@@ -877,7 +877,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(319, 26);
+            this.label39.Location = new System.Drawing.Point(371, 26);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(53, 12);
             this.label39.TabIndex = 54;
@@ -887,6 +887,7 @@
             // 
             this.cmbOeFactory.FormattingEnabled = true;
             this.cmbOeFactory.Location = new System.Drawing.Point(75, 49);
+            this.cmbOeFactory.MaxLength = 20;
             this.cmbOeFactory.Name = "cmbOeFactory";
             this.cmbOeFactory.Size = new System.Drawing.Size(151, 20);
             this.cmbOeFactory.TabIndex = 5;
@@ -903,7 +904,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(431, 26);
+            this.label35.Location = new System.Drawing.Point(630, 26);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(53, 12);
             this.label35.TabIndex = 40;
@@ -929,7 +930,7 @@
             // 
             // nudWorkHour
             // 
-            this.nudWorkHour.Location = new System.Drawing.Point(492, 22);
+            this.nudWorkHour.Location = new System.Drawing.Point(691, 22);
             this.nudWorkHour.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -957,9 +958,9 @@
             // 
             this.cmbOeModel.FormattingEnabled = true;
             this.cmbOeModel.Location = new System.Drawing.Point(223, 22);
-            this.cmbOeModel.MaxLength = 10;
+            this.cmbOeModel.MaxLength = 20;
             this.cmbOeModel.Name = "cmbOeModel";
-            this.cmbOeModel.Size = new System.Drawing.Size(88, 20);
+            this.cmbOeModel.Size = new System.Drawing.Size(142, 20);
             this.cmbOeModel.TabIndex = 1;
             // 
             // tabPage16
@@ -972,6 +973,16 @@
             this.tabPage16.TabIndex = 4;
             this.tabPage16.Text = "油机图片";
             this.tabPage16.UseVisualStyleBackColor = true;
+            // 
+            // ilvOe
+            // 
+            this.ilvOe.DeleteImgKey = null;
+            this.ilvOe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvOe.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvOe.ImgDictionary")));
+            this.ilvOe.Location = new System.Drawing.Point(0, 25);
+            this.ilvOe.Name = "ilvOe";
+            this.ilvOe.Size = new System.Drawing.Size(762, 453);
+            this.ilvOe.TabIndex = 10;
             // 
             // toolStrip1
             // 
@@ -1022,6 +1033,16 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "车辆图片";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // ilvVehicle
+            // 
+            this.ilvVehicle.DeleteImgKey = null;
+            this.ilvVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ilvVehicle.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvVehicle.ImgDictionary")));
+            this.ilvVehicle.Location = new System.Drawing.Point(0, 25);
+            this.ilvVehicle.Name = "ilvVehicle";
+            this.ilvVehicle.Size = new System.Drawing.Size(776, 485);
+            this.ilvVehicle.TabIndex = 9;
             // 
             // toolStrip5
             // 
@@ -1114,26 +1135,6 @@
             // 
             this.ofdImage.Filter = "图片文件|*.jpg|图片文件|*.png";
             this.ofdImage.Title = "请选择图片";
-            // 
-            // ilvOe
-            // 
-            this.ilvOe.DeleteImgKey = null;
-            this.ilvOe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvOe.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvOe.ImgDictionary")));
-            this.ilvOe.Location = new System.Drawing.Point(0, 25);
-            this.ilvOe.Name = "ilvOe";
-            this.ilvOe.Size = new System.Drawing.Size(762, 453);
-            this.ilvOe.TabIndex = 10;
-            // 
-            // ilvVehicle
-            // 
-            this.ilvVehicle.DeleteImgKey = null;
-            this.ilvVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ilvVehicle.ImgDictionary = ((System.Collections.Generic.Dictionary<string, System.Drawing.Image>)(resources.GetObject("ilvVehicle.ImgDictionary")));
-            this.ilvVehicle.Location = new System.Drawing.Point(0, 25);
-            this.ilvVehicle.Name = "ilvVehicle";
-            this.ilvVehicle.Size = new System.Drawing.Size(776, 485);
-            this.ilvVehicle.TabIndex = 9;
             // 
             // VehicleDetailForm
             // 

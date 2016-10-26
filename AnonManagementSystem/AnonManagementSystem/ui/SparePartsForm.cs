@@ -444,7 +444,9 @@ namespace AnonManagementSystem
 
         private IList<SparePart> QueryByPage(int pageSize, int curPage, IQueryable<SparePart> dbRaw)
         {
-            return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+            List<SparePart> lstEquip = dbRaw.ToList();
+            lstEquip.Sort(new AlphanumComparatorFast());
+            return lstEquip.Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
         }
 
         private void SaveDataSuccess()

@@ -939,6 +939,11 @@ namespace AnonManagementSystem
             {
                 try
                 {
+                    if (string.IsNullOrEmpty(tbSerialNo.Text) || string.IsNullOrEmpty(cmbName.Text))
+                    {
+                        MessageBox.Show(this, @"编号和名称均不能为空", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     if (Add)
                     {
                         #region 添加设备及相关信息
@@ -966,43 +971,6 @@ namespace AnonManagementSystem
                         };
                         _equipDb.Insert(ce);
 
-                        foreach (var equipimg in _equipImageList)
-                        {
-                            _equipImageDb.Insert(equipimg);
-                        }
-
-                        foreach (var eves in _eventsList)
-                        {
-                            _equipDb.Insert(eves);
-                        }
-                        foreach (var veh in _comVehList)
-                        {
-                            _equipDb.Insert(veh);
-                        }
-                        if (_oilEngines != null)
-                        {
-                            _equipDb.Insert(_oilEngines);
-                            foreach (var oilimg in _oilImgList)
-                            {
-                                _oilImageDb.Insert(oilimg);
-                            }
-                        }
-                        foreach (var mat in _materList)
-                        {
-                            _equipDb.Insert(mat);
-                        }
-                        foreach (var evedata in _eventDataList)
-                        {
-                            _equipDb.Insert(evedata);
-                        }
-                        foreach (var vhImg in _vehImgList)
-                        {
-                            _vehiclesImageDb.Insert(vhImg);
-                        }
-                        foreach (var eveImg in _eventsImgList)
-                        {
-                            _eventsImageDb.Insert(eveImg);
-                        }
                         #endregion 添加设备及相关信息
                     }
                     else
@@ -1034,45 +1002,81 @@ namespace AnonManagementSystem
 
                         _equipDb.Update(equipfirst);
 
-                        foreach (var equipimg in _equipImageList)
-                        {
-                            _equipImageDb.Insert(equipimg);
-                        }
-
-                        //foreach (var eves in _eventsList)
-                        //{
-                        //    _equipDb.InsertOrReplace(eves);
-                        //}
-                        //foreach (var veh in _comVehList)
-                        //{
-                        //    _equipDb.InsertOrReplace(veh);
-                        //}
-                        //if (_oilEngines != null)
-                        //{
-                        //    _equipDb.InsertOrReplace(_oilEngines);
-                        //    foreach (var oilimg in _oilImgList)
-                        //    {
-                        //        _oilImageDb.InsertOrReplace(oilimg);
-                        //    }
-                        //}
-                        //foreach (var mat in _materList)
-                        //{
-                        //    _equipDb.InsertOrReplace(mat);
-                        //}
-                        //foreach (var evedata in _eventDataList)
-                        //{
-                        //    _equipDb.Update(evedata);
-                        //}
-                        //foreach (var vhImg in _vehImgList)
-                        //{
-                        //    _vehiclesImageDb.InsertOrReplace(vhImg);
-                        //}
-                        //foreach (var eveImg in _eventsImgList)
-                        //{
-                        //    _eventsImageDb.InsertOrReplace(eveImg);
-                        //}
-
                         #endregion 修改设备信息
+                    }
+
+                    foreach (var equipimg in _equipImageList)
+                    {
+                        var imgtemp = _equipImageDb.EquipmentImages.Where(x => x.Images == equipimg.Images);
+                        if (imgtemp.Any())
+                        { _equipImageDb.Update(equipimg); }
+                        else
+                        { _equipImageDb.Insert(equipimg); }
+                    }
+
+                    foreach (var eves in _eventsList)
+                    {
+                        var evestemp = _equipDb.Events.Where(x => x.No == eves.No);
+                        if (evestemp.Any())
+                        { _equipDb.Update(eves); }
+                        else
+                        { _equipDb.Insert(eves); }
+                    }
+                    foreach (var veh in _comVehList)
+                    {
+                        var vehtemp = _equipDb.CombatVehicles.Where(x => x.SerialNo == veh.SerialNo);
+                        if (vehtemp.Any())
+                        { _equipDb.Update(veh); }
+                        else
+                        { _equipDb.Insert(veh); }
+                    }
+                    if (_oilEngines != null)
+                    {
+                        var oetemp = _equipDb.OilEngines.Where(x => x.OeNo == _oilEngines.OeNo);
+                        if (oetemp.Any())
+                        { _equipDb.Update(_oilEngines); }
+                        else
+                        { _equipDb.Insert(_oilEngines); }
+                        foreach (var oilimg in _oilImgList)
+                        {
+                            var imgtemp = _oilImageDb.OilEngineImages.Where(x => x.Images == oilimg.Images);
+                            if (imgtemp.Any())
+                            { _oilImageDb.Update(oilimg); }
+                            else
+                            { _oilImageDb.Insert(oilimg); }
+                        }
+                    }
+                    foreach (var mat in _materList)
+                    {
+                        var mattemp = _equipDb.Materials.Where(x => x.No == mat.No);
+                        if (mattemp.Any())
+                        { _equipDb.Update(mat); }
+                        else
+                        { _equipDb.Insert(mat); }
+                    }
+                    foreach (var evedata in _eventDataList)
+                    {
+                        var evedatatemp = _equipDb.EventData.Where(x => x.Name == evedata.Name);
+                        if (evedatatemp.Any())
+                        { _equipDb.Update(evedata); }
+                        else
+                        { _equipDb.Insert(evedata); }
+                    }
+                    foreach (var vhImg in _vehImgList)
+                    {
+                        var imgtemp = _vehiclesImageDb.VehiclesImages.Where(x => x.Images == vhImg.Images);
+                        if (imgtemp.Any())
+                        { _vehiclesImageDb.Update(vhImg); }
+                        else
+                        { _vehiclesImageDb.Insert(vhImg); }
+                    }
+                    foreach (var eveImg in _eventsImgList)
+                    {
+                        var imgtemp = _eventsImageDb.EventsImages.Where(x => x.Images == eveImg.Images);
+                        if (imgtemp.Any())
+                        { _eventsImageDb.Update(eveImg); }
+                        else
+                        { _eventsImageDb.Insert(eveImg); }
                     }
                     SaveSuccess?.Invoke();
                     CommonLogHelper.GetInstance("LogInfo").Info(@"保存设备数据成功");

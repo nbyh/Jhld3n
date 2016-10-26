@@ -258,7 +258,7 @@
             // 
             // nUdAmount
             // 
-            this.nUdAmount.Location = new System.Drawing.Point(709, 18);
+            this.nUdAmount.Location = new System.Drawing.Point(658, 71);
             this.nUdAmount.Maximum = new decimal(new int[] {
             99,
             0,
@@ -294,8 +294,8 @@
             // cmbName
             // 
             this.cmbName.FormattingEnabled = true;
-            this.cmbName.Location = new System.Drawing.Point(346, 18);
-            this.cmbName.MaxLength = 10;
+            this.cmbName.Location = new System.Drawing.Point(342, 18);
+            this.cmbName.MaxLength = 20;
             this.cmbName.Name = "cmbName";
             this.cmbName.Size = new System.Drawing.Size(188, 20);
             this.cmbName.TabIndex = 1;
@@ -303,7 +303,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(285, 22);
+            this.label3.Location = new System.Drawing.Point(283, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 37;
@@ -331,7 +331,7 @@
             // 
             this.tbSerialNo.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tbSerialNo.Location = new System.Drawing.Point(89, 18);
-            this.tbSerialNo.MaxLength = 16;
+            this.tbSerialNo.MaxLength = 20;
             this.tbSerialNo.Name = "tbSerialNo";
             this.tbSerialNo.Size = new System.Drawing.Size(188, 21);
             this.tbSerialNo.TabIndex = 0;
@@ -367,7 +367,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(672, 22);
+            this.label13.Location = new System.Drawing.Point(621, 75);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(29, 12);
             this.label13.TabIndex = 48;
@@ -403,7 +403,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(542, 22);
+            this.label4.Location = new System.Drawing.Point(536, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 42;
@@ -421,10 +421,10 @@
             // cmbModel
             // 
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(579, 18);
-            this.cmbModel.MaxLength = 10;
+            this.cmbModel.Location = new System.Drawing.Point(571, 18);
+            this.cmbModel.MaxLength = 20;
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(85, 20);
+            this.cmbModel.Size = new System.Drawing.Size(138, 20);
             this.cmbModel.TabIndex = 2;
             // 
             // ofdImage

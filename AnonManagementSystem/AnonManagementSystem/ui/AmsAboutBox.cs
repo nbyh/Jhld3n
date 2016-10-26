@@ -9,11 +9,11 @@ namespace AnonManagementSystem
         public AmsAboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("关于 {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("版本 {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
+            this.Text = $"关于 {AssemblyTitle}";
+            this.labelProductName.Text = $"产品名称 {AssemblyProduct}";
+            this.labelVersion.Text = $"版本 {AssemblyVersion}";
+            this.labelCopyright.Text = @"制作单位 装备处技术股";
+            this.labelCompanyName.Text = @"联系电话 47050";
             this.textBoxDescription.Text = AssemblyDescription;
         }
 

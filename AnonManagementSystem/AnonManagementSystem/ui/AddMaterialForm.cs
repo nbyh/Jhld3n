@@ -116,6 +116,11 @@ namespace AnonManagementSystem
         {
             try
             {
+                if (string.IsNullOrEmpty(tbDocNo.Text) || string.IsNullOrEmpty(tbDocName.Text))
+                {
+                    MessageBox.Show(this, @"资料编号和名称均不能为空", @"警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 _material = new Material()
                 {
                     No = tbDocNo.Text,
