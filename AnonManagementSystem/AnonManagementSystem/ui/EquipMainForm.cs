@@ -646,7 +646,9 @@ namespace AnonManagementSystem
 
         private IList<CombatEquipment> QueryByPage(int pageSize, int curPage, IEnumerable<CombatEquipment> dbRaw)
         {
-            return dbRaw.OrderBy(s => s.SerialNo).Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
+            List<CombatEquipment> lstEquip = dbRaw.ToList();
+            lstEquip.Sort(new AlphanumComparatorFast());
+            return lstEquip.Take(pageSize * curPage).Skip(pageSize * (curPage - 1)).ToList();
         }
 
         private void SaveDataSuccess()
