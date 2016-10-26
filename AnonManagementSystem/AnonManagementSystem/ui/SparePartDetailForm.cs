@@ -305,7 +305,7 @@ namespace AnonManagementSystem
                                     select img;
                         if (!spimg.Any())
                         {
-                            _partsImageDb.InsertOrReplace(sparePartImage);
+                            _partsImageDb.Insert(sparePartImage);
                         }
                     }
                 }
