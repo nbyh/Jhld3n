@@ -266,6 +266,7 @@ namespace AnonManagementSystem
         private void VehicleDetailForm_Load(object sender, EventArgs e)
         {
             tbSerialNo.Enabled = Add;
+            tbOilEngineNo.Enabled = Add;
             //tabOilEngine.Parent = null;
         }
 
